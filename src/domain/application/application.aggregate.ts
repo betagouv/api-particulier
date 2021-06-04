@@ -1,14 +1,30 @@
 import {Brand} from '../branded-types';
 import {DGFIPDataProvider} from './dgfip.data-provider';
 import {DGFIPInput, DGFIPOutput} from './dgfip.dto';
+import {DGFIPScopesFilter} from './dgfip.scopes-filter';
+import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
 
 export type ApplicationId = Brand<string, 'ApplicationId'>;
+export type Subscription = 'DGFIP' | 'CNAF';
+export type Scope = 'dgfip_avis_imposition' | 'dgfip_adresse';
 
 export class Application {
+  constructor(
+    public readonly id: ApplicationId,
+    public readonly name: string,
+    public readonly subscriptions: Subscription[],
+    private readonly scopes: Scope[]
+  ) {}
+
   async consumeDGFIP(
     input: DGFIPInput,
-    provider: DGFIPDataProvider
+    provider: DGFIPDataProvider,
+    scopesFilter: DGFIPScopesFilter
   ): Promise<Partial<DGFIPOutput>> {
-    return provider.fetch(input);
+    if (!('DGFIP' in this.subscriptions)) {
+      throw new ApplicationNotSubscribedError(this, 'DGFIP');
+    }
+    const unfilteredData = await provider.fetch(input);
+    return scopesFilter.filter(unfilteredData, this.scopes);
   }
 }
