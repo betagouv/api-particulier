@@ -21,7 +21,7 @@ export class Application {
     provider: DGFIPDataProvider,
     scopesFilter: DGFIPScopesFilter
   ): Promise<Partial<DGFIPOutput>> {
-    if (!('DGFIP' in this.subscriptions)) {
+    if (!this.subscriptions.includes('DGFIP')) {
       throw new ApplicationNotSubscribedError(this, 'DGFIP');
     }
     const unfilteredData = await provider.fetch(input);

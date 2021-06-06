@@ -11,6 +11,7 @@
     "@types/node": "^14.11.2",
     "gts": "^3.1.0",
     "jest": "^27.0.4",
+    "jest-mock-extended": "^1.0.15",
     "ts-jest": "^27.0.2",
     "ts-node": "^10.0.0",
     "typescript": "^4.0.3"
@@ -22,7 +23,6 @@
     "compile": "tsc",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
     "posttest": "npm run lint"
   },
   "repository": {
