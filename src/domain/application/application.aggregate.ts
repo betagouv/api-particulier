@@ -1,7 +1,7 @@
 import {Brand} from '../branded-types';
-import {DGFIPDataProvider} from './dgfip.data-provider';
-import {DGFIPInput, DGFIPOutput} from './dgfip.dto';
-import {DGFIPScopesFilter} from './dgfip.scopes-filter';
+import {DGFIPDataProvider} from '../dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from '../dgfip/dto';
+import {DGFIPScopesFilter} from '../dgfip/scopes.filter';
 import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
 
 export type ApplicationId = Brand<string, 'ApplicationId'>;
