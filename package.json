@@ -22,8 +22,7 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "posttest": "npm run lint"
+    "prepare": "npm run compile"
   },
   "repository": {
     "type": "git",
