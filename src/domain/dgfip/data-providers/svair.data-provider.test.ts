@@ -24,7 +24,7 @@ describe('Svair data provider', () => {
   it('reads data in the response html', async () => {
     const input: DGFIPInput = {
       taxNumber: '3',
-      taxNoticeNumber: '20B123',
+      taxNoticeNumber: '19B123',
     };
     mock.onPost().reply(
       200,
@@ -215,7 +215,7 @@ describe('Svair data provider', () => {
       },
       foyerFiscal: {
         adresse: '19 RUE DES ROSIERS 75002 PARIS',
-        annee: 2020,
+        annee: 2019,
       },
       impotRevenuNetAvantCorrections: 2074,
       montantImpot: null,

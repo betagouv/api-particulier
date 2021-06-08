@@ -19,7 +19,9 @@ export class SvairDataProvider implements DGFIPDataProvider {
       }
     );
 
-    return await parseSvairResponse(response.data, 2020);
+    const year = parseInt(`20${input.taxNoticeNumber.substring(0, 2)}`);
+
+    return await parseSvairResponse(response.data, year);
   }
 
   async getViewState(): Promise<string> {
