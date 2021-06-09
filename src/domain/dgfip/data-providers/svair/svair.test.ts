@@ -199,10 +199,10 @@ describe('Svair data provider', () => {
     expect(data).toEqual({
       anneeImpots: '2019',
       anneeRevenus: '2018',
-      dateEtablissement: '09/07/2019',
-      dateRecouvrement: '31/07/2019',
+      dateEtablissement: new Date('07-09-2019'),
+      dateRecouvrement: new Date('07-31-2019'),
       declarant1: {
-        dateNaissance: '03/05/1976',
+        dateNaissance: new Date('05-03-1976'),
         nom: 'MOUSTAKI',
         nomNaissance: 'MOUSTAKI',
         prenoms: 'GEORGES',

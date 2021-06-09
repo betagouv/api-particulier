@@ -59,10 +59,10 @@ describe('Parse ', () => {
         expect(result).toEqual({
           anneeImpots: '2015',
           anneeRevenus: '2014',
-          dateEtablissement: '08/07/2015',
-          dateRecouvrement: '31/07/2015',
+          dateEtablissement: new Date('07-08-2015'),
+          dateRecouvrement: new Date('07-31-2015'),
           declarant1: {
-            dateNaissance: '29/03/1984',
+            dateNaissance: new Date('03-29-1984'),
             nom: 'MARTIN',
             nomNaissance: 'MARTIN',
             prenoms: 'Jean',
@@ -96,16 +96,16 @@ describe('Parse ', () => {
         expect(result).toEqual({
           anneeImpots: '2014',
           anneeRevenus: '2013',
-          dateEtablissement: '30/07/2014',
-          dateRecouvrement: '31/07/2014',
+          dateEtablissement: new Date('07-30-2014'),
+          dateRecouvrement: new Date('07-31-2014'),
           declarant1: {
-            dateNaissance: '31/12/1959',
+            dateNaissance: new Date('12-31-1959'),
             nom: 'HONORE',
             nomNaissance: 'HONORE',
             prenoms: 'Jean',
           },
           declarant2: {
-            dateNaissance: '11/06/1968',
+            dateNaissance: new Date('06-11-1968'),
             nom: 'MARTIN',
             nomNaissance: 'MARTIN',
             prenoms: 'Laurence',

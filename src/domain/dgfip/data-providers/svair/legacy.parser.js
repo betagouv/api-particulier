@@ -2,6 +2,7 @@ const _ = require('lodash');
 const xpath = require('xpath');
 const select = xpath.useNamespaces({h: 'http://www.w3.org/1999/xhtml'});
 const dom = require('xmldom').DOMParser;
+const {parse} = require('date-fns');
 
 function parseEuro(str) {
   const data = str
@@ -17,6 +18,10 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+function parseDate(str) {
+  return parse(str, 'dd/MM/yyyy', new Date());
+}
+
 module.exports.euro = parseEuro;
 
 module.exports.result = function parseResult(html, year) {
@@ -30,7 +35,10 @@ module.exports.result = function parseResult(html, year) {
     nom: 'Nom',
     nomNaissance: 'Nom de naissance',
     prenoms: 'Prénom(s)',
-    dateNaissance: 'Date de naissance',
+    dateNaissance: {
+      src: 'Date de naissance',
+      fn: parseDate,
+    },
   };
 
   const compactedDeclarantMapping = _.map(mappingDeclarant, (val, key) => {
@@ -48,8 +56,11 @@ module.exports.result = function parseResult(html, year) {
   }
 
   const mapping = {
-    dateRecouvrement: "Date de mise en recouvrement de l'avis d'impôt",
-    dateEtablissement: "Date d'établissement",
+    dateRecouvrement: {
+      src: "Date de mise en recouvrement de l'avis d'impôt",
+      fn: parseDate,
+    },
+    dateEtablissement: {src: "Date d'établissement", fn: parseDate},
     nombreParts: {src: 'Nombre de part(s)', fn: parseFloat},
     situationFamille: 'Situation de famille',
     nombrePersonnesCharge: {
@@ -83,18 +94,24 @@ module.exports.result = function parseResult(html, year) {
     const rowHeading = cells[0].firstChild;
     if (rowHeading && rowHeading.data in declarantMappingBySrc) {
       const mappingEntry = declarantMappingBySrc[rowHeading];
-      if (mappingEntry.fn) {
-        result = mappingEntry.fn(line, result);
-      } else {
-        if (cells[1].firstChild) {
+      if (cells[1].firstChild) {
+        if (mappingEntry.fn) {
+          result.declarant1[mappingEntry.dest] = mappingEntry.fn(
+            cells[1].firstChild.data
+          );
+        } else {
           result.declarant1[mappingEntry.dest] = cells[1].firstChild.data;
         }
-        let data;
-        if (cells[2].firstChild) {
+      }
+      let data;
+      if (cells[2].firstChild) {
+        if (mappingEntry.fn) {
+          data = mappingEntry.fn(cells[2].firstChild.data);
+        } else {
           data = cells[2].firstChild.data;
         }
-        result.declarant2[mappingEntry.dest] = data || '';
       }
+      result.declarant2[mappingEntry.dest] = data || '';
     } else if (cells.length === 2 && rowHeading in mappingBySrc) {
       const mappingEntry = mappingBySrc[rowHeading];
       if (cells[1].firstChild) {
