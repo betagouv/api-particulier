@@ -1,23 +1,23 @@
 const fs = require('fs');
-const parse = require('../legacy.parser');
+const parse = require('./legacy.parser');
 
 describe('Parse ', () => {
   const parseEuro = parse.euro;
   const parseResult = parse.result;
   const postHttpResponse = fs.readFileSync(
-    __dirname + '/resources/postHttpResponse.txt',
+    __dirname + '/__tests__/resources/postHttpResponse.txt',
     'utf-8'
   );
   const getHttpResponse = fs.readFileSync(
-    __dirname + '/resources/getHttpResponse.txt',
+    __dirname + '/__tests__/resources/getHttpResponse.txt',
     'utf-8'
   );
   const postHttpResponse2 = fs.readFileSync(
-    __dirname + '/resources/postHttpResponse2.txt',
+    __dirname + '/__tests__/resources/postHttpResponse2.txt',
     'utf-8'
   );
   const postHttpEmptyCell = fs.readFileSync(
-    __dirname + '/resources/postHttpResponseEmptyCell.txt',
+    __dirname + '/__tests__/resources/postHttpResponseEmptyCell.txt',
     'utf-8'
   );
 

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {load} from 'cheerio';
-import {DGFIPDataProvider} from '../data-provider';
-import {DGFIPInput, DGFIPOutput} from '../dto';
-import {result as parseSvairResponse} from '../parsers/legacy.parser.js';
+import {DGFIPDataProvider} from '../../data-provider';
+import {DGFIPInput, DGFIPOutput} from '../../dto';
+import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DGFIPDataProvider {
   async fetch(input: DGFIPInput): Promise<DGFIPOutput> {

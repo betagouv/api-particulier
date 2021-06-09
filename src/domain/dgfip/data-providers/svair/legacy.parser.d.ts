@@ -1,4 +1,4 @@
-import {DGFIPOutput} from '../dto';
+import {DGFIPOutput} from '../../dto';
 
 export {parseEuro as euro};
 export function result(html: string, year: number): Promise<DGFIPOutput>;

@@ -1,9 +1,9 @@
 /* eslint-disable no-irregular-whitespace */
-import {SvairDataProvider} from './svair.data-provider';
+import {SvairDataProvider} from '.';
 import axios from 'axios';
 // eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
-import {DGFIPInput} from '../dto';
+import {DGFIPInput} from '../../dto';
 
 describe('Svair data provider', () => {
   const svairDataProvider = new SvairDataProvider();
