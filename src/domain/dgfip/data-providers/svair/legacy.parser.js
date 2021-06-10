@@ -20,7 +20,12 @@ function parseDate(str) {
 module.exports.euro = parseEuro;
 
 module.exports.result = function parseResult(html) {
-  const doc = new dom().parseFromString(html.replace(/(\n|\t)/g, ''));
+  const doc = new dom({
+    errorHandler: {
+      warning: () => {},
+      error: () => {},
+    },
+  }).parseFromString(html.replace(/(\n|\t)/g, ''));
   const result = {
     declarant1: {},
     declarant2: {},
