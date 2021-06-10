@@ -178,5 +178,5 @@ module.exports.result = function parseResult(html) {
   if (!result.declarant1.nom) {
     return Promise.reject(new Error('Parsing error'));
   }
-  return Promise.resolve(result);
+  return Promise.resolve(_.omitBy(result, _.isUndefined));
 };

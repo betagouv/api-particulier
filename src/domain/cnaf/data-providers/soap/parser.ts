@@ -26,7 +26,7 @@ export class XMLParser {
     const beneficiaries = body.identePersonnes.UNEPERSONNE.map(parsePerson);
 
     return {
-      adresse: _.pickBy(address),
+      adresse: _.omitBy(address, _.isUndefined),
       allocataires: beneficiaries,
       enfants: children,
       quotientFamilial: parseInt(body.quotients.QFMOIS.QUOTIENTF),
