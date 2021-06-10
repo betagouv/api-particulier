@@ -11,8 +11,11 @@ import {
   addressLine1Matcher,
   addressLine2Matcher,
   dependentsMatcher,
+  SvairResponseParser,
+  getYears,
 } from './parser';
 import * as cheerio from 'cheerio';
+import {load} from 'cheerio';
 
 const rawOuput = `<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -245,3 +248,26 @@ describe('The match fucntion', () => {
     expect(addressLine2).toEqual('75002 PARIS');
   });
 });
+
+describe('The years matcher', () => {
+  it('returns no year when years line is not found', () => {
+    const $ = load('<span>yolo</span>');
+    const years = getYears($);
+
+    expect(years).toEqual({});
+  });
+
+  it('returns the two years when year line is found', () => {
+    const $ = load(`<div class="titre_affiche_avis">
+    <span>Impôt   2019 sur les revenus de l'année  2018  
+    </span>
+    </div>`);
+    const years = getYears($);
+
+    expect(years).toEqual({
+      incomeYear: 2018,
+      taxationYear: 2019,
+    });
+  });
+});
+

@@ -135,6 +135,24 @@ export const referenceIncomeMatcher = {
   format: formatMoney,
 };
 
+export function getYears($: cheerio.Root): {
+  taxationYear?: number;
+  incomeYear?: number;
+} {
+  const yearsLine = $('.titre_affiche_avis>span').text();
+  if (yearsLine === undefined || yearsLine === '') {
+    return {};
+  }
+  const matches = yearsLine.match(/(\d{4})/g);
+  if (matches === undefined || matches === null || matches.length < 2) {
+    return {};
+  }
+  return {
+    taxationYear: parseInt(matches[0]),
+    incomeYear: parseInt(matches[1]),
+  };
+}
+
 export class SvairResponseParser {
   parse(rawResponse: string) {
     const $ = cheerio.load(rawResponse);
