@@ -26,7 +26,7 @@ module.exports.euro = parseEuro;
 
 module.exports.result = function parseResult(html, year) {
   const doc = new dom().parseFromString(html.replace(/(\n|\t)/g, ''));
-  let result = {
+  const result = {
     declarant1: {},
     declarant2: {},
   };
