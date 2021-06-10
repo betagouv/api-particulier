@@ -255,4 +255,23 @@ describe('The match fucntion', () => {
 
     expect(result).toEqual(1.0);
   });
+
+  it('matches the address', () => {
+    const addressLine1Matcher = {
+      regex: /Adresse déclarée/,
+      format: formatString,
+      offset: 3,
+    };
+    const addressLine2Matcher = {
+      regex: /Adresse déclarée/,
+      format: formatString,
+      offset: 6,
+    };
+
+    const addressLine1 = match(cells, addressLine1Matcher);
+    const addressLine2 = match(cells, addressLine2Matcher);
+
+    expect(addressLine1).toEqual('19 RUE DES ROSIERS');
+    expect(addressLine2).toEqual('75002 PARIS');
+  });
 });
