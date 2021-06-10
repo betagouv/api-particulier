@@ -140,8 +140,8 @@ module.exports.result = function parseResult(html, year) {
     const titleAnnee = nodeAnnee[0].firstChild.data;
     const regexp = /(\d{4})/g;
 
-    result.anneeImpots = regexp.exec(titleAnnee)[0];
-    result.anneeRevenus = regexp.exec(titleAnnee)[0];
+    result.anneeImpots = parseInt(regexp.exec(titleAnnee)[0]);
+    result.anneeRevenus = parseInt(regexp.exec(titleAnnee)[0]);
   }
 
   const nodeErreurCorrectif = select('//*[@id="erreurCorrectif"]', doc);

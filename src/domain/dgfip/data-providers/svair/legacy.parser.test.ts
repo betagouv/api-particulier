@@ -56,8 +56,8 @@ describe('Parse ', () => {
       const result = await parseResult(singlePersonResponse, 2015);
 
       expect(result).toEqual({
-        anneeImpots: '2015',
-        anneeRevenus: '2014',
+        anneeImpots: 2015,
+        anneeRevenus: 2014,
         dateEtablissement: new Date('07-08-2015'),
         dateRecouvrement: new Date('07-31-2015'),
         declarant1: {
@@ -91,8 +91,8 @@ describe('Parse ', () => {
       const result = await parseResult(twoPeopleResponse, 2014);
 
       expect(result).toEqual({
-        anneeImpots: '2014',
-        anneeRevenus: '2013',
+        anneeImpots: 2014,
+        anneeRevenus: 2013,
         dateEtablissement: new Date('07-30-2014'),
         dateRecouvrement: new Date('07-31-2014'),
         declarant1: {
@@ -132,8 +132,8 @@ describe('Parse ', () => {
       const result = await parseResult(partialSituation, 2018);
 
       expect(result).toEqual({
-        anneeImpots: '2018',
-        anneeRevenus: '2017',
+        anneeImpots: 2018,
+        anneeRevenus: 2017,
         dateEtablissement: new Date('2015-07-07T22:00:00.000Z'),
         dateRecouvrement: new Date('2015-07-30T22:00:00.000Z'),
         declarant1: {
@@ -171,8 +171,8 @@ describe('Parse ', () => {
       const result = await parseResult(fixError, 2018);
 
       expect(result).toEqual({
-        anneeImpots: '2018',
-        anneeRevenus: '2017',
+        anneeImpots: 2018,
+        anneeRevenus: 2017,
         dateEtablissement: new Date('2015-07-07T22:00:00.000Z'),
         dateRecouvrement: new Date('2015-07-30T22:00:00.000Z'),
         declarant1: {

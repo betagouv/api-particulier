@@ -197,8 +197,8 @@ describe('Svair data provider', () => {
     const data = await svairDataProvider.fetch(input);
 
     expect(data).toEqual({
-      anneeImpots: '2019',
-      anneeRevenus: '2018',
+      anneeImpots: 2019,
+      anneeRevenus: 2018,
       dateEtablissement: new Date('07-09-2019'),
       dateRecouvrement: new Date('07-31-2019'),
       declarant1: {

@@ -27,8 +27,8 @@ export type DGFIPOutput = {
     annee?: number;
     adresse?: string;
   };
-  anneeImpots?: string;
-  anneeRevenus?: string;
+  anneeImpots?: number;
+  anneeRevenus?: number;
   erreurCorrectif?: string;
   situationPartielle?: string;
 };
