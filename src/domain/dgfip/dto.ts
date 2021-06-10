@@ -12,7 +12,7 @@ type Declarant = {
 
 export type DGFIPOutput = {
   declarant1: Declarant;
-  declarant2: Declarant;
+  declarant2?: Declarant;
   dateRecouvrement: Date;
   dateEtablissement: Date;
   nombreParts: number;
