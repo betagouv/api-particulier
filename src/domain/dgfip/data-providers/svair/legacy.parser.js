@@ -19,7 +19,7 @@ function parseDate(str) {
 
 module.exports.euro = parseEuro;
 
-module.exports.result = function parseResult(html, year) {
+module.exports.result = function parseResult(html) {
   const doc = new dom().parseFromString(html.replace(/(\n|\t)/g, ''));
   const result = {
     declarant1: {},
@@ -130,11 +130,6 @@ module.exports.result = function parseResult(html, year) {
     }
   });
 
-  result.foyerFiscal = {
-    annee: year,
-    adresse: adress.join(' '),
-  };
-
   const nodeAnnee = select('//*[@class="titre_affiche_avis"]//h:span', doc);
   if (nodeAnnee.length > 0) {
     const titleAnnee = nodeAnnee[0].firstChild.data;
@@ -142,6 +137,11 @@ module.exports.result = function parseResult(html, year) {
 
     result.anneeImpots = parseInt(regexp.exec(titleAnnee)[0]);
     result.anneeRevenus = parseInt(regexp.exec(titleAnnee)[0]);
+
+    result.foyerFiscal = {
+      annee: result.anneeImpots,
+      adresse: adress.join(' '),
+    };
   }
 
   const nodeErreurCorrectif = select('//*[@id="erreurCorrectif"]', doc);
