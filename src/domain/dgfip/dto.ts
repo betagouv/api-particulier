@@ -7,7 +7,7 @@ type Declarant = {
   nom?: string;
   nomNaissance?: string;
   prenoms?: string;
-  dateNaissance?: Date;
+  dateNaissance?: Date | string;
 };
 
 export type DGFIPOutput = {
@@ -18,11 +18,11 @@ export type DGFIPOutput = {
   nombreParts?: number;
   situationFamille?: string;
   nombrePersonnesCharge?: number;
-  revenuBrutGlobal?: number;
-  revenuImposable?: number;
-  impotRevenuNetAvantCorrections?: number;
-  montantImpot?: number;
-  revenuFiscalReference?: number;
+  revenuBrutGlobal?: number | null;
+  revenuImposable?: number | null;
+  impotRevenuNetAvantCorrections?: number | null;
+  montantImpot?: number | null;
+  revenuFiscalReference?: number | null;
   foyerFiscal: {
     annee?: number;
     adresse?: string;
