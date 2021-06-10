@@ -14,8 +14,10 @@ export type CNAFOutput = {
   enfants: Person[];
   adresse: {
     identite: string;
+    complementIdentite: string;
     complementIdentiteGeo: string;
     numeroRue: string;
+    lieuDit: string;
     codePostalVille: string;
     pays: string;
   };
