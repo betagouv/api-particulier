@@ -11,55 +11,40 @@ describe('The CNAF XML parser', () => {
 
     const result = parser.parse(okXML);
 
-    expect(result).toMatchInlineSnapshot(`
-Object {
-  "adresse": Object {
-    "LIBLIG1ADR": "Madame JEANNE CROUTE",
-    "LIBLIG2ADR": "",
-    "LIBLIG3ADR": "",
-    "LIBLIG4ADR": "23 RUE DES ROSIERS",
-    "LIBLIG5ADR": "",
-    "LIBLIG6ADR": "75002 PARIS",
-    "LIBLIG7ADR": "FRANCE",
-  },
-  "identeEnfants": Object {
-    "UNENFANT": Array [
-      Object {
-        "DATNAISS": 4032015,
-        "NOMPRENOM": "MICHEL CROUTE",
-        "SEXE": "M",
+    expect(result).toEqual({
+      adresse: {
+        codePostalVille: '75002 PARIS',
+        identite: 'Madame JEANNE CROUTE',
+        numeroRue: '23 RUE DES ROSIERS',
+        pays: 'FRANCE',
       },
-      Object {
-        "DATNAISS": 11022017,
-        "NOMPRENOM": "MICHELINE CROUTE",
-        "SEXE": "F",
-      },
-    ],
-  },
-  "identePersonnes": Object {
-    "UNEPERSONNE": Array [
-      Object {
-        "DATNAISS": 5031988,
-        "NOMPRENOM": "JEANNE CROUTE",
-        "QUAL": "Madame",
-        "SEXE": "F",
-      },
-      Object {
-        "DATNAISS": 3051989,
-        "NOMPRENOM": "JEAN CROUTE",
-        "QUAL": "Monsieur",
-        "SEXE": "M",
-      },
-    ],
-  },
-  "quotients": Object {
-    "QFMOIS": Object {
-      "DELANNEE": 2021,
-      "DUMOIS": 5,
-      "QUOTIENTF": 2057,
-    },
-  },
-}
-`);
+      allocataires: [
+        {
+          dateDeNaissance: new Date('03-05-1988'),
+          nomPrenom: 'JEANNE CROUTE',
+          sexe: 'F',
+        },
+        {
+          dateDeNaissance: new Date('05-03-1989'),
+          nomPrenom: 'JEAN CROUTE',
+          sexe: 'M',
+        },
+      ],
+      annee: 2021,
+      enfants: [
+        {
+          dateDeNaissance: new Date('03-04-2015'),
+          nomPrenom: 'MICHEL CROUTE',
+          sexe: 'M',
+        },
+        {
+          dateDeNaissance: new Date('02-11-2017'),
+          nomPrenom: 'MICHELINE CROUTE',
+          sexe: 'F',
+        },
+      ],
+      mois: 5,
+      quotientFamilial: 2057,
+    });
   });
 });

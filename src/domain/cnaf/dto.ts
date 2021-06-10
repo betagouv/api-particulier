@@ -13,13 +13,13 @@ export type CNAFOutput = {
   allocataires: Person[];
   enfants: Person[];
   adresse: {
-    identite: string;
-    complementIdentite: string;
-    complementIdentiteGeo: string;
-    numeroRue: string;
-    lieuDit: string;
-    codePostalVille: string;
-    pays: string;
+    identite?: string;
+    complementIdentite?: string;
+    complementIdentiteGeo?: string;
+    numeroRue?: string;
+    lieuDit?: string;
+    codePostalVille?: string;
+    pays?: string;
   };
   quotientFamilial: number;
   mois: number;
