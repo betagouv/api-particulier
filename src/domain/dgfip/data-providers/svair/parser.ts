@@ -6,7 +6,7 @@ import {DGFIPOutput} from '../../dto';
 export type Matcher<T> = {
   regex: RegExp;
   format: (raw: string) => T;
-  valueInSecondColumn?: true;
+  offset?: number;
 };
 
 export function match<T>(
@@ -26,7 +26,7 @@ export function match<T>(
   }
 
   const value =
-    cells[matchingCellIndex + (matcher.valueInSecondColumn ? 2 : 1)].data;
+    cells[matchingCellIndex + (matcher.offset ? matcher.offset : 1)].data;
 
   if (value === undefined) {
     return;

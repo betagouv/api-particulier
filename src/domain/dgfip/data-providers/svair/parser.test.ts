@@ -45,7 +45,7 @@ const rawOuput = `<!DOCTYPE html>
 					</td>
 					<td class="labelPair">MOUSTAKI
 					</td>
-					<td class="labelPair">
+					<td class="labelPair">MOUSTAKI
 					</td>
 				</tr>
 				<tr>
@@ -53,7 +53,7 @@ const rawOuput = `<!DOCTYPE html>
 					</td>
 					<td class="labelImpair">MOUSTAKI
 					</td>
-					<td class="labelImpair">
+					<td class="labelImpair">MOUSTACROUTE
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +61,7 @@ const rawOuput = `<!DOCTYPE html>
 					</td>
 					<td class="labelPair">GEORGES
 					</td>
-					<td class="labelPair">
+					<td class="labelPair">GEORGETTE
 					</td>
 				</tr>
 				<tr>
@@ -69,7 +69,7 @@ const rawOuput = `<!DOCTYPE html>
 					</td>
 					<td class="labelImpair">03/05/1976
 					</td>
-					<td class="labelImpair">
+					<td class="labelImpair">03/05/1976
 					</td>
 				</tr>
 				<tr>
@@ -203,5 +203,17 @@ describe('The match fucntion', () => {
     const result = match(cells, creationDateMatcher);
 
     expect(result).toEqual(new Date('07-09-2019'));
+  });
+
+  it('matches a second person', () => {
+    const secondPersonBirthNameMatcher = {
+      regex: /^Nom de naissance/,
+      format: formatString,
+      offset: 2,
+    };
+
+    const result = match(cells, secondPersonBirthNameMatcher);
+
+    expect(result).toEqual('MOUSTACROUTE');
   });
 });
