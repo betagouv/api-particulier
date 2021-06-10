@@ -2,9 +2,14 @@
 import {
   match,
   formatString,
-  formatDate,
-  formatMoney,
-  formatFloat,
+  name1Matcher,
+  noticeCreationDateMatcher,
+  birthName2Matcher,
+  taxAmountMatcher,
+  referenceIncomeMatcher,
+  sharesCountMatcher,
+  addressLine1Matcher,
+  addressLine2Matcher,
 } from './parser';
 import * as cheerio from 'cheerio';
 
@@ -179,12 +184,7 @@ describe('The match fucntion', () => {
   const cells = $('td').contents().toArray();
 
   it('matches string values', () => {
-    const nameMatcher = {
-      regex: /^Nom(?! de)(?!bre)/,
-      format: formatString,
-    };
-
-    const result = match(cells, nameMatcher);
+    const result = match(cells, name1Matcher);
 
     expect(result).toEqual('MOUSTAKI');
   });
@@ -201,73 +201,36 @@ describe('The match fucntion', () => {
   });
 
   it('matches dates', () => {
-    const creationDateMatcher = {
-      regex: /^Date d'/,
-      format: formatDate,
-    };
-
-    const result = match(cells, creationDateMatcher);
+    const result = match(cells, noticeCreationDateMatcher);
 
     expect(result).toEqual(new Date('07-09-2019'));
   });
 
   it('matches a second person', () => {
-    const secondPersonBirthNameMatcher = {
-      regex: /^Nom de naissance/,
-      format: formatString,
-      offset: 2,
-    };
-
-    const result = match(cells, secondPersonBirthNameMatcher);
+    const result = match(cells, birthName2Matcher);
 
     expect(result).toEqual('MOUSTACROUTE');
   });
 
   it('matches non taxable notice', () => {
-    const taxAmountMatcher = {
-      regex: /^Montant de l'imp/,
-      format: formatMoney,
-    };
-
     const result = match(cells, taxAmountMatcher);
 
     expect(result).toBeUndefined();
   });
 
   it('matches money', () => {
-    const incomeMatcher = {
-      regex: /^Revenu fiscal de référence/,
-      format: formatMoney,
-    };
-
-    const result = match(cells, incomeMatcher);
+    const result = match(cells, referenceIncomeMatcher);
 
     expect(result).toEqual(23503);
   });
 
   it('matches float numbers', () => {
-    const sharesCountMatcher = {
-      regex: /^Nombre de part/,
-      format: formatFloat,
-    };
-
     const result = match(cells, sharesCountMatcher);
 
     expect(result).toEqual(1.0);
   });
 
   it('matches the address', () => {
-    const addressLine1Matcher = {
-      regex: /Adresse déclarée/,
-      format: formatString,
-      offset: 3,
-    };
-    const addressLine2Matcher = {
-      regex: /Adresse déclarée/,
-      format: formatString,
-      offset: 6,
-    };
-
     const addressLine1 = match(cells, addressLine1Matcher);
     const addressLine2 = match(cells, addressLine2Matcher);
 
