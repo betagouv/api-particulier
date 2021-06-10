@@ -10,6 +10,7 @@ import {
   sharesCountMatcher,
   addressLine1Matcher,
   addressLine2Matcher,
+  dependentsMatcher,
 } from './parser';
 import * as cheerio from 'cheerio';
 
@@ -228,6 +229,12 @@ describe('The match fucntion', () => {
     const result = match(cells, sharesCountMatcher);
 
     expect(result).toEqual(1.0);
+  });
+
+  it('matches int numbers', () => {
+    const result = match(cells, dependentsMatcher);
+
+    expect(result).toEqual(0);
   });
 
   it('matches the address', () => {
