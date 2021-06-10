@@ -16,6 +16,7 @@ import {
 } from './parser';
 import * as cheerio from 'cheerio';
 import {load} from 'cheerio';
+import {DGFIPOutput} from '../../dto';
 
 const rawOuput = `<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -271,3 +272,41 @@ describe('The years matcher', () => {
   });
 });
 
+describe('The parser', () => {
+  it('parses raw output', () => {
+    const parser = new SvairResponseParser();
+
+    const parsedOutput = parser.parse(rawOuput);
+
+    expect(parsedOutput).toEqual({
+      anneeImpots: '2019',
+      anneeRevenus: '2018',
+      dateEtablissement: new Date('07-09-2019'),
+      dateRecouvrement: new Date('07-31-2019'),
+      declarant1: {
+        dateNaissance: new Date('05-03-1976'),
+        nom: 'MOUSTAKI',
+        nomNaissance: 'MOUSTAKI',
+        prenoms: 'GEORGES',
+      },
+      declarant2: {
+        dateNaissance: new Date('05-03-1976'),
+        nom: 'MOUSTAKI',
+        nomNaissance: 'MOUSTACROUTE',
+        prenoms: 'GEORGETTE',
+      },
+      foyerFiscal: {
+        adresse: '19 RUE DES ROSIERS 75002 PARIS',
+        annee: 2019,
+      },
+      impotRevenuNetAvantCorrections: 2074,
+      nombreParts: 1,
+      montantImpots: undefined,
+      nombrePersonnesCharge: 0,
+      revenuBrutGlobal: 23503,
+      revenuFiscalReference: 23503,
+      revenuImposable: 23504,
+      situationFamille: 'Célibataire',
+    } as DGFIPOutput);
+  });
+});

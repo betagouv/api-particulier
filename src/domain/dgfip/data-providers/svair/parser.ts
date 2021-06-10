@@ -106,7 +106,7 @@ export const sharesCountMatcher = {
   regex: /^Nombre de part/,
   format: formatFloat,
 };
-export const familySituation = {
+export const familySituationMatcher = {
   regex: /Situation de famille/,
   format: formatString,
 };
@@ -122,7 +122,7 @@ export const taxableIncomeMatcher = {
   regex: /^Revenu imposable/,
   format: formatMoney,
 };
-export const incomeTaxBeforeCorrection = {
+export const incomeTaxBeforeCorrectionMatcher = {
   regex: /^Impôt sur le revenu net avant/,
   format: formatMoney,
 };
@@ -153,9 +153,53 @@ export function getYears($: cheerio.Root): {
   };
 }
 
+const getAddress = (cells: cheerio.Element[]) => {
+  const addressLine1 = match(cells, addressLine1Matcher);
+  const addressLine2 = match(cells, addressLine2Matcher);
+  if (addressLine1 === undefined && addressLine2 === undefined) {
+    return;
+  }
+  return `${addressLine1} ${addressLine2}`.trim();
+};
+
 export class SvairResponseParser {
-  parse(rawResponse: string) {
+  parse(rawResponse: string): DGFIPOutput {
     const $ = cheerio.load(rawResponse);
     const cells = $('td').contents().toArray();
+
+    const {taxationYear, incomeYear} = getYears($);
+    return {
+      declarant1: {
+        nom: match(cells, name1Matcher),
+        prenoms: match(cells, firstname1Matcher),
+        nomNaissance: match(cells, birthName1Matcher),
+        dateNaissance: match(cells, birthdate1Matcher),
+      },
+      declarant2: {
+        nom: match(cells, name2Matcher),
+        prenoms: match(cells, firstname2Matcher),
+        nomNaissance: match(cells, birthName2Matcher),
+        dateNaissance: match(cells, birthdate2Matcher),
+      },
+      foyerFiscal: {
+        annee: taxationYear,
+        adresse: getAddress(cells),
+      },
+      anneeImpots: taxationYear?.toString(),
+      anneeRevenus: incomeYear?.toString(),
+      dateEtablissement: match(cells, noticeCreationDateMatcher),
+      dateRecouvrement: match(cells, collectionDateMatcher),
+      impotRevenuNetAvantCorrections: match(
+        cells,
+        incomeTaxBeforeCorrectionMatcher
+      ),
+      montantImpot: match(cells, taxAmountMatcher),
+      nombreParts: match(cells, sharesCountMatcher),
+      nombrePersonnesCharge: match(cells, dependentsMatcher),
+      revenuBrutGlobal: match(cells, rawIncomeMatcher),
+      revenuFiscalReference: match(cells, referenceIncomeMatcher),
+      revenuImposable: match(cells, taxableIncomeMatcher),
+      situationFamille: match(cells, familySituationMatcher),
+    };
   }
 }

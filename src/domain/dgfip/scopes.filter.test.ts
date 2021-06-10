@@ -30,8 +30,8 @@ describe('DGFIP scopes filter', () => {
       annee: 2021,
       adresse: '5 rue des Rosiers 75001 Paris',
     },
-    anneeImpots: 2021,
-    anneeRevenus: 2020,
+    anneeImpots: '2021',
+    anneeRevenus: '2020',
     erreurCorrectif: '',
     situationPartielle: '',
   };
@@ -42,29 +42,27 @@ describe('DGFIP scopes filter', () => {
 
     const filteredResult = filter(unfilteredData, scopes);
 
-    expect(filteredResult).toMatchInlineSnapshot(`
-Object {
-  "anneeImpots": 2021,
-  "anneeRevenus": 2020,
-  "declarant1": Object {
-    "dateNaissance": 1986-06-02T00:00:00.000Z,
-    "nom": "Mousterie",
-    "nomNaissance": "Mousterie",
-    "prenoms": "Claude",
-  },
-  "declarant2": Object {
-    "dateNaissance": 1988-11-07T00:00:00.000Z,
-    "nom": "Mousterie",
-    "nomNaissance": "Arc",
-    "prenoms": "Jeanne",
-  },
-  "erreurCorrectif": "",
-  "foyerFiscal": Object {
-    "adresse": "5 rue des Rosiers 75001 Paris",
-    "annee": 2021,
-  },
-  "situationPartielle": "",
-}
-`);
+    expect(filteredResult).toEqual({
+      anneeImpots: '2021',
+      anneeRevenus: '2020',
+      declarant1: {
+        dateNaissance: new Date('1986-06-02T00:00:00.000Z'),
+        nom: 'Mousterie',
+        nomNaissance: 'Mousterie',
+        prenoms: 'Claude',
+      },
+      declarant2: {
+        dateNaissance: new Date('1988-11-07T00:00:00.000Z'),
+        nom: 'Mousterie',
+        nomNaissance: 'Arc',
+        prenoms: 'Jeanne',
+      },
+      erreurCorrectif: '',
+      foyerFiscal: {
+        adresse: '5 rue des Rosiers 75001 Paris',
+        annee: 2021,
+      },
+      situationPartielle: '',
+    });
   });
 });
