@@ -37,6 +37,13 @@ export function match<T>(
 
 export const formatString = (str: string) => str.trim();
 export const formatDate = (str: string) => parse(str, 'dd/MM/yyyy', new Date());
+export const formatMoney = (str: string): number | undefined => {
+  const parsedNumber = str.replace(/[^0-9]/g, '');
+  if (parsedNumber === '') {
+    return;
+  }
+  return parseInt(parsedNumber);
+};
 
 export class SvairResponseParser {
   parse(rawResponse: string) {

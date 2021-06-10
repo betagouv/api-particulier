@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-import {match, formatString, formatDate} from './parser';
+import {match, formatString, formatDate, formatMoney} from './parser';
 import * as cheerio from 'cheerio';
 
 const rawOuput = `<!DOCTYPE html>
@@ -215,5 +215,27 @@ describe('The match fucntion', () => {
     const result = match(cells, secondPersonBirthNameMatcher);
 
     expect(result).toEqual('MOUSTACROUTE');
+  });
+
+  it('matches non taxable notice', () => {
+    const taxAmountMatcher = {
+      regex: /^Montant de l'imp/,
+      format: formatMoney,
+    };
+
+    const result = match(cells, taxAmountMatcher);
+
+    expect(result).toBeUndefined();
+  });
+
+  it('matches money', () => {
+    const incomeMatcher = {
+      regex: /^Revenu fiscal de référence/,
+      format: formatMoney,
+    };
+
+    const result = match(cells, incomeMatcher);
+
+    expect(result).toEqual(23503);
   });
 });
