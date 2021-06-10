@@ -1,5 +1,11 @@
 /* eslint-disable no-irregular-whitespace */
-import {match, formatString, formatDate, formatMoney} from './parser';
+import {
+  match,
+  formatString,
+  formatDate,
+  formatMoney,
+  formatFloat,
+} from './parser';
 import * as cheerio from 'cheerio';
 
 const rawOuput = `<!DOCTYPE html>
@@ -237,5 +243,16 @@ describe('The match fucntion', () => {
     const result = match(cells, incomeMatcher);
 
     expect(result).toEqual(23503);
+  });
+
+  it('matches float numbers', () => {
+    const sharesCountMatcher = {
+      regex: /^Nombre de part/,
+      format: formatFloat,
+    };
+
+    const result = match(cells, sharesCountMatcher);
+
+    expect(result).toEqual(1.0);
   });
 });
