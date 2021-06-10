@@ -5,12 +5,7 @@ const dom = require('xmldom').DOMParser;
 const {parse} = require('date-fns');
 
 function parseEuro(str) {
-  const data = str
-    .replace(/\u00A0/g, '')
-    .replace(/€/g, '')
-    .replace(/ /g, '')
-    .replace(/\n/g, '')
-    .replace(/\t/g, '');
+  const data = str.replace(/[^0-9]/g, '');
   return isNumeric(data) ? _.parseInt(data) : 0;
 }
 
