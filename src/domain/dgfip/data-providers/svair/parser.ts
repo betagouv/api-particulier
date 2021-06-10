@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import {parse} from 'date-fns';
 import * as _ from 'lodash';
 import {DGFIPOutput} from '../../dto';
 
@@ -35,6 +36,7 @@ export function match<T>(
 }
 
 export const formatString = (str: string) => str.trim();
+export const formatDate = (str: string) => parse(str, 'dd/MM/yyyy', new Date());
 
 export class SvairResponseParser {
   parse(rawResponse: string) {

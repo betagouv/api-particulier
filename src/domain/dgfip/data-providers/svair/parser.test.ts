@@ -1,4 +1,5 @@
-import {SvairResponseParser, match, Matcher, formatString} from './parser';
+/* eslint-disable no-irregular-whitespace */
+import {match, formatString, formatDate} from './parser';
 import * as cheerio from 'cheerio';
 
 const rawOuput = `<!DOCTYPE html>
@@ -172,7 +173,7 @@ describe('The match fucntion', () => {
   const cells = $('td').contents().toArray();
 
   it('matches string values', () => {
-    const nameMatcher: Matcher<string> = {
+    const nameMatcher = {
       regex: /^Nom(?! de)(?!bre)/,
       format: formatString,
     };
@@ -183,7 +184,7 @@ describe('The match fucntion', () => {
   });
 
   it('returns undefined for missing values', () => {
-    const missingMatcher: Matcher<string> = {
+    const missingMatcher = {
       regex: /^Yolo/,
       format: formatString,
     };
@@ -191,5 +192,16 @@ describe('The match fucntion', () => {
     const result = match(cells, missingMatcher);
 
     expect(result).toBeUndefined();
+  });
+
+  it('matches dates', () => {
+    const creationDateMatcher = {
+      regex: /^Date d'/,
+      format: formatDate,
+    };
+
+    const result = match(cells, creationDateMatcher);
+
+    expect(result).toEqual(new Date('07-09-2019'));
   });
 });
