@@ -6,7 +6,13 @@ import {ApplicationNotSubscribedError} from './errors/application-not-subscribed
 
 export type ApplicationId = Brand<string, 'ApplicationId'>;
 export type Subscription = 'DGFIP' | 'CNAF';
-export type Scope = 'dgfip_avis_imposition' | 'dgfip_adresse';
+export type Scope =
+  | 'dgfip_avis_imposition'
+  | 'dgfip_adresse'
+  | 'cnaf_adresse'
+  | 'cnaf_allocataires'
+  | 'cnaf_enfants'
+  | 'cnaf_quotient_familial';
 
 export class Application {
   constructor(
