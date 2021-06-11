@@ -5,8 +5,10 @@
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.9",
     "date-fns": "^2.22.1",
+    "dotenv": "^10.0.0",
     "fast-xml-parser": "^3.19.0",
     "lodash": "^4.17.21",
+    "query-string": "^7.0.0",
     "typescript": "^4.3.2",
     "xmldom": "^0.6.0",
     "xpath": "0.0.32"
@@ -27,6 +29,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:integration": "jest -c test/integration/jest-integration.json",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",

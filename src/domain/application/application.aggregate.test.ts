@@ -43,11 +43,9 @@ describe('The application aggregate', () => {
         unfilteredData as unknown as DGFIPOutput
       );
 
-      const filteredData = Symbol('filtered data');
-
       const result = await application.consumeDGFIP(input, dataProvider);
 
-      expect(result).toEqual(filteredData);
+      expect(result).toEqual({});
     });
   });
 });
