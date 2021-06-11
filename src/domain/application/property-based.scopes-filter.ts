@@ -7,14 +7,14 @@ export type ScopesConfiguration<
 > = Record<Scope, (keyof T)[]>;
 
 export class PropertyBasedScopesFilter<
-  T extends DataProviderResponse,
-  Scope extends string
+  Scope extends string,
+  T extends DataProviderResponse
 > {
   constructor(
     private readonly scopesConfiguration: ScopesConfiguration<Scope, T>
   ) {}
 
-  filter = (scopes: Scope[], response: T): Partial<T> => {
+  filter = (scopes: Scope[], response: Partial<T>): Partial<T> => {
     const maskedProperties: (keyof T)[] = _(
       scopes.map(scope => this.scopesConfiguration[scope])
     )

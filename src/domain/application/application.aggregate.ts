@@ -1,36 +1,46 @@
 import {Brand} from '../branded-types';
 import {DGFIPDataProvider} from '../dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from '../dgfip/dto';
-import {DGFIPScopesFilter} from '../dgfip/scopes.filter';
 import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
+import {CNAFInput, CNAFOutput} from '../cnaf/dto';
+import {CNAFDataProvider} from '../cnaf/data-provider';
+import {PropertyBasedScopesFilter} from './property-based.scopes-filter';
+import {AnyScope, unifiedScopesConfiguration} from './scopes';
 
 export type ApplicationId = Brand<string, 'ApplicationId'>;
 export type Subscription = 'DGFIP' | 'CNAF';
-export type Scope =
-  | 'dgfip_avis_imposition'
-  | 'dgfip_adresse'
-  | 'cnaf_adresse'
-  | 'cnaf_allocataires'
-  | 'cnaf_enfants'
-  | 'cnaf_quotient_familial';
 
 export class Application {
+  private readonly propertyBasedScopesFilter = new PropertyBasedScopesFilter(
+    unifiedScopesConfiguration
+  );
+
   constructor(
     public readonly id: ApplicationId,
     public readonly name: string,
     public readonly subscriptions: Subscription[],
-    private readonly scopes: Scope[]
+    private readonly scopes: AnyScope[]
   ) {}
 
   async consumeDGFIP(
     input: DGFIPInput,
-    provider: DGFIPDataProvider,
-    scopesFilter: DGFIPScopesFilter
+    provider: DGFIPDataProvider
   ): Promise<Partial<DGFIPOutput>> {
     if (!this.subscriptions.includes('DGFIP')) {
       throw new ApplicationNotSubscribedError(this, 'DGFIP');
     }
     const unfilteredData = await provider.fetch(input);
-    return scopesFilter.filter(unfilteredData, this.scopes);
+    return this.propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
+  }
+
+  async consumeCNAF(
+    input: CNAFInput,
+    provider: CNAFDataProvider
+  ): Promise<Partial<CNAFOutput>> {
+    if (!this.subscriptions.includes('CNAF')) {
+      throw new ApplicationNotSubscribedError(this, 'CNAF');
+    }
+    const unfilteredData = await provider.fetch(input);
+    return this.propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
   }
 }

@@ -3,7 +3,6 @@ import {Application, ApplicationId} from './application.aggregate';
 // eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
 import {DGFIPDataProvider} from '../dgfip/data-provider';
-import {DGFIPScopesFilter} from '../dgfip/scopes.filter';
 import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
 
 describe('The application aggregate', () => {
@@ -19,8 +18,7 @@ describe('The application aggregate', () => {
       const useCase = async () =>
         await application.consumeDGFIP(
           mock<DGFIPInput>(),
-          mock<DGFIPDataProvider>(),
-          mock<DGFIPScopesFilter>()
+          mock<DGFIPDataProvider>()
         );
 
       expect(useCase).rejects.toBeInstanceOf(ApplicationNotSubscribedError);
@@ -46,18 +44,9 @@ describe('The application aggregate', () => {
       );
 
       const filteredData = Symbol('filtered data');
-      const scopesFilter = mock<DGFIPScopesFilter>();
-      scopesFilter.filter.mockReturnValue(filteredData);
 
-      const result = await application.consumeDGFIP(
-        input,
-        dataProvider,
-        scopesFilter
-      );
+      const result = await application.consumeDGFIP(input, dataProvider);
 
-      expect(scopesFilter.filter).toHaveBeenCalledWith(unfilteredData, [
-        'dgfip_avis_imposition',
-      ]);
       expect(result).toEqual(filteredData);
     });
   });
