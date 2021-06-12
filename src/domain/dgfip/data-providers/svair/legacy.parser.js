@@ -2,7 +2,6 @@ const _ = require('lodash');
 const xpath = require('xpath');
 const select = xpath.useNamespaces({h: 'http://www.w3.org/1999/xhtml'});
 const dom = require('xmldom').DOMParser;
-const {parse} = require('date-fns');
 
 function parseEuro(str) {
   const data = str.replace(/[^0-9]/g, '');
@@ -14,7 +13,8 @@ function isNumeric(n) {
 }
 
 function parseDate(str) {
-  return parse(str, 'dd/MM/yyyy', new Date());
+  const [date, month, year] = str.trim().split('/');
+  return new Date(year, month - 1, date - 1, 0, 0);
 }
 
 module.exports.euro = parseEuro;
