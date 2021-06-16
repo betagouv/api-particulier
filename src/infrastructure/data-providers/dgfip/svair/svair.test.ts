@@ -4,6 +4,7 @@ import axios from 'axios';
 // eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
 import {NetworkError} from 'src/domain/dgfip/errors/network.error';
+import {DGFIPInput} from 'src/domain/dgfip/dto';
 
 describe('Svair data provider', () => {
   const svairDataProvider = new SvairDataProvider();
@@ -26,6 +27,24 @@ describe('Svair data provider', () => {
       mock.onGet().networkError();
 
       await expect(svairDataProvider.getViewState()).rejects.toBeInstanceOf(
+        NetworkError
+      );
+    });
+  });
+
+  describe('when fetching data', () => {
+    it('throws a network error when network fails', async () => {
+      const input: DGFIPInput = {
+        taxNoticeNumber: 'yolo',
+        taxNumber: 'croute',
+      };
+
+      mock
+        .onGet()
+        .reply(200, '<input name="javax.faces.ViewState" value="croute">');
+      mock.onPost().networkError();
+
+      await expect(svairDataProvider.fetch(input)).rejects.toBeInstanceOf(
         NetworkError
       );
     });

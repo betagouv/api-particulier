@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {load} from 'cheerio';
 import {stringify} from 'query-string';
 import {DGFIPDataProvider} from 'src/domain/dgfip/data-provider';
@@ -10,17 +10,22 @@ export class SvairDataProvider implements DGFIPDataProvider {
   async fetch(input: DGFIPInput): Promise<DGFIPOutput> {
     const viewState = await this.getViewState();
 
-    const response = await axios.post(
-      'https://cfsmsp.impots.gouv.fr/secavis/faces/commun/index.jsf',
-      stringify({
-        'j_id_7:spi': input.taxNumber,
-        'j_id_7:num_facture': input.taxNoticeNumber,
-        'j_id_7:j_id_l': 'Valider',
-        j_id_7_SUBMIT: 1,
-        'javax.faces.ViewState': viewState,
-      }),
-      {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
-    );
+    let response: AxiosResponse;
+    try {
+      response = await axios.post(
+        'https://cfsmsp.impots.gouv.fr/secavis/faces/commun/index.jsf',
+        stringify({
+          'j_id_7:spi': input.taxNumber,
+          'j_id_7:num_facture': input.taxNoticeNumber,
+          'j_id_7:j_id_l': 'Valider',
+          j_id_7_SUBMIT: 1,
+          'javax.faces.ViewState': viewState,
+        }),
+        {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+      );
+    } catch (err) {
+      throw new NetworkError(err);
+    }
 
     return await parseSvairResponse(response.data);
   }
