@@ -1,9 +1,11 @@
 import {readFileSync} from 'fs';
+import {InvalidFormatError} from 'src/domain/cnaf/errors/invalid-format.error';
 import {XMLParser} from './parser';
 
 describe('The CNAF XML parser', () => {
+  const parser = new XMLParser();
+
   it('parses the XML', () => {
-    const parser = new XMLParser();
     const okXML = readFileSync(
       __dirname + '/__tests__/resources/ok.txt',
       'utf-8'
@@ -46,5 +48,9 @@ describe('The CNAF XML parser', () => {
       mois: 5,
       quotientFamilial: 2057,
     });
+  });
+
+  it('returns domain error when xml is invalid', () => {
+    expect(() => parser.parse('yolo<')).toThrowError(InvalidFormatError);
   });
 });
