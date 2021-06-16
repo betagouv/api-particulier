@@ -3,7 +3,7 @@ import {load} from 'cheerio';
 import {stringify} from 'query-string';
 import {DGFIPDataProvider} from 'src/domain/dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from 'src/domain/dgfip/dto';
-import {NetworkError} from 'src/domain/dgfip/errors/network.error';
+import {NetworkError} from 'src/domain/application/errors/network.error';
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DGFIPDataProvider {
