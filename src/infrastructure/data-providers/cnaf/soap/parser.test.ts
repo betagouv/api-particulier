@@ -1,4 +1,5 @@
 import {readFileSync} from 'fs';
+import {CNAFError} from 'src/domain/cnaf/errors/cnaf.error';
 import {InvalidFormatError} from 'src/domain/cnaf/errors/invalid-format.error';
 import {XMLParser} from './parser';
 
@@ -52,5 +53,13 @@ describe('The CNAF XML parser', () => {
 
   it('returns domain error when xml is invalid', () => {
     expect(() => parser.parse('yolo<')).toThrowError(InvalidFormatError);
+  });
+
+  it('returns CNAF error if webservice provides a non-null error code', () => {
+    const koXML = readFileSync(
+      __dirname + '/__tests__/resources/ko.txt',
+      'utf-8'
+    );
+    expect(() => parser.parse(koXML)).toThrowError(CNAFError);
   });
 });

@@ -1,0 +1,8 @@
+--MIMEBoundary_0085f52c3f26502144f16811fb6d6544e7f36e41757a5486
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+Content-Transfer-Encoding: binary
+Content-ID: <0.1085f52c3f26502144f16811fb6d6544e7f36e41757a5486@apache.org>
+
+<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentcafweb.cnaf/"><return><beanRetourDemandeDocumentWeb><codeRetour>4</codeRetour><fluxRetour>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+</fluxRetour><libelleRetour>Votre demande est bien enregistrée. Un document vous sera adressé à votre domicile dans les prochains jours.</libelleRetour></beanRetourDemandeDocumentWeb></return></ns2:demanderDocumentWebResponse></soapenv:Body></soapenv:Envelope>
+--MIMEBoundary_0085f52c3f26502144f16811fb6d6544e7f36e41757a5486--
