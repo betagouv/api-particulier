@@ -1,4 +1,4 @@
-import {CNAFOutput} from '../../dto';
+import {CNAFOutput} from '../../../../domain/cnaf/dto';
 import * as _ from 'lodash';
 import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';

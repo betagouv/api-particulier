@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Agent} from 'https';
-import {DataProvider} from '../../../application/data-provider';
-import {CNAFInput, CNAFOutput} from '../../dto';
+import {DataProvider} from '../../../../domain/application/data-provider';
+import {CNAFInput, CNAFOutput} from '../../../../domain/cnaf/dto';
 import {XMLParser} from './parser';
 
 export class SoapDataProvider implements DataProvider<CNAFInput, CNAFOutput> {
