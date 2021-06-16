@@ -1,3 +1,5 @@
+import {InvalidCredentialsError} from '../../errors/invalid-credentials.error';
+
 const fs = require('fs');
 const parse = require('./legacy.parser');
 
@@ -22,6 +24,10 @@ describe('Parse ', () => {
   );
   const fixError = fs.readFileSync(
     __dirname + '/__tests__/resources/erreur-correctif.txt',
+    'utf-8'
+  );
+  const invalidCredentials = fs.readFileSync(
+    __dirname + '/__tests__/resources/missing-error.txt',
     'utf-8'
   );
 
@@ -202,6 +208,12 @@ describe('Parse ', () => {
         revenuImposable: 17580,
         situationFamille: 'Célibataire',
       });
+    });
+
+    it('returns domain error when data is not found', async () => {
+      await expect(
+        parseResult(invalidCredentials, 2018)
+      ).rejects.toBeInstanceOf(InvalidCredentialsError);
     });
   });
 });
