@@ -33,8 +33,7 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
-    "fix": "gts fix",
-    "prepare": "npm run compile"
+    "fix": "gts fix"
   },
   "repository": {
     "type": "git",
