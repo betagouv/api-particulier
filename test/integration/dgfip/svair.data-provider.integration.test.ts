@@ -1,4 +1,4 @@
-import {SvairDataProvider} from '../../../src/domain/dgfip/data-providers/svair';
+import {SvairDataProvider} from '../../../src/infrastructure/data-providers/dgfip/svair';
 import {DGFIPInput} from '../../../src/domain/dgfip/dto';
 import * as dotenv from 'dotenv';
 

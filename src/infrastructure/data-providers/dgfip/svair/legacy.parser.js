@@ -4,8 +4,10 @@ const select = xpath.useNamespaces({h: 'http://www.w3.org/1999/xhtml'});
 const dom = require('xmldom').DOMParser;
 const {
   InvalidCredentialsError,
-} = require('../../errors/invalid-credentials.error.ts');
-const {InvalidFormatError} = require('../../errors/invalid-format.error.ts');
+} = require('../../../../domain/dgfip/errors/invalid-credentials.error.ts');
+const {
+  InvalidFormatError,
+} = require('../../../../domain/dgfip/errors/invalid-format.error.ts');
 
 function parseEuro(str) {
   const data = str.replace(/[^0-9]/g, '');

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {load} from 'cheerio';
 import {stringify} from 'query-string';
-import {DGFIPDataProvider} from '../../data-provider';
-import {DGFIPInput, DGFIPOutput} from '../../dto';
+import {DGFIPDataProvider} from 'src/domain/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from 'src/domain/dgfip/dto';
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DGFIPDataProvider {
