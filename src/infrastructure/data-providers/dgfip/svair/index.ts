@@ -3,6 +3,7 @@ import {load} from 'cheerio';
 import {stringify} from 'query-string';
 import {DGFIPDataProvider} from 'src/domain/dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from 'src/domain/dgfip/dto';
+import {NetworkError} from 'src/domain/dgfip/errors/network.error';
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DGFIPDataProvider {
@@ -25,10 +26,14 @@ export class SvairDataProvider implements DGFIPDataProvider {
   }
 
   async getViewState(): Promise<string> {
-    const preResponse = await axios.get(
-      'https://cfsmsp.impots.gouv.fr/secavis/faces/commun/index.jsf'
-    );
-    const $ = load(preResponse.data);
-    return $('input[name="javax.faces.ViewState"]').val();
+    try {
+      const preResponse = await axios.get(
+        'https://cfsmsp.impots.gouv.fr/secavis/faces/commun/index.jsf'
+      );
+      const $ = load(preResponse.data);
+      return $('input[name="javax.faces.ViewState"]').val();
+    } catch (err) {
+      throw new NetworkError(err);
+    }
   }
 }
