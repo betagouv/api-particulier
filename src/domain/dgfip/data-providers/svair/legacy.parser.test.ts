@@ -1,4 +1,5 @@
 import {InvalidCredentialsError} from '../../errors/invalid-credentials.error';
+import {InvalidFormatError} from '../../errors/invalid-format.error';
 
 const fs = require('fs');
 const parse = require('./legacy.parser');
@@ -28,6 +29,10 @@ describe('Parse ', () => {
   );
   const invalidCredentials = fs.readFileSync(
     __dirname + '/__tests__/resources/missing-error.txt',
+    'utf-8'
+  );
+  const invalidFormat = fs.readFileSync(
+    __dirname + '/__tests__/resources/invalid-format.txt',
     'utf-8'
   );
 
@@ -214,6 +219,12 @@ describe('Parse ', () => {
       await expect(
         parseResult(invalidCredentials, 2018)
       ).rejects.toBeInstanceOf(InvalidCredentialsError);
+    });
+
+    it('returns domain error when data format is invalid', async () => {
+      await expect(parseResult(invalidFormat, 2018)).rejects.toBeInstanceOf(
+        InvalidFormatError
+      );
     });
   });
 });

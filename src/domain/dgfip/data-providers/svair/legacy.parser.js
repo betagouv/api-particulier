@@ -5,6 +5,7 @@ const dom = require('xmldom').DOMParser;
 const {
   InvalidCredentialsError,
 } = require('../../errors/invalid-credentials.error.ts');
+const {InvalidFormatError} = require('../../errors/invalid-format.error.ts');
 
 function parseEuro(str) {
   const data = str.replace(/[^0-9]/g, '');
@@ -132,9 +133,11 @@ module.exports.result = function parseResult(html) {
   const adress = [];
   const adressRowNumbers = [5, 6, 7];
   adressRowNumbers.forEach(n => {
-    const node = docRow[n].getElementsByTagName('td')[1];
-    if (node && node.firstChild) {
-      adress.push(node.firstChild.data);
+    if (docRow[n]) {
+      const node = docRow[n].getElementsByTagName('td')[1];
+      if (node && node.firstChild) {
+        adress.push(node.firstChild.data);
+      }
     }
   });
 
@@ -179,7 +182,7 @@ module.exports.result = function parseResult(html) {
   }
 
   if (!result.declarant1.nom) {
-    return Promise.reject(new Error('Parsing error'));
+    return Promise.reject(new InvalidFormatError());
   }
   return Promise.resolve(_.omitBy(result, _.isUndefined));
 };
