@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {Agent} from 'https';
+import {NetworkError} from 'src/domain/application/errors/network.error';
 import {DataProvider} from '../../../../domain/application/data-provider';
 import {CNAFInput, CNAFOutput} from '../../../../domain/cnaf/dto';
 import {XMLParser} from './parser';
@@ -8,14 +9,20 @@ export class SoapDataProvider implements DataProvider<CNAFInput, CNAFOutput> {
   private readonly parser = new XMLParser();
 
   async fetch(input: CNAFInput): Promise<CNAFOutput> {
-    const response = await axios.post(
-      `${process.env.CAF_HOST}/sgmap/wswdd/v1`,
-      buildQuery(input),
-      {
-        httpsAgent: buildHttpsAgent(),
-        headers: {'Content-Type': 'text/xml; charset=utf-8'},
-      }
-    );
+    let response: AxiosResponse;
+
+    try {
+      response = await axios.post(
+        `${process.env.CAF_HOST}/sgmap/wswdd/v1`,
+        buildQuery(input),
+        {
+          httpsAgent: buildHttpsAgent(),
+          headers: {'Content-Type': 'text/xml; charset=utf-8'},
+        }
+      );
+    } catch (err) {
+      throw new NetworkError(err);
+    }
 
     return this.parser.parse(response.data);
   }
