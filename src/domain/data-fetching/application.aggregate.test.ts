@@ -1,8 +1,8 @@
-import {DGFIPInput, DGFIPOutput} from '../dgfip/dto';
+import {DGFIPInput, DGFIPOutput} from './dgfip/dto';
 import {Application, ApplicationId} from './application.aggregate';
 // eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
-import {DGFIPDataProvider} from '../dgfip/data-provider';
+import {DGFIPDataProvider} from './dgfip/data-provider';
 import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
 
 describe('The application aggregate', () => {

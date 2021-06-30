@@ -1,9 +1,9 @@
 import {Brand} from '../branded-types';
-import {DGFIPDataProvider} from '../dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from '../dgfip/dto';
+import {DGFIPDataProvider} from './dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from './dgfip/dto';
 import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
-import {CNAFInput, CNAFOutput} from '../cnaf/dto';
-import {CNAFDataProvider} from '../cnaf/data-provider';
+import {CNAFInput, CNAFOutput} from './cnaf/dto';
+import {CNAFDataProvider} from './cnaf/data-provider';
 import {PropertyBasedScopesFilter} from './property-based.scopes-filter';
 import {AnyScope, unifiedScopesConfiguration} from './scopes';
 

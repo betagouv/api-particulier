@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
-import {CNAFInput} from 'src/domain/cnaf/dto';
+import {CNAFInput} from 'src/domain/data-fetching/cnaf/dto';
 
 dotenv.config();
 

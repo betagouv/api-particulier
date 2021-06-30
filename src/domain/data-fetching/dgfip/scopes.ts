@@ -1,5 +1,5 @@
 import {DGFIPOutput} from './dto';
-import {ScopesConfiguration} from '../data-fetching/property-based.scopes-filter';
+import {ScopesConfiguration} from '../property-based.scopes-filter';
 
 export type DGFIPScope = 'dgfip_avis_imposition' | 'dgfip_adresse';
 
