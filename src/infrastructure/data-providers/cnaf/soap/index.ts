@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 import {Agent} from 'https';
-import {NetworkError} from 'src/domain/application/errors/network.error';
-import {DataProvider} from '../../../../domain/application/data-provider';
+import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
+import {DataProvider} from '../../../../domain/data-fetching/data-provider';
 import {CNAFInput, CNAFOutput} from '../../../../domain/cnaf/dto';
 import {XMLParser} from './parser';
 

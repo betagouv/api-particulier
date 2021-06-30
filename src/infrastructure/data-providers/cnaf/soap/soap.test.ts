@@ -1,7 +1,7 @@
 import axios from 'axios';
 // eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
-import {NetworkError} from 'src/domain/application/errors/network.error';
+import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {CNAFInput} from 'src/domain/cnaf/dto';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 
