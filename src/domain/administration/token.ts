@@ -6,6 +6,6 @@ export class Token {
   constructor(
     public readonly id: TokenId,
     public readonly createdOn: Date,
-    public readonly hash: string
+    public readonly value: string
   ) {}
 }
