@@ -8,12 +8,7 @@ import {ApplicationNotSubscribedError} from './errors/application-not-subscribed
 describe('The application aggregate', () => {
   describe('when called for DGFIP data', () => {
     it('throws an error if application is not subscribed to DGFIP data provider', async () => {
-      const application = new Application(
-        'croute' as ApplicationId,
-        'Yolo',
-        [],
-        []
-      );
+      const application = new Application('croute' as ApplicationId, [], []);
 
       const useCase = async () =>
         await application.consumeDGFIP(
@@ -26,7 +21,6 @@ describe('The application aggregate', () => {
 
     const application = new Application(
       'croute' as ApplicationId,
-      'Yolo',
       ['DGFIP'],
       ['dgfip_avis_imposition']
     );

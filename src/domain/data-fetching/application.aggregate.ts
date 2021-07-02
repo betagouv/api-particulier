@@ -17,7 +17,6 @@ export class Application {
 
   constructor(
     public readonly id: ApplicationId,
-    public readonly name: string,
     public readonly subscriptions: Subscription[],
     private readonly scopes: AnyScope[]
   ) {}
