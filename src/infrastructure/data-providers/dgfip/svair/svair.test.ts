@@ -3,7 +3,7 @@ import {SvairDataProvider} from '.';
 import axios from 'axios';
 // eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
-import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
+import {NetworkError} from 'src/domain/administration/errors/network.error';
 import {DGFIPInput} from 'src/domain/administration/dgfip/dto';
 
 describe('Svair data provider', () => {

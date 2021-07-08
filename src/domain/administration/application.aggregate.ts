@@ -6,11 +6,11 @@ import {CNAFDataProvider} from 'src/domain/administration/cnaf/data-provider';
 import {CNAFInput, CNAFOutput} from 'src/domain/administration/cnaf/dto';
 import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
-import {PropertyBasedScopesFilter} from 'src/domain/data-fetching/property-based.scopes-filter';
+import {PropertyBasedScopesFilter} from 'src/domain/administration/property-based.scopes-filter';
 import {
   AnyScope,
   unifiedScopesConfiguration,
-} from 'src/domain/data-fetching/scopes';
+} from 'src/domain/administration/scopes';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
