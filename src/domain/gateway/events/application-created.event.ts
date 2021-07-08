@@ -7,12 +7,13 @@ import {UserEmail} from 'src/domain/gateway/user';
 export class ApplicationCreated extends ApplicationEvent {
   constructor(
     applicationId: ApplicationId,
+    date: Date,
     readonly name: string,
     readonly dataPassId: string,
     readonly scopes: AnyScope[],
     readonly subscriptions: Subscription[],
     readonly userEmails: UserEmail[]
   ) {
-    super(applicationId, new Date());
+    super(applicationId, date);
   }
 }

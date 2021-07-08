@@ -44,6 +44,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
 
     const applicationCreatedEvent = new ApplicationCreated(
       'croute' as ApplicationId,
+      new Date(),
       name,
       dataPassId,
       scopes,
