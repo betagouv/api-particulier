@@ -13,6 +13,8 @@ describe('An application', () => {
     };
 
     const application = Application.create('yolo', '4', [], []);
+
+    expect(application.getPendingEvents()).toHaveLength(1);
     const expectedApiKey = Symbol('ApiKey');
     const newToken = Symbol('Token');
     tokenFactory.generateToken.mockReturnValue([newToken, expectedApiKey]);

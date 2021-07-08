@@ -10,6 +10,7 @@ import {PropertyBasedScopesFilter} from 'src/domain/gateway/property-based.scope
 import {AnyScope, unifiedScopesConfiguration} from 'src/domain/gateway/scopes';
 import {AggregateRoot} from 'src/domain/aggregate-root';
 import {ApplicationEvent} from 'src/domain/gateway/application.event';
+import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -18,15 +19,15 @@ const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
 );
 
 export class Application extends AggregateRoot<ApplicationEvent> {
-  private constructor(
-    public readonly id: ApplicationId,
-    public readonly name: string,
-    public readonly createdOn: Date,
-    public readonly dataPassId: string,
-    public readonly tokens: Token[],
-    public readonly subscriptions: Subscription[],
-    private readonly scopes: AnyScope[]
-  ) {
+  public id!: ApplicationId;
+  public name!: string;
+  public createdOn!: Date;
+  public dataPassId!: string;
+  public tokens!: Token[];
+  public subscriptions!: Subscription[];
+  private scopes!: AnyScope[];
+
+  private constructor() {
     super();
   }
 
@@ -36,15 +37,18 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     subscriptions: Subscription[],
     scopes: AnyScope[]
   ): Application {
-    return new Application(
+    const self = new this();
+
+    const applicationCreatedEvent = new ApplicationCreated(
       'croute' as ApplicationId,
       name,
-      new Date(),
       dataPassId,
-      [],
-      subscriptions,
-      scopes
+      scopes,
+      subscriptions
     );
+    self.raiseAndApply(applicationCreatedEvent);
+
+    return self;
   }
 
   generateNewToken(tokenFactory: TokenFactory) {
@@ -74,5 +78,15 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     }
     const unfilteredData = await provider.fetch(input);
     return propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
+  }
+
+  private applyApplicationCreated(event: ApplicationCreated) {
+    this.id = event.aggregateId as ApplicationId;
+    this.name = event.name;
+    this.dataPassId = event.dataPassId;
+    this.createdOn = event.date;
+    this.scopes = event.scopes;
+    this.subscriptions = event.subscriptions;
+    this.tokens = [];
   }
 }
