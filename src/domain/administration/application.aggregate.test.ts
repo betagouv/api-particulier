@@ -1,5 +1,4 @@
 import {Application} from 'src/domain/administration/application.aggregate';
-import {ApplicationId} from 'src/domain/application-id';
 
 describe('An application', () => {
   it('can generate new tokens', () => {
@@ -7,13 +6,7 @@ describe('An application', () => {
       generateToken: jest.fn(),
     };
 
-    const application = new Application(
-      'croute' as ApplicationId,
-      'yolo',
-      new Date(),
-      '4',
-      []
-    );
+    const application = Application.create('yolo', '4');
     const expectedApiKey = Symbol('ApiKey');
     const newToken = Symbol('Token');
     tokenFactory.generateToken.mockReturnValue([newToken, expectedApiKey]);
