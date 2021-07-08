@@ -1,4 +1,4 @@
-import {ScopesConfiguration} from 'src/domain/administration/property-based.scopes-filter';
+import {ScopesConfiguration} from 'src/domain/gateway/property-based.scopes-filter';
 import {CNAFOutput} from './dto';
 
 export type CNAFScope =

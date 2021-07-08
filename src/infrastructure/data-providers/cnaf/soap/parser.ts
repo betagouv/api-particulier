@@ -1,9 +1,9 @@
-import {CNAFOutput} from '../../../../domain/administration/cnaf/dto';
+import {CNAFOutput} from '../../../../domain/gateway/cnaf/dto';
 import * as _ from 'lodash';
 import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
-import {InvalidFormatError} from 'src/domain/administration/cnaf/errors/invalid-format.error';
-import {CNAFError} from 'src/domain/administration/cnaf/errors/cnaf.error';
+import {InvalidFormatError} from 'src/domain/gateway/cnaf/errors/invalid-format.error';
+import {CNAFError} from 'src/domain/gateway/cnaf/errors/cnaf.error';
 
 export class XMLParser {
   parse(xml: string): CNAFOutput {

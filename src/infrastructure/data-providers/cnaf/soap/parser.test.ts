@@ -1,6 +1,6 @@
 import {readFileSync} from 'fs';
-import {CNAFError} from 'src/domain/administration/cnaf/errors/cnaf.error';
-import {InvalidFormatError} from 'src/domain/administration/cnaf/errors/invalid-format.error';
+import {CNAFError} from 'src/domain/gateway/cnaf/errors/cnaf.error';
+import {InvalidFormatError} from 'src/domain/gateway/cnaf/errors/invalid-format.error';
 import {XMLParser} from './parser';
 
 describe('The CNAF XML parser', () => {

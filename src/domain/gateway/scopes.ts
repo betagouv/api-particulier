@@ -1,11 +1,11 @@
 import {
   CNAFScope,
   scopesConfiguration as cnafScopesConfiguration,
-} from '../administration/cnaf/scopes';
+} from './cnaf/scopes';
 import {
   DGFIPScope,
   scopesConfiguration as dgfipScopesConfiguration,
-} from '../administration/dgfip/scopes';
+} from './dgfip/scopes';
 
 export const isCNAFScope = (scope: AnyScope): scope is CNAFScope =>
   scope.startsWith('cnaf_');

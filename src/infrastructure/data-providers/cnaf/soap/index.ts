@@ -1,11 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 import {Agent} from 'https';
-import {NetworkError} from 'src/domain/administration/errors/network.error';
-import {DataProvider} from '../../../../domain/administration/data-provider';
-import {
-  CNAFInput,
-  CNAFOutput,
-} from '../../../../domain/administration/cnaf/dto';
+import {NetworkError} from 'src/domain/gateway/errors/network.error';
+import {DataProvider} from '../../../../domain/gateway/data-provider';
+import {CNAFInput, CNAFOutput} from '../../../../domain/gateway/cnaf/dto';
 import {XMLParser} from './parser';
 
 export class SoapDataProvider implements DataProvider<CNAFInput, CNAFOutput> {

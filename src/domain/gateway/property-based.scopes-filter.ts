@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {DataProviderResponse} from '../administration/dto';
+import {DataProviderResponse} from './dto';
 
 export type ScopesConfiguration<
   Scope extends string,

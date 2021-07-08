@@ -1,10 +1,10 @@
 // eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
-import {Application} from 'src/domain/administration/application.aggregate';
-import {ApplicationNotSubscribedError} from 'src/domain/administration/errors/application-not-subscribed.error';
-import {ApplicationId} from 'src/domain/administration/application-id';
-import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
+import {Application} from 'src/domain/gateway/application.aggregate';
+import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
+import {ApplicationId} from 'src/domain/gateway/application-id';
+import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
 
 describe('An application', () => {
   it('can generate new tokens', () => {

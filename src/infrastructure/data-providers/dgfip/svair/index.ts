@@ -1,9 +1,9 @@
 import axios, {AxiosResponse} from 'axios';
 import {load} from 'cheerio';
 import {stringify} from 'query-string';
-import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
-import {NetworkError} from 'src/domain/administration/errors/network.error';
+import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
+import {NetworkError} from 'src/domain/gateway/errors/network.error';
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DGFIPDataProvider {

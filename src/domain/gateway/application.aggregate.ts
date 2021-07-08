@@ -1,16 +1,13 @@
-import {ApplicationNotSubscribedError} from 'src/domain/administration/errors/application-not-subscribed.error';
-import {Token} from 'src/domain/administration/token';
-import {TokenFactory} from 'src/domain/administration/token.factory';
-import {ApplicationId} from 'src/domain/administration/application-id';
-import {CNAFDataProvider} from 'src/domain/administration/cnaf/data-provider';
-import {CNAFInput, CNAFOutput} from 'src/domain/administration/cnaf/dto';
-import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
-import {PropertyBasedScopesFilter} from 'src/domain/administration/property-based.scopes-filter';
-import {
-  AnyScope,
-  unifiedScopesConfiguration,
-} from 'src/domain/administration/scopes';
+import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
+import {Token} from 'src/domain/gateway/token';
+import {TokenFactory} from 'src/domain/gateway/token.factory';
+import {ApplicationId} from 'src/domain/gateway/application-id';
+import {CNAFDataProvider} from 'src/domain/gateway/cnaf/data-provider';
+import {CNAFInput, CNAFOutput} from 'src/domain/gateway/cnaf/dto';
+import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
+import {PropertyBasedScopesFilter} from 'src/domain/gateway/property-based.scopes-filter';
+import {AnyScope, unifiedScopesConfiguration} from 'src/domain/gateway/scopes';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
