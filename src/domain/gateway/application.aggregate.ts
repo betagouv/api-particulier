@@ -8,6 +8,8 @@ import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
 import {PropertyBasedScopesFilter} from 'src/domain/gateway/property-based.scopes-filter';
 import {AnyScope, unifiedScopesConfiguration} from 'src/domain/gateway/scopes';
+import {AggregateRoot} from 'src/domain/aggregate-root';
+import {ApplicationEvent} from 'src/domain/gateway/application.event';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -15,7 +17,7 @@ const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
   unifiedScopesConfiguration
 );
 
-export class Application {
+export class Application extends AggregateRoot<ApplicationEvent> {
   private constructor(
     public readonly id: ApplicationId,
     public readonly name: string,
@@ -24,7 +26,9 @@ export class Application {
     public readonly tokens: Token[],
     public readonly subscriptions: Subscription[],
     private readonly scopes: AnyScope[]
-  ) {}
+  ) {
+    super();
+  }
 
   static create(
     name: string,

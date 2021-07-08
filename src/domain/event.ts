@@ -1,4 +1,3 @@
-export interface Event {
-  aggregateId: string;
-  payload: object;
+export abstract class Event {
+  constructor(readonly aggregateId: string, readonly payload: object) {}
 }
