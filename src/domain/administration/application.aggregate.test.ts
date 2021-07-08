@@ -6,7 +6,7 @@ describe('An application', () => {
       generateToken: jest.fn(),
     };
 
-    const application = Application.create('yolo', '4');
+    const application = Application.create('yolo', '4', [], []);
     const expectedApiKey = Symbol('ApiKey');
     const newToken = Symbol('Token');
     tokenFactory.generateToken.mockReturnValue([newToken, expectedApiKey]);
