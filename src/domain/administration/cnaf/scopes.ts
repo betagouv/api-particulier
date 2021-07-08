@@ -1,5 +1,5 @@
 import {CNAFOutput} from './dto';
-import {ScopesConfiguration} from '../property-based.scopes-filter';
+import {ScopesConfiguration} from '../../data-fetching/property-based.scopes-filter';
 
 export type CNAFScope =
   | 'cnaf_adresse'

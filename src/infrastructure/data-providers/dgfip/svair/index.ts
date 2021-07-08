@@ -1,8 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 import {load} from 'cheerio';
 import {stringify} from 'query-string';
-import {DGFIPDataProvider} from 'src/domain/data-fetching/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/data-fetching/dgfip/dto';
+import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {result as parseSvairResponse} from './legacy.parser';
 

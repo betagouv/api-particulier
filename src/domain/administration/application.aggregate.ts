@@ -2,10 +2,10 @@ import {ApplicationNotSubscribedError} from 'src/domain/administration/errors/ap
 import {Token} from 'src/domain/administration/token';
 import {TokenFactory} from 'src/domain/administration/token.factory';
 import {ApplicationId} from 'src/domain/application-id';
-import {CNAFDataProvider} from 'src/domain/data-fetching/cnaf/data-provider';
-import {CNAFInput, CNAFOutput} from 'src/domain/data-fetching/cnaf/dto';
-import {DGFIPDataProvider} from 'src/domain/data-fetching/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/data-fetching/dgfip/dto';
+import {CNAFDataProvider} from 'src/domain/administration/cnaf/data-provider';
+import {CNAFInput, CNAFOutput} from 'src/domain/administration/cnaf/dto';
+import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
 import {PropertyBasedScopesFilter} from 'src/domain/data-fetching/property-based.scopes-filter';
 import {
   AnyScope,

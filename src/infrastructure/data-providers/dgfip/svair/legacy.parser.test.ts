@@ -1,5 +1,5 @@
-import {InvalidCredentialsError} from 'src/domain/data-fetching/dgfip/errors/invalid-credentials.error';
-import {InvalidFormatError} from 'src/domain/data-fetching/dgfip/errors/invalid-format.error';
+import {InvalidCredentialsError} from 'src/domain/administration/dgfip/errors/invalid-credentials.error';
+import {InvalidFormatError} from 'src/domain/administration/dgfip/errors/invalid-format.error';
 
 const fs = require('fs');
 const parse = require('./legacy.parser');

@@ -1,8 +1,8 @@
-import {DGFIPDataProvider} from './dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from './dgfip/dto';
+import {DGFIPDataProvider} from '../administration/dgfip/data-provider';
+import {DGFIPInput, DGFIPOutput} from '../administration/dgfip/dto';
 import {ApplicationNotSubscribedError} from './errors/application-not-subscribed.error';
-import {CNAFInput, CNAFOutput} from './cnaf/dto';
-import {CNAFDataProvider} from './cnaf/data-provider';
+import {CNAFInput, CNAFOutput} from '../administration/cnaf/dto';
+import {CNAFDataProvider} from '../administration/cnaf/data-provider';
 import {PropertyBasedScopesFilter} from './property-based.scopes-filter';
 import {AnyScope, unifiedScopesConfiguration} from './scopes';
 import {ApplicationId} from 'src/domain/application-id';
