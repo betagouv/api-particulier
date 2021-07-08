@@ -12,6 +12,7 @@ import {AggregateRoot} from 'src/domain/aggregate-root';
 import {ApplicationEvent} from 'src/domain/gateway/application.event';
 import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
 import {UserEmail} from 'src/domain/gateway/user';
+import {UserSubscribed} from 'src/domain/gateway/events/user-subscribed.event';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -63,6 +64,12 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     return apiKey;
   }
 
+  subscribeUser(userEmail: UserEmail) {
+    const event = new UserSubscribed(this.id, new Date(), userEmail);
+
+    this.raiseAndApply(event);
+  }
+
   async consumeDGFIP(
     input: DGFIPInput,
     provider: DGFIPDataProvider
@@ -94,5 +101,9 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     this.subscriptions = event.subscriptions;
     this.userEmails = event.userEmails;
     this.tokens = [];
+  }
+
+  private applyUserSubscribed(event: UserSubscribed) {
+    this.userEmails.push(event.userEmail);
   }
 }
