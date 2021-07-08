@@ -2,7 +2,7 @@
 import {mock} from 'jest-mock-extended';
 import {Application} from 'src/domain/administration/application.aggregate';
 import {ApplicationNotSubscribedError} from 'src/domain/administration/errors/application-not-subscribed.error';
-import {ApplicationId} from 'src/domain/application-id';
+import {ApplicationId} from 'src/domain/administration/application-id';
 import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from 'src/domain/administration/dgfip/dto';
 

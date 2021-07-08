@@ -1,7 +1,7 @@
 import {ApplicationNotSubscribedError} from 'src/domain/administration/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/administration/token';
 import {TokenFactory} from 'src/domain/administration/token.factory';
-import {ApplicationId} from 'src/domain/application-id';
+import {ApplicationId} from 'src/domain/administration/application-id';
 import {CNAFDataProvider} from 'src/domain/administration/cnaf/data-provider';
 import {CNAFInput, CNAFOutput} from 'src/domain/administration/cnaf/dto';
 import {DGFIPDataProvider} from 'src/domain/administration/dgfip/data-provider';
