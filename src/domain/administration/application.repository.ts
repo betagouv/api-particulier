@@ -1,5 +1,5 @@
 import {ApplicationId} from 'src/domain/application-id';
 
-export interface TokenRepository {
+export interface ApplicationRepository {
   getApplicationIdByTokenValue(tokenValue: string): Promise<ApplicationId>;
 }
