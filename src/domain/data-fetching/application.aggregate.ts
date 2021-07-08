@@ -9,11 +9,11 @@ import {ApplicationId} from 'src/domain/application-id';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
-export class Application {
-  private readonly propertyBasedScopesFilter = new PropertyBasedScopesFilter(
-    unifiedScopesConfiguration
-  );
+const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
+  unifiedScopesConfiguration
+);
 
+export class Application {
   constructor(
     public readonly id: ApplicationId,
     public readonly subscriptions: Subscription[],
@@ -28,7 +28,7 @@ export class Application {
       throw new ApplicationNotSubscribedError(this, 'DGFIP');
     }
     const unfilteredData = await provider.fetch(input);
-    return this.propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
+    return propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
   }
 
   async consumeCNAF(
@@ -39,6 +39,6 @@ export class Application {
       throw new ApplicationNotSubscribedError(this, 'CNAF');
     }
     const unfilteredData = await provider.fetch(input);
-    return this.propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
+    return propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
   }
 }
