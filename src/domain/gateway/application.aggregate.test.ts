@@ -12,7 +12,7 @@ describe('An application', () => {
       generateToken: jest.fn(),
     };
 
-    const application = Application.create('yolo', '4', [], []);
+    const application = Application.create('yolo', '4', [], [], []);
 
     expect(application.getPendingEvents()).toHaveLength(1);
     const expectedApiKey = Symbol('ApiKey');
@@ -30,6 +30,7 @@ describe('An application', () => {
         'croute' as ApplicationId,
         'yolo',
         [],
+        [],
         []
       );
 
@@ -46,7 +47,8 @@ describe('An application', () => {
       'croute' as ApplicationId,
       'yolo',
       ['DGFIP'],
-      ['dgfip_avis_imposition']
+      ['dgfip_avis_imposition'],
+      []
     );
 
     it('calls the data provider and filters return data', async () => {

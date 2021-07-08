@@ -11,6 +11,7 @@ import {AnyScope, unifiedScopesConfiguration} from 'src/domain/gateway/scopes';
 import {AggregateRoot} from 'src/domain/aggregate-root';
 import {ApplicationEvent} from 'src/domain/gateway/application.event';
 import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
+import {UserEmail} from 'src/domain/gateway/user';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -25,6 +26,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
   public dataPassId!: string;
   public tokens!: Token[];
   public subscriptions!: Subscription[];
+  public userEmails!: UserEmail[];
   private scopes!: AnyScope[];
 
   private constructor() {
@@ -35,7 +37,8 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     name: string,
     dataPassId: string,
     subscriptions: Subscription[],
-    scopes: AnyScope[]
+    scopes: AnyScope[],
+    userEmails: UserEmail[]
   ): Application {
     const self = new this();
 
@@ -44,7 +47,8 @@ export class Application extends AggregateRoot<ApplicationEvent> {
       name,
       dataPassId,
       scopes,
-      subscriptions
+      subscriptions,
+      userEmails
     );
     self.raiseAndApply(applicationCreatedEvent);
 
@@ -87,6 +91,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     this.createdOn = event.date;
     this.scopes = event.scopes;
     this.subscriptions = event.subscriptions;
+    this.userEmails = event.userEmails;
     this.tokens = [];
   }
 }
