@@ -13,6 +13,7 @@ import {ApplicationEvent} from 'src/domain/gateway/application.event';
 import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
 import {UserEmail} from 'src/domain/gateway/user';
 import {UserSubscribed} from 'src/domain/gateway/events/user-subscribed.event';
+import {TokenCreated} from 'src/domain/gateway/events/token-created.event';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -59,7 +60,9 @@ export class Application extends AggregateRoot<ApplicationEvent> {
 
   generateNewToken(tokenFactory: TokenFactory) {
     const token = tokenFactory.generateToken();
-    this.tokens.push(token);
+    const event = new TokenCreated(this.id, new Date(), token);
+
+    this.raiseAndApply(event);
   }
 
   subscribeUser(userEmail: UserEmail) {
@@ -103,5 +106,9 @@ export class Application extends AggregateRoot<ApplicationEvent> {
 
   private applyUserSubscribed(event: UserSubscribed) {
     this.userEmails.push(event.userEmail);
+  }
+
+  private applyTokenCreated(event: TokenCreated) {
+    this.tokens.push(event.token);
   }
 }
