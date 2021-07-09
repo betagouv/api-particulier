@@ -2,9 +2,9 @@
 import {mock} from 'jest-mock-extended';
 import {Application} from 'src/domain/gateway/application.aggregate';
 import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
-import {ApplicationId} from 'src/domain/gateway/application-id';
 import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
 import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
+import {UserEmail} from 'src/domain/gateway/user';
 
 describe('An application', () => {
   it('can generate new tokens', () => {
@@ -22,15 +22,26 @@ describe('An application', () => {
     expect(application.tokens).toHaveLength(1);
   });
 
+  it('can subscribe new users', () => {
+    const newUser = 'jean@moust.fr' as UserEmail;
+
+    const application = Application.create(
+      'yolo',
+      '4',
+      [],
+      [],
+      ['georges@moustaki.fr' as UserEmail]
+    );
+
+    application.subscribeUser(newUser);
+
+    expect(application.userEmails).toHaveLength(2);
+    expect(application.userEmails[1]).toEqual(newUser);
+  });
+
   describe('when called for DGFIP data', () => {
     it('throws an error if application is not subscribed to DGFIP data provider', async () => {
-      const application = Application.create(
-        'croute' as ApplicationId,
-        'yolo',
-        [],
-        [],
-        []
-      );
+      const application = Application.create('croute', 'yolo', [], [], []);
 
       const useCase = async () =>
         await application.consumeDGFIP(
@@ -42,7 +53,7 @@ describe('An application', () => {
     });
 
     const application = Application.create(
-      'croute' as ApplicationId,
+      'croute',
       'yolo',
       ['DGFIP'],
       ['dgfip_avis_imposition'],
