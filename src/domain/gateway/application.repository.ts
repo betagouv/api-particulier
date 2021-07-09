@@ -1,5 +1,6 @@
 import {ApplicationId} from 'src/domain/gateway/application-id';
+import {Application} from 'src/domain/gateway/application.aggregate';
 
 export interface ApplicationRepository {
-  getApplicationIdByTokenValue(tokenValue: string): Promise<ApplicationId>;
+  find(id: ApplicationId): Promise<Application>;
 }
