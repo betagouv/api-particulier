@@ -15,12 +15,24 @@ import {
 import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
 
 describe('An application', () => {
+  const uuidFactory = {
+    generateUuid() {
+      return 'yolo';
+    },
+  };
   it('can generate new tokens', () => {
     const tokenFactory = {
       generateToken: jest.fn(),
     };
 
-    const application = Application.create('yolo', '4', [], [], []);
+    const application = Application.create(
+      'yolo',
+      '4',
+      [],
+      [],
+      [],
+      uuidFactory
+    );
 
     expect(application.getPendingEvents()).toHaveLength(1);
     const newToken = Symbol('Token');
@@ -38,7 +50,8 @@ describe('An application', () => {
       '4',
       [],
       [],
-      ['georges@moustaki.fr' as UserEmail]
+      ['georges@moustaki.fr' as UserEmail],
+      uuidFactory
     );
 
     application.subscribeUser(newUser);
@@ -49,7 +62,14 @@ describe('An application', () => {
 
   describe('when called for DGFIP data', () => {
     it('throws an error if application is not subscribed to DGFIP data provider', async () => {
-      const application = Application.create('croute', 'yolo', [], [], []);
+      const application = Application.create(
+        'croute',
+        'yolo',
+        [],
+        [],
+        [],
+        uuidFactory
+      );
 
       const useCase = async () =>
         await application.consumeDGFIP(
@@ -65,7 +85,8 @@ describe('An application', () => {
       'yolo',
       ['DGFIP'],
       ['dgfip_avis_imposition'],
-      []
+      [],
+      uuidFactory
     );
 
     it('calls the data provider and filters return data', async () => {
@@ -88,7 +109,14 @@ describe('An application', () => {
 
   describe('when called for CNAF data', () => {
     it('throws an error if application is not subscribed to CNAF data provider', async () => {
-      const application = Application.create('croute', 'yolo', [], [], []);
+      const application = Application.create(
+        'croute',
+        'yolo',
+        [],
+        [],
+        [],
+        uuidFactory
+      );
 
       const useCase = async () =>
         await application.consumeCNAF(
@@ -104,7 +132,8 @@ describe('An application', () => {
       'yolo',
       ['CNAF'],
       ['cnaf_adresse'],
-      []
+      [],
+      uuidFactory
     );
 
     it('calls the data provider and filters return data', async () => {
