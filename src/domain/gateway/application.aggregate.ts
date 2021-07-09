@@ -20,6 +20,8 @@ import {ApplicationCreated} from 'src/domain/gateway/events/application-created.
 import {UserEmail} from 'src/domain/gateway/user';
 import {UserSubscribed} from 'src/domain/gateway/events/user-subscribed.event';
 import {TokenCreated} from 'src/domain/gateway/events/token-created.event';
+import {DataProvider} from 'src/domain/gateway/data-providers/data-provider';
+import {DataProviderResponse} from 'src/domain/gateway/data-providers/dto';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -81,19 +83,23 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     input: DGFIPInput,
     provider: DGFIPDataProvider
   ): Promise<Partial<DGFIPOutput>> {
-    if (!this.subscriptions.includes('DGFIP')) {
-      throw new ApplicationNotSubscribedError(this, 'DGFIP');
-    }
-    const unfilteredData = await provider.fetch(input);
-    return propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
+    return this.callDataProvider(input, 'DGFIP', provider);
   }
 
   async consumeCNAF(
     input: CNAFInput,
     provider: CNAFDataProvider
   ): Promise<Partial<CNAFOutput>> {
-    if (!this.subscriptions.includes('CNAF')) {
-      throw new ApplicationNotSubscribedError(this, 'CNAF');
+    return this.callDataProvider(input, 'CNAF', provider);
+  }
+
+  private async callDataProvider<I, O extends DataProviderResponse>(
+    input: I,
+    neededSubscription: Subscription,
+    provider: DataProvider<I, O>
+  ) {
+    if (!this.subscriptions.includes(neededSubscription)) {
+      throw new ApplicationNotSubscribedError(this, neededSubscription);
     }
     const unfilteredData = await provider.fetch(input);
     return propertyBasedScopesFilter.filter(this.scopes, unfilteredData);
