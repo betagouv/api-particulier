@@ -58,10 +58,8 @@ export class Application extends AggregateRoot<ApplicationEvent> {
   }
 
   generateNewToken(tokenFactory: TokenFactory) {
-    const [token, apiKey] = tokenFactory.generateToken();
+    const token = tokenFactory.generateToken();
     this.tokens.push(token);
-
-    return apiKey;
   }
 
   subscribeUser(userEmail: UserEmail) {

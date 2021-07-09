@@ -15,12 +15,10 @@ describe('An application', () => {
     const application = Application.create('yolo', '4', [], [], []);
 
     expect(application.getPendingEvents()).toHaveLength(1);
-    const expectedApiKey = Symbol('ApiKey');
     const newToken = Symbol('Token');
-    tokenFactory.generateToken.mockReturnValue([newToken, expectedApiKey]);
-    const actualApiKey = application.generateNewToken(tokenFactory);
+    tokenFactory.generateToken.mockReturnValue(newToken);
+    application.generateNewToken(tokenFactory);
 
-    expect(actualApiKey).toEqual(expectedApiKey);
     expect(application.tokens).toHaveLength(1);
   });
 
