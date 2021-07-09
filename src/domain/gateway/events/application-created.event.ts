@@ -1,6 +1,6 @@
 import {ApplicationId} from 'src/domain/gateway/application-id';
 import {Subscription} from 'src/domain/gateway/application.aggregate';
-import {ApplicationEvent} from 'src/domain/gateway/application.event';
+import {ApplicationEvent} from 'src/domain/gateway/events/application.event';
 import {AnyScope} from 'src/domain/gateway/scopes';
 import {UserEmail} from 'src/domain/gateway/user';
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 // eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
 import {NetworkError} from 'src/domain/gateway/errors/network.error';
-import {CNAFInput} from 'src/domain/gateway/cnaf/dto';
+import {CNAFInput} from 'src/domain/gateway/data-providers/cnaf/dto';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 
 describe('The soap data provider', () => {

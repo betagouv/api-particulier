@@ -2,14 +2,20 @@ import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/applicati
 import {Token} from 'src/domain/gateway/token';
 import {TokenFactory} from 'src/domain/gateway/token.factory';
 import {ApplicationId} from 'src/domain/gateway/application-id';
-import {CNAFDataProvider} from 'src/domain/gateway/cnaf/data-provider';
-import {CNAFInput, CNAFOutput} from 'src/domain/gateway/cnaf/dto';
-import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
-import {PropertyBasedScopesFilter} from 'src/domain/gateway/property-based.scopes-filter';
+import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
+import {
+  CNAFInput,
+  CNAFOutput,
+} from 'src/domain/gateway/data-providers/cnaf/dto';
+import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+import {
+  DGFIPInput,
+  DGFIPOutput,
+} from 'src/domain/gateway/data-providers/dgfip/dto';
+import {PropertyBasedScopesFilter} from 'src/domain/gateway/scopes-filters/property-based.scopes-filter';
 import {AnyScope, unifiedScopesConfiguration} from 'src/domain/gateway/scopes';
 import {AggregateRoot} from 'src/domain/aggregate-root';
-import {ApplicationEvent} from 'src/domain/gateway/application.event';
+import {ApplicationEvent} from 'src/domain/gateway/events/application.event';
 import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
 import {UserEmail} from 'src/domain/gateway/user';
 import {UserSubscribed} from 'src/domain/gateway/events/user-subscribed.event';

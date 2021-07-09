@@ -2,11 +2,17 @@
 import {mock} from 'jest-mock-extended';
 import {Application} from 'src/domain/gateway/application.aggregate';
 import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
-import {DGFIPDataProvider} from 'src/domain/gateway/dgfip/data-provider';
-import {DGFIPInput, DGFIPOutput} from 'src/domain/gateway/dgfip/dto';
+import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+import {
+  DGFIPInput,
+  DGFIPOutput,
+} from 'src/domain/gateway/data-providers/dgfip/dto';
 import {UserEmail} from 'src/domain/gateway/user';
-import {CNAFInput, CNAFOutput} from 'src/domain/gateway/cnaf/dto';
-import {CNAFDataProvider} from 'src/domain/gateway/cnaf/data-provider';
+import {
+  CNAFInput,
+  CNAFOutput,
+} from 'src/domain/gateway/data-providers/cnaf/dto';
+import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
 
 describe('An application', () => {
   it('can generate new tokens', () => {
