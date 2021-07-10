@@ -23,6 +23,7 @@ import {TokenCreated} from 'src/domain/gateway/events/token-created.event';
 import {DataProvider} from 'src/domain/gateway/data-providers/data-provider';
 import {DataProviderResponse} from 'src/domain/gateway/data-providers/dto';
 import {UuidFactory} from 'src/domain/uuid.factory';
+import {ApplicationCache} from 'src/domain/gateway/projections/application-cache';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -42,6 +43,20 @@ export class Application extends AggregateRoot<ApplicationEvent> {
 
   private constructor() {
     super();
+  }
+
+  static fromCache(cache: ApplicationCache): Application {
+    const self = new this();
+    self.id = cache.id;
+    self.name = cache.name;
+    self.createdOn = cache.createdOn;
+    self.dataPassId = cache.dataPassId;
+    self.tokens = cache.tokens;
+    self.subscriptions = cache.subscriptions;
+    self.userEmails = cache.userEmails;
+    self.scopes = cache.scopes;
+
+    return self;
   }
 
   static create(
