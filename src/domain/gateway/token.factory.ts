@@ -1,5 +1,5 @@
-import {Token} from 'src/domain/gateway/token';
+import {TokenValue} from 'src/domain/gateway/token-value';
 
 export interface TokenFactory {
-  generateToken(): Token;
+  generateToken(): TokenValue;
 }

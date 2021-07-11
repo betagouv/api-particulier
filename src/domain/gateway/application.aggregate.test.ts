@@ -13,7 +13,7 @@ import {
   CNAFOutput,
 } from 'src/domain/gateway/data-providers/cnaf/dto';
 import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
-import {Token} from 'src/domain/gateway/token';
+import {TokenValue} from 'src/domain/gateway/token-value';
 
 describe('An application', () => {
   const uuidFactory = {
@@ -23,7 +23,7 @@ describe('An application', () => {
   };
   const tokenFactory = {
     generateToken() {
-      return 'croute' as Token;
+      return 'croute' as TokenValue;
     },
   };
 
