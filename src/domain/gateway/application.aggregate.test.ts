@@ -38,7 +38,7 @@ describe('An application', () => {
       tokenFactory
     );
 
-    expect(application.token).toBeDefined();
+    expect(application.tokenValue).toBeDefined();
   });
 
   it('can subscribe new users', () => {

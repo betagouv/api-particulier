@@ -14,7 +14,7 @@ export class ApplicationCreated extends ApplicationEvent {
     readonly scopes: AnyScope[],
     readonly subscriptions: Subscription[],
     readonly userEmails: UserEmail[],
-    readonly token: TokenValue
+    readonly tokenValue: TokenValue
   ) {
     super(applicationId, date);
   }

@@ -21,6 +21,7 @@ import {UserSubscribed} from 'src/domain/gateway/events/user-subscribed.event';
 import {DataProvider} from 'src/domain/gateway/data-providers/data-provider';
 import {DataProviderResponse} from 'src/domain/gateway/data-providers/dto';
 import {UuidFactory} from 'src/domain/uuid.factory';
+import {TokenValue} from 'src/domain/gateway/token-value';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 
@@ -33,7 +34,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
   public name!: string;
   public createdOn!: Date;
   public dataPassId!: string;
-  public token!: string;
+  public tokenValue!: TokenValue;
   public subscriptions!: Subscription[];
   public userEmails!: UserEmail[];
   private scopes!: AnyScope[];
@@ -108,7 +109,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     this.scopes = event.scopes;
     this.subscriptions = event.subscriptions;
     this.userEmails = event.userEmails;
-    this.token = event.token;
+    this.tokenValue = event.tokenValue;
   }
 
   private applyUserSubscribed(event: UserSubscribed) {
