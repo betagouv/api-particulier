@@ -1,4 +1,4 @@
 import {DataProvider} from '../data-provider';
-import {CNAFInput, CNAFOutput} from './dto';
+import {CnafInput, CnafOutput} from './dto';
 
-export type CNAFDataProvider = DataProvider<CNAFInput, CNAFOutput>;
+export type CnafDataProvider = DataProvider<CnafInput, CnafOutput>;

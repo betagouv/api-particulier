@@ -1,5 +1,5 @@
 import {
-  CNAFScope,
+  CnafScope,
   scopesConfiguration as cnafScopesConfiguration,
 } from './data-providers/cnaf/scopes';
 import {
@@ -7,13 +7,13 @@ import {
   scopesConfiguration as dgfipScopesConfiguration,
 } from './data-providers/dgfip/scopes';
 
-export const isCNAFScope = (scope: AnyScope): scope is CNAFScope =>
+export const isCnafScope = (scope: AnyScope): scope is CnafScope =>
   scope.startsWith('cnaf_');
 
 export const isDGFIPScope = (scope: AnyScope): scope is DGFIPScope =>
   scope.startsWith('dgfip_');
 
-export type AnyScope = CNAFScope | DGFIPScope;
+export type AnyScope = CnafScope | DGFIPScope;
 
 export const unifiedScopesConfiguration = {
   ...cnafScopesConfiguration,

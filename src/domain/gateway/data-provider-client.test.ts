@@ -2,10 +2,10 @@
 import {mock} from 'jest-mock-extended';
 import {ApplicationId} from 'src/domain/gateway/application-id';
 import {DataProviderClient} from 'src/domain/gateway/data-provider-client';
-import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
+import {CnafDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
 import {
-  CNAFInput,
-  CNAFOutput,
+  CnafInput,
+  CnafOutput,
 } from 'src/domain/gateway/data-providers/cnaf/dto';
 import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
 import {
@@ -17,7 +17,7 @@ import {Token} from 'src/domain/gateway/projections/token';
 import {TokenValue} from 'src/domain/gateway/token-value';
 
 describe('The data provider client', () => {
-  const cnafDataProvider = mock<CNAFDataProvider>();
+  const cnafDataProvider = mock<CnafDataProvider>();
   const dgfipDataProvider = mock<DGFIPDataProvider>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
@@ -74,8 +74,8 @@ describe('The data provider client', () => {
   describe('when called for CNAF data', () => {
     it('throws an error if application is not subscribed to CNAF data provider', async () => {
       const useCase = async () =>
-        await dataProviderClient.consumeCNAF(
-          mock<CNAFInput>(),
+        await dataProviderClient.consumeCnaf(
+          mock<CnafInput>(),
           noSubscriptionToken
         );
 
@@ -83,17 +83,17 @@ describe('The data provider client', () => {
     });
 
     it('calls the data provider and filters return data', async () => {
-      const input: CNAFInput = {
+      const input: CnafInput = {
         codePostal: '3',
         numeroAllocataire: '4',
       };
 
       const unfilteredData = Symbol('unfiltered data');
       cnafDataProvider.fetch.mockResolvedValue(
-        unfilteredData as unknown as CNAFOutput
+        unfilteredData as unknown as CnafOutput
       );
 
-      const result = await dataProviderClient.consumeCNAF(input, cnafToken);
+      const result = await dataProviderClient.consumeCnaf(input, cnafToken);
 
       expect(result).toEqual({});
     });

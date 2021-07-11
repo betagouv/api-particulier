@@ -3,15 +3,15 @@ import {Agent} from 'https';
 import {NetworkError} from 'src/domain/gateway/errors/network.error';
 import {DataProvider} from '../../../../domain/gateway/data-providers/data-provider';
 import {
-  CNAFInput,
-  CNAFOutput,
+  CnafInput,
+  CnafOutput,
 } from '../../../../domain/gateway/data-providers/cnaf/dto';
 import {XMLParser} from './parser';
 
-export class SoapDataProvider implements DataProvider<CNAFInput, CNAFOutput> {
+export class SoapDataProvider implements DataProvider<CnafInput, CnafOutput> {
   private readonly parser = new XMLParser();
 
-  async fetch(input: CNAFInput): Promise<CNAFOutput> {
+  async fetch(input: CnafInput): Promise<CnafOutput> {
     let response: AxiosResponse;
 
     try {
@@ -32,7 +32,7 @@ export class SoapDataProvider implements DataProvider<CNAFInput, CNAFOutput> {
 }
 
 const buildQuery = (
-  input: CNAFInput
+  input: CnafInput
 ) => `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://v1.ws.wsdemandedocumentcafweb.cnaf/">
 <soap:Header/>
 <soap:Body>

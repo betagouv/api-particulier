@@ -1,12 +1,12 @@
-import {CNAFOutput} from '../../../../domain/gateway/data-providers/cnaf/dto';
+import {CnafOutput} from '../../../../domain/gateway/data-providers/cnaf/dto';
 import * as _ from 'lodash';
 import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
 import {InvalidFormatError} from 'src/domain/gateway/data-providers/cnaf/errors/invalid-format.error';
-import {CNAFError} from 'src/domain/gateway/data-providers/cnaf/errors/cnaf.error';
+import {CnafError} from 'src/domain/gateway/data-providers/cnaf/errors/cnaf.error';
 
 export class XMLParser {
-  parse(xml: string): CNAFOutput {
+  parse(xml: string): CnafOutput {
     let rawBody;
     let returnCode;
     try {
@@ -22,7 +22,7 @@ export class XMLParser {
     }
 
     if (returnCode !== 0) {
-      throw new CNAFError(returnCode);
+      throw new CnafError(returnCode);
     }
 
     const body = parse(_.unescape(rawBody), {

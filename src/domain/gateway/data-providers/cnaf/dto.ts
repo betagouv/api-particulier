@@ -1,4 +1,4 @@
-export type CNAFInput = {
+export type CnafInput = {
   numeroAllocataire: string;
   codePostal: string;
 };
@@ -9,7 +9,7 @@ type Person = {
   sexe: string;
 };
 
-export type CNAFOutput = {
+export type CnafOutput = {
   allocataires: Person[];
   enfants: Person[];
   adresse: {

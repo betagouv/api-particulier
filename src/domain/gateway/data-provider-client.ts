@@ -1,7 +1,7 @@
-import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
+import {CnafDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
 import {
-  CNAFInput,
-  CNAFOutput,
+  CnafInput,
+  CnafOutput,
 } from 'src/domain/gateway/data-providers/cnaf/dto';
 import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
 import {
@@ -19,7 +19,7 @@ const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
 
 export class DataProviderClient {
   constructor(
-    private readonly cnafDataProvider: CNAFDataProvider,
+    private readonly cnafDataProvider: CnafDataProvider,
     private readonly dgfipDataProvider: DGFIPDataProvider
   ) {}
 
@@ -34,10 +34,10 @@ export class DataProviderClient {
     return propertyBasedScopesFilter.filter(token.scopes, unfilteredData);
   }
 
-  async consumeCNAF(
-    input: CNAFInput,
+  async consumeCnaf(
+    input: CnafInput,
     token: Token
-  ): Promise<Partial<CNAFOutput>> {
+  ): Promise<Partial<CnafOutput>> {
     if (!token.subscriptions.includes('CNAF')) {
       throw new ApplicationNotSubscribedError(token.applicationId, 'CNAF');
     }
