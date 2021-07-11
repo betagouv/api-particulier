@@ -14,32 +14,22 @@ describe('An application', () => {
     },
   };
 
-  it('creates a token upon application creation', () => {
-    const application = Application.create(
-      'yolo',
-      '4',
-      [],
-      [],
-      ['georges@moustaki.fr' as UserEmail],
-      uuidFactory,
-      tokenValueFactory
-    );
+  const application = Application.create(
+    'yolo',
+    '4',
+    [],
+    [],
+    ['georges@moustaki.fr' as UserEmail],
+    uuidFactory,
+    tokenValueFactory
+  );
 
+  it('creates a token upon application creation', () => {
     expect(application.tokenValue).toBeDefined();
   });
 
   it('can subscribe new users', () => {
     const newUser = 'jean@moust.fr' as UserEmail;
-
-    const application = Application.create(
-      'yolo',
-      '4',
-      [],
-      [],
-      ['georges@moustaki.fr' as UserEmail],
-      uuidFactory,
-      tokenValueFactory
-    );
 
     application.subscribeUser(newUser);
 
