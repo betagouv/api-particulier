@@ -1,4 +1,4 @@
-import {Token} from 'src/domain/gateway/projections/token';
+import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
 
 export interface TokenRepository {

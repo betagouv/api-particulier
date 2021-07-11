@@ -1,5 +1,5 @@
 import {SvairDataProvider} from '../../../src/infrastructure/data-providers/dgfip/svair';
-import {DgfipInput} from '../../../src/domain/gateway/data-providers/dgfip/dto';
+import {DgfipInput} from '../../../src/domain/data-fetching/data-providers/dgfip/dto';
 import * as dotenv from 'dotenv';
 
 dotenv.config();

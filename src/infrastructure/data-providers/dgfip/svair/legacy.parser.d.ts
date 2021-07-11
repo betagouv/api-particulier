@@ -1,4 +1,4 @@
-import {DgfipOutput} from '../../../../domain/gateway/data-providers/dgfip/dto';
+import {DgfipOutput} from '../../../../domain/data-fetching/data-providers/dgfip/dto';
 
 export {parseEuro as euro};
 export function result(html: string): Promise<DgfipOutput>;

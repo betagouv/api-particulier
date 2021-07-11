@@ -1,12 +1,12 @@
 import axios, {AxiosResponse} from 'axios';
 import {load} from 'cheerio';
 import {stringify} from 'query-string';
-import {DgfipDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+import {DgfipDataProvider} from 'src/domain/data-fetching/data-providers/dgfip/data-provider';
 import {
   DgfipInput,
   DgfipOutput,
-} from 'src/domain/gateway/data-providers/dgfip/dto';
-import {NetworkError} from 'src/domain/gateway/errors/network.error';
+} from 'src/domain/data-fetching/data-providers/dgfip/dto';
+import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DgfipDataProvider {

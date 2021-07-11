@@ -1,7 +1,7 @@
 import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
-import {Token} from 'src/domain/gateway/projections/token';
-import {TokenRepository} from 'src/domain/gateway/repositories/token.repository';
+import {Token} from 'src/domain/data-fetching/projections/token';
+import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 
 export class TokenProjector {
   constructor(private readonly tokenRepository: TokenRepository) {}

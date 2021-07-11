@@ -1,19 +1,19 @@
 // eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
 import {ApplicationId} from 'src/domain/application-id';
-import {DataProviderClient} from 'src/domain/gateway/data-provider-client';
-import {CnafDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
+import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
+import {CnafDataProvider} from 'src/domain/data-fetching/data-providers/cnaf/data-provider';
 import {
   CnafInput,
   CnafOutput,
-} from 'src/domain/gateway/data-providers/cnaf/dto';
-import {DgfipDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+} from 'src/domain/data-fetching/data-providers/cnaf/dto';
+import {DgfipDataProvider} from 'src/domain/data-fetching/data-providers/dgfip/data-provider';
 import {
   DgfipInput,
   DgfipOutput,
-} from 'src/domain/gateway/data-providers/dgfip/dto';
-import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
-import {Token} from 'src/domain/gateway/projections/token';
+} from 'src/domain/data-fetching/data-providers/dgfip/dto';
+import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
+import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
 
 describe('The data provider client', () => {

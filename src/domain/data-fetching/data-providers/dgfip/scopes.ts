@@ -1,4 +1,4 @@
-import {ScopesConfiguration} from 'src/domain/gateway/scopes-filters/property-based.scopes-filter';
+import {ScopesConfiguration} from 'src/domain/data-fetching/scopes-filters/property-based.scopes-filter';
 import {DgfipOutput} from './dto';
 
 export type DgfipScope = 'dgfip_avis_imposition' | 'dgfip_adresse';
