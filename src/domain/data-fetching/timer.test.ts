@@ -1,4 +1,4 @@
-import {Timer} from 'src/domain/timer';
+import {Timer} from 'src/domain/data-fetching/timer';
 
 describe('The timer', () => {
   it('returns the time difference in milliseconds', done => {
