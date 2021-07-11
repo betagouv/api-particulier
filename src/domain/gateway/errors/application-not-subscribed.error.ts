@@ -1,7 +1,8 @@
-import {Application, Subscription} from '../application.aggregate';
+import {ApplicationId} from 'src/domain/gateway/application-id';
+import {Subscription} from '../application.aggregate';
 
 export class ApplicationNotSubscribedError extends Error {
-  constructor(application: Application, subscription: Subscription) {
-    super(`${application.id} has not subscribed to ${subscription}`);
+  constructor(applicationId: ApplicationId, subscription: Subscription) {
+    super(`${applicationId} has not subscribed to ${subscription}`);
   }
 }
