@@ -8,8 +8,8 @@ describe('An application', () => {
       return 'yolo';
     },
   };
-  const tokenFactory = {
-    generateToken() {
+  const tokenValueFactory = {
+    generateTokenValue() {
       return 'croute' as TokenValue;
     },
   };
@@ -22,7 +22,7 @@ describe('An application', () => {
       [],
       ['georges@moustaki.fr' as UserEmail],
       uuidFactory,
-      tokenFactory
+      tokenValueFactory
     );
 
     expect(application.tokenValue).toBeDefined();
@@ -38,7 +38,7 @@ describe('An application', () => {
       [],
       ['georges@moustaki.fr' as UserEmail],
       uuidFactory,
-      tokenFactory
+      tokenValueFactory
     );
 
     application.subscribeUser(newUser);

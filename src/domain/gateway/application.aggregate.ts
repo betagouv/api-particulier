@@ -1,4 +1,4 @@
-import {TokenFactory} from 'src/domain/gateway/token.factory';
+import {TokenValueFactory} from 'src/domain/gateway/token-value.factory';
 import {ApplicationId} from 'src/domain/gateway/application-id';
 import {AnyScope} from 'src/domain/gateway/scopes';
 import {AggregateRoot} from 'src/domain/aggregate-root';
@@ -32,7 +32,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
     scopes: AnyScope[],
     userEmails: UserEmail[],
     uuidFactory: UuidFactory,
-    tokenFactory: TokenFactory
+    tokenValueFactory: TokenValueFactory
   ): Application {
     const self = new this();
 
@@ -44,7 +44,7 @@ export class Application extends AggregateRoot<ApplicationEvent> {
       scopes,
       subscriptions,
       userEmails,
-      tokenFactory.generateToken()
+      tokenValueFactory.generateTokenValue()
     );
     self.raiseAndApply(applicationCreatedEvent);
 
