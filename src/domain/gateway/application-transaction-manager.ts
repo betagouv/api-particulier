@@ -1,4 +1,5 @@
 import {EventBus} from 'src/domain/event-bus';
+import {EventStore} from 'src/domain/event-store';
 import {ApplicationId} from 'src/domain/gateway/application-id';
 import {Application} from 'src/domain/gateway/application.aggregate';
 import {ApplicationRepository} from 'src/domain/gateway/repositories/application.repository';
@@ -6,7 +7,8 @@ import {ApplicationRepository} from 'src/domain/gateway/repositories/application
 export class ApplicationTransactionManager {
   constructor(
     private readonly applicationRepository: ApplicationRepository,
-    private readonly eventBus: EventBus
+    private readonly eventBus: EventBus,
+    private readonly eventStore: EventStore
   ) {}
 
   async apply(
@@ -25,6 +27,7 @@ export class ApplicationTransactionManager {
     const application = handler();
 
     application.getPendingEvents().forEach(event => {
+      this.eventStore.append(event);
       this.eventBus.publish(event);
     });
   }
