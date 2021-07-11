@@ -13,6 +13,7 @@ import {
   CNAFOutput,
 } from 'src/domain/gateway/data-providers/cnaf/dto';
 import {CNAFDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
+import {Token} from 'src/domain/gateway/token';
 
 describe('An application', () => {
   const uuidFactory = {
@@ -20,26 +21,24 @@ describe('An application', () => {
       return 'yolo';
     },
   };
-  it('can generate new tokens', () => {
-    const tokenFactory = {
-      generateToken: jest.fn(),
-    };
+  const tokenFactory = {
+    generateToken() {
+      return 'croute' as Token;
+    },
+  };
 
+  it('creates a token upon application creation', () => {
     const application = Application.create(
       'yolo',
       '4',
       [],
       [],
-      [],
-      uuidFactory
+      ['georges@moustaki.fr' as UserEmail],
+      uuidFactory,
+      tokenFactory
     );
 
-    expect(application.getPendingEvents()).toHaveLength(1);
-    const newToken = Symbol('Token');
-    tokenFactory.generateToken.mockReturnValue(newToken);
-    application.generateNewToken(tokenFactory);
-
-    expect(application.tokens).toHaveLength(1);
+    expect(application.token).toBeDefined();
   });
 
   it('can subscribe new users', () => {
@@ -51,7 +50,8 @@ describe('An application', () => {
       [],
       [],
       ['georges@moustaki.fr' as UserEmail],
-      uuidFactory
+      uuidFactory,
+      tokenFactory
     );
 
     application.subscribeUser(newUser);
@@ -68,7 +68,8 @@ describe('An application', () => {
         [],
         [],
         [],
-        uuidFactory
+        uuidFactory,
+        tokenFactory
       );
 
       const useCase = async () =>
@@ -86,7 +87,8 @@ describe('An application', () => {
       ['DGFIP'],
       ['dgfip_avis_imposition'],
       [],
-      uuidFactory
+      uuidFactory,
+      tokenFactory
     );
 
     it('calls the data provider and filters return data', async () => {
@@ -115,7 +117,8 @@ describe('An application', () => {
         [],
         [],
         [],
-        uuidFactory
+        uuidFactory,
+        tokenFactory
       );
 
       const useCase = async () =>
@@ -133,7 +136,8 @@ describe('An application', () => {
       ['CNAF'],
       ['cnaf_adresse'],
       [],
-      uuidFactory
+      uuidFactory,
+      tokenFactory
     );
 
     it('calls the data provider and filters return data', async () => {
