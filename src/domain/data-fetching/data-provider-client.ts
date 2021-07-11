@@ -10,7 +10,7 @@ import {
 } from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
-import {unifiedScopesConfiguration} from 'src/domain/gateway/scopes';
+import {unifiedScopesConfiguration} from 'src/domain/scopes';
 import {PropertyBasedScopesFilter} from 'src/domain/data-fetching/scopes-filters/property-based.scopes-filter';
 
 const propertyBasedScopesFilter = new PropertyBasedScopesFilter(

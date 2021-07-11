@@ -1,6 +1,6 @@
 import {ApplicationId} from 'src/domain/application-id';
-import {Subscription} from 'src/domain/gateway/application.aggregate';
-import {AnyScope} from 'src/domain/gateway/scopes';
+import {AnyScope} from 'src/domain/scopes';
+import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 
 export class Token {
