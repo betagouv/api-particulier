@@ -3,10 +3,10 @@ import {
   CnafInput,
   CnafOutput,
 } from 'src/domain/gateway/data-providers/cnaf/dto';
-import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+import {DgfipDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
 import {
-  DGFIPInput,
-  DGFIPOutput,
+  DgfipInput,
+  DgfipOutput,
 } from 'src/domain/gateway/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/gateway/projections/token';
@@ -20,13 +20,13 @@ const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
 export class DataProviderClient {
   constructor(
     private readonly cnafDataProvider: CnafDataProvider,
-    private readonly dgfipDataProvider: DGFIPDataProvider
+    private readonly dgfipDataProvider: DgfipDataProvider
   ) {}
 
-  async consumeDGFIP(
-    input: DGFIPInput,
+  async consumeDgfip(
+    input: DgfipInput,
     token: Token
-  ): Promise<Partial<DGFIPOutput>> {
+  ): Promise<Partial<DgfipOutput>> {
     if (!token.subscriptions.includes('DGFIP')) {
       throw new ApplicationNotSubscribedError(token.applicationId, 'CNAF');
     }

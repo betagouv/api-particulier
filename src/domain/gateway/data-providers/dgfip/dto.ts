@@ -1,4 +1,4 @@
-export type DGFIPInput = {
+export type DgfipInput = {
   taxNumber: string;
   taxNoticeNumber: string;
 };
@@ -10,7 +10,7 @@ type Declarant = {
   dateNaissance?: Date | string;
 };
 
-export type DGFIPOutput = {
+export type DgfipOutput = {
   declarant1: Declarant;
   declarant2: Declarant;
   dateRecouvrement?: Date;

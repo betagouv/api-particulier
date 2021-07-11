@@ -1,4 +1,4 @@
 import {DataProvider} from '../data-provider';
-import {DGFIPInput, DGFIPOutput} from './dto';
+import {DgfipInput, DgfipOutput} from './dto';
 
-export type DGFIPDataProvider = DataProvider<DGFIPInput, DGFIPOutput>;
+export type DgfipDataProvider = DataProvider<DgfipInput, DgfipOutput>;

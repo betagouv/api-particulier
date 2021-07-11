@@ -1,9 +1,9 @@
 import {ScopesConfiguration} from 'src/domain/gateway/scopes-filters/property-based.scopes-filter';
-import {DGFIPOutput} from './dto';
+import {DgfipOutput} from './dto';
 
-export type DGFIPScope = 'dgfip_avis_imposition' | 'dgfip_adresse';
+export type DgfipScope = 'dgfip_avis_imposition' | 'dgfip_adresse';
 
-export const scopesConfiguration: ScopesConfiguration<DGFIPScope, DGFIPOutput> =
+export const scopesConfiguration: ScopesConfiguration<DgfipScope, DgfipOutput> =
   {
     dgfip_avis_imposition: [],
     dgfip_adresse: [],

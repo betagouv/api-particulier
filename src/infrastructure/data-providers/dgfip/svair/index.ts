@@ -1,16 +1,16 @@
 import axios, {AxiosResponse} from 'axios';
 import {load} from 'cheerio';
 import {stringify} from 'query-string';
-import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+import {DgfipDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
 import {
-  DGFIPInput,
-  DGFIPOutput,
+  DgfipInput,
+  DgfipOutput,
 } from 'src/domain/gateway/data-providers/dgfip/dto';
 import {NetworkError} from 'src/domain/gateway/errors/network.error';
 import {result as parseSvairResponse} from './legacy.parser';
 
-export class SvairDataProvider implements DGFIPDataProvider {
-  async fetch(input: DGFIPInput): Promise<DGFIPOutput> {
+export class SvairDataProvider implements DgfipDataProvider {
+  async fetch(input: DgfipInput): Promise<DgfipOutput> {
     const viewState = await this.getViewState();
 
     let response: AxiosResponse;

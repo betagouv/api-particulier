@@ -3,17 +3,17 @@ import {
   scopesConfiguration as cnafScopesConfiguration,
 } from './data-providers/cnaf/scopes';
 import {
-  DGFIPScope,
+  DgfipScope,
   scopesConfiguration as dgfipScopesConfiguration,
 } from './data-providers/dgfip/scopes';
 
 export const isCnafScope = (scope: AnyScope): scope is CnafScope =>
   scope.startsWith('cnaf_');
 
-export const isDGFIPScope = (scope: AnyScope): scope is DGFIPScope =>
+export const isDgfipScope = (scope: AnyScope): scope is DgfipScope =>
   scope.startsWith('dgfip_');
 
-export type AnyScope = CnafScope | DGFIPScope;
+export type AnyScope = CnafScope | DgfipScope;
 
 export const unifiedScopesConfiguration = {
   ...cnafScopesConfiguration,

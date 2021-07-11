@@ -4,7 +4,7 @@ import axios from 'axios';
 // eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
 import {NetworkError} from 'src/domain/gateway/errors/network.error';
-import {DGFIPInput} from 'src/domain/gateway/data-providers/dgfip/dto';
+import {DgfipInput} from 'src/domain/gateway/data-providers/dgfip/dto';
 
 describe('Svair data provider', () => {
   const svairDataProvider = new SvairDataProvider();
@@ -34,7 +34,7 @@ describe('Svair data provider', () => {
 
   describe('when fetching data', () => {
     it('throws a network error when network fails', async () => {
-      const input: DGFIPInput = {
+      const input: DgfipInput = {
         taxNoticeNumber: 'yolo',
         taxNumber: 'croute',
       };

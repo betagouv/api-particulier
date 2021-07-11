@@ -1,5 +1,5 @@
 import {SvairDataProvider} from '../../../src/infrastructure/data-providers/dgfip/svair';
-import {DGFIPInput} from '../../../src/domain/gateway/data-providers/dgfip/dto';
+import {DgfipInput} from '../../../src/domain/gateway/data-providers/dgfip/dto';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -8,7 +8,7 @@ describe('The Svair data provider', () => {
   const dataProvider = new SvairDataProvider();
 
   it('returns data when correct input is provided', async () => {
-    const input: DGFIPInput = {
+    const input: DgfipInput = {
       taxNumber: process.env.TEST_TAX_NUMBER!,
       taxNoticeNumber: process.env.TEST_TAX_NOTICE_NUMBER!,
     };

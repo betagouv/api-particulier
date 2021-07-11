@@ -7,10 +7,10 @@ import {
   CnafInput,
   CnafOutput,
 } from 'src/domain/gateway/data-providers/cnaf/dto';
-import {DGFIPDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
+import {DgfipDataProvider} from 'src/domain/gateway/data-providers/dgfip/data-provider';
 import {
-  DGFIPInput,
-  DGFIPOutput,
+  DgfipInput,
+  DgfipOutput,
 } from 'src/domain/gateway/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/gateway/projections/token';
@@ -18,7 +18,7 @@ import {TokenValue} from 'src/domain/gateway/token-value';
 
 describe('The data provider client', () => {
   const cnafDataProvider = mock<CnafDataProvider>();
-  const dgfipDataProvider = mock<DGFIPDataProvider>();
+  const dgfipDataProvider = mock<DgfipDataProvider>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
     dgfipDataProvider
@@ -46,8 +46,8 @@ describe('The data provider client', () => {
   describe('when called for DGFIP data', () => {
     it('throws an error if application is not subscribed to DGFIP data provider', async () => {
       const useCase = async () =>
-        await dataProviderClient.consumeDGFIP(
-          mock<DGFIPInput>(),
+        await dataProviderClient.consumeDgfip(
+          mock<DgfipInput>(),
           noSubscriptionToken
         );
 
@@ -55,17 +55,17 @@ describe('The data provider client', () => {
     });
 
     it('calls the data provider and filters return data', async () => {
-      const input: DGFIPInput = {
+      const input: DgfipInput = {
         taxNumber: '3',
         taxNoticeNumber: '4',
       };
 
       const unfilteredData = Symbol('unfiltered data');
       dgfipDataProvider.fetch.mockResolvedValue(
-        unfilteredData as unknown as DGFIPOutput
+        unfilteredData as unknown as DgfipOutput
       );
 
-      const result = await dataProviderClient.consumeDGFIP(input, dgfipToken);
+      const result = await dataProviderClient.consumeDgfip(input, dgfipToken);
 
       expect(result).toEqual({});
     });
