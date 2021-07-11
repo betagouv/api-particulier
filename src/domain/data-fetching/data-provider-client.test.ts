@@ -14,14 +14,17 @@ import {
 } from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
+import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
 
 describe('The data provider client', () => {
   const cnafDataProvider = mock<CnafDataProvider>();
   const dgfipDataProvider = mock<DgfipDataProvider>();
+  const eventBus = mock<EventBus>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
-    dgfipDataProvider
+    dgfipDataProvider,
+    eventBus
   );
 
   const noSubscriptionToken = new Token(
