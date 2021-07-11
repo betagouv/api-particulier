@@ -1,5 +1,5 @@
 import {TokenValueFactory} from 'src/domain/gateway/token-value.factory';
-import {ApplicationId} from 'src/domain/gateway/application-id';
+import {ApplicationId} from 'src/domain/application-id';
 import {AnyScope} from 'src/domain/gateway/scopes';
 import {AggregateRoot} from 'src/domain/aggregate-root';
 import {ApplicationEvent} from 'src/domain/gateway/events/application.event';
@@ -7,7 +7,7 @@ import {ApplicationCreated} from 'src/domain/gateway/events/application-created.
 import {UserEmail} from 'src/domain/gateway/user';
 import {UserSubscribed} from 'src/domain/gateway/events/user-subscribed.event';
 import {UuidFactory} from 'src/domain/uuid.factory';
-import {TokenValue} from 'src/domain/gateway/token-value';
+import {TokenValue} from 'src/domain/token-value';
 
 export type Subscription = 'DGFIP' | 'CNAF';
 

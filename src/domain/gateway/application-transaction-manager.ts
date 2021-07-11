@@ -1,6 +1,6 @@
 import {EventBus} from 'src/domain/event-bus';
 import {EventStore} from 'src/domain/event-store';
-import {ApplicationId} from 'src/domain/gateway/application-id';
+import {ApplicationId} from 'src/domain/application-id';
 import {Application} from 'src/domain/gateway/application.aggregate';
 import {ApplicationRepository} from 'src/domain/gateway/repositories/application.repository';
 

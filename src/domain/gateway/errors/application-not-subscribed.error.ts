@@ -1,4 +1,4 @@
-import {ApplicationId} from 'src/domain/gateway/application-id';
+import {ApplicationId} from 'src/domain/application-id';
 import {Subscription} from '../application.aggregate';
 
 export class ApplicationNotSubscribedError extends Error {

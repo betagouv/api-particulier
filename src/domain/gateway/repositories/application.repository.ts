@@ -1,4 +1,4 @@
-import {ApplicationId} from 'src/domain/gateway/application-id';
+import {ApplicationId} from 'src/domain/application-id';
 import {Application} from 'src/domain/gateway/application.aggregate';
 
 export interface ApplicationRepository {

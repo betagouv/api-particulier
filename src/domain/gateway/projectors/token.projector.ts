@@ -1,4 +1,4 @@
-import {ApplicationId} from 'src/domain/gateway/application-id';
+import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/gateway/events/application-created.event';
 import {Token} from 'src/domain/gateway/projections/token';
 import {TokenRepository} from 'src/domain/gateway/repositories/token.repository';

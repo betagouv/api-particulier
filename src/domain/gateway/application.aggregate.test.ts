@@ -1,6 +1,6 @@
 import {Application} from 'src/domain/gateway/application.aggregate';
 import {UserEmail} from 'src/domain/gateway/user';
-import {TokenValue} from 'src/domain/gateway/token-value';
+import {TokenValue} from 'src/domain/token-value';
 
 describe('An application', () => {
   const uuidFactory = {

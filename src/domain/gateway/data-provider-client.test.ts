@@ -1,6 +1,6 @@
 // eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
-import {ApplicationId} from 'src/domain/gateway/application-id';
+import {ApplicationId} from 'src/domain/application-id';
 import {DataProviderClient} from 'src/domain/gateway/data-provider-client';
 import {CnafDataProvider} from 'src/domain/gateway/data-providers/cnaf/data-provider';
 import {
@@ -14,7 +14,7 @@ import {
 } from 'src/domain/gateway/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/gateway/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/gateway/projections/token';
-import {TokenValue} from 'src/domain/gateway/token-value';
+import {TokenValue} from 'src/domain/token-value';
 
 describe('The data provider client', () => {
   const cnafDataProvider = mock<CnafDataProvider>();
