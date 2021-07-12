@@ -8,6 +8,8 @@ jobs:
     services:
       redis:
         image: redis
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
@@ -27,6 +29,7 @@ jobs:
           TEST_TAX_NOTICE_NUMBER: ${{ secrets.TEST_TAX_NOTICE_NUMBER }}
           TEST_TAX_NUMBER: ${{ secrets.TEST_TAX_NUMBER }}
           REDIS_HOST: redis
+          REDIS_PORT: 6379
       - run: npm run compile
   coverage:
     needs: [ test ]

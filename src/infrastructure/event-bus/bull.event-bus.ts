@@ -6,6 +6,7 @@ import {EventBus} from 'src/domain/event-bus';
 
 const redisConnection = new IORedis({
   host: process.env.REDIS_HOST || 'localhost',
+  port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
 });
 
 export const applicationEventQueue = new Queue('Application events', {
