@@ -6,7 +6,7 @@ import {
   DgfipInput,
   DgfipOutput,
 } from 'src/domain/data-fetching/data-providers/dgfip/dto';
-import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
+import {transformError} from 'src/infrastructure/data-providers/error-transformer';
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DgfipDataProvider {
@@ -26,8 +26,8 @@ export class SvairDataProvider implements DgfipDataProvider {
         }),
         {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
       );
-    } catch (err) {
-      throw new NetworkError(err);
+    } catch (error) {
+      throw transformError(error);
     }
 
     return await parseSvairResponse(response.data);
@@ -40,8 +40,8 @@ export class SvairDataProvider implements DgfipDataProvider {
       );
       const $ = load(preResponse.data);
       return $('input[name="javax.faces.ViewState"]').val();
-    } catch (err) {
-      throw new NetworkError(err);
+    } catch (error) {
+      throw transformError(error);
     }
   }
 }

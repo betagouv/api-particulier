@@ -1,12 +1,12 @@
 import axios, {AxiosResponse} from 'axios';
 import {Agent} from 'https';
-import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {DataProvider} from '../../../../domain/data-fetching/data-providers/data-provider';
 import {
   CnafInput,
   CnafOutput,
 } from '../../../../domain/data-fetching/data-providers/cnaf/dto';
 import {XMLParser} from './parser';
+import {transformError} from 'src/infrastructure/data-providers/error-transformer';
 
 export class SoapDataProvider implements DataProvider<CnafInput, CnafOutput> {
   private readonly parser = new XMLParser();
@@ -23,8 +23,8 @@ export class SoapDataProvider implements DataProvider<CnafInput, CnafOutput> {
           headers: {'Content-Type': 'text/xml; charset=utf-8'},
         }
       );
-    } catch (err) {
-      throw new NetworkError(err);
+    } catch (error) {
+      throw transformError(error);
     }
 
     return this.parser.parse(response.data);
