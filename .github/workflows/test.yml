@@ -5,6 +5,9 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
@@ -23,6 +26,7 @@ jobs:
           TEST_NUMERO_ALLOCATAIRE: ${{ secrets.TEST_NUMERO_ALLOCATAIRE }}
           TEST_TAX_NOTICE_NUMBER: ${{ secrets.TEST_TAX_NOTICE_NUMBER }}
           TEST_TAX_NUMBER: ${{ secrets.TEST_TAX_NUMBER }}
+          REDIS_HOST: redis
       - run: npm run compile
   coverage:
     needs: [ test ]
