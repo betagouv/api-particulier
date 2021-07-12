@@ -28,8 +28,6 @@ jobs:
           TEST_NUMERO_ALLOCATAIRE: ${{ secrets.TEST_NUMERO_ALLOCATAIRE }}
           TEST_TAX_NOTICE_NUMBER: ${{ secrets.TEST_TAX_NOTICE_NUMBER }}
           TEST_TAX_NUMBER: ${{ secrets.TEST_TAX_NUMBER }}
-          REDIS_HOST: redis
-          REDIS_PORT: 6379
       - run: npm run compile
   coverage:
     needs: [ test ]
