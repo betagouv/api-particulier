@@ -11,6 +11,8 @@ import {Timer} from 'src/domain/data-fetching/timer';
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {DataProvider} from 'src/domain/data-fetching/data-providers/data-provider';
 import {Subscription} from 'src/domain/subscription';
+import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
+import {ApplicationId} from 'src/domain/application-id';
 
 const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
   unifiedScopesConfiguration
@@ -45,19 +47,51 @@ export class DataProviderClient {
     }
     const timer = new Timer();
     timer.start();
-    const unfilteredData = await dataProvider.fetch(input);
-    const timeSpent = timer.stop();
+    let unfilteredData: O;
 
-    const event = new TokenConsumed(
+    try {
+      unfilteredData = await dataProvider.fetch(input);
+    } catch (error) {
+      const timeSpent = timer.stop();
+      const statusCode =
+        error instanceof NetworkError ? error.status || 502 : 500;
+      this.publishConsumptionEvent(
+        token.applicationId,
+        neededSubscription,
+        '/route',
+        statusCode,
+        timeSpent
+      );
+      throw error;
+    }
+
+    const timeSpent = timer.stop();
+    this.publishConsumptionEvent(
       token.applicationId,
-      new Date(),
       neededSubscription,
       '/route',
       200,
       timeSpent
     );
-    this.eventBus.publish(event);
 
     return propertyBasedScopesFilter.filter(token.scopes, unfilteredData);
+  }
+
+  private publishConsumptionEvent(
+    applicationId: ApplicationId,
+    subscription: Subscription,
+    route: string,
+    statusCode: number,
+    timeSpent: number
+  ) {
+    const event = new TokenConsumed(
+      applicationId,
+      new Date(),
+      subscription,
+      route,
+      statusCode,
+      timeSpent
+    );
+    this.eventBus.publish(event);
   }
 }
