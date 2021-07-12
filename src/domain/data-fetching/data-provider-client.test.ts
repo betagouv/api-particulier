@@ -13,6 +13,7 @@ import {
   DgfipOutput,
 } from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
+import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {EventBus} from 'src/domain/event-bus';
@@ -146,5 +147,35 @@ describe('The data provider client', () => {
     expect(
       (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
     ).toEqual(403);
+  });
+
+  it('logs the data provider error', async () => {
+    const input = mock<CnafInput>();
+    cnafDataProvider.fetch.mockRejectedValue(new NetworkError(404));
+
+    try {
+      await dataProviderClient.consumeCnaf(input, cnafToken, '/croute').catch();
+      // eslint-disable-next-line no-empty
+    } catch {}
+
+    expect(eventBus.publish).toHaveBeenCalled();
+    expect(
+      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
+    ).toEqual(404);
+  });
+
+  it('logs a generic 502 error when data provider does not provide a status code', async () => {
+    const input = mock<CnafInput>();
+    cnafDataProvider.fetch.mockRejectedValue(new NetworkError());
+
+    try {
+      await dataProviderClient.consumeCnaf(input, cnafToken, '/croute').catch();
+      // eslint-disable-next-line no-empty
+    } catch {}
+
+    expect(eventBus.publish).toHaveBeenCalled();
+    expect(
+      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
+    ).toEqual(502);
   });
 });
