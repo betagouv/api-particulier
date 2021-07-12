@@ -25,17 +25,30 @@ export class DataProviderClient {
     private readonly eventBus: EventBus
   ) {}
 
-  consumeDgfip(input: DgfipInput, token: Token) {
-    return this.callDataProvider(input, token, this.dgfipDataProvider, 'DGFIP');
+  consumeDgfip(input: DgfipInput, token: Token, route: string) {
+    return this.callDataProvider(
+      input,
+      token,
+      route,
+      this.dgfipDataProvider,
+      'DGFIP'
+    );
   }
 
-  consumeCnaf(input: CnafInput, token: Token) {
-    return this.callDataProvider(input, token, this.cnafDataProvider, 'CNAF');
+  consumeCnaf(input: CnafInput, token: Token, route: string) {
+    return this.callDataProvider(
+      input,
+      token,
+      route,
+      this.cnafDataProvider,
+      'CNAF'
+    );
   }
 
   private async callDataProvider<I, O>(
     input: I,
     token: Token,
+    route: string,
     dataProvider: DataProvider<I, O>,
     neededSubscription: Subscription
   ) {
@@ -58,7 +71,7 @@ export class DataProviderClient {
       this.publishConsumptionEvent(
         token.applicationId,
         neededSubscription,
-        '/route',
+        route,
         statusCode,
         timeSpent
       );
@@ -69,7 +82,7 @@ export class DataProviderClient {
     this.publishConsumptionEvent(
       token.applicationId,
       neededSubscription,
-      '/route',
+      route,
       200,
       timeSpent
     );

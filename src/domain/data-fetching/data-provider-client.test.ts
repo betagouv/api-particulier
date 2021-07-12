@@ -51,7 +51,8 @@ describe('The data provider client', () => {
       const useCase = async () =>
         await dataProviderClient.consumeDgfip(
           mock<DgfipInput>(),
-          noSubscriptionToken
+          noSubscriptionToken,
+          '/croute'
         );
 
       expect(useCase).rejects.toBeInstanceOf(ApplicationNotSubscribedError);
@@ -68,7 +69,11 @@ describe('The data provider client', () => {
         unfilteredData as unknown as DgfipOutput
       );
 
-      const result = await dataProviderClient.consumeDgfip(input, dgfipToken);
+      const result = await dataProviderClient.consumeDgfip(
+        input,
+        dgfipToken,
+        '/croute'
+      );
 
       expect(result).toEqual({});
     });
@@ -79,7 +84,8 @@ describe('The data provider client', () => {
       const useCase = async () =>
         await dataProviderClient.consumeCnaf(
           mock<CnafInput>(),
-          noSubscriptionToken
+          noSubscriptionToken,
+          '/croute'
         );
 
       expect(useCase).rejects.toBeInstanceOf(ApplicationNotSubscribedError);
@@ -96,7 +102,11 @@ describe('The data provider client', () => {
         unfilteredData as unknown as CnafOutput
       );
 
-      const result = await dataProviderClient.consumeCnaf(input, cnafToken);
+      const result = await dataProviderClient.consumeCnaf(
+        input,
+        cnafToken,
+        '/croute'
+      );
 
       expect(result).toEqual({});
     });
