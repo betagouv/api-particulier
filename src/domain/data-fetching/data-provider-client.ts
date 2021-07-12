@@ -52,22 +52,22 @@ export class DataProviderClient {
     dataProvider: DataProvider<I, O>,
     neededSubscription: Subscription
   ) {
-    if (!token.subscriptions.includes(neededSubscription)) {
-      throw new ApplicationNotSubscribedError(
-        token.applicationId,
-        neededSubscription
-      );
-    }
     const timer = new Timer();
-    timer.start();
     let unfilteredData: O;
 
     try {
+      timer.start();
+      if (!token.subscriptions.includes(neededSubscription)) {
+        throw new ApplicationNotSubscribedError(
+          token.applicationId,
+          neededSubscription
+        );
+      }
       unfilteredData = await dataProvider.fetch(input);
     } catch (error) {
       const timeSpent = timer.stop();
-      const statusCode =
-        error instanceof NetworkError ? error.status || 502 : 500;
+      const statusCode = this.computeErrorStatusCode(error);
+
       this.publishConsumptionEvent(
         token.applicationId,
         neededSubscription,
@@ -88,6 +88,17 @@ export class DataProviderClient {
     );
 
     return propertyBasedScopesFilter.filter(token.scopes, unfilteredData);
+  }
+
+  private computeErrorStatusCode(error: Error): number {
+    switch (error.constructor) {
+      case NetworkError:
+        return (error as NetworkError).status || 502;
+      case ApplicationNotSubscribedError:
+        return 403;
+      default:
+        return 500;
+    }
   }
 
   private publishConsumptionEvent(

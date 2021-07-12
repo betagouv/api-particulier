@@ -132,4 +132,19 @@ describe('The data provider client', () => {
       (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
     ).toEqual(500);
   });
+
+  it('logs a 403 when application is not subscribed to data provider', async () => {
+    const input = mock<CnafInput>();
+    try {
+      await dataProviderClient
+        .consumeCnaf(input, dgfipToken, '/croute')
+        .catch();
+      // eslint-disable-next-line no-empty
+    } catch {}
+
+    expect(eventBus.publish).toHaveBeenCalled();
+    expect(
+      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
+    ).toEqual(403);
+  });
 });
