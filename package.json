@@ -37,7 +37,8 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
-    "fix": "gts fix"
+    "fix": "gts fix",
+    "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts"
   },
   "repository": {
     "type": "git",
