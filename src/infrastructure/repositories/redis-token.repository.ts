@@ -5,14 +5,7 @@ import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repos
 import {TokenValue} from 'src/domain/token-value';
 
 export class RedisTokenRepository implements TokenRepository {
-  private readonly connection: Redis.Redis;
-
-  constructor() {
-    this.connection = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
-    });
-  }
+  constructor(private readonly connection: Redis.Redis) {}
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {
     const stringifiedToken = await this.connection.get(

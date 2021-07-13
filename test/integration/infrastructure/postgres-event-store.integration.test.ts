@@ -12,9 +12,10 @@ dotenv.config();
 
 describe('The postgres event store', () => {
   let eventStore: EventStore;
+  let client: Client;
 
   beforeAll(async () => {
-    const client = new Client(process.env.TEST_DATABASE_URL);
+    client = new Client(process.env.TEST_DATABASE_URL);
     await client.connect();
     await client.query(
       'DROP TABLE IF EXISTS events; DROP TABLE IF EXISTS pgmigrations;'
@@ -28,6 +29,10 @@ describe('The postgres event store', () => {
       log: () => {},
     });
     eventStore = new PostgresEventStore(client);
+  });
+
+  afterAll(async () => {
+    await client.end();
   });
 
   it('stores application events', async () => {
