@@ -2,7 +2,6 @@ import {TokenValueFactory} from 'src/domain/application-management/token-value.f
 import {ApplicationId} from 'src/domain/application-id';
 import {AnyScope} from 'src/domain/scopes';
 import {AggregateRoot} from 'src/domain/aggregate-root';
-import {ApplicationEvent} from 'src/domain/application-management/events/application.event';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {UserEmail} from 'src/domain/application-management/user';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
@@ -10,7 +9,7 @@ import {UuidFactory} from 'src/domain/uuid.factory';
 import {TokenValue} from 'src/domain/token-value';
 import {Subscription} from 'src/domain/subscription';
 
-export class Application extends AggregateRoot<ApplicationEvent> {
+export class Application extends AggregateRoot {
   public id!: ApplicationId;
   public name!: string;
   public createdOn!: Date;

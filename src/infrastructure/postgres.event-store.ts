@@ -20,10 +20,10 @@ export class PostgresEventStore implements EventStore {
     await this.client.query(insertQuery, values);
   }
 
-  async listAggregateEvents<E extends Event>(
+  async listAggregateEvents(
     aggregate: string,
     aggregateId: string
-  ): Promise<E[]> {
+  ): Promise<Event[]> {
     const selectQuery =
       'SELECT event_name, payload FROM events WHERE aggregate_name = $1 AND aggregate_id = $2 ORDER BY created_at';
     const {rows} = await this.client.query(selectQuery, [
@@ -52,6 +52,6 @@ export class PostgresEventStore implements EventStore {
           );
       }
       throw new Error(`Unknown event ${row.event_name}`);
-    }) as unknown as E[];
+    });
   }
 }

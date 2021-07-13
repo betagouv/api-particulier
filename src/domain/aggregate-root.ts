@@ -1,9 +1,9 @@
 import {Event} from 'src/domain/event';
 
-export class AggregateRoot<E extends Event> {
-  private events: E[] = [];
+export class AggregateRoot {
+  private events: Event[] = [];
 
-  static fromEvents<E extends Event>(events: E[]) {
+  static fromEvents(events: Event[]) {
     const self = new this();
     events.forEach(event => {
       self.apply(event);
@@ -12,16 +12,16 @@ export class AggregateRoot<E extends Event> {
     return self;
   }
 
-  getPendingEvents(): E[] {
+  getPendingEvents(): Event[] {
     return this.events;
   }
 
-  protected raiseAndApply(event: E) {
+  protected raiseAndApply(event: Event) {
     this.events.push(event);
     this.apply(event);
   }
 
-  private apply(event: E) {
+  private apply(event: Event) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (!this[`apply${event.constructor.name}`]) {
