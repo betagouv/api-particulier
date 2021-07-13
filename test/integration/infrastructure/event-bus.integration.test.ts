@@ -1,31 +1,32 @@
+import * as IORedis from 'ioredis';
 import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {Event} from 'src/domain/event';
+import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
-import {
-  applicationEventQueue,
-  BullEventBus,
-  tokenEventQueue,
-} from 'src/infrastructure/event-bus/bull.event-bus';
+import {BullEventBus} from 'src/infrastructure/event-bus/bull.event-bus';
 import {BullWorker} from 'src/infrastructure/event-bus/bull.worker';
 
 describe('The event bus', () => {
+  let eventBus: EventBus;
+  let connection: IORedis.Redis;
   let worker: BullWorker;
+
   beforeAll(async () => {
-    await applicationEventQueue.drain();
-    await tokenEventQueue.drain();
+    connection = new IORedis({
+      host: process.env.REDIS_HOST || 'localhost',
+      port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
+    });
+    eventBus = new BullEventBus(connection);
   });
 
   afterAll(async () => {
     await worker.close();
-    await applicationEventQueue.disconnect();
-    await tokenEventQueue.disconnect();
+    await connection.disconnect(false);
   });
 
   it('publishes events that are consumed by the worker', done => {
-    const eventBus = new BullEventBus();
-
-    worker = new BullWorker({
+    worker = new BullWorker(connection, {
       [ApplicationCreated.name]: [
         (event: Event) => {
           expect(event.aggregateId).toBeDefined();

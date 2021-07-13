@@ -4,26 +4,29 @@ import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.even
 import {Event} from 'src/domain/event';
 import {EventBus} from 'src/domain/event-bus';
 
-const redisConnection = new IORedis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
-});
-
-export const applicationEventQueue = new Queue('Application events', {
-  connection: redisConnection,
-});
-export const tokenEventQueue = new Queue('Token events', {
-  connection: redisConnection,
-});
+export const applicationEventQueueName = 'Application events';
+export const tokenEventQueueName = 'Token events';
 
 export class BullEventBus implements EventBus {
+  private readonly applicationEventQueue: Queue;
+  private readonly tokenEventQueue: Queue;
+
+  constructor(redisConnection: IORedis.Redis) {
+    this.applicationEventQueue = new Queue(applicationEventQueueName, {
+      connection: redisConnection,
+    });
+    this.tokenEventQueue = new Queue(applicationEventQueueName, {
+      connection: redisConnection,
+    });
+  }
+
   publish(event: Event): void {
     switch (event.constructor) {
       case TokenConsumed:
-        tokenEventQueue.add(event.constructor.name, event);
+        this.tokenEventQueue.add(event.constructor.name, event);
         break;
       default:
-        applicationEventQueue.add(event.constructor.name, event);
+        this.applicationEventQueue.add(event.constructor.name, event);
         break;
     }
   }

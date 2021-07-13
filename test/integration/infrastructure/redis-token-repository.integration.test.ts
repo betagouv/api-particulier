@@ -18,7 +18,7 @@ describe('The redis token repository', () => {
   });
 
   afterAll(async () => {
-    await connection.disconnect();
+    await connection.disconnect(false);
   });
 
   it('saves tokens and finds them later on', async () => {
