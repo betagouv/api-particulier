@@ -9,19 +9,19 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       primaryKey: true,
       default: pgm.func('gen_random_uuid()'),
     },
-    aggregateName: {type: 'varchar(100)', notNull: true},
-    aggregateId: {type: 'uuid', notNull: true},
-    createdAt: {
+    aggregate_name: {type: 'varchar(100)', notNull: true},
+    aggregate_id: {type: 'uuid', notNull: true},
+    created_at: {
       type: 'timestamptz',
       notNull: true,
     },
-    eventName: {type: 'varchar(100)', notNull: true},
+    event_name: {type: 'varchar(100)', notNull: true},
     payload: {
       type: 'jsonb',
       notNull: true,
     },
   });
-  pgm.createIndex('events', 'aggregateId');
+  pgm.createIndex('events', 'aggregate_id');
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
