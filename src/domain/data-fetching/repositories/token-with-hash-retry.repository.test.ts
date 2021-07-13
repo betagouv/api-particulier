@@ -2,13 +2,13 @@
 import {mock} from 'jest-mock-extended';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
-import {TokenWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
+import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {TokenValue} from 'src/domain/token-value';
 
 describe('The hash retry token repository', () => {
   const decoratedRepository = mock<TokenRepository>();
-  const repository = new TokenWithHashRetry(decoratedRepository);
+  const repository = new TokenRepositoryWithHashRetry(decoratedRepository);
   const clearTokenValue = 'croute' as TokenValue;
 
   it('uses the API Particulier legacy hash method', () => {

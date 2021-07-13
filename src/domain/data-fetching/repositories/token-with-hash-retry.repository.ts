@@ -4,7 +4,7 @@ import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {TokenValue} from 'src/domain/token-value';
 
-export class TokenWithHashRetry implements TokenRepository {
+export class TokenRepositoryWithHashRetry implements TokenRepository {
   constructor(private readonly decoratedRepository: TokenRepository) {}
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {
