@@ -10,6 +10,8 @@ import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
 import {EventStore} from 'src/domain/event-store';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {EventBus} from 'src/domain/event-bus';
+import {UuidFactory} from 'src/infrastructure/uuid.factory';
+import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 
 const postgresClient = new Client(process.env.DATABASE_URL);
 
@@ -32,4 +34,11 @@ export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
   dgfipDataProvider,
   eventBus
+);
+
+export const uuidFactory = new UuidFactory();
+
+export const fetchDataUsecase = new FetchDataUsecase(
+  tokenRepository,
+  dataProviderClient
 );
