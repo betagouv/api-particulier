@@ -17,7 +17,8 @@
     "typescript": "^4.3.2",
     "uuid": "^8.3.2",
     "xmldom": "^0.6.0",
-    "xpath": "0.0.32"
+    "xpath": "0.0.32",
+    "zod": "^3.5.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.29",
