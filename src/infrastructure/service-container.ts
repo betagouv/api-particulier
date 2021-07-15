@@ -1,5 +1,5 @@
+const IORedis = require('ioredis');
 import {Client} from 'pg';
-import * as IORedis from 'ioredis';
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';

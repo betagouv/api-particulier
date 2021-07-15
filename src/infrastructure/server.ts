@@ -1,4 +1,4 @@
-import * as express from 'express';
+const express = require('express');
 import {fetchDgfipData} from 'src/presentation/controllers/fetch-data.controller';
 import {dfdipInputValidationMiddleware} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
 

@@ -1,13 +1,15 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 const _ = require('lodash');
 const xpath = require('xpath');
 const select = xpath.useNamespaces({h: 'http://www.w3.org/1999/xhtml'});
 const dom = require('xmldom').DOMParser;
 const {
   InvalidCredentialsError,
-} = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error.ts');
+} = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error');
 const {
   InvalidFormatError,
-} = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-format.error.ts');
+} = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-format.error');
 
 function parseEuro(str) {
   const data = str.replace(/[^0-9]/g, '');
@@ -23,9 +25,9 @@ function parseDate(str) {
   return new Date(year, month - 1, date - 1, 0, 0);
 }
 
-module.exports.euro = parseEuro;
+export const euro = parseEuro;
 
-module.exports.result = function parseResult(html) {
+export const result = function parseResult(html) {
   const doc = new dom({
     errorHandler: {
       warning: () => {},
