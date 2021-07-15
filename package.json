@@ -35,6 +35,7 @@
     "jest-mock-extended": "^1.0.15",
     "ts-jest": "^27.0.2",
     "ts-node": "^10.0.0",
+    "tsconfig-paths": "^3.10.1",
     "typescript": "^4.0.3"
   },
   "scripts": {
@@ -44,7 +45,8 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts"
+    "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts",
+    "start:dev": "ts-node -r tsconfig-paths/register src/infrastructure/server.ts"
   },
   "repository": {
     "type": "git",
