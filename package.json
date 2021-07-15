@@ -54,7 +54,8 @@
     "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts",
     "start:dev": "ts-node -r tsconfig-paths/register src/infrastructure/server.ts",
     "build": "npm run type-check && npm run compile",
-    "start": "node build/infrastructure/server.js"
+    "start": "node build/infrastructure/server.js",
+    "start:worker": "node build/infrastructure/worker.js"
   },
   "repository": {
     "type": "git",

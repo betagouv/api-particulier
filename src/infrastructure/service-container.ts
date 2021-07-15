@@ -12,12 +12,13 @@ import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repos
 import {EventBus} from 'src/domain/event-bus';
 import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
+import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
 
 const postgresClient = new Client(process.env.DATABASE_URL);
 
 export const eventStore: EventStore = new PostgresEventStore(postgresClient);
 
-const redisConnection = new IORedis({
+export const redisConnection = new IORedis({
   host: process.env.REDIS_HOST || 'localhost',
   port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
 });
@@ -42,3 +43,5 @@ export const fetchDataUsecase = new FetchDataUsecase(
   tokenRepository,
   dataProviderClient
 );
+
+export const tokenProjector = new TokenProjector(tokenRepository);
