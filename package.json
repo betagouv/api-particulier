@@ -43,7 +43,7 @@
     "test:integration": "jest -c test/integration/jest-integration.json",
     "lint": "gts lint",
     "clean": "gts clean",
-    "compile": "tsc",
+    "compile": "tsc -p tsconfig-compile.json",
     "fix": "gts fix",
     "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts",
     "start:dev": "ts-node -r tsconfig-paths/register src/infrastructure/server.ts"
