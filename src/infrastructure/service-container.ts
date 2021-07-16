@@ -13,8 +13,9 @@ import {EventBus} from 'src/domain/event-bus';
 import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
+import {EventSourcedApplicationRepository} from 'src/infrastructure/repositories/event-sourced-application.repository';
 
-const postgresClient = new Client(process.env.DATABASE_URL);
+export const postgresClient = new Client(process.env.DATABASE_URL);
 
 export const eventStore: EventStore = new PostgresEventStore(postgresClient);
 
@@ -45,3 +46,7 @@ export const fetchDataUsecase = new FetchDataUsecase(
 );
 
 export const tokenProjector = new TokenProjector(tokenRepository);
+
+export const applicationRepository = new EventSourcedApplicationRepository(
+  eventStore
+);
