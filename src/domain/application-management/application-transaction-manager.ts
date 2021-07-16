@@ -26,9 +26,11 @@ export class ApplicationTransactionManager {
   async applyToNew(handler: () => Application) {
     const application = handler();
 
-    application.getPendingEvents().forEach(event => {
-      this.eventStore.append(event);
-      this.eventBus.publish(event);
-    });
+    return Promise.all(
+      application.getPendingEvents().map(async event => {
+        await this.eventStore.append(event);
+        this.eventBus.publish(event);
+      })
+    );
   }
 }

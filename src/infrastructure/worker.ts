@@ -10,12 +10,18 @@ import {
 new BullWorker(redisConnection, {
   [ApplicationCreated.name]: [
     (event: Event) => {
-      tokenProjector.onApplicationCreated(event as ApplicationCreated);
+      tokenProjector.onApplicationCreated.call(
+        tokenProjector,
+        event as ApplicationCreated
+      );
     },
   ],
   [ApplicationImported.name]: [
     (event: Event) => {
-      tokenProjector.onApplicationImported(event as ApplicationImported);
+      tokenProjector.onApplicationImported.call(
+        tokenProjector,
+        event as ApplicationImported
+      );
     },
   ],
 });

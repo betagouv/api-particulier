@@ -3,13 +3,19 @@ dotenv.config();
 import {Command} from 'commander';
 import {Client} from 'pg';
 import {ApplicationId} from 'src/domain/application-id';
-import {postgresClient as mainPgClient} from 'src/infrastructure/service-container';
+import {
+  postgresClient as mainPgClient,
+  applicationTransactionManager,
+} from 'src/infrastructure/service-container';
+import {Application} from 'src/domain/application-management/application.aggregate';
+import {Subscription} from 'src/domain/subscription';
+import {UserEmail} from 'src/domain/application-management/user';
 
 const listAlreadyImportedApplicationIds = async (pg: Client) => {
   const result = await pg.query(
     "SELECT DISTINCT aggregate_id FROM events WHERE aggregate_name = 'Application'"
   );
-  return result.rows as ApplicationId[];
+  return result.rows;
 };
 
 const getApplicationToImport = async (
@@ -26,9 +32,13 @@ const getApplicationToImport = async (
   INNER JOIN memberships ON memberships.reference_id = app.id
   INNER JOIN users ON users.id = memberships.member_id
   WHERE app.status = 'ACTIVE'
-  AND app.id NOT IN (${alreadyImportedApplicationIds.map(
-    str => "'" + str + "'"
-  )})
+  ${
+    alreadyImportedApplicationIds.length > 0
+      ? 'AND app.id NOT IN (' +
+        alreadyImportedApplicationIds.map(str => "'" + str + "'") +
+        ')'
+      : ''
+  }
   GROUP BY app.id
 `
   );
@@ -90,11 +100,32 @@ const getApplicationToImport = async (
   const alreadyImportedApplicationIds = await listAlreadyImportedApplicationIds(
     mainPgClient
   );
-  console.log(
-    await getApplicationToImport(
-      graviteePgClient,
-      alreadyImportedApplicationIds
-    )
+  const applicationsToImport = await getApplicationToImport(
+    graviteePgClient,
+    alreadyImportedApplicationIds
+  );
+
+  console.log(`${applicationsToImport.length} applications to import`);
+
+  await Promise.all(
+    applicationsToImport.map(async (applicationToImport, index) => {
+      console.log(
+        `Importing application #${index + 1}: ${
+          applicationToImport.applicationName
+        }`
+      );
+      await applicationTransactionManager.applyToNew(() => {
+        return Application.import(
+          applicationToImport.applicationId,
+          applicationToImport.applicationName,
+          applicationToImport.dataPassId,
+          applicationToImport.subscriptions as Subscription[],
+          applicationToImport.scopes,
+          applicationToImport.userEmails as UserEmail[],
+          applicationToImport.tokenValue
+        );
+      });
+    })
   );
 
   await graviteePgClient.end();
