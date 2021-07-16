@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import {Command} from 'commander';
 import {Client} from 'pg';
-import {ApplicationId} from 'src/domain/application-id';
 import {
   postgresClient as mainPgClient,
   applicationTransactionManager,
@@ -20,7 +19,7 @@ const listAlreadyImportedApplicationIds = async (pg: Client) => {
 
 const getApplicationToImport = async (
   pg: Client,
-  alreadyImportedApplicationIds: string[]
+  alreadyImportedApplicationIds: {aggregate_id: string}[]
 ) => {
   const result = await pg.query(
     `
@@ -35,14 +34,15 @@ const getApplicationToImport = async (
   ${
     alreadyImportedApplicationIds.length > 0
       ? 'AND app.id NOT IN (' +
-        alreadyImportedApplicationIds.map(str => "'" + str + "'") +
+        alreadyImportedApplicationIds.map(
+          ({aggregate_id}) => "'" + aggregate_id + "'"
+        ) +
         ')'
       : ''
   }
   GROUP BY app.id
 `
   );
-  console.log(result.command);
   return result.rows.map(row => {
     const dataPassIdMatch = row.application_description.match(
       /Numéro de demande : ([0-9]+)/
