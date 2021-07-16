@@ -14,6 +14,7 @@ import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
 import {EventSourcedApplicationRepository} from 'src/infrastructure/repositories/event-sourced-application.repository';
+import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
 
 export const postgresClient = new Client(process.env.DATABASE_URL);
 
@@ -48,5 +49,11 @@ export const fetchDataUsecase = new FetchDataUsecase(
 export const tokenProjector = new TokenProjector(tokenRepository);
 
 export const applicationRepository = new EventSourcedApplicationRepository(
+  eventStore
+);
+
+export const applicationTransactionManager = new ApplicationTransactionManager(
+  applicationRepository,
+  eventBus,
   eventStore
 );

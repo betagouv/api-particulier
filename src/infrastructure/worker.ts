@@ -1,4 +1,5 @@
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
+import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {Event} from 'src/domain/event';
 import {BullWorker} from 'src/infrastructure/event-bus/bull.worker';
 import {
@@ -10,6 +11,11 @@ new BullWorker(redisConnection, {
   [ApplicationCreated.name]: [
     (event: Event) => {
       tokenProjector.onApplicationCreated(event as ApplicationCreated);
+    },
+  ],
+  [ApplicationImported.name]: [
+    (event: Event) => {
+      tokenProjector.onApplicationImported(event as ApplicationImported);
     },
   ],
 });
