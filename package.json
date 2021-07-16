@@ -37,6 +37,7 @@
     "@types/xmldom": "^0.1.30",
     "axios-mock-adapter": "^1.19.0",
     "babel-plugin-module-resolver": "^4.1.0",
+    "bull-repl": "^0.26.3",
     "gts": "^3.1.0",
     "jest": "^27.0.4",
     "jest-mock-extended": "^1.0.15",
@@ -57,7 +58,7 @@
     "start:dev": "ts-node -r tsconfig-paths/register src/infrastructure/server.ts",
     "build": "npm run type-check && npm run compile",
     "start": "node build/infrastructure/server.js",
-    "start:worker": "node build/infrastructure/worker.js",
+    "start:worker": "node -r dotenv/config build/infrastructure/worker.js",
     "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts"
   },
   "repository": {
