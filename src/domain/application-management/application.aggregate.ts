@@ -8,6 +8,7 @@ import {UserSubscribed} from 'src/domain/application-management/events/user-subs
 import {UuidFactory} from 'src/domain/uuid.factory';
 import {TokenValue} from 'src/domain/token-value';
 import {Subscription} from 'src/domain/subscription';
+import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 
 export class Application extends AggregateRoot {
   public id!: ApplicationId;
@@ -49,6 +50,32 @@ export class Application extends AggregateRoot {
     return self;
   }
 
+  static import(
+    id: ApplicationId,
+    name: string,
+    dataPassId: string,
+    subscriptions: Subscription[],
+    scopes: AnyScope[],
+    userEmails: UserEmail[],
+    tokenValue: TokenValue
+  ): Application {
+    const self = new this();
+
+    const applicationImportedEvent = new ApplicationImported(
+      id,
+      new Date(),
+      name,
+      dataPassId,
+      scopes,
+      subscriptions,
+      userEmails,
+      tokenValue
+    );
+    self.raiseAndApply(applicationImportedEvent);
+
+    return self;
+  }
+
   subscribeUser(userEmail: UserEmail) {
     const event = new UserSubscribed(this.id, new Date(), userEmail);
 
@@ -56,6 +83,17 @@ export class Application extends AggregateRoot {
   }
 
   private applyApplicationCreated(event: ApplicationCreated) {
+    this.id = event.aggregateId as ApplicationId;
+    this.name = event.name;
+    this.dataPassId = event.dataPassId;
+    this.createdOn = event.date;
+    this.scopes = event.scopes;
+    this.subscriptions = event.subscriptions;
+    this.userEmails = event.userEmails;
+    this.tokenValue = event.tokenValue;
+  }
+
+  private applyApplicationImported(event: ApplicationImported) {
     this.id = event.aggregateId as ApplicationId;
     this.name = event.name;
     this.dataPassId = event.dataPassId;
