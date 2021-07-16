@@ -12,8 +12,12 @@ const listAlreadyImportedApplicationIds = async (pg: Client) => {
   return result.rows as ApplicationId[];
 };
 
-const getApplicationToImport = async (pg: Client) => {
-  const result = await pg.query(`
+const getApplicationToImport = async (
+  pg: Client,
+  alreadyImportedApplicationIds: string[]
+) => {
+  const result = await pg.query(
+    `
   SELECT app.id as application_id, app.name as application_name, app.description as application_description, array_agg(scopes_md.value) as scopes, array_agg(legacy_md.value) as legacy_token_hash, array_agg(k.key) as token, array_agg(users.email) as user_email
   FROM applications app
   INNER JOIN metadata scopes_md ON scopes_md.reference_id = app.id AND scopes_md.key = 'scopes'
@@ -22,8 +26,13 @@ const getApplicationToImport = async (pg: Client) => {
   INNER JOIN memberships ON memberships.reference_id = app.id
   INNER JOIN users ON users.id = memberships.member_id
   WHERE app.status = 'ACTIVE'
+  AND app.id NOT IN (${alreadyImportedApplicationIds.map(
+    str => "'" + str + "'"
+  )})
   GROUP BY app.id
-`);
+`
+  );
+  console.log(result.command);
   return result.rows.map(row => {
     const dataPassIdMatch = row.application_description.match(
       /Numéro de demande : ([0-9]+)/
@@ -78,7 +87,15 @@ const getApplicationToImport = async (pg: Client) => {
   await mainPgClient.connect();
   console.log('Connected to main database');
 
-  await getApplicationToImport(graviteePgClient);
+  const alreadyImportedApplicationIds = await listAlreadyImportedApplicationIds(
+    mainPgClient
+  );
+  console.log(
+    await getApplicationToImport(
+      graviteePgClient,
+      alreadyImportedApplicationIds
+    )
+  );
 
   await graviteePgClient.end();
   await mainPgClient.end();
