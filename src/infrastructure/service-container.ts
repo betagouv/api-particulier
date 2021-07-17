@@ -20,10 +20,7 @@ export const postgresClient = new Client(process.env.DATABASE_URL);
 
 export const eventStore: EventStore = new PostgresEventStore(postgresClient);
 
-export const redisConnection = new IORedis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
-});
+export const redisConnection = new IORedis(process.env.REDIS_URL);
 
 export const tokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new RedisTokenRepository(redisConnection));
