@@ -18,7 +18,7 @@ describe('The postgres event store', () => {
     client = new Client(process.env.TEST_DATABASE_URL);
     await client.connect();
     await client.query(
-      'DROP TABLE IF EXISTS events; DROP TABLE IF EXISTS pgmigrations;'
+      'DROP TABLE IF EXISTS events; DROP TABLE IF EXISTS pgmigrations; DROP TABLE IF EXISTS tokens;'
     );
     await pgMigrate({
       migrationsTable: 'pgmigrations',

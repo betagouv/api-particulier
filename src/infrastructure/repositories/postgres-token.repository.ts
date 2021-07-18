@@ -4,7 +4,7 @@ import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {TokenValue} from 'src/domain/token-value';
 
-export class PostgresRepository implements TokenRepository {
+export class PostgresTokenRepository implements TokenRepository {
   constructor(private readonly pg: Client) {}
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {

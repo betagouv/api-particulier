@@ -15,6 +15,8 @@ import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
 import {EventSourcedApplicationRepository} from 'src/infrastructure/repositories/event-sourced-application.repository';
 import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
+import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
+import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 
 export const postgresClient = new Client(process.env.DATABASE_URL);
 
@@ -22,8 +24,10 @@ export const eventStore: EventStore = new PostgresEventStore(postgresClient);
 
 export const redisConnection = new IORedis(process.env.REDIS_URL);
 
-export const tokenRepository: TokenRepository =
+export const mainTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new RedisTokenRepository(redisConnection));
+export const fallbackTokenRepository: TokenRepository =
+  new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresClient));
 
 export const eventBus: EventBus = new BullEventBus(redisConnection);
 
@@ -39,12 +43,15 @@ export const dataProviderClient: DataProviderClient = new DataProviderClient(
 export const uuidFactory = new UuidFactory();
 
 export const fetchDataUsecase = new FetchDataUsecase(
-  tokenRepository,
+  mainTokenRepository,
   dataProviderClient,
   eventBus
 );
 
-export const tokenProjector = new TokenProjector(tokenRepository);
+export const mainTokenProjector = new TokenProjector(mainTokenRepository);
+export const fallbackTokenProjector = new TokenProjector(
+  fallbackTokenRepository
+);
 
 export const applicationRepository = new EventSourcedApplicationRepository(
   eventStore
@@ -54,4 +61,9 @@ export const applicationTransactionManager = new ApplicationTransactionManager(
   applicationRepository,
   eventBus,
   eventStore
+);
+
+export const repositoryFeeder = new RepositoryFeeder(
+  mainTokenRepository,
+  fallbackTokenRepository
 );
