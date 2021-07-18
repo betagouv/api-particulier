@@ -40,7 +40,8 @@ export const uuidFactory = new UuidFactory();
 
 export const fetchDataUsecase = new FetchDataUsecase(
   tokenRepository,
-  dataProviderClient
+  dataProviderClient,
+  eventBus
 );
 
 export const tokenProjector = new TokenProjector(tokenRepository);
