@@ -48,7 +48,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:integration": "jest -c test/integration/jest-integration.json",
+    "test:integration": "ts-node -r tsconfig-paths/register -r dotenv/config test/integration/run.ts",
     "lint": "gts lint",
     "clean": "gts clean",
     "type-check": "tsc --noEmit",

@@ -1,41 +1,17 @@
-import {Client} from 'pg';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {EventStore} from 'src/domain/event-store';
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
-import * as dotenv from 'dotenv';
-import pgMigrate from 'node-pg-migrate';
 import {ApplicationId} from 'src/domain/application-id';
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenValue} from 'src/domain/token-value';
-
-dotenv.config();
+import {pgClient} from 'test/integration/config';
 
 describe('The postgres event store', () => {
-  let eventStore: EventStore;
-  let client: Client;
-
-  beforeAll(async () => {
-    client = new Client(process.env.TEST_DATABASE_URL);
-    await client.connect();
-    await client.query(
-      'DROP TABLE IF EXISTS events; DROP TABLE IF EXISTS pgmigrations; DROP TABLE IF EXISTS tokens;'
-    );
-    await pgMigrate({
-      migrationsTable: 'pgmigrations',
-      count: 1000,
-      dir: process.cwd() + '/migrations',
-      direction: 'up',
-      databaseUrl: process.env.TEST_DATABASE_URL!,
-      log: () => {},
-    });
-    eventStore = new PostgresEventStore(client);
-  });
-
-  afterAll(async () => {
-    await client.end();
-  });
+  const eventStore: EventStore = new PostgresEventStore(pgClient);
 
   it('stores application events', async () => {
+    await pgClient.connect();
+
     const applicationCreated = new ApplicationCreated(
       '9d2b706c-7b3c-48ac-afdf-9d311533b656' as ApplicationId,
       new Date(),
