@@ -1,5 +1,5 @@
 const IORedis = require('ioredis');
-import {Client} from 'pg';
+import {Pool} from 'pg';
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';
@@ -18,16 +18,18 @@ import {ApplicationTransactionManager} from 'src/domain/application-management/a
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
 import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 
-export const postgresClient = new Client(process.env.DATABASE_URL);
+export const postgresPool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
-export const eventStore: EventStore = new PostgresEventStore(postgresClient);
+export const eventStore: EventStore = new PostgresEventStore(postgresPool);
 
 export const redisConnection = new IORedis(process.env.REDIS_URL);
 
 export const redisTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new RedisTokenRepository(redisConnection));
 export const postgresTokenRepository: TokenRepository =
-  new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresClient));
+  new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresPool));
 
 export const eventBus: EventBus = new BullEventBus(redisConnection);
 

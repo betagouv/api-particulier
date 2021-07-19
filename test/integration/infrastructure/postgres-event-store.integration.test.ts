@@ -4,17 +4,13 @@ import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {ApplicationId} from 'src/domain/application-id';
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenValue} from 'src/domain/token-value';
-import {pgClient} from 'test/integration/config';
+import {pgPool} from 'test/integration/config';
 
 describe('The postgres event store', () => {
-  const eventStore: EventStore = new PostgresEventStore(pgClient);
-
-  beforeAll(async () => {
-    await pgClient.connect();
-  });
+  const eventStore: EventStore = new PostgresEventStore(pgPool);
 
   afterAll(async () => {
-    await pgClient.end();
+    await pgPool.end();
   });
 
   it('stores application events', async () => {

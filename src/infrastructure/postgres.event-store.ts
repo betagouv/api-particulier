@@ -1,4 +1,4 @@
-import {Client} from 'pg';
+import {Pool} from 'pg';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {Event} from 'src/domain/event';
@@ -8,7 +8,7 @@ import {logFor} from 'src/domain/logger';
 export class PostgresEventStore implements EventStore {
   private readonly logger = logFor(PostgresEventStore.name);
 
-  constructor(private readonly client: Client) {}
+  constructor(private readonly pool: Pool) {}
 
   async append(event: Event): Promise<void> {
     this.logger.log(
@@ -25,7 +25,7 @@ export class PostgresEventStore implements EventStore {
       event.constructor.name,
       event,
     ];
-    await this.client.query(insertQuery, values);
+    await this.pool.query(insertQuery, values);
   }
 
   async listAggregateEvents(
@@ -34,10 +34,7 @@ export class PostgresEventStore implements EventStore {
   ): Promise<Event[]> {
     const selectQuery =
       'SELECT event_name, payload FROM events WHERE aggregate_name = $1 AND aggregate_id = $2 ORDER BY created_at';
-    const {rows} = await this.client.query(selectQuery, [
-      aggregate,
-      aggregateId,
-    ]);
+    const {rows} = await this.pool.query(selectQuery, [aggregate, aggregateId]);
 
     const events = rows.map(row => {
       switch (row.event_name) {

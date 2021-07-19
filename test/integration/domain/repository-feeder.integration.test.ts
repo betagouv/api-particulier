@@ -8,7 +8,7 @@ import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 import {TokenValue} from 'src/domain/token-value';
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
 import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';
-import {pgClient} from 'test/integration/config';
+import {pgPool} from 'test/integration/config';
 
 describe('The token feeder', () => {
   let redisRepository: TokenRepository;
@@ -22,10 +22,9 @@ describe('The token feeder', () => {
   );
 
   beforeAll(async () => {
-    await pgClient.connect();
     connection = new IORedis(process.env.REDIS_URL);
     redisRepository = new RedisTokenRepository(connection);
-    postgresRepository = new PostgresTokenRepository(pgClient);
+    postgresRepository = new PostgresTokenRepository(pgPool);
 
     await postgresRepository.save(token);
     await connection.del('TOKEN_VALUE-' + token.value);
@@ -33,7 +32,7 @@ describe('The token feeder', () => {
 
   afterAll(async () => {
     await connection.disconnect(false);
-    await pgClient.end();
+    await pgPool.end();
   });
 
   it('updates the redis repository when a token is missing', async () => {

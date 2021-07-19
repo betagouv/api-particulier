@@ -1,16 +1,16 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import {Command} from 'commander';
-import {Client} from 'pg';
+import {Pool} from 'pg';
 import {
-  postgresClient as mainPgClient,
+  postgresPool as mainPgPool,
   applicationTransactionManager,
 } from 'src/infrastructure/service-container';
 import {Application} from 'src/domain/application-management/application.aggregate';
 import {Subscription} from 'src/domain/subscription';
 import {UserEmail} from 'src/domain/application-management/user';
 
-const listAlreadyImportedApplicationIds = async (pg: Client) => {
+const listAlreadyImportedApplicationIds = async (pg: Pool) => {
   const result = await pg.query(
     "SELECT DISTINCT aggregate_id FROM events WHERE aggregate_name = 'Application'"
   );
@@ -18,7 +18,7 @@ const listAlreadyImportedApplicationIds = async (pg: Client) => {
 };
 
 const getApplicationToImport = async (
-  pg: Client,
+  pg: Pool,
   alreadyImportedApplicationIds: {aggregate_id: string}[]
 ) => {
   const result = await pg.query(
@@ -91,17 +91,15 @@ const getApplicationToImport = async (
 
   const options = program.opts();
   const graviteeDbUrl = options.graviteeDbUrl;
-  const graviteePgClient = new Client(graviteeDbUrl);
-  await graviteePgClient.connect();
+  const graviteePgPool = new Pool({connectionString: graviteeDbUrl});
   console.log('Connected to Gravitee database');
-  await mainPgClient.connect();
   console.log('Connected to main database');
 
   const alreadyImportedApplicationIds = await listAlreadyImportedApplicationIds(
-    mainPgClient
+    mainPgPool
   );
   const applicationsToImport = await getApplicationToImport(
-    graviteePgClient,
+    graviteePgPool,
     alreadyImportedApplicationIds
   );
 
@@ -128,8 +126,8 @@ const getApplicationToImport = async (
     })
   );
 
-  await graviteePgClient.end();
-  await mainPgClient.end();
+  await graviteePgPool.end();
+  await mainPgPool.end();
   console.log('Disconnected');
   // eslint-disable-next-line no-process-exit
   process.exit(0);

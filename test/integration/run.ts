@@ -1,11 +1,10 @@
 import pgMigrate from 'node-pg-migrate';
 // eslint-disable-next-line node/no-unpublished-import
 import {run} from 'jest';
-import {pgClient} from 'test/integration/config';
+import {pgPool} from 'test/integration/config';
 
 const setup = async () => {
-  await pgClient.connect();
-  await pgClient.query(`
+  await pgPool.query(`
     DROP TABLE IF EXISTS events;
     DROP TABLE IF EXISTS pgmigrations;
     DROP TABLE IF EXISTS tokens;
@@ -20,7 +19,7 @@ const setup = async () => {
 };
 
 const teardown = async () => {
-  pgClient.end();
+  pgPool.end();
 };
 
 setup()

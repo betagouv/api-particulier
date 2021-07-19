@@ -1,4 +1,4 @@
-import {Client} from 'pg';
+import {Pool} from 'pg';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
@@ -8,7 +8,7 @@ import {TokenValue} from 'src/domain/token-value';
 export class PostgresTokenRepository implements TokenRepository {
   private readonly logger = logFor(PostgresTokenRepository.name);
 
-  constructor(private readonly pg: Client) {}
+  constructor(private readonly pg: Pool) {}
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {
     this.logger.log('debug', `Finding token "${tokenValue}"`);
