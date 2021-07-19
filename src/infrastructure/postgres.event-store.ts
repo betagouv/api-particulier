@@ -11,7 +11,11 @@ export class PostgresEventStore implements EventStore {
   constructor(private readonly client: Client) {}
 
   async append(event: Event): Promise<void> {
-    this.logger.log('debug', 'Appending event', {event});
+    this.logger.log(
+      'debug',
+      `Appending event ${event.constructor.name} to Postgres`,
+      {event}
+    );
     const insertQuery =
       'INSERT INTO events(aggregate_name, aggregate_id, created_at, event_name, payload) VALUES($1, $2, $3, $4, $5)';
     const values = [

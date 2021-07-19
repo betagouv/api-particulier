@@ -5,7 +5,9 @@ import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repos
 import {TokenValue} from 'src/domain/token-value';
 
 export class TokenRepositoryWithHashRetry implements TokenRepository {
-  constructor(private readonly decoratedRepository: TokenRepository) {}
+  constructor(private readonly decoratedRepository: TokenRepository) {
+    this.constructor = decoratedRepository.constructor;
+  }
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {
     try {

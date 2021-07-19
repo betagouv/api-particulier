@@ -1,4 +1,4 @@
-import {Worker} from 'bullmq';
+import {Job, Worker} from 'bullmq';
 import {Redis} from 'ioredis';
 import {Event} from 'src/domain/event';
 import {logFor} from 'src/domain/logger';
@@ -18,24 +18,22 @@ export class BullWorker {
       [eventName: string]: ((event: Event) => void)[];
     }
   ) {
+    const jobHandler = async (job: Job) => {
+      if (eventHandlers[job.name]) {
+        return await Promise.all(
+          eventHandlers[job.name].map(handler => handler(job.data))
+        );
+      }
+      return;
+    };
     this.applicationEventWorker = new Worker(
       applicationEventQueueName,
-      async job => {
-        if (eventHandlers[job.name]) {
-          eventHandlers[job.name].forEach(handler => handler(job.data));
-        }
-      },
+      jobHandler,
       {connection}
     );
-    this.tokenEventWorker = new Worker(
-      tokenEventQueueName,
-      async job => {
-        if (eventHandlers[job.name]) {
-          eventHandlers[job.name].forEach(handler => handler(job.data));
-        }
-      },
-      {connection}
-    );
+    this.tokenEventWorker = new Worker(tokenEventQueueName, jobHandler, {
+      connection,
+    });
     this.attachListenersToWorker(this.applicationEventWorker);
     this.attachListenersToWorker(this.tokenEventWorker);
   }
