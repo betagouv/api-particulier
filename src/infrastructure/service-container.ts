@@ -24,9 +24,9 @@ export const eventStore: EventStore = new PostgresEventStore(postgresClient);
 
 export const redisConnection = new IORedis(process.env.REDIS_URL);
 
-export const mainTokenRepository: TokenRepository =
+export const redisTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new RedisTokenRepository(redisConnection));
-export const fallbackTokenRepository: TokenRepository =
+export const postgresTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresClient));
 
 export const eventBus: EventBus = new BullEventBus(redisConnection);
@@ -43,14 +43,14 @@ export const dataProviderClient: DataProviderClient = new DataProviderClient(
 export const uuidFactory = new UuidFactory();
 
 export const fetchDataUsecase = new FetchDataUsecase(
-  mainTokenRepository,
+  redisTokenRepository,
   dataProviderClient,
   eventBus
 );
 
-export const mainTokenProjector = new TokenProjector(mainTokenRepository);
-export const fallbackTokenProjector = new TokenProjector(
-  fallbackTokenRepository
+export const redisTokenProjector = new TokenProjector(redisTokenRepository);
+export const postgresTokenProjector = new TokenProjector(
+  postgresTokenRepository
 );
 
 export const applicationRepository = new EventSourcedApplicationRepository(
@@ -64,6 +64,6 @@ export const applicationTransactionManager = new ApplicationTransactionManager(
 );
 
 export const repositoryFeeder = new RepositoryFeeder(
-  mainTokenRepository,
-  fallbackTokenRepository
+  redisTokenRepository,
+  postgresTokenRepository
 );

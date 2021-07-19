@@ -5,36 +5,36 @@ import {Event} from 'src/domain/event';
 import {BullWorker} from 'src/infrastructure/event-bus/bull.worker';
 import {
   redisConnection,
-  mainTokenProjector,
-  fallbackTokenProjector,
+  redisTokenProjector,
+  postgresTokenProjector,
   repositoryFeeder,
 } from 'src/infrastructure/service-container';
 
 new BullWorker(redisConnection, {
   [ApplicationCreated.name]: [
     (event: Event) => {
-      mainTokenProjector.onApplicationCreated.call(
-        mainTokenProjector,
+      redisTokenProjector.onApplicationCreated.call(
+        redisTokenProjector,
         event as ApplicationCreated
       );
     },
     (event: Event) => {
-      fallbackTokenProjector.onApplicationCreated.call(
-        fallbackTokenProjector,
+      postgresTokenProjector.onApplicationCreated.call(
+        postgresTokenProjector,
         event as ApplicationCreated
       );
     },
   ],
   [ApplicationImported.name]: [
     (event: Event) => {
-      mainTokenProjector.onApplicationImported.call(
-        mainTokenProjector,
+      redisTokenProjector.onApplicationImported.call(
+        redisTokenProjector,
         event as ApplicationImported
       );
     },
     (event: Event) => {
-      fallbackTokenProjector.onApplicationImported.call(
-        fallbackTokenProjector,
+      postgresTokenProjector.onApplicationImported.call(
+        postgresTokenProjector,
         event as ApplicationImported
       );
     },
