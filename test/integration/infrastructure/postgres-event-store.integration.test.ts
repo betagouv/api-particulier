@@ -9,9 +9,15 @@ import {pgClient} from 'test/integration/config';
 describe('The postgres event store', () => {
   const eventStore: EventStore = new PostgresEventStore(pgClient);
 
-  it('stores application events', async () => {
+  beforeAll(async () => {
     await pgClient.connect();
+  });
 
+  afterAll(async () => {
+    await pgClient.end();
+  });
+
+  it('stores application events', async () => {
     const applicationCreated = new ApplicationCreated(
       '9d2b706c-7b3c-48ac-afdf-9d311533b656' as ApplicationId,
       new Date(),
