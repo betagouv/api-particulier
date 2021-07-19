@@ -1,6 +1,7 @@
 import {Worker} from 'bullmq';
 import {Redis} from 'ioredis';
 import {Event} from 'src/domain/event';
+import {logFor} from 'src/domain/logger';
 import {
   applicationEventQueueName,
   tokenEventQueueName,
@@ -9,6 +10,7 @@ import {
 export class BullWorker {
   private readonly applicationEventWorker: Worker;
   private readonly tokenEventWorker: Worker;
+  private readonly logger = logFor(BullWorker.name);
 
   constructor(
     connection: Redis,
@@ -34,6 +36,25 @@ export class BullWorker {
       },
       {connection}
     );
+    this.attachListenersToWorker(this.applicationEventWorker);
+    this.attachListenersToWorker(this.tokenEventWorker);
+  }
+
+  private attachListenersToWorker(worker: Worker) {
+    worker.on('completed', job => {
+      this.logger.log(
+        'debug',
+        `Job "${job.name}" on queue "${job.queueName}" completed`,
+        {job: job.toJSON()}
+      );
+    });
+    worker.on('failed', job => {
+      this.logger.log(
+        'error',
+        `Job "${job.name}" on queue "${job.queueName}" failed`,
+        {job: job.toJSON()}
+      );
+    });
   }
 
   async close() {

@@ -3,11 +3,15 @@ import {ApplicationCreated} from 'src/domain/application-management/events/appli
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {Event} from 'src/domain/event';
 import {EventStore} from 'src/domain/event-store';
+import {logFor} from 'src/domain/logger';
 
 export class PostgresEventStore implements EventStore {
+  private readonly logger = logFor(PostgresEventStore.name);
+
   constructor(private readonly client: Client) {}
 
   async append(event: Event): Promise<void> {
+    this.logger.log('debug', 'Appending event', {event});
     const insertQuery =
       'INSERT INTO events(aggregate_name, aggregate_id, created_at, event_name, payload) VALUES($1, $2, $3, $4, $5)';
     const values = [
@@ -31,7 +35,7 @@ export class PostgresEventStore implements EventStore {
       aggregateId,
     ]);
 
-    return rows.map(row => {
+    const events = rows.map(row => {
       switch (row.event_name) {
         case ApplicationCreated.name:
           return new ApplicationCreated(
@@ -51,7 +55,14 @@ export class PostgresEventStore implements EventStore {
             row.payload.userEmail
           );
       }
+      this.logger.log('error', `Read unknown event ${row.event_name}`, {row});
       throw new Error(`Unknown event ${row.event_name}`);
     });
+    this.logger.log(
+      'debug',
+      `Listing events for aggregate ${aggregate} ${aggregateId}`,
+      {events}
+    );
+    return events;
   }
 }

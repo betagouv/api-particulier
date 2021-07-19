@@ -2,12 +2,16 @@ import {Client} from 'pg';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
+import {logFor} from 'src/domain/logger';
 import {TokenValue} from 'src/domain/token-value';
 
 export class PostgresTokenRepository implements TokenRepository {
+  private readonly logger = logFor(PostgresTokenRepository.name);
+
   constructor(private readonly pg: Client) {}
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {
+    this.logger.log('debug', `Finding token "${tokenValue}"`);
     const query = 'SELECT * FROM tokens WHERE value = $1';
     const values = [tokenValue];
 
@@ -18,15 +22,19 @@ export class PostgresTokenRepository implements TokenRepository {
     }
     const rawToken = result.rows[0];
 
-    return new Token(
+    const token = new Token(
       rawToken.application_id,
       rawToken.value,
       rawToken.scopes,
       rawToken.subscriptions
     );
+    this.logger.log('debug', `Found token for value "${tokenValue}"`, {token});
+
+    return token;
   }
 
   async save(token: Token): Promise<void> {
+    this.logger.log('debug', `Saving token "${token.value}"`, {token});
     const query =
       'INSERT INTO tokens(application_id, value, scopes, subscriptions) VALUES ($1, $2, $3, $4)';
     const values = [
