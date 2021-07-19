@@ -3,19 +3,26 @@ import {ApplicationCreated} from 'src/domain/application-management/events/appli
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
+import {logFor, Logger} from 'src/domain/logger';
 
 export class TokenProjector {
-  constructor(private readonly tokenRepository: TokenRepository) {}
+  private readonly logger: Logger;
 
-  onApplicationCreated(event: ApplicationCreated): void {
-    this.createTokenFromEvent(event);
+  constructor(private readonly tokenRepository: TokenRepository) {
+    this.logger = logFor(
+      `${TokenProjector.name}/${tokenRepository.constructor.name}`
+    );
   }
 
-  onApplicationImported(event: ApplicationImported): void {
-    this.createTokenFromEvent(event);
+  async onApplicationCreated(event: ApplicationCreated): Promise<void> {
+    await this.createTokenFromEvent(event);
   }
 
-  private createTokenFromEvent(
+  async onApplicationImported(event: ApplicationImported): Promise<void> {
+    await this.createTokenFromEvent(event);
+  }
+
+  private async createTokenFromEvent(
     event: ApplicationCreated | ApplicationImported
   ) {
     const newToken = new Token(
@@ -25,6 +32,7 @@ export class TokenProjector {
       event.subscriptions
     );
 
-    this.tokenRepository.save(newToken);
+    await this.tokenRepository.save(newToken);
+    this.logger.log('debug', 'Projected token from event', {event});
   }
 }
