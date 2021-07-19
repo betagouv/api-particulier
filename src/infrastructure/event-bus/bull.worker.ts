@@ -55,6 +55,11 @@ export class BullWorker {
         {job: job.toJSON()}
       );
     });
+    worker.on('error', error => {
+      this.logger.log('error', `Worker failed on queue ${worker.name}`, {
+        error,
+      });
+    });
   }
 
   async close() {
