@@ -32,8 +32,8 @@ export class PostgresTokenRepository implements TokenRepository {
     const values = [
       token.applicationId,
       token.value,
-      token.scopes,
-      token.subscriptions,
+      JSON.stringify(token.scopes),
+      JSON.stringify(token.subscriptions),
     ];
 
     await this.pg.query(query, values);
