@@ -36,6 +36,8 @@ export class BullWorker {
     });
     this.attachListenersToWorker(this.applicationEventWorker);
     this.attachListenersToWorker(this.tokenEventWorker);
+
+    this.logger.log('info', 'Bull worker started!');
   }
 
   private attachListenersToWorker(worker: Worker) {

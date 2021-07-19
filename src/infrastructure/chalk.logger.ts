@@ -21,10 +21,12 @@ export class ChalkLogger implements Logger {
     const logDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss.SSSxxx');
     console.log(
       `${levelColor[level](
-        '[' + logDate + '][' + level.toLocaleUpperCase() + ']'
-      )} ${chalk.bold.cyanBright(service)} ${message}\n${chalk.italic.gray(
-        JSON.stringify(rest)
-      )}`
+        '[' + level.toLocaleUpperCase() + ']'
+      )} ${logDate} ${chalk.bold.cyanBright(service)} ${message}${
+        Object.keys(rest).length
+          ? '\n' + chalk.italic.gray(JSON.stringify(rest))
+          : ''
+      }`
     );
   }
 }

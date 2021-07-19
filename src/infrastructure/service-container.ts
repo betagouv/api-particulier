@@ -18,59 +18,77 @@ import {ApplicationTransactionManager} from 'src/domain/application-management/a
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
 import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 import {ChalkLogger} from 'src/infrastructure/chalk.logger';
-import {setInstance} from 'src/domain/logger';
+import {logFor, setInstance} from 'src/domain/logger';
 
 const logger = new ChalkLogger();
 setInstance(logger);
 
+const localLogger = logFor('ServiceContainer');
+
 export const postgresPool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
+localLogger.log('info', 'Postgres pool configured');
 
 export const eventStore: EventStore = new PostgresEventStore(postgresPool);
+localLogger.log('info', 'Event store initialized');
 
 export const redisConnection = new IORedis(process.env.REDIS_URL);
+localLogger.log('info', 'Redis connection configured');
 
 export const redisTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new RedisTokenRepository(redisConnection));
+localLogger.log('info', 'Redis token repository initialized');
 export const postgresTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresPool));
+localLogger.log('info', 'Postgres token repository initialized');
 
 export const eventBus: EventBus = new BullEventBus(redisConnection);
+localLogger.log('info', 'Event bus initialized');
 
 const cnafDataProvider = new SoapDataProvider();
+localLogger.log('info', 'CNAF data provider initialized');
 const dgfipDataProvider = new SvairDataProvider();
+localLogger.log('info', 'DGFIP data provider initialized');
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
   dgfipDataProvider,
   eventBus
 );
+localLogger.log('info', 'Data provider client initialized');
 
 export const uuidFactory = new UuidFactory();
+localLogger.log('info', 'Uuid factory initialized');
 
 export const fetchDataUsecase = new FetchDataUsecase(
   redisTokenRepository,
   dataProviderClient,
   eventBus
 );
+localLogger.log('info', 'Fetch data usecase initialized');
 
 export const redisTokenProjector = new TokenProjector(redisTokenRepository);
+localLogger.log('info', 'Redis token projector initialized');
 export const postgresTokenProjector = new TokenProjector(
   postgresTokenRepository
 );
+localLogger.log('info', 'Postgres token projector initialized');
 
 export const applicationRepository = new EventSourcedApplicationRepository(
   eventStore
 );
+localLogger.log('info', 'Application repository initialized');
 
 export const applicationTransactionManager = new ApplicationTransactionManager(
   applicationRepository,
   eventBus,
   eventStore
 );
+localLogger.log('info', 'Application transaction manager initialized');
 
 export const repositoryFeeder = new RepositoryFeeder(
   redisTokenRepository,
   postgresTokenRepository
 );
+localLogger.log('info', 'Repository feeder initialized');
