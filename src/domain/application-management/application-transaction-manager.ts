@@ -3,8 +3,11 @@ import {EventStore} from 'src/domain/event-store';
 import {ApplicationId} from 'src/domain/application-id';
 import {Application} from 'src/domain/application-management/application.aggregate';
 import {ApplicationRepository} from 'src/domain/application-management/repositories/application.repository';
+import {logFor} from 'src/domain/logger';
 
 export class ApplicationTransactionManager {
+  private readonly logger = logFor(ApplicationTransactionManager.name);
+
   constructor(
     private readonly applicationRepository: ApplicationRepository,
     private readonly eventBus: EventBus,
@@ -16,21 +19,38 @@ export class ApplicationTransactionManager {
     applicationId: ApplicationId
   ): Promise<void> {
     let application = await this.applicationRepository.find(applicationId);
+    this.logger.log(
+      'debug',
+      `Beginning transaction for application "${application.name}"`,
+      {application}
+    );
     application = handler(application);
 
     application.getPendingEvents().forEach(event => {
       this.eventBus.publish(event);
     });
+    this.logger.log(
+      'debug',
+      `End of transaction for application "${application.name}"`,
+      {application}
+    );
   }
 
   async applyToNew(handler: () => Application) {
+    this.logger.log('debug', 'Beginning transaction for new application');
     const application = handler();
 
-    return Promise.all(
+    await Promise.all(
       application.getPendingEvents().map(async event => {
         await this.eventStore.append(event);
         this.eventBus.publish(event);
       })
     );
+    this.logger.log(
+      'debug',
+      `End of transaction for application "${application.name}"`,
+      {application}
+    );
+    return;
   }
 }

@@ -9,6 +9,7 @@ import {UuidFactory} from 'src/domain/uuid.factory';
 import {TokenValue} from 'src/domain/token-value';
 import {Subscription} from 'src/domain/subscription';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {logFor} from 'src/domain/logger';
 
 export class Application extends AggregateRoot {
   public id!: ApplicationId;
@@ -19,6 +20,7 @@ export class Application extends AggregateRoot {
   public subscriptions!: Subscription[];
   public userEmails!: UserEmail[];
   private scopes!: AnyScope[];
+  private readonly logger = logFor(Application.name);
 
   private constructor() {
     super();
@@ -83,6 +85,8 @@ export class Application extends AggregateRoot {
   }
 
   private applyApplicationCreated(event: ApplicationCreated) {
+    this.logger.log('debug', `Creating application "${event.name}"`, {event});
+
     this.id = event.aggregateId as ApplicationId;
     this.name = event.name;
     this.dataPassId = event.dataPassId;
@@ -94,6 +98,8 @@ export class Application extends AggregateRoot {
   }
 
   private applyApplicationImported(event: ApplicationImported) {
+    this.logger.log('debug', `Importing application "${event.name}"`, {event});
+
     this.id = event.aggregateId as ApplicationId;
     this.name = event.name;
     this.dataPassId = event.dataPassId;
@@ -105,6 +111,10 @@ export class Application extends AggregateRoot {
   }
 
   private applyUserSubscribed(event: UserSubscribed) {
+    this.logger.log('debug', `Adding user to application "${this.name}"`, {
+      event,
+    });
+
     this.userEmails.push(event.userEmail);
   }
 }
