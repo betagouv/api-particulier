@@ -10,10 +10,7 @@ describe('The redis token repository', () => {
   let connection: IORedis.Redis;
 
   beforeAll(async () => {
-    connection = new IORedis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379,
-    });
+    connection = new IORedis(process.env.REDIS_URL);
     repository = new RedisTokenRepository(connection);
   });
 
