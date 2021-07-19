@@ -1,4 +1,4 @@
-import chalk = require('chalk');
+const chalk = require('chalk');
 import {Level, Logger} from 'src/domain/logger';
 import {format} from 'date-fns';
 
