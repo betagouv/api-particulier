@@ -17,6 +17,11 @@ import {EventSourcedApplicationRepository} from 'src/infrastructure/repositories
 import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
 import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
+import {ChalkLogger} from 'src/infrastructure/chalk.logger';
+import {setInstance} from 'src/domain/logger';
+
+const logger = new ChalkLogger();
+setInstance(logger);
 
 export const postgresPool = new Pool({
   connectionString: process.env.DATABASE_URL,

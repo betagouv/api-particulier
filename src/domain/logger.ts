@@ -1,4 +1,4 @@
-type Level = 'silly' | 'debug' | 'verbose' | 'info' | 'warn' | 'error';
+export type Level = 'silly' | 'debug' | 'verbose' | 'info' | 'warn' | 'error';
 
 export interface Logger {
   log(level: Level, message: string, meta?: {[key: string]: unknown}): void;
