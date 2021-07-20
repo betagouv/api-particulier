@@ -1,6 +1,7 @@
 import {defaults, pick} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
+import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 
 export class DgfipDataPresenter {
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
@@ -35,22 +36,5 @@ export class DgfipDataPresenter {
     };
 
     return defaults(input, pick(mask, Object.keys(input)));
-  }
-
-  presentError(error: Error) {
-    if (error instanceof NetworkError) {
-      return {
-        error: 'not_found',
-        reason:
-          'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis',
-        message:
-          'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis',
-      };
-    }
-    return {
-      error: error.constructor.name,
-      reason: error.message,
-      message: 'Erreur interne',
-    };
   }
 }

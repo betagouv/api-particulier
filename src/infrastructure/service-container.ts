@@ -19,6 +19,7 @@ import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-
 import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 import {ChalkLogger} from 'src/infrastructure/chalk.logger';
 import {logFor, setInstance} from 'src/domain/logger';
+import {DgfipDataPresenter} from 'src/presentation/presenters/dgfip-data.presenter';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -92,3 +93,6 @@ export const repositoryFeeder = new RepositoryFeeder(
   postgresTokenRepository
 );
 localLogger.log('info', 'Repository feeder initialized');
+
+export const dgfipDataPresenter = new DgfipDataPresenter();
+localLogger.log('info', 'DGFIP data presenter initialized');
