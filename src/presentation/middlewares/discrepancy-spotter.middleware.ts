@@ -1,7 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
-import {logFor} from 'src/domain/logger';
-
-const logger = logFor('DiscrepancyCheckerMiddleware');
+import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
+import {eventBus} from 'src/infrastructure/service-container';
 
 export const discrepancyCheckerMiddleware = (
   req: Request,
@@ -11,9 +10,19 @@ export const discrepancyCheckerMiddleware = (
   const initialMethod = res.json;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  res.json = (body: unknown) => {
-    logger.log('debug', 'JSON response', {body, status: res.statusCode});
-    initialMethod.call(res, body);
+  res.json = (data: object) => {
+    initialMethod.call(res, data);
+    eventBus.publish(
+      new ResponseSent(
+        '',
+        new Date(),
+        req.path,
+        req.params,
+        req.headers,
+        res.statusCode,
+        data
+      )
+    );
   };
   next();
 };

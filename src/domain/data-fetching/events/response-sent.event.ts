@@ -5,6 +5,8 @@ export class ResponseSent implements Event {
     readonly aggregateId: string,
     readonly date: Date,
     readonly route: string,
+    readonly params: object,
+    readonly headers: object,
     readonly statusCode: number,
     readonly data: object
   ) {}
