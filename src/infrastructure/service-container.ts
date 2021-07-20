@@ -20,6 +20,8 @@ import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 import {ChalkLogger} from 'src/infrastructure/chalk.logger';
 import {logFor, setInstance} from 'src/domain/logger';
 import {DgfipDataPresenter} from 'src/presentation/presenters/dgfip-data.presenter';
+import {AxiosLegacyApiClient} from 'src/infrastructure/axios-legacy.client';
+import {QualityMonitor} from 'src/domain/quality-monitoring/quality-monitor';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -96,3 +98,9 @@ localLogger.log('info', 'Repository feeder initialized');
 
 export const dgfipDataPresenter = new DgfipDataPresenter();
 localLogger.log('info', 'DGFIP data presenter initialized');
+
+export const legacyApiClient = new AxiosLegacyApiClient();
+localLogger.log('info', 'Legacy API client initialized');
+
+export const qualityMonitor = new QualityMonitor(legacyApiClient);
+localLogger.log('info', 'Quality monitor initialized');

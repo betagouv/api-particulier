@@ -17,7 +17,7 @@ export const discrepancyCheckerMiddleware = (
         '',
         new Date(),
         req.path,
-        req.params,
+        req.query,
         req.headers,
         res.statusCode,
         data

@@ -12,7 +12,9 @@ export class AxiosLegacyApiClient implements LegacyApiClient {
         `https://particulier.api.gouv.fr/api${route}`,
         {
           params,
-          headers,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          headers: {'X-Api-Key': headers['x-api-key']},
         }
       );
       return {

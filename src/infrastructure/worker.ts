@@ -1,5 +1,6 @@
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Event} from 'src/domain/event';
 import {BullWorker} from 'src/infrastructure/event-bus/bull.worker';
@@ -8,6 +9,7 @@ import {
   redisTokenProjector,
   postgresTokenProjector,
   repositoryFeeder,
+  qualityMonitor,
 } from 'src/infrastructure/service-container';
 
 new BullWorker(redisConnection, {
@@ -45,6 +47,11 @@ new BullWorker(redisConnection, {
         repositoryFeeder,
         event as TokenNotFound
       );
+    },
+  ],
+  [ResponseSent.name]: [
+    (event: Event) => {
+      qualityMonitor.onResponseSent.call(qualityMonitor, event as ResponseSent);
     },
   ],
 });

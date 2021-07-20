@@ -23,7 +23,11 @@ export class QualityMonitor {
     } catch (error) {
       if (error instanceof AssertionError) {
         this.logger.log('warn', 'Response discrepancy with legacy', {
-          message: error.message,
+          message: error.message.replace(
+            // eslint-disable-next-line no-control-regex
+            /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+            ''
+          ),
         });
       }
     }
