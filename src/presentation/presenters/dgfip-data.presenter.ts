@@ -1,60 +1,51 @@
 import {format} from 'date-fns';
-import {defaults, pick, update} from 'lodash';
+import {get, has, identity, set} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 
 const formatDate = (date?: Date) => {
   if (!date) {
-    return;
+    return '';
   }
   return format(date, 'dd/MM/yyyy');
 };
+const formatUndefined = (value?: unknown) => (value === undefined ? '' : value);
+const formatNull = (value?: unknown) => (value === undefined ? null : value);
 
 export class DgfipDataPresenter {
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
-    const mask = {
-      declarant1: {
-        nom: '',
-        nomNaissance: '',
-        prenoms: '',
-        dateNaissance: '',
-      },
-      declarant2: {
-        nom: '',
-        nomNaissance: '',
-        prenoms: '',
-        dateNaissance: '',
-      },
-      foyerFiscal: {
-        adresse: '',
-      },
-      dateRecouvrement: '',
-      dateEtablissement: '',
-      nombreParts: '',
-      situationFamille: '',
-      nombrePersonnesCharge: 0,
-      revenuBrutGlobal: withNulls ? null : undefined,
-      revenuImposable: withNulls ? null : undefined,
-      impotRevenuNetAvantCorrections: withNulls ? null : undefined,
-      montantImpot: withNulls ? null : undefined,
-      revenuFiscalReference: withNulls ? null : undefined,
+    const config = {
+      'declarant1.nom': formatUndefined,
+      'declarant1.nomNaissance': formatUndefined,
+      'declarant1.prenoms': formatUndefined,
+      'declarant1.dateNaissance': formatDate,
+      'declarant2.nom': formatUndefined,
+      'declarant2.nomNaissance': formatUndefined,
+      'declarant2.prenoms': formatUndefined,
+      'declarant2.dateNaissance': formatDate,
+      'foyerFiscal.adresse': formatUndefined,
+      'foyerFiscal.annee': identity,
+      dateRecouvrement: formatDate,
+      dateEtablissement: formatDate,
+      nombreParts: formatUndefined,
+      situationFamille: formatUndefined,
+      revenuBrutGlobal: withNulls ? formatNull : formatUndefined,
+      revenuImposable: withNulls ? formatNull : formatUndefined,
+      impotRevenuNetAvantCorrections: withNulls ? formatNull : formatUndefined,
+      montantImpot: withNulls ? formatNull : formatUndefined,
+      revenuFiscalReference: withNulls ? formatNull : formatUndefined,
+      nombrePersonnesCharge: identity,
+      anneeImports: identity,
+      anneeRevenus: identity,
+      erreurCorrectif: identity,
+      siturationPartielle: identity,
     };
 
-    return update(
-      update(
-        update(
-          update(
-            defaults(input, pick(mask, Object.keys(input))),
-            'dateRecouvrement',
-            formatDate
-          ),
-          'dateEtablissement',
-          formatDate
-        ),
-        'declarant1.dateNaissance',
-        formatDate
-      ),
-      'declarant2.dateNaissance',
-      formatDate
-    );
+    const presentKeys = Object.keys(config).filter(key => has(input, key));
+
+    return presentKeys.reduce((result, key) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      return set(result, key, config[key](get(input, key)));
+    }, {}) as Record<string, unknown>;
   }
 }
