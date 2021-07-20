@@ -27,7 +27,8 @@ export const fetchDgfipDataControllerBuidler =
         req.path
       );
 
-      return res.json(dgfipDataPresenter.presentData(data, withNulls));
+      res.json(dgfipDataPresenter.presentData(data, withNulls));
+      return next();
     } catch (error) {
       return next(error);
     }
