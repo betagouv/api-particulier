@@ -31,8 +31,6 @@ export class DgfipDataPresenter {
       impotRevenuNetAvantCorrections: withNulls ? null : undefined,
       montantImpot: withNulls ? null : undefined,
       revenuFiscalReference: withNulls ? null : undefined,
-      erreurCorrectif: '',
-      situationPartielle: '',
     };
 
     return defaults(input, pick(mask, Object.keys(input)));

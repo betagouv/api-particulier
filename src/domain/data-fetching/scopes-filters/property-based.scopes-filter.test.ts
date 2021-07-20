@@ -13,7 +13,7 @@ describe('The generic property-based scopes filter', () => {
       year: 1991,
     },
   };
-  const scopesConfiguration: ScopesConfiguration<TestScope, typeof payload> = {
+  const scopesConfiguration: ScopesConfiguration<TestScope> = {
     yolo: ['name'],
     croute: ['surname'],
     moustaki: ['birthdate.day'],

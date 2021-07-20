@@ -13,24 +13,20 @@ describe('The DGFIP data presenter', () => {
       anneeImpots: 2020,
       anneeRevenus: 2021,
       nombreParts: 2,
-      erreurCorrectif: undefined,
     };
 
     const output = dgfipDataPresenter.presentData(input, false);
 
-    expect(output.erreurCorrectif).toEqual('');
     expect(output.montantImpot).toBeUndefined();
   });
 
   it('sets null values when needed', () => {
     const input: Partial<DgfipOutput> = {
-      erreurCorrectif: undefined,
       montantImpot: undefined,
     };
 
     const output = dgfipDataPresenter.presentData(input, true);
 
-    expect(output.erreurCorrectif).toEqual('');
     expect(output.montantImpot).toBeNull();
   });
 });
