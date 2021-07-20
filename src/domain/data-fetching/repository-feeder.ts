@@ -17,7 +17,7 @@ export class RepositoryFeeder {
         event.tokenValue
       );
       this.logger.log(
-        'info',
+        'warn',
         `Token "${token.value}" was found through fallback`
       );
       this.mainRepository.save(token);

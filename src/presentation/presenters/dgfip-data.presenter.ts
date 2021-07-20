@@ -1,7 +1,5 @@
 import {defaults, pick} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
-import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
-import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 
 export class DgfipDataPresenter {
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
