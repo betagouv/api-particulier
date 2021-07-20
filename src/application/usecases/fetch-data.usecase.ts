@@ -19,8 +19,15 @@ export class FetchDataUsecase {
     input: DgfipInput,
     route: string
   ) {
-    const token = await this.tokenRepository.findByTokenValue(tokenValue);
-    return this.dataProviderClient.consumeDgfip(input, token, route);
+    try {
+      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      return this.dataProviderClient.consumeDgfip(input, token, route);
+    } catch (error) {
+      if (error instanceof TokenNotFoundError) {
+        this.eventBus.publish(new TokenNotFound('', new Date(), tokenValue));
+      }
+      throw error;
+    }
   }
 
   async fetchCnafData(tokenValue: TokenValue, input: CnafInput, route: string) {
