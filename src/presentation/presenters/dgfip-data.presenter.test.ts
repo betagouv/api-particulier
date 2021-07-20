@@ -29,4 +29,15 @@ describe('The DGFIP data presenter', () => {
 
     expect(output.montantImpot).toBeNull();
   });
+
+  it('formats dates', () => {
+    const input: Partial<DgfipOutput> = {
+      dateEtablissement: new Date('2020-01-31'),
+    };
+
+    const output = dgfipDataPresenter.presentData(input, true);
+
+    expect(output.dateEtablissement).toEqual('31/01/2020');
+    expect(output.dateRecouvrement).toBeUndefined();
+  });
 });

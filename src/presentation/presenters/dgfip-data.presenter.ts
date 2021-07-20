@@ -1,5 +1,13 @@
-import {defaults, pick} from 'lodash';
+import {format} from 'date-fns';
+import {defaults, pick, update} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
+
+const formatDate = (date?: Date) => {
+  if (!date) {
+    return;
+  }
+  return format(date, 'dd/MM/yyyy');
+};
 
 export class DgfipDataPresenter {
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
@@ -31,6 +39,22 @@ export class DgfipDataPresenter {
       revenuFiscalReference: withNulls ? null : undefined,
     };
 
-    return defaults(input, pick(mask, Object.keys(input)));
+    return update(
+      update(
+        update(
+          update(
+            defaults(input, pick(mask, Object.keys(input))),
+            'dateRecouvrement',
+            formatDate
+          ),
+          'dateEtablissement',
+          formatDate
+        ),
+        'declarant1.dateNaissance',
+        formatDate
+      ),
+      'declarant2.dateNaissance',
+      formatDate
+    );
   }
 }
