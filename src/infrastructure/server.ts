@@ -9,14 +9,14 @@ const app = express();
 const logger = logFor('Server');
 
 app.get(
-  '/impots/svair',
+  '/api/impots/svair',
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
   manageErrorMiddleware
 );
 app.get(
-  '/v2/avis-imposition',
+  '/api/v2/avis-imposition',
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
