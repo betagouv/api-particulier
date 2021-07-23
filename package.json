@@ -11,7 +11,6 @@
     "fix": "gts fix",
     "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts",
     "build": "npm run type-check && npm run compile",
-    "heroku-prebuild": "npm run migrate up",
     "start:dev": "ts-node-dev -r tsconfig-paths/register src/infrastructure/server.ts",
     "start": "node build/infrastructure/server.js",
     "start:worker:dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/infrastructure/worker.ts",
