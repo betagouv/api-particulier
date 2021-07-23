@@ -44,15 +44,13 @@ export class BullWorker {
     worker.on('completed', job => {
       this.logger.log(
         'debug',
-        `Job "${job.name}" on queue "${job.queueName}" completed`,
-        {job: job.toJSON()}
+        `Job "${job.name}" on queue "${job.queueName}" completed`
       );
     });
     worker.on('failed', job => {
       this.logger.log(
         'error',
-        `Job "${job.name}" on queue "${job.queueName}" failed`,
-        {job: job.toJSON()}
+        `Job "${job.name}" on queue "${job.queueName}" failed`
       );
     });
     worker.on('error', error => {

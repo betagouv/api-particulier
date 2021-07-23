@@ -25,9 +25,7 @@ export class BullEventBus implements EventBus {
   }
 
   publish(event: Event): void {
-    this.logger.log('debug', `Publishing ${event.constructor.name} event`, {
-      event,
-    });
+    this.logger.log('debug', `Publishing ${event.constructor.name} event`);
     switch (event.constructor) {
       case TokenNotFound:
       case TokenConsumed:

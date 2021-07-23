@@ -27,8 +27,6 @@ export class PropertyBasedScopesFilter<
 
     this.logger.log('debug', 'Filtered response', {
       scopes,
-      unfilteredResponse: response,
-      filteredResponse,
     });
 
     return filteredResponse;
