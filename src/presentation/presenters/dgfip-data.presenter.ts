@@ -8,8 +8,11 @@ const formatDate = (date?: Date) => {
   }
   return format(date, 'dd/MM/yyyy');
 };
+
 const formatUndefined = (value?: unknown) => (value === undefined ? '' : value);
 const formatNull = (value?: unknown) => (value === undefined ? null : value);
+const formatYears = (value?: number) =>
+  value === undefined ? '' : value.toString();
 
 export class DgfipDataPresenter {
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
@@ -34,8 +37,8 @@ export class DgfipDataPresenter {
       montantImpot: withNulls ? formatNull : formatUndefined,
       revenuFiscalReference: withNulls ? formatNull : formatUndefined,
       nombrePersonnesCharge: identity,
-      anneeImports: identity,
-      anneeRevenus: identity,
+      anneeImpots: formatYears,
+      anneeRevenus: formatYears,
       erreurCorrectif: identity,
       siturationPartielle: identity,
     };

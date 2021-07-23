@@ -69,10 +69,10 @@ describe('Parse ', () => {
       expect(result).toEqual({
         anneeImpots: 2015,
         anneeRevenus: 2014,
-        dateEtablissement: new Date(2015, 6, 7),
-        dateRecouvrement: new Date(2015, 6, 30),
+        dateEtablissement: new Date(2015, 6, 8),
+        dateRecouvrement: new Date(2015, 6, 31),
         declarant1: {
-          dateNaissance: new Date(1984, 2, 28),
+          dateNaissance: new Date(1984, 2, 29),
           nom: 'MARTIN',
           nomNaissance: 'MARTIN',
           prenoms: 'Jean',
@@ -104,16 +104,16 @@ describe('Parse ', () => {
       expect(result).toEqual({
         anneeImpots: 2014,
         anneeRevenus: 2013,
-        dateEtablissement: new Date(2014, 6, 29),
-        dateRecouvrement: new Date(2014, 6, 30),
+        dateEtablissement: new Date(2014, 6, 30),
+        dateRecouvrement: new Date(2014, 6, 31),
         declarant1: {
-          dateNaissance: new Date(1959, 11, 30),
+          dateNaissance: new Date(1959, 11, 31),
           nom: 'HONORE',
           nomNaissance: 'HONORE',
           prenoms: 'Jean',
         },
         declarant2: {
-          dateNaissance: new Date(1968, 5, 10),
+          dateNaissance: new Date(1968, 5, 11),
           nom: 'MARTIN',
           nomNaissance: 'MARTIN',
           prenoms: 'Laurence',
@@ -145,10 +145,10 @@ describe('Parse ', () => {
       expect(result).toEqual({
         anneeImpots: 2018,
         anneeRevenus: 2017,
-        dateEtablissement: new Date(2015, 6, 7),
-        dateRecouvrement: new Date(2015, 6, 30),
+        dateEtablissement: new Date(2015, 6, 8),
+        dateRecouvrement: new Date(2015, 6, 31),
         declarant1: {
-          dateNaissance: new Date(1984, 2, 28),
+          dateNaissance: new Date(1984, 2, 29),
           nom: 'MARTIN',
           nomNaissance: 'MARTIN',
           prenoms: 'Jean',
@@ -184,10 +184,10 @@ describe('Parse ', () => {
       expect(result).toEqual({
         anneeImpots: 2018,
         anneeRevenus: 2017,
-        dateEtablissement: new Date(2015, 6, 7),
-        dateRecouvrement: new Date(2015, 6, 30),
+        dateEtablissement: new Date(2015, 6, 8),
+        dateRecouvrement: new Date(2015, 6, 31),
         declarant1: {
-          dateNaissance: new Date(1984, 2, 28),
+          dateNaissance: new Date(1984, 2, 29),
           nom: 'MARTIN',
           nomNaissance: 'MARTIN',
           prenoms: 'Jean',

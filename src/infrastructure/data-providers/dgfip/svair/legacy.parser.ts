@@ -22,7 +22,7 @@ function isNumeric(n) {
 
 function parseDate(str) {
   const [date, month, year] = str.trim().split('/');
-  return new Date(year, month - 1, date - 1, 0, 0);
+  return new Date(year, month - 1, date, 0, 0);
 }
 
 export const euro = parseEuro;
