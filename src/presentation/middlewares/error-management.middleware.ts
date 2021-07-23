@@ -16,6 +16,7 @@ export const manageErrorMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
+  logger.log('error', `Erreur capturée: ${error.constructor.name}`, {error: error, stack: error.stack});
   if (error instanceof InvalidCredentialsError) {
     res.status(404).json({
       error: 'not_found',
@@ -65,6 +66,5 @@ export const manageErrorMiddleware = (
     reason: 'Internal server error',
     message: "Une erreur interne s'est produite, l'équipe a été prévenue.",
   });
-  logger.log('error', 'Erreur interne', {error: error, stack: error.stack});
   return next();
 };
