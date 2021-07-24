@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+const _ = require('lodash');
 import {pick} from 'lodash';
 import {logFor} from 'src/domain/logger';
 import {DataProviderResponse} from '../data-providers/dto';

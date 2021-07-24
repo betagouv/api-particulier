@@ -1,5 +1,5 @@
 import {CnafOutput} from '../../../../domain/data-fetching/data-providers/cnaf/dto';
-import * as _ from 'lodash';
+const _ = require('lodash');
 import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
 import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/cnaf/errors/invalid-format.error';
