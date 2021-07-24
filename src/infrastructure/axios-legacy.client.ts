@@ -1,13 +1,17 @@
 import axios from 'axios';
+import {logFor} from 'src/domain/logger';
 import {LegacyApiClient} from 'src/domain/quality-monitoring/legacy-api.client';
 
 export class AxiosLegacyApiClient implements LegacyApiClient {
+  private readonly logger = logFor(AxiosLegacyApiClient.name);
+
   async callLegacy(
     route: string,
     params: object,
     headers: object
   ): Promise<{statusCode: number; body: object}> {
     try {
+      this.logger.log('debug', 'Calling legacy API', {route, params, headers});
       const response = await axios.get(
         `https://particulier.api.gouv.fr/no-mirror${route}`,
         {
