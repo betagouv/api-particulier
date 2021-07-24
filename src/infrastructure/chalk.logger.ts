@@ -11,12 +11,26 @@ const levelColor = {
   error: chalk.redBright.bold,
 };
 
+const levelPriorities = {
+  silly: 0,
+  debug: 1,
+  verbose: 2,
+  info: 3,
+  warn: 4,
+  error: 5,
+};
+
+const logLevel = parseInt(process.env.LOG_LEVEL || '3');
+
 export class ChalkLogger implements Logger {
   log(
     level: Level,
     message: string,
     meta: {[key: string]: unknown} = {}
   ): void {
+    if (levelPriorities[level] < logLevel) {
+      return;
+    }
     const {service, ...rest} = meta;
     const logDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss.SSSxxx');
     console.log(
