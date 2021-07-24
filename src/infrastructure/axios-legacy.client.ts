@@ -9,7 +9,7 @@ export class AxiosLegacyApiClient implements LegacyApiClient {
   ): Promise<{statusCode: number; body: object}> {
     try {
       const response = await axios.get(
-        `https://particulier.api.gouv.fr/api${route}`,
+        `https://particulier.api.gouv.fr${route}`,
         {
           params,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
