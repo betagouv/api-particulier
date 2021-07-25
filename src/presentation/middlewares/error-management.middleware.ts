@@ -6,6 +6,7 @@ import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/app
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {logFor} from 'src/domain/logger';
+import {ZodError} from 'zod';
 
 const logger = logFor('ManageErrorMiddleware');
 
@@ -16,7 +17,19 @@ export const manageErrorMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
-  logger.log('error', `Erreur capturée: ${error.constructor.name}`, {error: error, stack: error.stack});
+  logger.log('error', `Erreur capturée: ${error.constructor.name}`, {
+    error: error,
+    stack: error.stack,
+  });
+  if (error instanceof ZodError) {
+    res.status(400).json({
+      error: 'bad_request',
+      reason:
+        'Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.',
+      message:
+        'Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.',
+    });
+  }
   if (error instanceof InvalidCredentialsError) {
     res.status(404).json({
       error: 'not_found',
