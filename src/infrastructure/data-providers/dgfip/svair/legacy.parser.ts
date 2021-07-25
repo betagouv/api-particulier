@@ -21,6 +21,9 @@ function isNumeric(n) {
 }
 
 function parseDate(str) {
+  if (str.trim() === '-') {
+    return '-';
+  }
   const [date, month, year] = str.trim().split('/');
   return new Date(year, month - 1, date, 0, 0);
 }

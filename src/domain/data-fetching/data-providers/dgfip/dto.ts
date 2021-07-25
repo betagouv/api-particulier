@@ -13,7 +13,7 @@ type Declarant = {
 export type DgfipOutput = {
   declarant1: Declarant;
   declarant2: Declarant;
-  dateRecouvrement?: Date;
+  dateRecouvrement?: Date | '-';
   dateEtablissement?: Date;
   nombreParts?: number;
   situationFamille?: string;

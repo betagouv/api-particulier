@@ -13,6 +13,12 @@ const formatUndefined = (value?: unknown) => (value === undefined ? '' : value);
 const formatNull = (value?: unknown) => (value === undefined ? null : value);
 const formatYears = (value?: number) =>
   value === undefined ? '' : value.toString();
+const formatDateOrMissing = (date?: Date | '-') => {
+  if (date === '-') {
+    return '-';
+  }
+  return formatDate(date);
+};
 
 export class DgfipDataPresenter {
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
@@ -27,7 +33,7 @@ export class DgfipDataPresenter {
       'declarant2.dateNaissance': formatDate,
       'foyerFiscal.adresse': formatUndefined,
       'foyerFiscal.annee': identity,
-      dateRecouvrement: formatDate,
+      dateRecouvrement: formatDateOrMissing,
       dateEtablissement: formatDate,
       nombreParts: formatUndefined,
       situationFamille: formatUndefined,
