@@ -30,6 +30,11 @@ export class QualityMonitor {
           ),
           legacyReponse: error.expected,
           newResponse: error.actual,
+          route: event.route,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          apiKey: event.headers['x-api-key'],
+          params: event.params,
         });
       }
     }
