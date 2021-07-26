@@ -10,6 +10,13 @@ import {ZodError} from 'zod';
 
 const logger = logFor('ManageErrorMiddleware');
 
+const logError = (error: Error) => {
+  logger.log('error', `Erreur capturée: ${error.constructor.name}`, {
+    error: error,
+    stack: error.stack,
+  });
+};
+
 export const manageErrorMiddleware = (
   error: Error,
   req: Request,
@@ -17,10 +24,6 @@ export const manageErrorMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
-  logger.log('error', `Erreur capturée: ${error.constructor.name}`, {
-    error: error,
-    stack: error.stack,
-  });
   if (error instanceof ZodError) {
     res.status(400).json({
       error: 'bad_request',
@@ -29,6 +32,7 @@ export const manageErrorMiddleware = (
       message:
         'Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.',
     });
+    return next();
   }
   if (error instanceof InvalidCredentialsError) {
     res.status(404).json({
@@ -46,6 +50,7 @@ export const manageErrorMiddleware = (
       reason: error.message,
       message: 'La réponse du fournisseur de donnée est inexploitable',
     });
+    logError(error);
     return next();
   }
   if (error instanceof NetworkError) {
@@ -55,6 +60,7 @@ export const manageErrorMiddleware = (
       message:
         "Une erreur est survenue lors de l'appel du fournisseur de donnée",
     });
+    logError(error);
     return next();
   }
   if (error instanceof TokenNotFoundError) {
@@ -79,5 +85,6 @@ export const manageErrorMiddleware = (
     reason: 'Internal server error',
     message: "Une erreur interne s'est produite, l'équipe a été prévenue.",
   });
+  logError(error);
   return next();
 };
