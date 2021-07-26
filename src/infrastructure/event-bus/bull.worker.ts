@@ -28,7 +28,8 @@ export class BullWorker {
       if (eventHandlers[job.name]) {
         const transaction = Sentry.startTransaction({
           name: job.name,
-          data: job,
+          op: job.id,
+          data: job.toJSON(),
         });
         try {
           return await Promise.all(
@@ -66,7 +67,8 @@ export class BullWorker {
     worker.on('failed', job => {
       this.logger.log(
         'error',
-        `Job "${job.name}" on queue "${job.queueName}" failed`
+        `Job "${job.name}" on queue "${job.queueName}" failed`,
+        {job}
       );
     });
     worker.on('error', error => {

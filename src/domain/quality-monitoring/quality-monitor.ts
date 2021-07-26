@@ -1,3 +1,4 @@
+import {captureException} from '@sentry/node';
 import {AssertionError, deepStrictEqual} from 'assert';
 import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
 import {logFor} from 'src/domain/logger';
@@ -37,6 +38,7 @@ export class QualityMonitor {
           params: event.params,
         });
       }
+      captureException(error);
     }
   }
 }
