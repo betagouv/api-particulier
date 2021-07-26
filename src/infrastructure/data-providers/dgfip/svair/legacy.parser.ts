@@ -20,9 +20,12 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function parseDate(str) {
+function parseDateOrString(str) {
   if (str.trim() === '-') {
     return '-';
+  }
+  if (str.indexOf('/') === -1) {
+    return str.trim();
   }
   const [date, month, year] = str.trim().split('/');
   return new Date(year, month - 1, date, 0, 0);
@@ -48,7 +51,7 @@ export const result = function parseResult(html) {
     prenoms: 'Prénom(s)',
     dateNaissance: {
       src: 'Date de naissance',
-      fn: parseDate,
+      fn: parseDateOrString,
     },
   };
 
@@ -69,9 +72,9 @@ export const result = function parseResult(html) {
   const mapping = {
     dateRecouvrement: {
       src: "Date de mise en recouvrement de l'avis d'impôt",
-      fn: parseDate,
+      fn: parseDateOrString,
     },
-    dateEtablissement: {src: "Date d'établissement", fn: parseDate},
+    dateEtablissement: {src: "Date d'établissement", fn: parseDateOrString},
     nombreParts: {src: 'Nombre de part(s)', fn: parseFloat},
     situationFamille: 'Situation de famille',
     nombrePersonnesCharge: {

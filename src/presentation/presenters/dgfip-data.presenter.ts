@@ -13,9 +13,9 @@ const formatUndefined = (value?: unknown) => (value === undefined ? '' : value);
 const formatNull = (value?: unknown) => (value === undefined ? null : value);
 const formatYears = (value?: number) =>
   value === undefined ? '' : value.toString();
-const formatDateOrMissing = (date?: Date | '-') => {
-  if (date === '-') {
-    return '-';
+const formatDateOrString = (date?: Date | string) => {
+  if (typeof date === 'string') {
+    return date;
   }
   return formatDate(date);
 };
@@ -26,14 +26,14 @@ export class DgfipDataPresenter {
       'declarant1.nom': formatUndefined,
       'declarant1.nomNaissance': formatUndefined,
       'declarant1.prenoms': formatUndefined,
-      'declarant1.dateNaissance': formatDate,
+      'declarant1.dateNaissance': formatDateOrString,
       'declarant2.nom': formatUndefined,
       'declarant2.nomNaissance': formatUndefined,
       'declarant2.prenoms': formatUndefined,
-      'declarant2.dateNaissance': formatDate,
+      'declarant2.dateNaissance': formatDateOrString,
       'foyerFiscal.adresse': formatUndefined,
       'foyerFiscal.annee': identity,
-      dateRecouvrement: formatDateOrMissing,
+      dateRecouvrement: formatDateOrString,
       dateEtablissement: formatDate,
       nombreParts: formatUndefined,
       situationFamille: formatUndefined,
