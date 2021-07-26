@@ -11,7 +11,7 @@
     "fix": "gts fix",
     "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts",
     "build": "npm run type-check && npm run compile",
-    "start:dev": "ts-node-dev -r tsconfig-paths/register src/infrastructure/server.ts",
+    "start:dev": "ts-node-dev -r dotenv/config -r tsconfig-paths/register src/infrastructure/server.ts",
     "start": "node build/infrastructure/server.js",
     "start:worker:dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/infrastructure/worker.ts",
     "start:worker": "node -r dotenv/config build/infrastructure/worker.js",
