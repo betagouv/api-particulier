@@ -23,6 +23,7 @@ Sentry.init({
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
   ignoreErrors: ['Unable to find token'],
+  environment: process.env.ENV,
 });
 
 app.use(Sentry.Handlers.requestHandler());
@@ -46,5 +47,5 @@ app.get(
 );
 
 app.listen(process.env.PORT || 3000, () => {
-  logger.log('info', 'App listening on port 3000');
+  logger.log('info', `App listening on port ${process.env.PORT || 3000}`);
 });
