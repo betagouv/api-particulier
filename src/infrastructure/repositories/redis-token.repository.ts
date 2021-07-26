@@ -1,3 +1,4 @@
+import {setUser} from '@sentry/node';
 import * as Redis from 'ioredis';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
@@ -23,6 +24,7 @@ export class RedisTokenRepository implements TokenRepository {
     const token = JSON.parse(stringifiedToken);
     this.logger.log('debug', `Found token for value "${tokenValue}"`, {token});
 
+    setUser({id: token.applicationId});
     return token;
   }
 

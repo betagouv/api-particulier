@@ -1,3 +1,4 @@
+import {configureScope} from '@sentry/node';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
@@ -51,6 +52,9 @@ new BullWorker(redisConnection, {
   ],
   [ResponseSent.name]: [
     (event: Event) => {
+      configureScope(scope => {
+        scope.setUser({id: (event as ResponseSent).aggregateId});
+      });
       return qualityMonitor.onResponseSent.call(
         qualityMonitor,
         event as ResponseSent
