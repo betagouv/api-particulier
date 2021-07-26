@@ -22,6 +22,7 @@ Sentry.init({
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
+  ignoreErrors: ['Unable to find token'],
 });
 
 app.use(Sentry.Handlers.requestHandler());
