@@ -1,5 +1,6 @@
 import {InvalidCredentialsError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error';
 import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-format.error';
+import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/errors/rate-limited.error';
 
 const fs = require('fs');
 const parse = require('./legacy.parser');
@@ -33,6 +34,10 @@ describe('Parse ', () => {
   );
   const invalidFormat = fs.readFileSync(
     __dirname + '/__tests__/resources/invalid-format.txt',
+    'utf-8'
+  );
+  const forbiddenFormat = fs.readFileSync(
+    __dirname + '/__tests__/resources/forbidden.txt',
     'utf-8'
   );
 
@@ -224,6 +229,12 @@ describe('Parse ', () => {
     it('returns domain error when data format is invalid', async () => {
       await expect(parseResult(invalidFormat, 2018)).rejects.toBeInstanceOf(
         InvalidFormatError
+      );
+    });
+
+    it('returns domain error when error rate limit is reached', async () => {
+      await expect(parseResult(forbiddenFormat, 2018)).rejects.toBeInstanceOf(
+        RateLimitedError
       );
     });
   });

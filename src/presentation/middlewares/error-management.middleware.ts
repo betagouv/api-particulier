@@ -2,6 +2,7 @@ import {Request, Response, NextFunction} from 'express';
 import {snakeCase} from 'lodash';
 import {InvalidCredentialsError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error';
 import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-format.error';
+import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/errors/rate-limited.error';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
@@ -24,6 +25,15 @@ export const manageErrorMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
+  if (error instanceof RateLimitedError) {
+    res.status(509).json({
+      error: 'rate_limited',
+      reason: error.message,
+      message:
+        "Le fournisseur de donnée a rejeté la demande en raison d'un trop grand nombre d'échecs antérieurs.",
+    });
+    return next();
+  }
   if (error instanceof ZodError) {
     res.status(400).json({
       error: 'bad_request',

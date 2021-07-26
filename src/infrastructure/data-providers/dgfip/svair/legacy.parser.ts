@@ -1,5 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+const {
+  RateLimitedError,
+} = require('../../../../domain/data-fetching/data-providers/dgfip/errors/rate-limited.error');
 const _ = require('lodash');
 const xpath = require('xpath');
 const select = xpath.useNamespaces({h: 'http://www.w3.org/1999/xhtml'});
@@ -34,6 +37,9 @@ function parseDateOrString(str) {
 export const euro = parseEuro;
 
 export const result = function parseResult(html) {
+  if (html.indexOf('class="interdit"') !== -1) {
+    return Promise.reject(new RateLimitedError());
+  }
   const doc = new dom({
     errorHandler: {
       warning: () => {},
