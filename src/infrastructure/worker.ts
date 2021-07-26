@@ -15,13 +15,13 @@ import {
 new BullWorker(redisConnection, {
   [ApplicationCreated.name]: [
     (event: Event) => {
-      redisTokenProjector.onApplicationCreated.call(
+      return redisTokenProjector.onApplicationCreated.call(
         redisTokenProjector,
         event as ApplicationCreated
       );
     },
     (event: Event) => {
-      postgresTokenProjector.onApplicationCreated.call(
+      return postgresTokenProjector.onApplicationCreated.call(
         postgresTokenProjector,
         event as ApplicationCreated
       );
@@ -29,13 +29,13 @@ new BullWorker(redisConnection, {
   ],
   [ApplicationImported.name]: [
     (event: Event) => {
-      redisTokenProjector.onApplicationImported.call(
+      return redisTokenProjector.onApplicationImported.call(
         redisTokenProjector,
         event as ApplicationImported
       );
     },
     (event: Event) => {
-      postgresTokenProjector.onApplicationImported.call(
+      return postgresTokenProjector.onApplicationImported.call(
         postgresTokenProjector,
         event as ApplicationImported
       );
@@ -43,7 +43,7 @@ new BullWorker(redisConnection, {
   ],
   [TokenNotFound.name]: [
     (event: Event) => {
-      repositoryFeeder.onTokenNotFound.call(
+      return repositoryFeeder.onTokenNotFound.call(
         repositoryFeeder,
         event as TokenNotFound
       );
@@ -51,7 +51,10 @@ new BullWorker(redisConnection, {
   ],
   [ResponseSent.name]: [
     (event: Event) => {
-      qualityMonitor.onResponseSent.call(qualityMonitor, event as ResponseSent);
+      return qualityMonitor.onResponseSent.call(
+        qualityMonitor,
+        event as ResponseSent
+      );
     },
   ],
 });

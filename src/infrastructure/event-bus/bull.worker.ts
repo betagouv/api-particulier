@@ -6,6 +6,12 @@ import {
   applicationEventQueueName,
   tokenEventQueueName,
 } from 'src/infrastructure/event-bus/bull.event-bus';
+import * as Sentry from '@sentry/node';
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  tracesSampleRate: 1.0,
+});
 
 export class BullWorker {
   private readonly applicationEventWorker: Worker;
@@ -20,9 +26,19 @@ export class BullWorker {
   ) {
     const jobHandler = async (job: Job) => {
       if (eventHandlers[job.name]) {
-        return await Promise.all(
-          eventHandlers[job.name].map(handler => handler(job.data))
-        );
+        const transaction = Sentry.startTransaction({
+          name: job.name,
+          data: job,
+        });
+        try {
+          return await Promise.all(
+            eventHandlers[job.name].map(handler => handler(job.data))
+          );
+        } catch (error) {
+          Sentry.captureException(error);
+        } finally {
+          transaction.finish();
+        }
       }
       return;
     };
@@ -54,6 +70,7 @@ export class BullWorker {
       );
     });
     worker.on('error', error => {
+      Sentry.captureException(error);
       this.logger.log('error', `Worker failed on queue ${worker.name}`, {
         error,
       });

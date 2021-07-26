@@ -18,6 +18,8 @@
     "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts"
   },
   "dependencies": {
+    "@sentry/node": "^6.10.0",
+    "@sentry/tracing": "^6.10.0",
     "axios": "^0.21.1",
     "bullmq": "^1.38.1",
     "chalk": "^4.1.1",
