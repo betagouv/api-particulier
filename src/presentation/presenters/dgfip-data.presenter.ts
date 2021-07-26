@@ -46,7 +46,7 @@ export class DgfipDataPresenter {
       anneeImpots: formatYears,
       anneeRevenus: formatYears,
       erreurCorrectif: identity,
-      siturationPartielle: identity,
+      situationPartielle: identity,
     };
 
     const presentKeys = Object.keys(config).filter(key => has(input, key));
