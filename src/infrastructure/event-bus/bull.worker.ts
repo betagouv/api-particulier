@@ -12,6 +12,7 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,
   environment: process.env.ENV,
+  maxValueLength: 2000,
 });
 
 export class BullWorker {

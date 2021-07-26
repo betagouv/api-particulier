@@ -24,6 +24,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
   ignoreErrors: ['Unable to find token'],
   environment: process.env.ENV,
+  maxValueLength: 2000,
 });
 
 app.use(Sentry.Handlers.requestHandler());
