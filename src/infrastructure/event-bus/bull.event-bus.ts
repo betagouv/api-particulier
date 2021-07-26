@@ -1,3 +1,4 @@
+import {getCurrentHub} from '@sentry/node';
 import {Queue} from 'bullmq';
 import * as IORedis from 'ioredis';
 import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
@@ -30,10 +31,16 @@ export class BullEventBus implements EventBus {
       case TokenNotFound:
       case TokenConsumed:
       case ResponseSent:
-        this.tokenEventQueue.add(event.constructor.name, event);
+        this.tokenEventQueue.add(event.constructor.name, {
+          ...event,
+          traceId: getCurrentHub().getScope()?.getTransaction()?.traceId,
+        });
         break;
       default:
-        this.applicationEventQueue.add(event.constructor.name, event);
+        this.applicationEventQueue.add(event.constructor.name, {
+          ...event,
+          traceId: getCurrentHub().getScope()?.getTransaction()?.traceId,
+        });
         break;
     }
   }

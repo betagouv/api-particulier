@@ -32,6 +32,7 @@ export class BullWorker {
           name: job.name,
           op: job.id,
           data: job.toJSON(),
+          traceId: job.data.traceId,
         });
         try {
           return await Promise.all(
