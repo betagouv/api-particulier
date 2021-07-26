@@ -30,9 +30,11 @@ export class BullWorker {
       if (eventHandlers[job.name]) {
         const transaction = Sentry.startTransaction({
           name: job.name,
-          spanId: job.id,
           data: job.toJSON(),
           traceId: job.data.traceId,
+        });
+        Sentry.configureScope(scope => {
+          scope.setSpan(transaction);
         });
         try {
           return await Promise.all(
