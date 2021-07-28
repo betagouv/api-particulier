@@ -25,7 +25,7 @@ export class CnafDataPresenter {
       enfants: formatPersons(input.enfants),
     };
 
-    this.logger.log('debug', 'Presented DGFIP data', {
+    this.logger.log('debug', 'Presented CNAF data', {
       input,
       result,
     });
