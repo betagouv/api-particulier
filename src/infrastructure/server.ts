@@ -1,7 +1,6 @@
 const express = require('express');
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
-import {NextFunction, Request, Response} from 'express';
 import {logFor} from 'src/domain/logger';
 import {fetchDgfipDataControllerBuidler} from 'src/presentation/controllers/fetch-data.controller';
 import {dfdipInputValidationMiddleware} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
