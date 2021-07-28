@@ -13,6 +13,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
   environment: process.env.ENV,
   maxValueLength: 2000,
+  enabled: process.env.SENTRY_ENABLED === 'true',
 });
 
 export class BullWorker {
