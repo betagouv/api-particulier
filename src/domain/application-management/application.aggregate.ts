@@ -11,12 +11,17 @@ import {Subscription} from 'src/domain/subscription';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {logFor} from 'src/domain/logger';
 
+export type Token = {
+  value: TokenValue;
+  createdOn: Date;
+};
+
 export class Application extends AggregateRoot {
   public id!: ApplicationId;
   public name!: string;
   public createdOn!: Date;
   public dataPassId!: string;
-  public tokenValue!: TokenValue;
+  public tokens!: Token[];
   public subscriptions!: Subscription[];
   public userEmails!: UserEmail[];
   private scopes!: AnyScope[];
@@ -94,7 +99,7 @@ export class Application extends AggregateRoot {
     this.scopes = event.scopes;
     this.subscriptions = event.subscriptions;
     this.userEmails = event.userEmails;
-    this.tokenValue = event.tokenValue;
+    this.tokens = [{createdOn: event.date, value: event.tokenValue}];
   }
 
   private applyApplicationImported(event: ApplicationImported) {
@@ -107,7 +112,7 @@ export class Application extends AggregateRoot {
     this.scopes = event.scopes;
     this.subscriptions = event.subscriptions;
     this.userEmails = event.userEmails;
-    this.tokenValue = event.tokenValue;
+    this.tokens = [{createdOn: event.date, value: event.tokenValue}];
   }
 
   private applyUserSubscribed(event: UserSubscribed) {

@@ -26,7 +26,7 @@ describe('An application', () => {
   );
 
   it('creates a token upon application creation', () => {
-    expect(application.tokenValue).toBeDefined();
+    expect(application.tokens).toHaveLength(1);
   });
 
   it('can subscribe new users', () => {
