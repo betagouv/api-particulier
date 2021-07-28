@@ -11,7 +11,7 @@ export const journalMiddleware = (
 ) => {
   const {token, startTime} = res.locals as {token: Token; startTime: number};
   if (!token) {
-    throw new Error('No token found in locals');
+    return next();
   }
   if (!startTime) {
     throw new Error('No startTime found in locals');
@@ -36,6 +36,9 @@ const getSubscriptionFromRoute = (route: string): Subscription => {
     case '/api/v2/avis-imposition':
     case '/api/impots/svair':
       return 'DGFIP';
+    case '/api/v2/composition-familiale':
+    case '/api/caf/famille':
+      return 'CNAF';
     default:
       throw new Error(`No subscription found for route ${route}`);
   }

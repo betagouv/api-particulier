@@ -25,6 +25,7 @@ import {QualityMonitor} from 'src/domain/quality-monitoring/quality-monitor';
 import {EntryRepository} from 'src/domain/journal/repositories/entry.repository';
 import {PostgresEntryRepository} from 'src/infrastructure/repositories/postgres-entry.repository';
 import {EntryProjector} from 'src/domain/journal/projectors/entry.projector';
+import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -100,6 +101,9 @@ localLogger.log('info', 'Repository feeder initialized');
 
 export const dgfipDataPresenter = new DgfipDataPresenter();
 localLogger.log('info', 'DGFIP data presenter initialized');
+
+export const cnafDataPresenter = new CnafDataPresenter();
+localLogger.log('info', 'CNAF data presenter initialized');
 
 export const legacyApiClient = new AxiosLegacyApiClient();
 localLogger.log('info', 'Legacy API client initialized');

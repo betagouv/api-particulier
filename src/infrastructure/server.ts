@@ -2,7 +2,11 @@ const express = require('express');
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import {logFor} from 'src/domain/logger';
-import {fetchDgfipDataControllerBuidler} from 'src/presentation/controllers/fetch-data.controller';
+import {
+  fetchCnafDataControllerBuidler,
+  fetchDgfipDataControllerBuidler,
+} from 'src/presentation/controllers/fetch-data.controller';
+import {cnafInputValidationMiddleware} from 'src/presentation/middlewares/cnaf-input-validation.middleware';
 import {dfdipInputValidationMiddleware} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
 import {discrepancyCheckerMiddleware} from 'src/presentation/middlewares/discrepancy-spotter.middleware';
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
@@ -48,6 +52,27 @@ app.get(
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
+  Sentry.Handlers.errorHandler(),
+  manageErrorMiddleware,
+  journalMiddleware
+);
+
+app.get(
+  '/api/caf/famille',
+  timingMiddleware,
+  discrepancyCheckerMiddleware,
+  cnafInputValidationMiddleware,
+  fetchCnafDataControllerBuidler(),
+  Sentry.Handlers.errorHandler(),
+  manageErrorMiddleware,
+  journalMiddleware
+);
+app.get(
+  '/api/v2/composition-familiale',
+  timingMiddleware,
+  discrepancyCheckerMiddleware,
+  cnafInputValidationMiddleware,
+  fetchCnafDataControllerBuidler(),
   Sentry.Handlers.errorHandler(),
   manageErrorMiddleware,
   journalMiddleware
