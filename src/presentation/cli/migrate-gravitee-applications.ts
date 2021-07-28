@@ -61,11 +61,10 @@ const getApplicationToImport = async (
     const filteredLegacyTokenHash = row.legacy_token_hash.filter(
       (hash: string) => hash !== null
     );
-    const filteredToken = row.token.filter((token: string) => token !== null);
-    const tokenValue =
-      filteredLegacyTokenHash.length > 0
-        ? filteredLegacyTokenHash[0]
-        : filteredToken[0];
+    const tokens = [row.token.filter((token: string) => token !== null)[0]];
+    if (filteredLegacyTokenHash.length > 0) {
+      tokens.push(filteredLegacyTokenHash[0]);
+    }
     return {
       applicationId: row.application_id,
       applicationName: row.application_name.replace(/ - [0-9]+$/, ''),
@@ -75,7 +74,7 @@ const getApplicationToImport = async (
       userEmails: Array.from(
         new Set(row.user_email.filter((email: string) => email !== null))
       ),
-      tokenValue,
+      tokens,
     };
   });
 };
@@ -120,7 +119,7 @@ const getApplicationToImport = async (
           applicationToImport.subscriptions as Subscription[],
           applicationToImport.scopes,
           applicationToImport.userEmails as UserEmail[],
-          applicationToImport.tokenValue
+          applicationToImport.tokens
         );
       });
     })

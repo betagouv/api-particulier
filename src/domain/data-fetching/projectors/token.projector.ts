@@ -15,16 +15,6 @@ export class TokenProjector {
   }
 
   async onApplicationCreated(event: ApplicationCreated): Promise<void> {
-    await this.createTokenFromEvent(event);
-  }
-
-  async onApplicationImported(event: ApplicationImported): Promise<void> {
-    await this.createTokenFromEvent(event);
-  }
-
-  private async createTokenFromEvent(
-    event: ApplicationCreated | ApplicationImported
-  ) {
     const newToken = new Token(
       event.aggregateId as ApplicationId,
       event.tokenValue,
@@ -34,5 +24,20 @@ export class TokenProjector {
 
     await this.tokenRepository.save(newToken);
     this.logger.log('debug', 'Projected token from event', {event});
+  }
+
+  async onApplicationImported(event: ApplicationImported): Promise<void> {
+    const tokens = event.tokens.map(
+      token =>
+        new Token(
+          event.aggregateId as ApplicationId,
+          token.value,
+          event.scopes,
+          event.subscriptions
+        )
+    );
+
+    await Promise.all(tokens.map(token => this.tokenRepository.save(token)));
+    this.logger.log('debug', 'Projected tokens from event', {event});
   }
 }

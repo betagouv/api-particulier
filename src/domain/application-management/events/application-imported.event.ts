@@ -1,8 +1,8 @@
 import {AnyScope} from 'src/domain/scopes';
-import {TokenValue} from 'src/domain/token-value';
 import {UserEmail} from 'src/domain/application-management/user';
 import {Subscription} from 'src/domain/subscription';
 import {Event} from 'src/domain/event';
+import {Token} from 'src/domain/application-management/application.aggregate';
 
 export class ApplicationImported implements Event {
   constructor(
@@ -13,6 +13,6 @@ export class ApplicationImported implements Event {
     readonly scopes: AnyScope[],
     readonly subscriptions: Subscription[],
     readonly userEmails: UserEmail[],
-    readonly tokenValue: TokenValue
+    readonly tokens: Token[]
   ) {}
 }

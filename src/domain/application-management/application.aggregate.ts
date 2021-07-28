@@ -64,7 +64,7 @@ export class Application extends AggregateRoot {
     subscriptions: Subscription[],
     scopes: AnyScope[],
     userEmails: UserEmail[],
-    tokenValue: TokenValue
+    tokenValues: TokenValue[]
   ): Application {
     const self = new this();
 
@@ -76,7 +76,10 @@ export class Application extends AggregateRoot {
       scopes,
       subscriptions,
       userEmails,
-      tokenValue
+      tokenValues.map(tokenValue => ({
+        createdOn: new Date(),
+        value: tokenValue,
+      }))
     );
     self.raiseAndApply(applicationImportedEvent);
 
@@ -112,7 +115,7 @@ export class Application extends AggregateRoot {
     this.scopes = event.scopes;
     this.subscriptions = event.subscriptions;
     this.userEmails = event.userEmails;
-    this.tokens = [{createdOn: event.date, value: event.tokenValue}];
+    this.tokens = event.tokens;
   }
 
   private applyUserSubscribed(event: UserSubscribed) {

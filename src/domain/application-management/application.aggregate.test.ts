@@ -46,7 +46,7 @@ describe('An application', () => {
       [],
       [],
       ['georges@moustaki.fr' as UserEmail],
-      'token' as TokenValue
+      ['token' as TokenValue]
     );
 
     expect(application.createdOn).toBeDefined();
