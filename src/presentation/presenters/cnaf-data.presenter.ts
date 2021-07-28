@@ -1,5 +1,6 @@
 import {format} from 'date-fns';
 import {CnafOutput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
+import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {logFor} from 'src/domain/logger';
 
 const formatDate = (date?: Date) => {
@@ -30,5 +31,24 @@ export class CnafDataPresenter {
       result,
     });
     return result;
+  }
+
+  presentError(error: CnafError) {
+    switch (error.errorCode) {
+      case 141:
+        return {
+          statusCode: 404,
+          error: 'not_found',
+          reason: 'Non droit. Le document ne peut être édité.',
+          message: 'Non droit. Le document ne peut être édité.',
+        };
+      default:
+        return {
+          statusCode: 404,
+          error: 'not_found',
+          reason: 'Non droit. Le document ne peut être édité.',
+          message: 'Non droit. Le document ne peut être édité.',
+        };
+    }
   }
 }

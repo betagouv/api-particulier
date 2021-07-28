@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import {snakeCase} from 'lodash';
+import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {InvalidCredentialsError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error';
 import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-format.error';
 import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/errors/rate-limited.error';
@@ -7,6 +8,7 @@ import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/app
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {logFor} from 'src/domain/logger';
+import {cnafDataPresenter} from 'src/infrastructure/service-container';
 import {ZodError} from 'zod';
 
 const logger = logFor('ManageErrorMiddleware');
@@ -51,6 +53,15 @@ export const manageErrorMiddleware = (
         'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis',
       message:
         'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis',
+    });
+    return next();
+  }
+  if (error instanceof CnafError) {
+    const presentedError = cnafDataPresenter.presentError(error);
+    res.status(presentedError.statusCode).json({
+      error: presentedError.error,
+      reason: presentedError.reason,
+      message: presentedError.message,
     });
     return next();
   }
