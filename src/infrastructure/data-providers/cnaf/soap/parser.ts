@@ -1,9 +1,9 @@
 import {CnafOutput} from '../../../../domain/data-fetching/data-providers/cnaf/dto';
-const _ = require('lodash');
 import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
 import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/cnaf/errors/invalid-format.error';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
+import {isArray, isUndefined, omitBy, unescape} from 'lodash';
 
 export class XMLParser {
   parse(xml: string): CnafOutput {
@@ -25,7 +25,7 @@ export class XMLParser {
       throw new CnafError(returnCode);
     }
 
-    const body = parse(_.unescape(rawBody), {
+    const body = parse(unescape(rawBody), {
       parseNodeValue: false,
     }).drtData;
 
@@ -39,11 +39,15 @@ export class XMLParser {
       pays: parseString(body.adresse.LIBLIG7ADR),
     };
 
-    const children = body.identeEnfants.UNENFANT.map(parsePerson);
-    const beneficiaries = body.identePersonnes.UNEPERSONNE.map(parsePerson);
+    const children = isArray(body.identeEnfants.UNENFANT)
+      ? body.identeEnfants.UNENFANT.map(parsePerson)
+      : [parsePerson(body.identeEnfants.UNENFANT)];
+    const beneficiaries = isArray(body.identePersonnes.UNEPERSONNE)
+      ? body.identePersonnes.UNEPERSONNE.map(parsePerson)
+      : [parsePerson(body.identePersonnes.UNEPERSONNE)];
 
     return {
-      adresse: _.omitBy(address, _.isUndefined),
+      adresse: omitBy(address, isUndefined),
       allocataires: beneficiaries,
       enfants: children,
       quotientFamilial: parseInt(body.quotients.QFMOIS.QUOTIENTF),
