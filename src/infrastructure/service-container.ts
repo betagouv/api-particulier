@@ -59,8 +59,7 @@ localLogger.log('info', 'DGFIP data provider initialized');
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
-  dgfipDataProvider,
-  eventBus
+  dgfipDataProvider
 );
 localLogger.log('info', 'Data provider client initialized');
 

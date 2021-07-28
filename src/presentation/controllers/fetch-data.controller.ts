@@ -7,6 +7,7 @@ import {
   fetchDataUsecase,
 } from 'src/infrastructure/service-container';
 import {TokenValue} from 'src/domain/token-value';
+import {Token} from 'src/domain/data-fetching/projections/token';
 
 export const fetchDgfipDataControllerBuidler =
   (withNulls: boolean) =>
@@ -24,7 +25,10 @@ export const fetchDgfipDataControllerBuidler =
       const data = await fetchDataUsecase.fetchDgfipData(
         tokenValue,
         input,
-        req.path
+        req.path,
+        (token: Token) => {
+          res.locals.token = token;
+        }
       );
 
       res.json(dgfipDataPresenter.presentData(data, withNulls));

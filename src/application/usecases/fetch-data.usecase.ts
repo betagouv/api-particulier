@@ -3,6 +3,7 @@ import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
+import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
@@ -17,10 +18,12 @@ export class FetchDataUsecase {
   async fetchDgfipData(
     tokenValue: TokenValue,
     input: DgfipInput,
-    route: string
+    route: string,
+    setCurrentToken: (token: Token) => void
   ) {
     try {
       const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      setCurrentToken(token);
       return this.dataProviderClient.consumeDgfip(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
@@ -30,9 +33,15 @@ export class FetchDataUsecase {
     }
   }
 
-  async fetchCnafData(tokenValue: TokenValue, input: CnafInput, route: string) {
+  async fetchCnafData(
+    tokenValue: TokenValue,
+    input: CnafInput,
+    route: string,
+    setCurrentToken: (token: Token) => void
+  ) {
     try {
       const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      setCurrentToken(token);
       return this.dataProviderClient.consumeCnaf(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {

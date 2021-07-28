@@ -13,20 +13,15 @@ import {
   DgfipOutput,
 } from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
-import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
-import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
-import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
 
 describe('The data provider client', () => {
   const cnafDataProvider = mock<CnafDataProvider>();
   const dgfipDataProvider = mock<DgfipDataProvider>();
-  const eventBus = mock<EventBus>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
-    dgfipDataProvider,
-    eventBus
+    dgfipDataProvider
   );
 
   const noSubscriptionToken = new Token(
@@ -112,70 +107,5 @@ describe('The data provider client', () => {
 
       expect(result).toEqual({});
     });
-  });
-
-  it('logs 500 error when internal error occurs', async () => {
-    const input: CnafInput = {
-      codePostal: '3',
-      numeroAllocataire: '4',
-    };
-    cnafDataProvider.fetch.mockRejectedValue(
-      new Error('Cannot read property croute of undefined')
-    );
-
-    try {
-      await dataProviderClient.consumeCnaf(input, cnafToken, '/croute').catch();
-      // eslint-disable-next-line no-empty
-    } catch {}
-
-    expect(eventBus.publish).toHaveBeenCalled();
-    expect(
-      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
-    ).toEqual(500);
-  });
-
-  it('logs a 403 when application is not subscribed to data provider', async () => {
-    const input = mock<CnafInput>();
-    try {
-      await dataProviderClient
-        .consumeCnaf(input, dgfipToken, '/croute')
-        .catch();
-      // eslint-disable-next-line no-empty
-    } catch {}
-
-    expect(eventBus.publish).toHaveBeenCalled();
-    expect(
-      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
-    ).toEqual(403);
-  });
-
-  it('logs the data provider error', async () => {
-    const input = mock<CnafInput>();
-    cnafDataProvider.fetch.mockRejectedValue(new NetworkError(404));
-
-    try {
-      await dataProviderClient.consumeCnaf(input, cnafToken, '/croute').catch();
-      // eslint-disable-next-line no-empty
-    } catch {}
-
-    expect(eventBus.publish).toHaveBeenCalled();
-    expect(
-      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
-    ).toEqual(404);
-  });
-
-  it('logs a generic 502 error when data provider does not provide a status code', async () => {
-    const input = mock<CnafInput>();
-    cnafDataProvider.fetch.mockRejectedValue(new NetworkError());
-
-    try {
-      await dataProviderClient.consumeCnaf(input, cnafToken, '/croute').catch();
-      // eslint-disable-next-line no-empty
-    } catch {}
-
-    expect(eventBus.publish).toHaveBeenCalled();
-    expect(
-      (eventBus.publish.mock.calls[0][0] as TokenConsumed).statusCode
-    ).toEqual(502);
   });
 });

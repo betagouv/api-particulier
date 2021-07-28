@@ -1,11 +1,14 @@
 const express = require('express');
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
+import {NextFunction, Request, Response} from 'express';
 import {logFor} from 'src/domain/logger';
 import {fetchDgfipDataControllerBuidler} from 'src/presentation/controllers/fetch-data.controller';
 import {dfdipInputValidationMiddleware} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
 import {discrepancyCheckerMiddleware} from 'src/presentation/middlewares/discrepancy-spotter.middleware';
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
+import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware';
+import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
 
 const app = express();
 const logger = logFor('Server');
@@ -32,19 +35,23 @@ app.use(Sentry.Handlers.tracingHandler());
 
 app.get(
   '/api/impots/svair',
+  timingMiddleware,
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(false),
   Sentry.Handlers.errorHandler(),
-  manageErrorMiddleware
+  manageErrorMiddleware,
+  journalMiddleware
 );
 app.get(
   '/api/v2/avis-imposition',
+  timingMiddleware,
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
   Sentry.Handlers.errorHandler(),
-  manageErrorMiddleware
+  manageErrorMiddleware,
+  journalMiddleware
 );
 
 app.listen(process.env.PORT || 3000, () => {
