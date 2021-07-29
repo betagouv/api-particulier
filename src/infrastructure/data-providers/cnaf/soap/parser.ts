@@ -3,7 +3,7 @@ import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
 import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/cnaf/errors/invalid-format.error';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
-import {isArray, isUndefined, omitBy, unescape} from 'lodash';
+import {isArray, isObject, isUndefined, omitBy, unescape} from 'lodash';
 
 export class XMLParser {
   parse(xml: string): CnafOutput {
@@ -41,10 +41,14 @@ export class XMLParser {
 
     const children = isArray(body.identeEnfants.UNENFANT)
       ? body.identeEnfants.UNENFANT.map(parsePerson)
-      : [parsePerson(body.identeEnfants.UNENFANT)];
+      : isObject(body.identeEnfants.UNENFANT)
+      ? [parsePerson(body.identeEnfants.UNENFANT)]
+      : [];
     const beneficiaries = isArray(body.identePersonnes.UNEPERSONNE)
       ? body.identePersonnes.UNEPERSONNE.map(parsePerson)
-      : [parsePerson(body.identePersonnes.UNEPERSONNE)];
+      : isObject(body.identePersonnes.UNEPERSONNE)
+      ? [parsePerson(body.identePersonnes.UNEPERSONNE)]
+      : [];
 
     return {
       adresse: omitBy(address, isUndefined),
