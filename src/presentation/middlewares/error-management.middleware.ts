@@ -93,12 +93,7 @@ export const manageErrorMiddleware = (
     return next();
   }
   if (error instanceof ApplicationNotSubscribedError) {
-    res.status(403).json({
-      error: 'unauthorized',
-      reason: 'Data provider call forbidden',
-      message:
-        "Votre jeton d'API ne vous permet pas de faire appel à la route que vous avez demandée",
-    });
+    res.status(200).json({});
     return next();
   }
   res.status(500).json({
