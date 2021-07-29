@@ -14,7 +14,7 @@ export const discrepancyCheckerMiddleware = (
     initialMethod.call(res, data);
     eventBus.publish(
       new ResponseSent(
-        '',
+        res.locals?.token?.applicationId ?? '',
         new Date(),
         req.path,
         req.query,
