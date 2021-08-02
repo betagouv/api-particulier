@@ -20,7 +20,7 @@ export function inputValidationMiddlewareBuilder<O extends ParsedQs, D, I>(
       return next(inputValidation.error);
     }
 
-    req.query = inputSchema.parse(req.query);
+    res.locals.input = inputSchema.parse(req.query);
     next();
   };
 }
