@@ -7,6 +7,10 @@ dotenv.config();
 describe('The Svair data provider', () => {
   const dataProvider = new SvairDataProvider();
 
+  afterAll(() => {
+    dataProvider.throttledGetViewState.cancel();
+  });
+
   it('returns data when correct input is provided', async () => {
     const input: DgfipInput = {
       taxNumber: process.env.TEST_TAX_NUMBER!,

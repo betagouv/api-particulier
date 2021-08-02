@@ -27,11 +27,7 @@ const teardown = async () => {
 
 setup()
   .then(async () => {
-    await run([
-      '-c',
-      'test/integration/jest-integration.json',
-      '--detectOpenHandles',
-    ]);
+    await run(['-c', 'test/integration/jest-integration.json']);
   })
   .then(teardown)
   .catch(e => console.error(e));
