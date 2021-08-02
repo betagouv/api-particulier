@@ -7,14 +7,9 @@ import {
   tokenEventQueueName,
 } from 'src/infrastructure/event-bus/bull.event-bus';
 import * as Sentry from '@sentry/node';
+import {sentryOptions} from 'src/infrastructure/configuration';
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  tracesSampleRate: 1.0,
-  environment: process.env.ENV,
-  maxValueLength: 2000,
-  enabled: process.env.SENTRY_ENABLED === 'true',
-});
+Sentry.init(sentryOptions);
 
 export class BullWorker {
   private readonly applicationEventWorker: Worker;

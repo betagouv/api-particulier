@@ -2,6 +2,7 @@ const express = require('express');
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import {logFor} from 'src/domain/logger';
+import {sentryOptions} from 'src/infrastructure/configuration';
 import {
   fetchCnafDataControllerBuidler,
   fetchDgfipDataControllerBuidler,
@@ -16,21 +17,13 @@ import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
 const app = express();
 const logger = logFor('Server');
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
+  ...sentryOptions,
   integrations: [
     // enable HTTP calls tracing
     new Sentry.Integrations.Http({tracing: true}),
     // enable Express.js middleware tracing
     new Tracing.Integrations.Express({app}),
   ],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-  environment: process.env.ENV,
-  maxValueLength: 2000,
-  enabled: process.env.SENTRY_ENABLED === 'true',
 });
 
 app.use(Sentry.Handlers.requestHandler());

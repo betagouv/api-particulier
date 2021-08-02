@@ -1,5 +1,3 @@
-const IORedis = require('ioredis');
-import {Pool} from 'pg';
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';
@@ -26,21 +24,18 @@ import {EntryRepository} from 'src/domain/journal/repositories/entry.repository'
 import {PostgresEntryRepository} from 'src/infrastructure/repositories/postgres-entry.repository';
 import {EntryProjector} from 'src/domain/journal/projectors/entry.projector';
 import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter';
+import {postgresPool, redisConnection} from 'src/infrastructure/configuration';
 
 const logger = new ChalkLogger();
 setInstance(logger);
 
 const localLogger = logFor('ServiceContainer');
 
-export const postgresPool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 localLogger.log('info', 'Postgres pool configured');
 
 export const eventStore: EventStore = new PostgresEventStore(postgresPool);
 localLogger.log('info', 'Event store initialized');
 
-export const redisConnection = new IORedis(process.env.REDIS_URL);
 localLogger.log('info', 'Redis connection configured');
 
 export const redisTokenRepository: TokenRepository =
