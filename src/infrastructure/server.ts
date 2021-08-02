@@ -35,7 +35,6 @@ app.get(
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(false),
-  Sentry.Handlers.errorHandler(),
   manageErrorMiddleware,
   journalMiddleware
 );
@@ -45,7 +44,6 @@ app.get(
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
-  Sentry.Handlers.errorHandler(),
   manageErrorMiddleware,
   journalMiddleware
 );
@@ -56,7 +54,6 @@ app.get(
   discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
-  Sentry.Handlers.errorHandler(),
   manageErrorMiddleware,
   journalMiddleware
 );
@@ -66,7 +63,6 @@ app.get(
   discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
-  Sentry.Handlers.errorHandler(),
   manageErrorMiddleware,
   journalMiddleware
 );

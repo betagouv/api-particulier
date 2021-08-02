@@ -1,3 +1,4 @@
+import {captureException} from '@sentry/node';
 import {Request, Response, NextFunction} from 'express';
 import {snakeCase} from 'lodash';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
@@ -34,6 +35,7 @@ export const manageErrorMiddleware = (
       message:
         "Le fournisseur de donnée a rejeté la demande en raison d'un trop grand nombre d'échecs antérieurs.",
     });
+    captureException(error);
     return next();
   }
   if (error instanceof ZodError) {
@@ -72,6 +74,7 @@ export const manageErrorMiddleware = (
       message: 'La réponse du fournisseur de donnée est inexploitable',
     });
     logError(error);
+    captureException(error);
     return next();
   }
   if (error instanceof NetworkError) {
@@ -81,6 +84,7 @@ export const manageErrorMiddleware = (
       message:
         "Une erreur est survenue lors de l'appel du fournisseur de donnée",
     });
+    captureException(error);
     logError(error);
     return next();
   }
@@ -102,5 +106,6 @@ export const manageErrorMiddleware = (
     message: "Une erreur interne s'est produite, l'équipe a été prévenue.",
   });
   logError(error);
+  captureException(error);
   return next();
 };
