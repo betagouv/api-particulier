@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import {logFor} from 'src/domain/logger';

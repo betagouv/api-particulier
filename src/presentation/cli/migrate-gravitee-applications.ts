@@ -2,10 +2,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import {Command} from 'commander';
 import {Pool} from 'pg';
-import {
-  postgresPool as mainPgPool,
-  applicationTransactionManager,
-} from 'src/infrastructure/service-container';
+import {postgresPool as mainPgPool} from 'src/infrastructure/configuration';
+import {applicationTransactionManager} from 'src/infrastructure/service-container';
 import {Application} from 'src/domain/application-management/application.aggregate';
 import {Subscription} from 'src/domain/subscription';
 import {UserEmail} from 'src/domain/application-management/user';
