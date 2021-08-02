@@ -1,5 +1,5 @@
 import {NodeOptions} from '@sentry/node';
-import IORedis from 'ioredis';
+const IORedis = require('ioredis');
 import {Pool} from 'pg';
 
 export const postgresPool = new Pool({

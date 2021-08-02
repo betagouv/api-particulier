@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-import {pick} from 'lodash';
+import {chain, pick} from 'lodash';
 import {logFor} from 'src/domain/logger';
 import {DataProviderResponse} from '../data-providers/dto';
 
@@ -16,7 +15,7 @@ export class PropertyBasedScopesFilter<
   ) {}
 
   filter = (scopes: Scope[], response: Partial<T>): Partial<T> => {
-    const maskedProperties: string[] = _(
+    const maskedProperties: string[] = chain(
       scopes.map(scope => this.scopesConfiguration[scope])
     )
       .flattenDeep()
