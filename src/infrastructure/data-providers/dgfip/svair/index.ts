@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {load} from 'cheerio';
+import {DebouncedFunc, throttle} from 'lodash';
 import {stringify} from 'query-string';
 import {DgfipDataProvider} from 'src/domain/data-fetching/data-providers/dgfip/data-provider';
 import {
@@ -10,8 +11,16 @@ import {transformError} from 'src/infrastructure/data-providers/error-transforme
 import {result as parseSvairResponse} from './legacy.parser';
 
 export class SvairDataProvider implements DgfipDataProvider {
+  throttledGetViewState: DebouncedFunc<() => Promise<string>>;
+
+  constructor() {
+    this.throttledGetViewState = throttle(this.getViewState, 300000, {
+      trailing: false,
+    });
+  }
+
   async fetch(input: DgfipInput): Promise<DgfipOutput> {
-    const viewState = await this.getViewState();
+    const viewState = await this.throttledGetViewState();
 
     let response: AxiosResponse;
     try {

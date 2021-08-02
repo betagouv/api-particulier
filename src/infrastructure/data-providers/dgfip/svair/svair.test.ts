@@ -10,12 +10,14 @@ describe('Svair data provider', () => {
   const svairDataProvider = new SvairDataProvider();
   const mock = new MockAdapter(axios);
   const expectedViewState = 'the-view-state';
-  mock
-    .onGet()
-    .reply(
-      200,
-      `<input name="javax.faces.ViewState" value="${expectedViewState}">`
-    );
+  beforeEach(() => {
+    mock
+      .onGet()
+      .reply(
+        200,
+        `<input name="javax.faces.ViewState" value="${expectedViewState}">`
+      );
+  });
 
   describe('when fetching the state', () => {
     it('loads the JSF view state', async () => {
@@ -29,6 +31,14 @@ describe('Svair data provider', () => {
       await expect(svairDataProvider.getViewState()).rejects.toBeInstanceOf(
         NetworkError
       );
+    });
+
+    it('does not call the network more than once every 5 minutes', async () => {
+      mock.resetHistory();
+      await svairDataProvider.throttledGetViewState();
+      await svairDataProvider.throttledGetViewState();
+
+      expect(mock.history.get).toHaveLength(1);
     });
   });
 

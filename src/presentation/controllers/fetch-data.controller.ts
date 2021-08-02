@@ -1,7 +1,5 @@
 import {z} from 'zod';
 import {NextFunction, Request, Response} from 'express';
-import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
-import {dgfipInputSchema} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
 import {
   cnafDataPresenter,
   dgfipDataPresenter,
@@ -11,6 +9,7 @@ import {TokenValue} from 'src/domain/token-value';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {cnafInputSchema} from 'src/presentation/middlewares/cnaf-input-validation.middleware';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
+import {dgfipInputSchema} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
 
 export const fetchDgfipDataControllerBuidler =
   (withNulls: boolean) =>
@@ -19,15 +18,11 @@ export const fetchDgfipDataControllerBuidler =
     res: Response,
     next: NextFunction
   ) => {
-    const input: DgfipInput = {
-      taxNumber: req.query.numeroFiscal,
-      taxNoticeNumber: req.query.referenceAvis,
-    };
     const tokenValue = req.header('X-Api-Key') as TokenValue;
     try {
       const data = await fetchDataUsecase.fetchDgfipData(
         tokenValue,
-        input,
+        req.query,
         req.path,
         (token: Token) => {
           res.locals.token = token;
