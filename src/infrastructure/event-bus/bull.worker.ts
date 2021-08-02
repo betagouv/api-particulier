@@ -7,7 +7,7 @@ import {
   tokenEventQueueName,
 } from 'src/infrastructure/event-bus/bull.event-bus';
 import * as Sentry from '@sentry/node';
-import {sentryOptions} from 'src/infrastructure/configuration';
+import {sentryOptions} from 'src/infrastructure/configuration/sentry';
 
 Sentry.init(sentryOptions);
 

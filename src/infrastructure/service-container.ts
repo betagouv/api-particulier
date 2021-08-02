@@ -24,7 +24,8 @@ import {EntryRepository} from 'src/domain/journal/repositories/entry.repository'
 import {PostgresEntryRepository} from 'src/infrastructure/repositories/postgres-entry.repository';
 import {EntryProjector} from 'src/domain/journal/projectors/entry.projector';
 import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter';
-import {postgresPool, redisConnection} from 'src/infrastructure/configuration';
+import {postgresPool} from 'src/infrastructure/configuration/postgres';
+import {redisConnection} from 'src/infrastructure/configuration/redis';
 
 const logger = new ChalkLogger();
 setInstance(logger);

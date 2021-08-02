@@ -5,7 +5,7 @@ import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event'
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Event} from 'src/domain/event';
-import {redisConnection} from 'src/infrastructure/configuration';
+import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {BullWorker} from 'src/infrastructure/event-bus/bull.worker';
 import {
   redisTokenProjector,
