@@ -9,10 +9,12 @@
       "src/*": ["./src/*"]
     },
     "sourceMap": true,
-    "inlineSources": true
+    "inlineSources": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ]
+  ],
+  "exclude": ["src/**/*.spec.ts"]
 }

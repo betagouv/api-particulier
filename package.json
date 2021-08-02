@@ -53,7 +53,7 @@
     "@types/chai-as-promised": "^7.1.4",
     "@types/cheerio": "^0.22.29",
     "@types/express": "^4.17.13",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.170",
     "@types/mocha": "^9.0.0",
     "@types/node": "^14.11.2",
