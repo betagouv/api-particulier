@@ -10,6 +10,11 @@ describe('Svair data provider', () => {
   const svairDataProvider = new SvairDataProvider();
   const mock = new MockAdapter(axios);
   const expectedViewState = 'the-view-state';
+
+  afterAll(() => {
+    svairDataProvider.throttledGetViewState.cancel();
+  });
+
   beforeEach(() => {
     mock
       .onGet()
