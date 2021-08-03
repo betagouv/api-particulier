@@ -4,6 +4,7 @@
   "scripts": {
     "test": "jest",
     "test2": "mocha \"src/**/*.spec.ts\"",
+    "coverage": "nyc --reporter=lcov mocha \"src/**/*.spec.ts\"",
     "test:integration": "ts-node -r tsconfig-paths/register -r dotenv/config test/integration/run.ts",
     "test:integration2": "mocha -r dotenv/config \"test/**/*.spec.ts\"",
     "lint": "gts lint",
@@ -72,6 +73,7 @@
     "jest": "^27.0.4",
     "jest-mock-extended": "^1.0.15",
     "mocha": "^9.0.3",
+    "nyc": "^15.1.0",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.7.0",
     "ts-jest": "^27.0.2",
