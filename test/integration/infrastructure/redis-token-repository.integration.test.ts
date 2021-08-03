@@ -4,7 +4,7 @@ import {ApplicationId} from 'src/domain/application-id';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
 import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';
-import {redisConnection} from 'test/config';
+import {redisConnection} from 'test/integration/config';
 
 describe('The redis token repository', () => {
   const repository = new RedisTokenRepository(redisConnection);

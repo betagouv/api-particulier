@@ -6,7 +6,7 @@ import {Event} from 'src/domain/event';
 import {TokenValue} from 'src/domain/token-value';
 import {BullEventBus} from 'src/infrastructure/event-bus/bull.event-bus';
 import {BullWorker} from 'src/infrastructure/event-bus/bull.worker';
-import {redisConnection} from 'test/config';
+import {redisConnection} from 'test/integration/config';
 
 describe('The event bus', () => {
   const eventBus = new BullEventBus(redisConnection);

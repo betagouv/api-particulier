@@ -4,7 +4,7 @@ import {ApplicationId} from 'src/domain/application-id';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
-import {pgPool} from 'test/config';
+import {pgPool} from 'test/integration/config';
 
 describe('The postgres token repository', () => {
   it('can save and retrieve tokens', async () => {

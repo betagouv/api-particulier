@@ -5,7 +5,7 @@
     "test": "jest",
     "test2": "mocha \"src/**/*.spec.ts\"",
     "coverage": "nyc --reporter=lcov mocha \"src/**/*.spec.ts\"",
-    "test:integration": "mocha -r dotenv/config -r test/database-register.js \"test/**/*.test.ts\"",
+    "test:integration": "mocha -r dotenv/config -r test/integration/database-register.js \"test/**/*.test.ts\"",
     "lint": "gts lint",
     "clean": "gts clean",
     "type-check": "tsc --noEmit",
