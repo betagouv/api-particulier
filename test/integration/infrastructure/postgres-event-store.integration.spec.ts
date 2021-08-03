@@ -6,7 +6,7 @@ import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {ApplicationId} from 'src/domain/application-id';
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenValue} from 'src/domain/token-value';
-import {pgPool} from 'test/config.js';
+import {pgPool} from 'test/config';
 
 describe('The postgres event store', () => {
   const eventStore: EventStore = new PostgresEventStore(pgPool);
