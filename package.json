@@ -6,7 +6,7 @@
     "test2": "mocha \"src/**/*.spec.ts\"",
     "coverage": "nyc --reporter=lcov mocha \"src/**/*.spec.ts\"",
     "test:integration": "ts-node -r tsconfig-paths/register -r dotenv/config test/integration/run.ts",
-    "test:integration2": "mocha -r dotenv/config \"test/**/*.spec.ts\"",
+    "test:integration2": "mocha -r dotenv/config -r test/database-register.js \"test/**/*.spec.ts\"",
     "lint": "gts lint",
     "clean": "gts clean",
     "type-check": "tsc --noEmit",

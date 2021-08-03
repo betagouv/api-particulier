@@ -6,7 +6,7 @@
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
-      "src/*": ["./src/*"]
+      "src/*": ["./src/*"],
     },
     "sourceMap": true,
     "inlineSources": true,

@@ -11,6 +11,7 @@ register({
         root: ['..'],
         alias: {
           src: './src/',
+          test: './test/',
         },
       },
     ],
