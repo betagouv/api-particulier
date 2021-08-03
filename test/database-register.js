@@ -1,6 +1,7 @@
 const {pgPool} = require('./config');
 // eslint-disable-next-line node/no-unpublished-require
 const {default: pgMigrate} = require('node-pg-migrate');
+const {redisConnection} = require('./config');
 
 exports.mochaGlobalSetup = async function () {
   await pgPool.query(`
@@ -18,9 +19,9 @@ exports.mochaGlobalSetup = async function () {
     direction: 'up',
     databaseUrl: process.env.TEST_DATABASE_URL,
   });
-  this.pgPool = pgPool;
 };
 
 exports.mochaGlobalTeardown = async function () {
   await pgPool.end();
+  await redisConnection.disconnect(false);
 };
