@@ -6,7 +6,6 @@ const fs = require('fs');
 const parse = require('./legacy.parser');
 
 describe('Parse ', () => {
-  const parseEuro = parse.euro;
   const parseResult = parse.result;
   const singlePersonResponse = fs.readFileSync(
     __dirname + '/__tests__/resources/single-person.txt',
@@ -40,32 +39,6 @@ describe('Parse ', () => {
     __dirname + '/__tests__/resources/forbidden.txt',
     'utf-8'
   );
-
-  describe('parse Euro', () => {
-    it('removes space', () => {
-      expect(parseEuro('13 000')).toEqual(13000);
-    });
-
-    it('removes € symbol', () => {
-      expect(parseEuro('13000€')).toEqual(13000);
-    });
-
-    it('removes non breakable space symbol', () => {
-      expect(parseEuro('13\u00A0000')).toEqual(13000);
-    });
-
-    it('removes any non numeric symbol', () => {
-      expect(parseEuro('32&nbsp;011 €')).toEqual(32011);
-    });
-
-    it('removes space € symbol', () => {
-      expect(parseEuro('1 665 €\n\t\t\t\t\t')).toEqual(1665);
-    });
-
-    it('returns 0 if no data', () => {
-      expect(parseEuro('')).toEqual(0);
-    });
-  });
 
   describe('parse Response', () => {
     it('works with a single person', async () => {

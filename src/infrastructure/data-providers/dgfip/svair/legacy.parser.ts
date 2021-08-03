@@ -13,28 +13,7 @@ const {
 const {
   InvalidFormatError,
 } = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-format.error');
-
-function parseEuro(str) {
-  const data = str.replace(/[^0-9]/g, '');
-  return isNumeric(data) ? _.parseInt(data) : 0;
-}
-
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-function parseDateOrString(str) {
-  if (str.trim() === '-') {
-    return '-';
-  }
-  if (str.indexOf('/') === -1) {
-    return str.trim();
-  }
-  const [date, month, year] = str.trim().split('/');
-  return new Date(year, month - 1, date, 0, 0);
-}
-
-export const euro = parseEuro;
+const {parseEuro, parseDateOrString} = require('../parsing-functions');
 
 export const result = function parseResult(html) {
   if (html.indexOf('class="interdit"') !== -1) {
