@@ -26,6 +26,7 @@ import {EntryProjector} from 'src/domain/journal/projectors/entry.projector';
 import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter';
 import {postgresPool} from 'src/infrastructure/configuration/postgres';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
+import {AirtableDgfipDataProvider} from 'src/infrastructure/data-providers/dgfip/airtable';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -51,8 +52,16 @@ localLogger.log('info', 'Event bus initialized');
 
 const cnafDataProvider = new SoapDataProvider();
 localLogger.log('info', 'CNAF data provider initialized');
-const dgfipDataProvider = new SvairDataProvider();
-localLogger.log('info', 'DGFIP data provider initialized');
+const dgfipDataProvider =
+  process.env.STUB_DATA_PROVIDERS === 'false'
+    ? new SvairDataProvider()
+    : new AirtableDgfipDataProvider();
+localLogger.log(
+  'info',
+  `DGFIP data provider initialized - ${
+    process.env.STUB_DATA_PROVIDERS ? 'stubbed' : 'real'
+  }`
+);
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,

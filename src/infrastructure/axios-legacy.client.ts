@@ -11,16 +11,22 @@ export class AxiosLegacyApiClient implements LegacyApiClient {
     headers: object
   ): Promise<{statusCode: number; body: object}> {
     try {
-      this.logger.log('debug', 'Calling legacy API', {route, params, headers});
-      const response = await axios.get(
-        `https://particulier.api.gouv.fr/no-mirror${route}`,
-        {
-          params,
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          headers: {'X-Api-Key': headers['x-api-key']},
-        }
-      );
+      const url =
+        process.env.STUB_DATA_PROVIDERS === 'true'
+          ? `https://particulier-test.api.gouv.fr/no-mirror${route}`
+          : `https://particulier.api.gouv.fr/no-mirror${route}`;
+      this.logger.log('debug', 'Calling legacy API', {
+        route,
+        params,
+        headers,
+        url,
+      });
+      const response = await axios.get(url, {
+        params,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        headers: {'X-Api-Key': headers['x-api-key']},
+      });
       return {
         statusCode: response.status,
         body: response.data,

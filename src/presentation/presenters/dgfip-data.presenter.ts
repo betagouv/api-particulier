@@ -7,7 +7,11 @@ const formatDate = (date?: Date) => {
   if (!date) {
     return '';
   }
-  return format(date, 'dd/MM/yyyy');
+  try {
+    return format(date, 'dd/MM/yyyy');
+  } catch (error) {
+    return '';
+  }
 };
 
 const formatUndefined = (value?: unknown) =>
