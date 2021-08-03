@@ -36,6 +36,16 @@ jobs:
           TEST_TAX_NOTICE_NUMBER: ${{ secrets.TEST_TAX_NOTICE_NUMBER }}
           TEST_TAX_NUMBER: ${{ secrets.TEST_TAX_NUMBER }}
           TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      - run: npm run test:integration2
+        env:
+          CAF_CERTIFICATE: ${{ secrets.CAF_CERTIFICATE }}
+          CAF_PRIVATE_KEY: ${{ secrets.CAF_PRIVATE_KEY }}
+          CAF_HOST: ${{ secrets.CAF_HOST }}
+          TEST_CODE_POSTAL: ${{ secrets.TEST_CODE_POSTAL }}
+          TEST_NUMERO_ALLOCATAIRE: ${{ secrets.TEST_NUMERO_ALLOCATAIRE }}
+          TEST_TAX_NOTICE_NUMBER: ${{ secrets.TEST_TAX_NOTICE_NUMBER }}
+          TEST_TAX_NUMBER: ${{ secrets.TEST_TAX_NUMBER }}
+          TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       - run: npm run compile
   coverage:
     needs: [ test ]
