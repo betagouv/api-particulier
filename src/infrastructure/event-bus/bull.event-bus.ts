@@ -19,9 +19,15 @@ export class BullEventBus implements EventBus {
   constructor(redisConnection: IORedis.Redis) {
     this.applicationEventQueue = new Queue(applicationEventQueueName, {
       connection: redisConnection,
+      defaultJobOptions: {
+        removeOnComplete: 1000,
+      },
     });
     this.tokenEventQueue = new Queue(tokenEventQueueName, {
       connection: redisConnection,
+      defaultJobOptions: {
+        removeOnComplete: true,
+      },
     });
   }
 
