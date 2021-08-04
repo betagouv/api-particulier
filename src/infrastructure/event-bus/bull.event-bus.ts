@@ -20,7 +20,7 @@ export class BullEventBus implements EventBus {
     this.applicationEventQueue = new Queue(applicationEventQueueName, {
       connection: redisConnection,
     });
-    this.tokenEventQueue = new Queue(applicationEventQueueName, {
+    this.tokenEventQueue = new Queue(tokenEventQueueName, {
       connection: redisConnection,
     });
   }
