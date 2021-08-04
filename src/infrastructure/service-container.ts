@@ -27,6 +27,10 @@ import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter
 import {postgresPool} from 'src/infrastructure/configuration/postgres';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {AirtableDgfipDataProvider} from 'src/infrastructure/data-providers/dgfip/airtable';
+import {PostgresApplicationProjectionRepository} from 'src/infrastructure/repositories/postgres-application-projection.repository';
+import {pgPool} from 'test/integration/config';
+import {ApplicationProjector} from 'src/domain/application-management/projectors/application-projection.projector';
+import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -123,3 +127,12 @@ localLogger.log('info', 'Journal entry repository initialized');
 
 export const entryProjector = new EntryProjector(entryRepository);
 localLogger.log('info', 'Journal entry projector initialized');
+
+export const applicationProjectionRepository: ApplicationProjectionRepository =
+  new PostgresApplicationProjectionRepository(pgPool);
+localLogger.log('info', 'Application projection repository initialized');
+
+export const applicationProjector = new ApplicationProjector(
+  applicationProjectionRepository
+);
+localLogger.log('info', 'Application projector initialized');

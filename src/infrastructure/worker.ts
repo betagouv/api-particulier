@@ -13,6 +13,7 @@ import {
   repositoryFeeder,
   qualityMonitor,
   entryProjector,
+  applicationProjector,
 } from 'src/infrastructure/service-container';
 
 new BullWorker(redisConnection, {
@@ -29,6 +30,12 @@ new BullWorker(redisConnection, {
         event as ApplicationCreated
       );
     },
+    (event: Event) => {
+      return applicationProjector.onApplicationCreated.call(
+        applicationProjector,
+        event as ApplicationCreated
+      );
+    },
   ],
   [ApplicationImported.name]: [
     (event: Event) => {
@@ -40,6 +47,12 @@ new BullWorker(redisConnection, {
     (event: Event) => {
       return postgresTokenProjector.onApplicationImported.call(
         postgresTokenProjector,
+        event as ApplicationImported
+      );
+    },
+    (event: Event) => {
+      return applicationProjector.onApplicationImported.call(
+        applicationProjector,
         event as ApplicationImported
       );
     },
