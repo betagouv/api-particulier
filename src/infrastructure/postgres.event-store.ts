@@ -64,7 +64,7 @@ export class PostgresEventStore implements EventStore {
       switch (row.event_name) {
         case ApplicationImported.name:
           return new ApplicationImported(
-            row.payload.applicationId,
+            row.payload.aggregateId,
             row.payload.date,
             row.payload.name,
             row.payload.dataPassId,
@@ -75,7 +75,7 @@ export class PostgresEventStore implements EventStore {
           );
         case ApplicationCreated.name:
           return new ApplicationCreated(
-            row.payload.applicationId,
+            row.payload.aggregateId,
             row.payload.date,
             row.payload.name,
             row.payload.dataPassId,
@@ -86,7 +86,7 @@ export class PostgresEventStore implements EventStore {
           );
         case UserSubscribed.name:
           return new UserSubscribed(
-            row.payload.applicationId,
+            row.payload.aggregateId,
             row.payload.date,
             row.payload.userEmail
           );
