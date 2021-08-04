@@ -1,7 +1,7 @@
 const express = require('express');
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
-import * as basicAuth from 'express-basic-auth';
+import basicAuth from 'express-basic-auth';
 import {logFor} from 'src/domain/logger';
 import {sentryOptions} from 'src/infrastructure/configuration/sentry';
 import {
