@@ -23,20 +23,7 @@ export class QualityMonitor {
       );
     } catch (error) {
       if (error instanceof AssertionError) {
-        this.logger.log('warn', 'Response discrepancy with legacy', {
-          message: error.message.replace(
-            // eslint-disable-next-line no-control-regex
-            /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-            ''
-          ),
-          legacyReponse: error.expected,
-          newResponse: error.actual,
-          route: event.route,
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          apiKey: event.headers['x-api-key'],
-          params: event.params,
-        });
+        this.logger.log('warn', 'Response discrepancy with legacy');
       }
       captureException(error);
     }
