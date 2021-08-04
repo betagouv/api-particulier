@@ -1,6 +1,7 @@
 const express = require('express');
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
+import * as basicAuth from 'express-basic-auth';
 import {logFor} from 'src/domain/logger';
 import {sentryOptions} from 'src/infrastructure/configuration/sentry';
 import {
@@ -13,9 +14,28 @@ import {discrepancyCheckerMiddleware} from 'src/presentation/middlewares/discrep
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
 import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware';
 import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
+import {ExpressAdapter} from '@bull-board/express';
+import {createBullBoard} from '@bull-board/api';
+import {BullMQAdapter} from '@bull-board/api/bullMQAdapter';
+import {Queue} from 'bullmq';
+import {
+  applicationEventQueueName,
+  tokenEventQueueName,
+} from 'src/infrastructure/event-bus/bull.event-bus';
 
 const app = express();
 const logger = logFor('Server');
+const serverAdapter = new ExpressAdapter();
+
+createBullBoard({
+  queues: [
+    new BullMQAdapter(new Queue(applicationEventQueueName)),
+    new BullMQAdapter(new Queue(tokenEventQueueName)),
+  ],
+  serverAdapter,
+});
+serverAdapter.setBasePath('/admin/queues');
+
 Sentry.init({
   ...sentryOptions,
   integrations: [
@@ -26,6 +46,18 @@ Sentry.init({
   ],
 });
 
+app.use(
+  '/admin/queues',
+  basicAuth({
+    users: {
+      [process.env.ADMIN_USER || 'admin']:
+        process.env.ADMIN_PASSWORD || 'password',
+    },
+    realm: process.env.ENV,
+    challenge: true,
+  }),
+  serverAdapter.getRouter()
+);
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
