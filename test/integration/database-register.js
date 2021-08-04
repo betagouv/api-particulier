@@ -8,6 +8,7 @@ exports.mochaGlobalSetup = async function () {
     DROP TABLE IF EXISTS events;
     DROP TABLE IF EXISTS pgmigrations;
     DROP TABLE IF EXISTS tokens;
+    DROP TABLE IF EXISTS applications;
     DROP MATERIALIZED VIEW IF EXISTS consumptions_summary_daily;
     DROP MATERIALIZED VIEW IF EXISTS consumptions_summary_hourly;
     DROP TABLE IF EXISTS journal_entries;
