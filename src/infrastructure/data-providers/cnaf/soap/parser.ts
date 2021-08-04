@@ -54,9 +54,14 @@ export class XMLParser {
       adresse: omitBy(address, isUndefined),
       allocataires: beneficiaries,
       enfants: children,
-      quotientFamilial: parseInt(body.quotients.QFMOIS.QUOTIENTF),
-      annee: parseInt(body.quotients.QFMOIS.DELANNEE),
-      mois: parseInt(body.quotients.QFMOIS.DUMOIS),
+      quotientFamilial:
+        body.quotients !== ''
+          ? parseInt(body.quotients.QFMOIS.QUOTIENTF)
+          : null,
+      annee:
+        body.quotients !== '' ? parseInt(body.quotients.QFMOIS.DELANNEE) : null,
+      mois:
+        body.quotients !== '' ? parseInt(body.quotients.QFMOIS.DUMOIS) : null,
     };
   }
 }

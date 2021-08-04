@@ -21,7 +21,7 @@ export type CnafOutput = {
     codePostalVille?: string;
     pays?: string;
   };
-  quotientFamilial: number;
-  mois: number;
-  annee: number;
+  quotientFamilial: number | null;
+  mois: number | null;
+  annee: number | null;
 };
