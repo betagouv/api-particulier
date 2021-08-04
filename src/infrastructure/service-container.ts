@@ -31,6 +31,7 @@ import {PostgresApplicationProjectionRepository} from 'src/infrastructure/reposi
 import {pgPool} from 'test/integration/config';
 import {ApplicationProjector} from 'src/domain/application-management/projectors/application-projection.projector';
 import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
+import {IntrospectUsecase} from 'src/application/usecases/introspect.usecase';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -75,13 +76,6 @@ localLogger.log('info', 'Data provider client initialized');
 
 export const uuidFactory = new UuidFactory();
 localLogger.log('info', 'Uuid factory initialized');
-
-export const fetchDataUsecase = new FetchDataUsecase(
-  redisTokenRepository,
-  dataProviderClient,
-  eventBus
-);
-localLogger.log('info', 'Fetch data usecase initialized');
 
 export const redisTokenProjector = new TokenProjector(redisTokenRepository);
 localLogger.log('info', 'Redis token projector initialized');
@@ -136,3 +130,16 @@ export const applicationProjector = new ApplicationProjector(
   applicationProjectionRepository
 );
 localLogger.log('info', 'Application projector initialized');
+
+export const fetchDataUsecase = new FetchDataUsecase(
+  redisTokenRepository,
+  dataProviderClient,
+  eventBus
+);
+localLogger.log('info', 'Fetch data usecase initialized');
+
+export const introspectUsecase = new IntrospectUsecase(
+  applicationProjectionRepository,
+  redisTokenRepository
+);
+localLogger.log('info', 'Introspect usecase initialized');
