@@ -12,7 +12,7 @@ export class AxiosLegacyApiClient implements LegacyApiClient {
   ): Promise<{statusCode: number; body: object}> {
     try {
       const url =
-        process.env.STUB_DATA_PROVIDERS === 'true'
+        process.env.SANDBOXED === 'true'
           ? `https://particulier-test.api.gouv.fr/no-mirror${route}`
           : `https://particulier.api.gouv.fr/no-mirror${route}`;
       this.logger.log('debug', 'Calling legacy API', {

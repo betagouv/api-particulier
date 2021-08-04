@@ -28,7 +28,12 @@ const getApplicationToImport = async (
   FULL OUTER JOIN "keys" k ON k.application = app.id AND k.revoked = false AND k.paused = false
   INNER JOIN memberships ON memberships.reference_id = app.id
   INNER JOIN users ON users.id = memberships.member_id
+  INNER JOIN subscriptions ON subscriptions.application = app.id
+  INNER JOIN apis ON apis.id = subscriptions.api
   WHERE app.status = 'ACTIVE'
+  AND apis."name" = '${
+    process.env.SANDBOXED === 'false' ? 'API Particulier' : 'Sandbox'
+  }'
   ${
     alreadyImportedApplicationIds.length > 0
       ? 'AND app.id NOT IN (' +

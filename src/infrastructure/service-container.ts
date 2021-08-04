@@ -53,13 +53,13 @@ localLogger.log('info', 'Event bus initialized');
 const cnafDataProvider = new SoapDataProvider();
 localLogger.log('info', 'CNAF data provider initialized');
 const dgfipDataProvider =
-  process.env.STUB_DATA_PROVIDERS === 'false'
+  process.env.SANDBOXED === 'false'
     ? new SvairDataProvider()
     : new AirtableDgfipDataProvider();
 localLogger.log(
   'info',
   `DGFIP data provider initialized - ${
-    process.env.STUB_DATA_PROVIDERS ? 'stubbed' : 'real'
+    process.env.SANDBOXED ? 'stubbed' : 'real'
   }`
 );
 
