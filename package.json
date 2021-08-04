@@ -17,7 +17,8 @@
     "start": "node build/infrastructure/server.js",
     "start:worker:dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/infrastructure/worker.ts",
     "start:worker": "node -r dotenv/config build/infrastructure/worker.js",
-    "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts"
+    "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts",
+    "publish-all-events": "ts-node -r tsconfig-paths/register src/presentation/cli/publish-all-events.ts"
   },
   "dependencies": {
     "@bull-board/api": "^3.4.0",

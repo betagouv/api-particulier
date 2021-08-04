@@ -1,5 +1,6 @@
 import {Pool} from 'pg';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
+import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {Event} from 'src/domain/event';
 import {EventStore} from 'src/domain/event-store';
@@ -36,8 +37,42 @@ export class PostgresEventStore implements EventStore {
       'SELECT event_name, payload FROM events WHERE aggregate_name = $1 AND aggregate_id = $2 ORDER BY created_at';
     const {rows} = await this.pool.query(selectQuery, [aggregate, aggregateId]);
 
-    const events = rows.map(row => {
+    const events = this.constructEventsFromRows(rows);
+
+    this.logger.log(
+      'debug',
+      `Listing events for aggregate ${aggregate} ${aggregateId}`,
+      {events}
+    );
+    return events;
+  }
+
+  async listEvents(): Promise<Event[]> {
+    const selectQuery =
+      'SELECT event_name, payload FROM events ORDER BY created_at';
+    const {rows} = await this.pool.query(selectQuery, []);
+
+    const events = this.constructEventsFromRows(rows);
+
+    this.logger.log('debug', 'Listing all events');
+    return events;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private constructEventsFromRows(rows: any[]): Event[] {
+    return rows.map(row => {
       switch (row.event_name) {
+        case ApplicationImported.name:
+          return new ApplicationImported(
+            row.payload.applicationId,
+            row.payload.date,
+            row.payload.name,
+            row.payload.dataPassId,
+            row.payload.scopes,
+            row.payload.subscriptions,
+            row.payload.userEmails,
+            row.payload.tokens
+          );
         case ApplicationCreated.name:
           return new ApplicationCreated(
             row.payload.applicationId,
@@ -56,14 +91,7 @@ export class PostgresEventStore implements EventStore {
             row.payload.userEmail
           );
       }
-      this.logger.log('error', `Read unknown event ${row.event_name}`, {row});
       throw new Error(`Unknown event ${row.event_name}`);
     });
-    this.logger.log(
-      'debug',
-      `Listing events for aggregate ${aggregate} ${aggregateId}`,
-      {events}
-    );
-    return events;
   }
 }
