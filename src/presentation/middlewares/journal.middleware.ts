@@ -4,7 +4,7 @@ import {Token} from 'src/domain/data-fetching/projections/token';
 import {Subscription} from 'src/domain/subscription';
 import {eventBus} from 'src/infrastructure/service-container';
 
-export const journalMiddleware = (
+export const journalMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -18,7 +18,7 @@ export const journalMiddleware = (
   }
   const timeSpent = new Date().getTime() - startTime;
   const subscription = getSubscriptionFromRoute(req.path);
-  eventBus.publish(
+  await eventBus.publish(
     new TokenConsumed(
       token.applicationId,
       new Date(),

@@ -31,19 +31,19 @@ export class BullEventBus implements EventBus {
     });
   }
 
-  publish(event: Event): void {
+  async publish(event: Event): Promise<void> {
     this.logger.log('debug', `Publishing ${event.constructor.name} event`);
     switch (event.constructor) {
       case TokenNotFound:
       case TokenConsumed:
       case ResponseSent:
-        this.tokenEventQueue.add(event.constructor.name, {
+        await this.tokenEventQueue.add(event.constructor.name, {
           ...event,
           traceId: getCurrentHub().getScope()?.getTransaction()?.traceId,
         });
         break;
       default:
-        this.applicationEventQueue.add(event.constructor.name, {
+        await this.applicationEventQueue.add(event.constructor.name, {
           ...event,
           traceId: getCurrentHub().getScope()?.getTransaction()?.traceId,
         });

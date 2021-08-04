@@ -26,9 +26,11 @@ export class ApplicationTransactionManager {
     );
     application = handler(application);
 
-    application.getPendingEvents().forEach(event => {
-      this.eventBus.publish(event);
-    });
+    await Promise.all(
+      application.getPendingEvents().map(event => {
+        return this.eventBus.publish(event);
+      })
+    );
     this.logger.log(
       'debug',
       `End of transaction for application "${application.name}"`,
@@ -43,7 +45,7 @@ export class ApplicationTransactionManager {
     await Promise.all(
       application.getPendingEvents().map(async event => {
         await this.eventStore.append(event);
-        this.eventBus.publish(event);
+        await this.eventBus.publish(event);
       })
     );
     this.logger.log(

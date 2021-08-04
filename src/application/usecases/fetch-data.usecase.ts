@@ -27,7 +27,9 @@ export class FetchDataUsecase {
       return this.dataProviderClient.consumeDgfip(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
-        this.eventBus.publish(new TokenNotFound('', new Date(), tokenValue));
+        await this.eventBus.publish(
+          new TokenNotFound('', new Date(), tokenValue)
+        );
       }
       throw error;
     }
@@ -45,7 +47,9 @@ export class FetchDataUsecase {
       return this.dataProviderClient.consumeCnaf(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
-        this.eventBus.publish(new TokenNotFound('', new Date(), tokenValue));
+        await this.eventBus.publish(
+          new TokenNotFound('', new Date(), tokenValue)
+        );
       }
       throw error;
     }

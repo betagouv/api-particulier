@@ -13,9 +13,11 @@ import {pgPool} from 'test/integration/config';
 
   console.log(`Publishing ${events.length} events`);
 
-  events.forEach(event => {
-    eventBus.publish(event);
-  });
+  await Promise.all(
+    events.map(event => {
+      return eventBus.publish(event);
+    })
+  );
 
   await pgPool.end();
   console.log('Disconnected');
