@@ -22,6 +22,7 @@ import {
   applicationEventQueueName,
   tokenEventQueueName,
 } from 'src/infrastructure/event-bus/bull.event-bus';
+import {redisConnection} from 'src/infrastructure/configuration/redis';
 
 const app = express();
 const logger = logFor('Server');
@@ -29,8 +30,12 @@ const serverAdapter = new ExpressAdapter();
 
 createBullBoard({
   queues: [
-    new BullMQAdapter(new Queue(applicationEventQueueName)),
-    new BullMQAdapter(new Queue(tokenEventQueueName)),
+    new BullMQAdapter(
+      new Queue(applicationEventQueueName, {connection: redisConnection})
+    ),
+    new BullMQAdapter(
+      new Queue(tokenEventQueueName, {connection: redisConnection})
+    ),
   ],
   serverAdapter,
 });
