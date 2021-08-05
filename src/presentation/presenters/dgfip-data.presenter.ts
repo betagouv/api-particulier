@@ -1,5 +1,5 @@
 import {format} from 'date-fns';
-import {get, has, identity, set} from 'lodash';
+import {get, identity, set} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {logFor} from 'src/domain/logger';
 
