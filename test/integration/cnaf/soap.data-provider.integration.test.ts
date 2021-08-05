@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';

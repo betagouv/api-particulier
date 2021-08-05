@@ -1,5 +1,4 @@
 const {pgPool} = require('./config');
-// eslint-disable-next-line node/no-unpublished-require
 const {default: pgMigrate} = require('node-pg-migrate');
 const {redisConnection} = require('./config');
 

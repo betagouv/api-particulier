@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {parseEuro} from 'src/infrastructure/data-providers/dgfip/parsing-functions';
 

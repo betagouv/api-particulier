@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {readFileSync} from 'fs';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';

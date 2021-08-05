@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-require
 const register = require('@babel/register').default;
 
 register({

@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {ApplicationId} from 'src/domain/application-id';
 import {Token} from 'src/domain/data-fetching/projections/token';

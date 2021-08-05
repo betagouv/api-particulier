@@ -1,6 +1,4 @@
-// eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'ts-sinon';
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {ApplicationId} from 'src/domain/application-id';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';

@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {IntrospectUsecase} from 'src/application/usecases/introspect.usecase';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';

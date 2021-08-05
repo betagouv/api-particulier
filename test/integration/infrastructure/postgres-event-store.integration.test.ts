@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {EventStore} from 'src/domain/event-store';

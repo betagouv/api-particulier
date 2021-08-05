@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
 import {ApplicationId} from 'src/domain/application-id';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';

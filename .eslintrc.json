@@ -1,3 +1,8 @@
 {
-  "extends": "./node_modules/gts/"
+  "extends": "./node_modules/gts/",
+  "env": {"node": true},
+  "rules": {
+    "node/no-unpublished-import" : 0,
+    "node/no-unpublished-require" : 0
+  }
 }

@@ -1,7 +1,6 @@
 /* eslint-disable no-irregular-whitespace */
 import {SvairDataProvider} from '.';
 import axios from 'axios';
-// eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';

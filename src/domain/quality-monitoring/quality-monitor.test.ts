@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
 import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
 import {Logger, setInstance} from 'src/domain/logger';

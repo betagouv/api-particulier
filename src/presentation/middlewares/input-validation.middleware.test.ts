@@ -1,5 +1,4 @@
 import {Request, Response} from 'express';
-// eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
 import {z} from 'zod';
 import {inputValidationMiddlewareBuilder} from 'src/presentation/middlewares/input-validation.middleware';

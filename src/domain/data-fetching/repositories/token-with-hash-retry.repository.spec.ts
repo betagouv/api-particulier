@@ -1,11 +1,9 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {TokenValue} from 'src/domain/token-value';
-// eslint-disable-next-line node/no-unpublished-import
 import {stubInterface} from 'ts-sinon';
 
 describe('The hash retry token repository', () => {

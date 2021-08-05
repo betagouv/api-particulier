@@ -1,5 +1,4 @@
 import axios from 'axios';
-// eslint-disable-next-line node/no-unpublished-import
 import MockAdapter from 'axios-mock-adapter';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';

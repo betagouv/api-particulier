@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {mock} from 'jest-mock-extended';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';

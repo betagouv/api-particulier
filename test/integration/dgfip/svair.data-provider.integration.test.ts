@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unpublished-import
 import {expect} from 'chai';
 import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
