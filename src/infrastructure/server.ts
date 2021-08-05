@@ -23,6 +23,7 @@ import {
   tokenEventQueueName,
 } from 'src/infrastructure/event-bus/bull.event-bus';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
+import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-validation.middleware';
 
 const app = express();
 const logger = logFor('Server');
@@ -68,6 +69,7 @@ app.use(Sentry.Handlers.tracingHandler());
 
 app.get(
   '/api/impots/svair',
+  apiKeyValidationMiddleware,
   timingMiddleware,
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
@@ -77,6 +79,7 @@ app.get(
 );
 app.get(
   '/api/v2/avis-imposition',
+  apiKeyValidationMiddleware,
   timingMiddleware,
   discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
