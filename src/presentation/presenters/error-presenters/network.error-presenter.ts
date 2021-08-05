@@ -19,6 +19,6 @@ export const networkErrorPresenter: ErrorPresenter<NetworkError> = (
     statusCode: error.status ?? 503,
     error: snakeCase(error.name),
     reason: error.message,
-    message: "Une erreur est survenue lors de l'appel du fournisseur de donnée",
+    message: "Une erreur est survenue lors de l'appel au fournisseur de donnée",
   };
 };

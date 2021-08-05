@@ -25,6 +25,7 @@ import {
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-validation.middleware';
 import {introspectController} from 'src/presentation/controllers/introspect.controller';
+import {pingControllerBuilder} from 'src/presentation/controllers/ping.controller';
 
 const app = express();
 const logger = logFor('Server');
@@ -114,6 +115,15 @@ app.get(
   '/api/introspect',
   apiKeyValidationMiddleware,
   introspectController,
+  manageErrorMiddleware
+);
+
+app.get(
+  '/api/impots/ping',
+  pingControllerBuilder('/api/v2/avis-imposition', {
+    numeroFiscal: process.env.TEST_TAX_NUMBER,
+    referenceAvis: process.env.TEST_TAX_NOTICE_NUMBER,
+  }),
   manageErrorMiddleware
 );
 
