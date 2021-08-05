@@ -1,3 +1,4 @@
+import {expect} from 'chai';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {DgfipDataPresenter} from 'src/presentation/presenters/dgfip-data.presenter';
 
@@ -17,19 +18,17 @@ describe('The DGFIP data presenter', () => {
 
     const output = dgfipDataPresenter.presentData(input, false);
 
-    expect(output.montantImpot).toBeUndefined();
+    expect(output.montantImpot).to.be.undefined;
   });
 
   it('sets null values when needed', () => {
     const input: Partial<DgfipOutput> = {
-      montantImpot: undefined,
       revenuFiscalReference: undefined,
     };
 
     const output = dgfipDataPresenter.presentData(input, true);
 
-    expect(output.montantImpot).toBeUndefined();
-    expect(output.revenuFiscalReference).toBeNull();
+    expect(output.revenuFiscalReference).to.be.null;
   });
 
   it('formats dates', () => {
@@ -39,7 +38,7 @@ describe('The DGFIP data presenter', () => {
 
     const output = dgfipDataPresenter.presentData(input, true);
 
-    expect(output.dateEtablissement).toEqual('31/01/2020');
-    expect(output.dateRecouvrement).toBeUndefined();
+    expect(output.dateEtablissement).to.equal('31/01/2020');
+    expect(output.dateRecouvrement).to.be.undefined;
   });
 });
