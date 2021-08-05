@@ -26,6 +26,7 @@ import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-validation.middleware';
 import {introspectController} from 'src/presentation/controllers/introspect.controller';
 import {pingControllerBuilder} from 'src/presentation/controllers/ping.controller';
+import {Request, Response} from 'express';
 
 const app = express();
 const logger = logFor('Server');
@@ -126,6 +127,19 @@ app.get(
   }),
   manageErrorMiddleware
 );
+
+app.get(
+  '/api/caf/ping',
+  pingControllerBuilder('/api/v2/composition-familiale', {
+    codePostal: process.env.TEST_CODE_POSTAL,
+    numeroAllocataire: process.env.TEST_NUMERO_ALLOCATAIRE,
+  }),
+  manageErrorMiddleware
+);
+
+app.get('/api/ping', (req: Request, res: Response) => {
+  res.json('pong');
+});
 
 app.listen(process.env.PORT || 3000, () => {
   logger.log('info', `App listening on port ${process.env.PORT || 3000}`);
