@@ -2,6 +2,7 @@ import {format} from 'date-fns';
 import {CnafOutput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {logFor} from 'src/domain/logger';
+import cnafErrors from 'src/presentation/presenters/cnaf-errors.json';
 
 const formatDate = (date?: Date) => {
   if (!date) {
@@ -34,21 +35,24 @@ export class CnafDataPresenter {
   }
 
   presentError(error: CnafError) {
-    switch (error.errorCode) {
-      case 141:
-        return {
-          statusCode: 404,
-          error: 'not_found',
-          reason: 'Non droit. Le document ne peut être édité.',
-          message: 'Non droit. Le document ne peut être édité.',
-        };
-      default:
-        return {
-          statusCode: 404,
-          error: 'not_found',
-          reason: 'Non droit. Le document ne peut être édité.',
-          message: 'Non droit. Le document ne peut être édité.',
-        };
+    type CnafErrors = {[key: string]: {msg: string; code: number}};
+    const foundError = (cnafErrors as unknown as CnafErrors)[
+      error.errorCode.toString()
+    ];
+    if (!foundError) {
+      return {
+        statusCode: 503,
+        error: 'data_provider_error',
+        reason: `Unknown error code ${error.errorCode}`,
+        message: 'Erreur inconnue du fournisseur de donnée CAF',
+      };
     }
+
+    return {
+      statusCode: foundError.code,
+      error: 'not_found',
+      reason: foundError.msg,
+      message: foundError.msg,
+    };
   }
 }

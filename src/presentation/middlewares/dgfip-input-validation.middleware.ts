@@ -6,11 +6,11 @@ export const dgfipInputSchema = z
     referenceAvis: z
       .string()
       .nonempty()
-      .transform(str => str.replace(/[^a-zA-Z0-9]/g, '')),
+      .transform(str => str.replace(/[^a-zA-Z0-9]/g, '').slice(0, 13)),
     numeroFiscal: z
       .string()
       .nonempty()
-      .transform(str => str.replace(/[^a-zA-Z0-9]/g, '')),
+      .transform(str => str.replace(/[^a-zA-Z0-9]/g, '').slice(0, 13)),
   })
   .transform(obj => ({
     taxNoticeNumber: obj.referenceAvis,

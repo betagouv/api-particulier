@@ -9,7 +9,7 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "type-check": "tsc --noEmit",
-    "compile": "babel src --out-dir build --extensions \".ts,.js\"",
+    "compile": "babel src --out-dir build --extensions \".ts,.js\" --copy-files",
     "fix": "gts fix",
     "migrate": "ts-node -r dotenv/config node_modules/.bin/node-pg-migrate -j ts",
     "build": "npm run type-check && npm run compile",
