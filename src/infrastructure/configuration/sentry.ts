@@ -9,4 +9,5 @@ export const sentryOptions: NodeOptions = {
   environment: process.env.ENV,
   maxValueLength: 2000,
   enabled: process.env.SENTRY_ENABLED === 'true',
+  release: process.env.ENV + '@' + process.env.GIT_REV,
 };
