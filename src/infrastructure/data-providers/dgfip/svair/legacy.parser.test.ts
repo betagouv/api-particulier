@@ -1,5 +1,5 @@
 import {InvalidCredentialsError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error';
-import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-format.error';
+import {InvalidFormatError} from 'src/domain/data-fetching/errors/invalid-format.error';
 import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/errors/rate-limited.error';
 
 const fs = require('fs');

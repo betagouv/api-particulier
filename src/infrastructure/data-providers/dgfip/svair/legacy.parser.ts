@@ -12,7 +12,7 @@ const {
 } = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error');
 const {
   InvalidFormatError,
-} = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-format.error');
+} = require('../../../../domain/data-fetching/errors/invalid-format.error');
 const {parseEuro, parseDateOrString} = require('../parsing-functions');
 
 export const result = function parseResult(html) {

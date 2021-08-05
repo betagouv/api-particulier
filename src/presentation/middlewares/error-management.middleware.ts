@@ -3,7 +3,7 @@ import {Request, Response, NextFunction} from 'express';
 import {snakeCase} from 'lodash';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {InvalidCredentialsError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error';
-import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-format.error';
+import {InvalidFormatError} from 'src/domain/data-fetching/errors/invalid-format.error';
 import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/errors/rate-limited.error';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';

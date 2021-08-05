@@ -1,5 +1,5 @@
 export class InvalidFormatError extends Error {
   constructor() {
-    super('DGFIP returned an invalid data format.');
+    super('Data provider returned an invalid data format.');
   }
 }

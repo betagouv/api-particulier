@@ -1,7 +1,7 @@
 import {CnafOutput} from '../../../../domain/data-fetching/data-providers/cnaf/dto';
 import {parse} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
-import {InvalidFormatError} from 'src/domain/data-fetching/data-providers/cnaf/errors/invalid-format.error';
+import {InvalidFormatError} from 'src/domain/data-fetching/errors/invalid-format.error';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {isArray, isObject, isUndefined, omitBy, unescape} from 'lodash';
 
