@@ -14,11 +14,12 @@ describe('The DGFIP data presenter', () => {
       anneeImpots: 2020,
       anneeRevenus: 2021,
       nombreParts: 2,
+      montantImpot: undefined,
     };
 
     const output = dgfipDataPresenter.presentData(input, false);
 
-    expect(output.montantImpot).to.be.undefined;
+    expect(output.montantImpot).to.be.null;
   });
 
   it('sets null values when needed', () => {
