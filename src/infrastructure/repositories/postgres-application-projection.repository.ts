@@ -40,7 +40,7 @@ export class PostgresApplicationProjectionRepository
       rawApplication.id,
       rawApplication.name,
       rawApplication.user_emails as UserEmail[],
-      rawApplication.scope as AnyScope[],
+      rawApplication.scopes as AnyScope[],
       rawApplication.subscriptions as Subscription[],
       rawApplication.data_pass_id,
       rawApplication.created_at

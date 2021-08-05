@@ -24,6 +24,7 @@ import {
 } from 'src/infrastructure/event-bus/bull.event-bus';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-validation.middleware';
+import {introspectController} from 'src/presentation/controllers/introspect.controller';
 
 const app = express();
 const logger = logFor('Server');
@@ -107,6 +108,13 @@ app.get(
   fetchCnafDataControllerBuidler(),
   manageErrorMiddleware,
   journalMiddleware
+);
+
+app.get(
+  '/api/introspect',
+  apiKeyValidationMiddleware,
+  introspectController,
+  manageErrorMiddleware
 );
 
 app.listen(process.env.PORT || 3000, () => {

@@ -31,6 +31,7 @@ import {PostgresApplicationProjectionRepository} from 'src/infrastructure/reposi
 import {ApplicationProjector} from 'src/domain/application-management/projectors/application-projection.projector';
 import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
 import {IntrospectUsecase} from 'src/application/usecases/introspect.usecase';
+import {IntrospectDataPresenter} from 'src/presentation/presenters/introspect-data.presenter';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -106,6 +107,9 @@ localLogger.log('info', 'DGFIP data presenter initialized');
 
 export const cnafDataPresenter = new CnafDataPresenter();
 localLogger.log('info', 'CNAF data presenter initialized');
+
+export const introspectDataPresenter = new IntrospectDataPresenter();
+localLogger.log('info', 'Introspect data presenter initialized');
 
 export const legacyApiClient = new AxiosLegacyApiClient();
 localLogger.log('info', 'Legacy API client initialized');
