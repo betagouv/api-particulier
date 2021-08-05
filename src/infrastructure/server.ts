@@ -90,6 +90,7 @@ app.get(
 
 app.get(
   '/api/caf/famille',
+  apiKeyValidationMiddleware,
   timingMiddleware,
   discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,
@@ -99,6 +100,7 @@ app.get(
 );
 app.get(
   '/api/v2/composition-familiale',
+  apiKeyValidationMiddleware,
   timingMiddleware,
   discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,

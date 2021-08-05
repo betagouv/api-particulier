@@ -1,4 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
+import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
+import {TokenValue} from 'src/domain/token-value';
 import * as z from 'zod';
 
 export async function apiKeyValidationMiddleware(
@@ -12,7 +14,7 @@ export async function apiKeyValidationMiddleware(
     .safeParseAsync(req.header('X-Api-Key'));
 
   if (!headerValidation.success) {
-    return next(headerValidation.error);
+    return next(new TokenNotFoundError('' as TokenValue));
   }
   next();
 }

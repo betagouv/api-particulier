@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {Request, Response} from 'express';
+import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-validation.middleware';
 import sinon, {stubInterface} from 'ts-sinon';
 
@@ -13,6 +14,8 @@ describe('The Api key validation middleware', () => {
 
     await apiKeyValidationMiddleware(req, res, next);
 
-    expect(next).to.have.been.calledOnceWith(sinon.match.defined);
+    expect(next).to.have.been.calledWithMatch(
+      sinon.match.instanceOf(TokenNotFoundError)
+    );
   });
 });
