@@ -16,9 +16,11 @@ describe('The DGFIP data presenter', () => {
       montantImpot: undefined,
     };
 
-    const output = dgfipDataPresenter.presentData(input, false);
+    const outputWithoutNulls = dgfipDataPresenter.presentData(input, false);
+    expect(outputWithoutNulls.montantImpot).toBeUndefined();
 
-    expect(output.montantImpot).toBeNull();
+    const outputWithNulls = dgfipDataPresenter.presentData(input, true);
+    expect(outputWithNulls.montantImpot).toBeNull();
   });
 
   it('sets null values when needed', () => {

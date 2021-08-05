@@ -23,8 +23,8 @@ describe('Parse ', () => {
       expect(parseEuro('1 665 €\n\t\t\t\t\t')).to.equal(1665);
     });
 
-    it('returns 0 if no data', () => {
-      expect(parseEuro('')).to.equal(0);
+    it('returns undefined if no data', () => {
+      expect(parseEuro('')).to.be.undefined;
     });
   });
 });

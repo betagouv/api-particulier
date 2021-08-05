@@ -1,8 +1,11 @@
-export function parseEuro(str?: string) {
+export function parseEuro(str?: string): number | undefined {
   if (str === undefined) {
-    return str;
+    return undefined;
   }
   const data = str.replace(/[^0-9]/g, '');
+  if (data === '') {
+    return undefined;
+  }
   return isNumeric(data) ? parseInt(data) : 0;
 }
 

@@ -18,11 +18,11 @@ export type DgfipOutput = {
   nombreParts?: number;
   situationFamille?: string;
   nombrePersonnesCharge?: number;
-  revenuBrutGlobal?: number | null;
-  revenuImposable?: number | null;
+  revenuBrutGlobal?: number;
+  revenuImposable?: number;
   impotRevenuNetAvantCorrections?: number | null;
   montantImpot?: number | null;
-  revenuFiscalReference?: number | null;
+  revenuFiscalReference?: number;
   foyerFiscal: {
     annee?: number;
     adresse?: string;

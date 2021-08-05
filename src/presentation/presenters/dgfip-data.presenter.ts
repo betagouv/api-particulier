@@ -3,7 +3,7 @@ import {get, has, identity, set} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {logFor} from 'src/domain/logger';
 
-const formatDate = (date?: Date) => {
+const dateToString = (date?: Date) => {
   if (!date) {
     return '';
   }
@@ -13,17 +13,27 @@ const formatDate = (date?: Date) => {
     return '';
   }
 };
-
-const formatUndefined = (value?: unknown) =>
-  value === undefined || value === null ? undefined : value;
-const formatNull = (value?: unknown) => (value === undefined ? null : value);
-const formatYears = (value?: number) =>
+const dateToStringOrUndefined = (date?: Date) => {
+  if (date === undefined) {
+    return undefined;
+  }
+  return dateToString(date);
+};
+const undefinedToNull = (value?: unknown) =>
+  value === undefined ? null : value;
+const yearToString = (value?: number) =>
   value === undefined ? '' : value.toString();
-const formatDateOrString = (date?: Date | string) => {
+const dateOrStringToStringOrUndefined = (date?: Date | string) => {
   if (typeof date === 'string') {
     return date;
   }
-  return formatDate(date);
+  return dateToStringOrUndefined(date);
+};
+const dateOrStringToString = (date?: Date | string) => {
+  if (typeof date === 'string') {
+    return date;
+  }
+  return dateToString(date);
 };
 
 export class DgfipDataPresenter {
@@ -31,35 +41,33 @@ export class DgfipDataPresenter {
 
   presentData(input: Partial<DgfipOutput>, withNulls: boolean) {
     const config = {
-      'declarant1.nom': formatUndefined,
-      'declarant1.nomNaissance': formatUndefined,
-      'declarant1.prenoms': formatUndefined,
-      'declarant1.dateNaissance': formatDateOrString,
-      'declarant2.nom': formatUndefined,
-      'declarant2.nomNaissance': formatUndefined,
-      'declarant2.prenoms': formatUndefined,
-      'declarant2.dateNaissance': formatDateOrString,
-      'foyerFiscal.adresse': formatUndefined,
+      'declarant1.nom': identity,
+      'declarant1.nomNaissance': identity,
+      'declarant1.prenoms': identity,
+      'declarant1.dateNaissance': dateOrStringToString,
+      'declarant2.nom': identity,
+      'declarant2.nomNaissance': identity,
+      'declarant2.prenoms': identity,
+      'declarant2.dateNaissance': dateOrStringToString,
+      'foyerFiscal.adresse': identity,
       'foyerFiscal.annee': identity,
-      dateRecouvrement: formatDateOrString,
-      dateEtablissement: formatDate,
-      nombreParts: formatUndefined,
-      situationFamille: formatUndefined,
-      revenuBrutGlobal: withNulls ? formatNull : formatUndefined,
-      revenuImposable: withNulls ? formatNull : formatUndefined,
-      impotRevenuNetAvantCorrections: formatNull,
-      montantImpot: formatNull,
-      revenuFiscalReference: withNulls ? formatNull : formatUndefined,
+      dateRecouvrement: dateOrStringToStringOrUndefined,
+      dateEtablissement: dateOrStringToString,
+      nombreParts: identity,
+      situationFamille: identity,
+      revenuBrutGlobal: withNulls ? undefinedToNull : identity,
+      revenuImposable: withNulls ? undefinedToNull : identity,
+      impotRevenuNetAvantCorrections: withNulls ? undefinedToNull : identity,
+      montantImpot: withNulls ? undefinedToNull : identity,
+      revenuFiscalReference: withNulls ? undefinedToNull : identity,
       nombrePersonnesCharge: identity,
-      anneeImpots: formatYears,
-      anneeRevenus: formatYears,
+      anneeImpots: yearToString,
+      anneeRevenus: yearToString,
       erreurCorrectif: identity,
       situationPartielle: identity,
     };
 
-    const presentKeys = Object.keys(config).filter(key => has(input, key));
-
-    const result = presentKeys.reduce((result, key) => {
+    const result = Object.keys(config).reduce((result, key) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return set(result, key, config[key](get(input, key)));

@@ -48,6 +48,9 @@ export const result = function parseResult(html) {
   const declarantMappingBySrc = _.keyBy(compactedDeclarantMapping, 'src');
 
   function getImpot(value) {
+    if (value === undefined) {
+      return undefined;
+    }
     if (value.trim() === 'Non imposable') {
       return null;
     }
@@ -113,9 +116,11 @@ export const result = function parseResult(html) {
       result.declarant2[mappingEntry.dest] = data || '';
     } else if (cells.length === 2 && rowHeading in mappingBySrc) {
       const mappingEntry = mappingBySrc[rowHeading];
-      if (cells[1].firstChild) {
+      if (cells[1].firstChild !== undefined) {
         if (mappingEntry.fn) {
-          result[mappingEntry.dest] = mappingEntry.fn(cells[1].firstChild.data);
+          result[mappingEntry.dest] = mappingEntry.fn(
+            cells[1].firstChild?.data
+          );
         } else {
           result[mappingEntry.dest] = cells[1].firstChild.data;
         }
