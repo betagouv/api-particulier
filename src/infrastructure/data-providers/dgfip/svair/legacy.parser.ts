@@ -70,7 +70,7 @@ export const result = function parseResult(html) {
       fn: _.parseInt,
     },
     revenuBrutGlobal: {src: 'Revenu brut global', fn: parseEuro},
-    revenuImposable: {src: 'Revenu imposable', fn: parseEuro},
+    revenuImposable: {src: 'Revenu imposable', fn: getImpot},
     impotRevenuNetAvantCorrections: {
       src: 'Impôt sur le revenu net avant corrections',
       fn: getImpot,
