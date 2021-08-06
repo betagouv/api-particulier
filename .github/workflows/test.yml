@@ -26,6 +26,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run test
+      - run: npm run test2
       - run: npm run test:integration
         env:
           CAF_CERTIFICATE: ${{ secrets.CAF_CERTIFICATE }}
@@ -52,4 +53,4 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: 58d135b01479962c6a2aa07b51c29fd2251904da10bd164bdd85d943230c5a1e
         with:
-          coverageCommand: npm run test -- --coverage
+          coverageCommand: npm run coverage
