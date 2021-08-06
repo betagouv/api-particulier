@@ -1,1 +1,1 @@
-export type Subscription = 'DGFIP' | 'CNAF';
+export type Subscription = 'DGFIP' | 'CNAF' | 'POLE_EMPLOI';

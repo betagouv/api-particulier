@@ -61,6 +61,9 @@ const getApplicationToImport = async (
     if (row.scopes[0].indexOf('cnaf') !== -1) {
       subscriptions.push('CNAF');
     }
+    if (row.scopes[0].indexOf('pole_emploi') !== -1) {
+      subscriptions.push('POLE_EMPLOI');
+    }
     const filteredLegacyTokenHash = row.legacy_token_hash.filter(
       (hash: string) => hash !== null
     );
