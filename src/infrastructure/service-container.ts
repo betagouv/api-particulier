@@ -32,6 +32,8 @@ import {ApplicationProjector} from 'src/domain/application-management/projectors
 import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
 import {IntrospectUsecase} from 'src/application/usecases/introspect.usecase';
 import {IntrospectDataPresenter} from 'src/presentation/presenters/introspect-data.presenter';
+import {RandomTokenValueFactory} from 'src/infrastructure/token-value.factory';
+import {CreateApplicationUsecase} from 'src/application/usecases/create-application.usecase';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -76,6 +78,9 @@ localLogger.log('info', 'Data provider client initialized');
 
 export const uuidFactory = new UuidFactory();
 localLogger.log('info', 'Uuid factory initialized');
+
+export const tokenValueFactory = new RandomTokenValueFactory(uuidFactory);
+localLogger.log('info', 'Token value factory initialized');
 
 export const redisTokenProjector = new TokenProjector(redisTokenRepository);
 localLogger.log('info', 'Redis token projector initialized');
@@ -146,3 +151,10 @@ export const introspectUsecase = new IntrospectUsecase(
   redisTokenRepository
 );
 localLogger.log('info', 'Introspect usecase initialized');
+
+export const createApplicationUsecase = new CreateApplicationUsecase(
+  applicationTransactionManager,
+  uuidFactory,
+  tokenValueFactory
+);
+localLogger.log('info', 'Create application usecase initialized');

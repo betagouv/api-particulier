@@ -12,18 +12,21 @@ export class CreateApplicationUsecase {
   ) {}
 
   async createApplication(createApplicationDto: CreateApplicationDto) {
-    await this.applicationTransactionManager.applyToNew(() => {
-      const application = Application.create(
-        createApplicationDto.name,
-        createApplicationDto.dataPassId,
-        createApplicationDto.subscriptions,
-        createApplicationDto.scopes,
-        createApplicationDto.userEmails,
-        this.uuidFactory,
-        this.tokenValueFactory
-      );
+    const application = await this.applicationTransactionManager.applyToNew(
+      () => {
+        const application = Application.create(
+          createApplicationDto.name,
+          createApplicationDto.dataPassId,
+          createApplicationDto.subscriptions,
+          createApplicationDto.scopes,
+          createApplicationDto.userEmails,
+          this.uuidFactory,
+          this.tokenValueFactory
+        );
 
-      return application;
-    });
+        return application;
+      }
+    );
+    return application;
   }
 }

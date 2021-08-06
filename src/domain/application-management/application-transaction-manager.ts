@@ -17,7 +17,7 @@ export class ApplicationTransactionManager {
   async apply(
     handler: (application: Application) => Application,
     applicationId: ApplicationId
-  ): Promise<void> {
+  ) {
     let application = await this.applicationRepository.find(applicationId);
     this.logger.log(
       'debug',
@@ -36,6 +36,8 @@ export class ApplicationTransactionManager {
       `End of transaction for application "${application.name}"`,
       {application}
     );
+
+    return application;
   }
 
   async applyToNew(handler: () => Application) {
@@ -53,6 +55,6 @@ export class ApplicationTransactionManager {
       `End of transaction for application "${application.name}"`,
       {application}
     );
-    return;
+    return application;
   }
 }
