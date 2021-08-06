@@ -8,14 +8,14 @@ import {expect} from 'chai';
 
 describe('Svair data provider', () => {
   const svairDataProvider = new SvairDataProvider();
-  const mock = new MockAdapter(axios);
   const expectedViewState = 'the-view-state';
-
+  let mock: MockAdapter;
   after(() => {
     svairDataProvider.throttledGetViewState.cancel();
   });
 
   beforeEach(() => {
+    mock = new MockAdapter(axios);
     mock
       .onGet()
       .reply(
