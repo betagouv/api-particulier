@@ -1,4 +1,3 @@
-import {captureException} from '@sentry/node';
 import {snakeCase} from 'lodash';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {logFor} from 'src/domain/logger';
