@@ -35,7 +35,7 @@ export const fetchCnafDataControllerBuidler =
       const data = await fetchDataUsecase.fetchCnafData(
         tokenValue,
         res.locals.input,
-        req.path,
+        req.baseUrl + req.path,
         (token: Token) => {
           res.locals.token = token;
         }

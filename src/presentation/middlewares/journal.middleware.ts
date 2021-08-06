@@ -17,13 +17,13 @@ export const journalMiddleware = async (
     throw new Error('No startTime found in locals');
   }
   const timeSpent = new Date().getTime() - startTime;
-  const subscription = getSubscriptionFromRoute(req.path);
+  const subscription = getSubscriptionFromRoute(req.baseUrl + req.path);
   await eventBus.publish(
     new TokenConsumed(
       token.applicationId,
       new Date(),
       subscription,
-      req.path,
+      req.baseUrl + req.path,
       res.statusCode,
       timeSpent
     )
