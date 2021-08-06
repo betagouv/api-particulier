@@ -8,7 +8,7 @@ export const createApplicationDtoSchema = z
     data_pass_id: z.string().nonempty(),
     technical_contact_email: z.string().email().nonempty(),
     author_email: z.string().email().nonempty(),
-    scopes: z.array(z.string().nonempty()),
+    scopes: z.array(z.string().nonempty()).nonempty(),
   })
   .transform(obj => ({
     name: obj.name,

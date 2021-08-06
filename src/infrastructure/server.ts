@@ -27,6 +27,9 @@ import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-v
 import {introspectController} from 'src/presentation/controllers/introspect.controller';
 import {pingControllerBuilder} from 'src/presentation/controllers/ping.controller';
 import {Request, Response} from 'express';
+import {createApplicationValidationMiddleware} from 'src/presentation/middlewares/create-application-validation.middleware';
+import {createApplicationController} from 'src/presentation/controllers/create-application.controller';
+import {json} from 'body-parser';
 
 const app = express();
 const logger = logFor('Server');
@@ -140,6 +143,15 @@ app.get(
 app.get('/api/ping', (req: Request, res: Response) => {
   res.json('pong');
 });
+
+app.post(
+  '/api/applications',
+  json(),
+  apiKeyValidationMiddleware,
+  createApplicationValidationMiddleware,
+  createApplicationController,
+  manageErrorMiddleware
+);
 
 app.listen(process.env.PORT || 3000, () => {
   logger.log('info', `App listening on port ${process.env.PORT || 3000}`);
