@@ -2,8 +2,8 @@
   "name": "api-particulier",
   "version": "3.0.0",
   "scripts": {
-    "test": "mocha \"src/**/*.spec.ts\"",
-    "coverage": "nyc --reporter=lcov mocha \"src/**/*.spec.ts\"",
+    "test": "mocha \"src/**/*.test.ts\"",
+    "coverage": "nyc --reporter=lcov mocha \"src/**/*.test.ts\"",
     "test:integration": "mocha -r dotenv/config -r test/integration/database-register.js \"test/**/*.test.ts\"",
     "lint": "gts lint",
     "clean": "gts clean",
