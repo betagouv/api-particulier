@@ -16,7 +16,7 @@ describe('The create application validation middleware', () => {
     req.body = {
       name: 'Croute',
       author_email: authorEmail,
-      data_pass_id: '12345',
+      data_pass_id: 12345,
       technical_contact_email: technicalContactEmail,
       scopes: ['yolo', 'croute'],
     };
@@ -35,7 +35,7 @@ describe('The create application validation middleware', () => {
     req.body = {
       name: 'Croute',
       author_email: technicalContactEmail,
-      data_pass_id: '12345',
+      data_pass_id: 12345,
       technical_contact_email: technicalContactEmail,
       scopes: ['yolo', 'croute'],
     };
