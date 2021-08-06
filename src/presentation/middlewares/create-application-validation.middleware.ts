@@ -16,6 +16,7 @@ export const createApplicationDtoSchema = z
     userEmails: uniq(
       [obj.technical_contact_email, obj.author_email].filter(identity)
     ),
+    scopes: obj.scopes,
   }));
 
 export const createApplicationValidationMiddleware =
