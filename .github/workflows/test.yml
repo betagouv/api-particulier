@@ -26,7 +26,6 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run test
-      - run: npm run test2
       - run: npm run test:integration
         env:
           CAF_CERTIFICATE: ${{ secrets.CAF_CERTIFICATE }}
