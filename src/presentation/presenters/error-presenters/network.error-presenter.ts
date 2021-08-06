@@ -13,7 +13,6 @@ export const networkErrorPresenter: ErrorPresenter<NetworkError> = (
     error: error,
     stack: error.stack,
   });
-  captureException(error);
 
   return {
     statusCode: error.status ?? 503,
