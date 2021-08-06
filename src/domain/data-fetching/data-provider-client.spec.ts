@@ -15,13 +15,16 @@ import {
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
+import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/pole-emploi/data-provider';
 
 describe('The data provider client', () => {
   const cnafDataProvider = sinon.stubInterface<CnafDataProvider>();
   const dgfipDataProvider = sinon.stubInterface<DgfipDataProvider>();
+  const poleEmploiDataProvider = sinon.stubInterface<PoleEmploiDataProvider>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
-    dgfipDataProvider
+    dgfipDataProvider,
+    poleEmploiDataProvider
   );
 
   const noSubscriptionToken = new Token(

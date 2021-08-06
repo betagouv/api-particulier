@@ -1,6 +1,7 @@
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
+import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
@@ -45,6 +46,26 @@ export class FetchDataUsecase {
       const token = await this.tokenRepository.findByTokenValue(tokenValue);
       setCurrentToken(token);
       return this.dataProviderClient.consumeCnaf(input, token, route);
+    } catch (error) {
+      if (error instanceof TokenNotFoundError) {
+        await this.eventBus.publish(
+          new TokenNotFound('', new Date(), tokenValue)
+        );
+      }
+      throw error;
+    }
+  }
+
+  async fetchPoleEmploiData(
+    tokenValue: TokenValue,
+    input: PoleEmploiInput,
+    route: string,
+    setCurrentToken: (token: Token) => void
+  ) {
+    try {
+      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      setCurrentToken(token);
+      return this.dataProviderClient.consumePoleEmploi(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
         await this.eventBus.publish(

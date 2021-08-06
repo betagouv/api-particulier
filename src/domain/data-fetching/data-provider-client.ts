@@ -8,6 +8,8 @@ import {unifiedScopesConfiguration} from 'src/domain/scopes';
 import {PropertyBasedScopesFilter} from 'src/domain/data-fetching/scopes-filters/property-based.scopes-filter';
 import {DataProvider} from 'src/domain/data-fetching/data-providers/data-provider';
 import {Subscription} from 'src/domain/subscription';
+import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
+import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/pole-emploi/data-provider';
 
 const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
   unifiedScopesConfiguration
@@ -16,7 +18,8 @@ const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
 export class DataProviderClient {
   constructor(
     private readonly cnafDataProvider: CnafDataProvider,
-    private readonly dgfipDataProvider: DgfipDataProvider
+    private readonly dgfipDataProvider: DgfipDataProvider,
+    private readonly poleEmploiDataProvider: PoleEmploiDataProvider
   ) {}
 
   consumeDgfip(input: DgfipInput, token: Token, route: string) {
@@ -36,6 +39,16 @@ export class DataProviderClient {
       route,
       this.cnafDataProvider,
       'CNAF'
+    );
+  }
+
+  consumePoleEmploi(input: PoleEmploiInput, token: Token, route: string) {
+    return this.callDataProvider(
+      input,
+      token,
+      route,
+      this.poleEmploiDataProvider,
+      'POLE_EMPLOI'
     );
   }
 

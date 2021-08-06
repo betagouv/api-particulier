@@ -11,6 +11,7 @@ import {
   DgfipInput,
   DgfipOutput,
 } from 'src/domain/data-fetching/data-providers/dgfip/dto';
+import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/pole-emploi/data-provider';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
@@ -18,9 +19,11 @@ import {TokenValue} from 'src/domain/token-value';
 describe('The data provider client', () => {
   const cnafDataProvider = mock<CnafDataProvider>();
   const dgfipDataProvider = mock<DgfipDataProvider>();
+  const poleEmploiDataProvider = mock<PoleEmploiDataProvider>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
-    dgfipDataProvider
+    dgfipDataProvider,
+    poleEmploiDataProvider
   );
 
   const noSubscriptionToken = new Token(

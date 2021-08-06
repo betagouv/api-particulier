@@ -7,6 +7,7 @@ export type PoleEmploiInput = {
 };
 
 export type PoleEmploiOutput = {
+  identifiant: PoleEmploiId;
   adresse: {
     INSEECommune: string;
     codePostal: string;
@@ -17,8 +18,8 @@ export type PoleEmploiOutput = {
     ligneComplementDestinataire: string;
     ligneComplementDistribution: string;
   };
-  categorieInscription: string;
-  libellecategorieInscription: string;
+  codeCategorieInscription?: number;
+  libelleCategorieInscription: string;
   civilite: string;
   codeCertificationCNAV: string;
   dateCessationInscription: Date;

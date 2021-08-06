@@ -34,6 +34,7 @@ import {IntrospectUsecase} from 'src/application/usecases/introspect.usecase';
 import {IntrospectDataPresenter} from 'src/presentation/presenters/introspect-data.presenter';
 import {RandomTokenValueFactory} from 'src/infrastructure/token-value.factory';
 import {CreateApplicationUsecase} from 'src/application/usecases/create-application.usecase';
+import {PoleEmploiApiDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-api.data-provider';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -69,10 +70,13 @@ localLogger.log(
     process.env.SANDBOXED ? 'stubbed' : 'real'
   }`
 );
+const poleEmploiDataProvider = new PoleEmploiApiDataProvider();
+localLogger.log('info', 'Pole Emploi data provider initialized');
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
-  dgfipDataProvider
+  dgfipDataProvider,
+  poleEmploiDataProvider
 );
 localLogger.log('info', 'Data provider client initialized');
 
