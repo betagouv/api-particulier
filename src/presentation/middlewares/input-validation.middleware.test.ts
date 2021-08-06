@@ -9,22 +9,9 @@ describe('The input validation middleware', () => {
       yolo: z.string(),
     })
   );
-  it('checks for the API key', async () => {
-    const req = {
-      header: jest.fn(),
-    } as unknown as Request;
-    const res = mock<Response>();
-    const next = jest.fn();
-
-    await middleware(req, res, next);
-
-    expect(next).toHaveBeenCalledTimes(1);
-    expect(next.mock.calls[0][0].format()).toEqual({_errors: ['Required']});
-  });
 
   it('checks for input correctness', async () => {
     const req = {
-      header: jest.fn().mockReturnValue('The api key'),
       query: {
         croute: 'yolo',
       },
@@ -42,7 +29,6 @@ describe('The input validation middleware', () => {
 
   it('passes when everything is ok', async () => {
     const req = {
-      header: jest.fn().mockReturnValue('The api key'),
       query: {
         yolo: 'croute',
       },

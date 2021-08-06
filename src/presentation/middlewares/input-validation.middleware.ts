@@ -3,24 +3,17 @@ import {ParsedQs} from 'qs';
 import * as z from 'zod';
 
 export function inputValidationMiddlewareBuilder<O extends ParsedQs, D, I>(
-  inputSchema: z.ZodSchema<O, D, I>
+  inputSchema: z.ZodSchema<O, D, I>,
+  source: 'query' | 'body' = 'query'
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const headerValidation = await z
-      .string()
-      .safeParseAsync(req.header('X-Api-Key'));
-
-    if (!headerValidation.success) {
-      return next(headerValidation.error);
-    }
-
-    const inputValidation = await inputSchema.safeParseAsync(req.query);
+    const inputValidation = await inputSchema.safeParseAsync(req[source]);
 
     if (!inputValidation.success) {
       return next(inputValidation.error);
     }
 
-    res.locals.input = inputSchema.parse(req.query);
+    res.locals.input = inputSchema.parse(req[source]);
     next();
   };
 }

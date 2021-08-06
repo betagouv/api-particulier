@@ -13,9 +13,7 @@ describe('The input validation middleware', () => {
   );
 
   it('checks for input correctness', async () => {
-    const req = {
-      header: stub().returns('The api key'),
-    } as unknown as Request;
+    const req = {} as unknown as Request;
     const res = stubInterface<Response>();
     const next = stub();
 
@@ -26,7 +24,6 @@ describe('The input validation middleware', () => {
 
   it('passes when everything is ok', async () => {
     const req = {
-      header: stub().returns('The api key'),
       query: {
         yolo: 'croute',
       },
@@ -37,5 +34,41 @@ describe('The input validation middleware', () => {
     await middleware(req, res, next);
 
     expect(next).to.have.been.calledOnceWithExactly();
+  });
+
+  it('checks in the request body if needed', async () => {
+    const bodyMiddleware = inputValidationMiddlewareBuilder(
+      z.object({
+        yolo: z.string(),
+      }),
+      'body'
+    );
+    const req = {
+      body: {
+        yolo: 'croute',
+      },
+    } as unknown as Request;
+
+    const res = stubInterface<Response>();
+    const next = stub();
+
+    await bodyMiddleware(req, res, next);
+
+    expect(next).to.have.been.calledOnceWithExactly();
+  });
+
+  it('sets the parsing result in the res.locals.input variable', async () => {
+    const req = {
+      query: {
+        yolo: 'croute',
+      },
+    } as unknown as Request;
+
+    const res = stubInterface<Response>();
+    const next = stub();
+
+    await middleware(req, res, next);
+
+    expect(res.locals.input).to.deep.equal(req.query);
   });
 });
