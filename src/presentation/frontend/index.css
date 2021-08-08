@@ -1,3 +1,7 @@
+@import '@gouvfr/dsfr/dist/css/dsfr.css';
+@import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import '@gouvfr/all/dist/css/all.css';
+.reset > p {
+  @apply m-2;
+}
