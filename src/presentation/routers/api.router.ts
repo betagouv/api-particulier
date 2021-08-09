@@ -4,6 +4,7 @@ import {createApplicationController} from 'src/presentation/controllers/create-a
 import {
   fetchCnafDataControllerBuidler,
   fetchDgfipDataControllerBuidler,
+  fetchPoleEmploiDataControllerBuidler,
 } from 'src/presentation/controllers/fetch-data.controller';
 import {introspectController} from 'src/presentation/controllers/introspect.controller';
 import {pingControllerBuilder} from 'src/presentation/controllers/ping.controller';
@@ -15,6 +16,7 @@ import {discrepancyCheckerMiddleware} from 'src/presentation/middlewares/discrep
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
 import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware';
 import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
+import {poleEmploiInputValidationMiddleware} from 'src/presentation/middlewares/pole-emploi-input-validation.middleware';
 
 export const apiRouter = Router();
 
@@ -56,6 +58,17 @@ apiRouter.get(
   discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
+  manageErrorMiddleware,
+  journalMiddleware
+);
+
+apiRouter.get(
+  '/v2/situations-pole-emploi',
+  apiKeyValidationMiddleware,
+  timingMiddleware,
+  discrepancyCheckerMiddleware,
+  poleEmploiInputValidationMiddleware,
+  fetchPoleEmploiDataControllerBuidler(),
   manageErrorMiddleware,
   journalMiddleware
 );
