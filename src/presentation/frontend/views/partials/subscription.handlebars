@@ -5,7 +5,7 @@
         <div class="flex-1 text-center mx-4">
             <input data-clipboard-target="source" type="textarea" value="{{ token }}" readonly
                 class="absolute opacity-0 -left-32">
-            <div class="select-all">{{ token }}</div>
+            <div class="select-all truncate max-w-prose">{{ token }}</div>
         </div>
         <button data-action="clipboard#copy" data-clipboard-target="button" class="rf-btn hidden">Copier dans le
             presse-papier</button>
