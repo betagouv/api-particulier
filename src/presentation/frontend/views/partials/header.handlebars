@@ -1,0 +1,31 @@
+<header class="rf-header" role="banner">
+    <div class="rf-container">
+        <div class="rf-header__body">
+            <div class="rf-header__brand">
+                <a class="rf-logo" href="#" title="République française">
+                    <span class="rf-logo__title">
+                        API<br>
+                        Particulier
+                    </span>
+                </a>
+            </div>
+            <div class="rf-header__navbar">
+                <div class="rf-service">
+                    <a class="rf-service__title" href="#" title="Nom du service">
+                        Portail développeur
+                    </a>
+                    <p class="rf-service__tagline">Gérez vos accès à API Particulier en toute simplicité</p>
+                </div>
+            </div>
+            <div class="rf-header__tools" x-data="{ dropdown: false }">
+                <div class="rf-shortcuts relative">
+                    <ul class="rf-shortcuts__list">
+                        <li class="rf-shortcuts__item">
+                            <a class="rf-link rf-fi-account-line" target="_self" @click="dropdown = !dropdown">
+                                {{ user.email }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</header>

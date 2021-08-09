@@ -1,0 +1,13 @@
+<div class="rf-mt-4w container mx-auto mb-auto px-4 xl:px-0">
+    <h3>Détails de votre jeton d'accès</h3>
+    {{#if subscriptions}}
+    {{#each subscriptions}}
+    {{> subscription }}
+    {{/each}}
+    <br>
+    <h3>Quel faire de mon jeton ?</h3>
+    <p>Transmettez ce jeton au <strong>responsable technique</strong> de l'application qui intègre API Particulier.</p>
+    {{else}}
+    {{> noToken }}
+    {{/if}}
+</div>

@@ -12,7 +12,7 @@ const css = () => {
 const js = () => {
   return gulp.src('./src/presentation/frontend/index.ts').pipe(
     gulpEsbuild({
-      outfile: 'main.js',
+      outfile: 'index.js',
       bundle: true,
       minify: true,
       sourcemap: true,

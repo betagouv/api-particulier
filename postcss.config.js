@@ -26,7 +26,7 @@ module.exports = {
       purge: false,
     }),
     autoprefixer(),
-    purgecss,
+    // purgecss,
     require('cssnano'),
   ],
 };
