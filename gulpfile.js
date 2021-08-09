@@ -1,23 +1,34 @@
 const gulp = require('gulp');
-const postcss = require('gulp-postcss');
+const gulpPostcss = require('gulp-postcss');
 const gulpEsbuild = require('gulp-esbuild');
 
-const css = () => {
+const postcss = () => {
   return gulp
     .src('./src/presentation/frontend/index.css')
-    .pipe(postcss())
+    .pipe(gulpPostcss())
     .pipe(gulp.dest('./public'));
 };
 
+const fonts = () => {
+  return gulp
+    .src('node_modules/@gouvfr/dsfr/dist/fonts/*')
+    .pipe(gulp.dest('./public/fonts'));
+};
+
+const css = gulp.parallel(postcss, fonts);
+
 const js = () => {
-  return gulp.src('./src/presentation/frontend/index.ts').pipe(
-    gulpEsbuild({
-      outfile: 'index.js',
-      bundle: true,
-      minify: true,
-      sourcemap: true,
-    }).pipe(gulp.dest('./public'))
-  );
+  return gulp
+    .src('./src/presentation/frontend/index.ts')
+    .pipe(
+      gulpEsbuild({
+        outfile: 'index.js',
+        bundle: true,
+        minify: true,
+        sourcemap: true,
+      })
+    )
+    .pipe(gulp.dest('./public'));
 };
 
 exports.dev = () => {
