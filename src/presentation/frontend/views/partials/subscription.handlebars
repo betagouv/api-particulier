@@ -1,12 +1,14 @@
+{{#each tokens as |token|}}
 <div class="rf-tile rf-tile--horizontal rf-mb-4w">
     <div data-controller="clipboard" class="rf-m-4w w-full flex flex-row items-center">
-        <div><strong>{{ name }}</strong></div>
+        <div><strong>{{ ../name }}</strong></div>
         <div class="flex-1 text-center mx-4">
-            <input data-clipboard-target="source" type="textarea" value="{{#each tokens}}{{ this }}{{/each}}" readonly
+            <input data-clipboard-target="source" type="textarea" value="{{ token }}" readonly
                 class="absolute opacity-0 -left-32">
-            <div class="select-all">{{#each tokens}}{{ this }}{{/each}}</div>
+            <div class="select-all">{{ token }}</div>
         </div>
         <button data-action="clipboard#copy" data-clipboard-target="button" class="rf-btn hidden">Copier dans le
             presse-papier</button>
     </div>
 </div>
+{{/each}}

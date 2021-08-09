@@ -6,7 +6,6 @@ export const listApplications = async (req: Request, res: Response) => {
   const applications = await applicationProjectionRepository.findAllByUserEmail(
     'croute' as UserEmail
   );
-  console.log(applications[0]);
 
   res.render('index', {applications, user: {email: 'croute@lol.fr'}});
 };
