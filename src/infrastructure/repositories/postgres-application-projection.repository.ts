@@ -63,8 +63,8 @@ export class PostgresApplicationProjectionRepository
       'debug',
       `Finding application projections for user "${userEmail}"`
     );
-    const query = 'SELECT * FROM applications';
-    const values = [] as never[];
+    const query = 'SELECT * FROM applications WHERE user_emails ? $1';
+    const values = [userEmail];
 
     const result = await this.pg.query(query, values);
 
