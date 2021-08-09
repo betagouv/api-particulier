@@ -33,7 +33,10 @@ const js = () => {
 
 exports.dev = () => {
   gulp.watch(
-    'src/presentation/frontend/index.css',
+    [
+      'src/presentation/frontend/index.css',
+      'src/presentation/frontend/views/**/*.handlebars',
+    ],
     {ignoreInitial: false},
     css
   );

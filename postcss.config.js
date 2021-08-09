@@ -23,7 +23,8 @@ module.exports = {
   plugins: [
     postcssImport(),
     tailwincss({
-      purge: false,
+      purge: ['**/*.handlebars'],
+      darkMode: false,
     }),
     purgecss,
     autoprefixer(),
