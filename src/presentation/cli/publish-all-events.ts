@@ -15,6 +15,10 @@ import {redisConnection} from 'src/infrastructure/configuration/redis';
   const eventBus = new BullEventBus(redisConnection);
   const events = await eventStore.listEvents();
 
+  console.log('Removing projections');
+
+  await postgresPool.query('DELETE FROM applications');
+
   console.log(`Publishing ${events.length} events`);
 
   await Promise.all(

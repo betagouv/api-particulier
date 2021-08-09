@@ -43,7 +43,8 @@ export class PostgresApplicationProjectionRepository
       rawApplication.scopes as AnyScope[],
       rawApplication.subscriptions as Subscription[],
       rawApplication.data_pass_id,
-      rawApplication.created_at
+      rawApplication.created_at,
+      rawApplication.tokens
     );
 
     this.logger.log(
@@ -55,6 +56,40 @@ export class PostgresApplicationProjectionRepository
     return application;
   }
 
+  async findAllByUserEmail(
+    userEmail: UserEmail
+  ): Promise<ApplicationProjection[]> {
+    this.logger.log(
+      'debug',
+      `Finding application projections for user "${userEmail}"`
+    );
+    const query = 'SELECT * FROM applications';
+    const values = [] as never[];
+
+    const result = await this.pg.query(query, values);
+
+    const applications = result.rows.map(
+      rawApplication =>
+        new ApplicationProjection(
+          rawApplication.id,
+          rawApplication.name,
+          rawApplication.user_emails as UserEmail[],
+          rawApplication.scopes as AnyScope[],
+          rawApplication.subscriptions as Subscription[],
+          rawApplication.data_pass_id,
+          rawApplication.created_at,
+          rawApplication.tokens
+        )
+    );
+
+    this.logger.log(
+      'debug',
+      `Found application projections for user "${userEmail}"`
+    );
+
+    return applications;
+  }
+
   async save(applicationProjection: ApplicationProjection): Promise<void> {
     this.logger.log(
       'debug',
@@ -62,7 +97,7 @@ export class PostgresApplicationProjectionRepository
       {applicationProjection}
     );
     const query =
-      'INSERT INTO applications(id, name, scopes, subscriptions, data_pass_id, user_emails, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+      'INSERT INTO applications(id, name, scopes, subscriptions, data_pass_id, user_emails, created_at, tokens) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
     const values = [
       applicationProjection.id,
       applicationProjection.name,
@@ -71,6 +106,7 @@ export class PostgresApplicationProjectionRepository
       applicationProjection.dataPassId,
       JSON.stringify(applicationProjection.userEmails),
       applicationProjection.createdAt,
+      JSON.stringify(applicationProjection.tokens),
     ];
 
     await this.pg.query(query, values);

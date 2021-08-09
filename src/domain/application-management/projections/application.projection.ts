@@ -11,6 +11,7 @@ export class ApplicationProjection {
     readonly scopes: AnyScope[],
     readonly subscriptions: Subscription[],
     readonly dataPassId: string,
-    readonly createdAt: Date
+    readonly createdAt: Date,
+    readonly tokens: string[]
   ) {}
 }

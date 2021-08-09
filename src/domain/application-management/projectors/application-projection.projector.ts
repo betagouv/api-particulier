@@ -10,16 +10,6 @@ export class ApplicationProjector {
   ) {}
 
   async onApplicationCreated(event: ApplicationCreated): Promise<void> {
-    return this.saveNewApplicationProjection(event);
-  }
-
-  async onApplicationImported(event: ApplicationImported): Promise<void> {
-    return this.saveNewApplicationProjection(event);
-  }
-
-  private async saveNewApplicationProjection(
-    event: ApplicationCreated | ApplicationImported
-  ): Promise<void> {
     const applicationProjection = new ApplicationProjection(
       event.aggregateId as ApplicationId,
       event.name,
@@ -27,7 +17,23 @@ export class ApplicationProjector {
       event.scopes,
       event.subscriptions,
       event.dataPassId,
-      event.date
+      event.date,
+      [event.tokenValue]
+    );
+
+    return this.applicationProjectionRepository.save(applicationProjection);
+  }
+
+  async onApplicationImported(event: ApplicationImported): Promise<void> {
+    const applicationProjection = new ApplicationProjection(
+      event.aggregateId as ApplicationId,
+      event.name,
+      event.userEmails,
+      event.scopes,
+      event.subscriptions,
+      event.dataPassId,
+      event.date,
+      event.tokens.map(({value}) => value)
     );
 
     return this.applicationProjectionRepository.save(applicationProjection);
