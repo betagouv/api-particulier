@@ -8,21 +8,23 @@ export const discrepancyCheckerMiddleware = (
   next: NextFunction
 ) => {
   const initialMethod = res.json;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  res.json = (data: object) => {
-    initialMethod.call(res, data);
-    eventBus.publish(
-      new ResponseSent(
-        res.locals?.token?.applicationId ?? '',
-        new Date(),
-        req.path,
-        req.query,
-        req.headers,
-        res.statusCode,
-        data
-      )
-    );
-  };
+  if (process.env.MONITOR_QUALITY === 'true') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    res.json = (data: object) => {
+      initialMethod.call(res, data);
+      eventBus.publish(
+        new ResponseSent(
+          res.locals?.token?.applicationId ?? '',
+          new Date(),
+          req.path,
+          req.query,
+          req.headers,
+          res.statusCode,
+          data
+        )
+      );
+    };
+  }
   next();
 };

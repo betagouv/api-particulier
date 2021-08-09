@@ -85,7 +85,7 @@ apiRouter.get(
   manageErrorMiddleware
 );
 
-apiRouter.get('/ping', (req: Request, res: Response) => {
+apiRouter.get('/ping', (_req: Request, res: Response) => {
   res.json('pong');
 });
 
