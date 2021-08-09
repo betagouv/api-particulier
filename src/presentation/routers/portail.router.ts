@@ -5,7 +5,6 @@ import {listApplications} from 'src/presentation/controllers/list-applications.c
 import {Issuer, Strategy, TokenSet} from 'openid-client';
 import passport from 'passport';
 import session from 'express-session';
-import {UserEmail} from 'src/domain/application-management/user';
 
 export const initPortail = (app: Express) => {
   app.engine('handlebars', expressHandlebars());
@@ -47,7 +46,13 @@ passport.deserializeUser((user, done) => {
 
 export const portailRouter = Router();
 
-portailRouter.use(session({secret: process.env.SESSION_SECRET!}));
+portailRouter.use(
+  session({
+    secret: process.env.SESSION_SECRET!,
+    saveUninitialized: true,
+    resave: true,
+  })
+);
 portailRouter.use(passport.initialize());
 portailRouter.use(passport.session());
 portailRouter.get('/', listApplications);
