@@ -28,7 +28,7 @@ module.exports = {
     purgecss,
     autoprefixer(),
     postcssUrl({
-      assetsPath: path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist'),
+      assetsPath: path.join(__dirname, 'node_modules/@gouvfr/all/dist'),
     }),
     require('cssnano'),
   ],
