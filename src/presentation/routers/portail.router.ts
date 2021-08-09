@@ -1,4 +1,4 @@
-import express, {Express, Router, Request, Response} from 'express';
+import express, {Express, Router} from 'express';
 import expressHandlebars from 'express-handlebars';
 import path from 'path';
 import {listApplications} from 'src/presentation/controllers/list-applications.controller';

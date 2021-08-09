@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 import {Request, Response} from 'express';
 
 export const pingControllerBuilder =
@@ -18,7 +18,8 @@ export const pingControllerBuilder =
       );
       status = response.status;
     } catch (error) {
-      status = error.statusCode ?? 500;
+      const axiosError = error as AxiosError;
+      status = axiosError.response?.status ?? 500;
     }
 
     if (status < 500) {

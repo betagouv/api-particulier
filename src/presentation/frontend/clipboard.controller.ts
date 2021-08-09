@@ -2,8 +2,8 @@ import {Controller} from 'stimulus';
 
 export default class extends Controller {
   static targets = ['source', 'button'];
-  sourceTarget: any;
-  buttonTarget: any;
+  sourceTarget!: Element;
+  buttonTarget!: Element;
 
   connect() {
     if (document.queryCommandSupported('copy')) {
@@ -12,6 +12,8 @@ export default class extends Controller {
   }
 
   copy() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     this.sourceTarget.select();
     document.execCommand('copy');
     this.buttonTarget.innerHTML = 'Jeton copié !';
