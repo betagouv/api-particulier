@@ -8,6 +8,7 @@ export const redirectToPortailDomain = (
   // eslint-disable-next-line node/no-unsupported-features/node-builtins
   if (req.hostname !== new URL(process.env.BASE_URL!).hostname) {
     res.redirect(process.env.BASE_URL!);
+    return;
   }
   next();
 };
