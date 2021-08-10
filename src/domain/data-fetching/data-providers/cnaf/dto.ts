@@ -3,7 +3,7 @@ export type CnafInput = {
   codePostal: string;
 };
 
-type Person = {
+export type Person = {
   nomPrenom: string;
   dateDeNaissance: Date;
   sexe: string;
