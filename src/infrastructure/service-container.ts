@@ -35,6 +35,7 @@ import {IntrospectDataPresenter} from 'src/presentation/presenters/introspect-da
 import {RandomTokenValueFactory} from 'src/infrastructure/token-value.factory';
 import {CreateApplicationUsecase} from 'src/application/usecases/create-application.usecase';
 import {PoleEmploiApiDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-api.data-provider';
+import {AirtableCnafDataProvider} from 'src/infrastructure/data-providers/cnaf/airtable';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -58,8 +59,16 @@ localLogger.log('info', 'Postgres token repository initialized');
 export const eventBus: EventBus = new BullEventBus(redisConnection);
 localLogger.log('info', 'Event bus initialized');
 
-const cnafDataProvider = new SoapDataProvider();
-localLogger.log('info', 'CNAF data provider initialized');
+const cnafDataProvider =
+  process.env.SANDBOXED === 'false'
+    ? new SoapDataProvider()
+    : new AirtableCnafDataProvider();
+localLogger.log(
+  'info',
+  `CNAF data provider initialized - ${
+    process.env.SANDBOXED ? 'stubbed' : 'real'
+  }`
+);
 const dgfipDataProvider =
   process.env.SANDBOXED === 'false'
     ? new SvairDataProvider()
