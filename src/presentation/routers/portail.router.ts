@@ -5,6 +5,7 @@ import {listApplications} from 'src/presentation/controllers/list-applications.c
 import {Issuer, Strategy, TokenSet} from 'openid-client';
 import passport from 'passport';
 import session from 'express-session';
+import {redirectToPortailDomain} from 'src/presentation/middlewares/redirect-to-portail-domain.middleware';
 
 export const initPortail = (app: Express) => {
   app.engine('handlebars', expressHandlebars());
@@ -55,7 +56,7 @@ portailRouter.use(
 );
 portailRouter.use(passport.initialize());
 portailRouter.use(passport.session());
-portailRouter.get('/', listApplications);
+portailRouter.get('/', redirectToPortailDomain, listApplications);
 portailRouter.get('/login', passport.authenticate('openid'));
 portailRouter.get(
   '/callback',
