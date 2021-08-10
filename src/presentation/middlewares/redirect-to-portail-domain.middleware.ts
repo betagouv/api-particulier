@@ -5,7 +5,8 @@ export const redirectToPortailDomain = (
   res: Response,
   next: NextFunction
 ) => {
-  if (req.protocol + '://' + req.header('host') !== process.env.BASE_URL) {
+  // eslint-disable-next-line node/no-unsupported-features/node-builtins
+  if (req.hostname !== new URL(process.env.BASE_URL!).hostname) {
     res.redirect(process.env.BASE_URL!);
   }
   next();
