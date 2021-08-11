@@ -1,0 +1,3579 @@
+[
+  {
+    "numeroAllocataire": "0000354",
+    "codePostal": "99148",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARIE DUPONT",
+          "dateDeNaissance": "12111971",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "JEAN DUPONT",
+          "dateDeNaissance": "18101969",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "LUCIE DUPONT",
+          "dateDeNaissance": "11122016",
+          "sexe": "F"
+        }
+      ],
+      "adresse": {
+        "identite": "Madame MARIE DUPONT",
+        "complementIdentiteGeo": "ESCALIER B",
+        "numeroRue": "123 RUE BIDON",
+        "codePostalVille": "12345 CONDAT",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 1754,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "0000001",
+    "codePostal": "75001",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BENJAMIN ARNOUX",
+          "dateDeNaissance": "25011973",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "FRANCOISE ARNOUX",
+          "dateDeNaissance": "25061978",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "GABRIEL ARNOUX",
+          "dateDeNaissance": "14072010",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JULIE ARNOUX",
+          "dateDeNaissance": "23122008",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "MALCOM ARNOUX",
+          "dateDeNaissance": "03062012",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Monsieur Benjamin Arnoux",
+        "complementIdentiteGeo": "",
+        "numeroRue": "34 rue Rivoli",
+        "codePostalVille": "75001 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "0000002",
+    "codePostal": "75002",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "CLOVIS HEBERT",
+          "dateDeNaissance": "12031968",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "EMILIE HEBERT",
+          "dateDeNaissance": "19111970",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "GABRIEL HEBERT",
+          "dateDeNaissance": "14072010",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JULIE HEBERT",
+          "dateDeNaissance": "23122008",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "MALCOM HEBERT",
+          "dateDeNaissance": "03062012",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC HEBERT",
+          "dateDeNaissance": "01052009",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Madame Emilie HEBERT",
+        "complementIdentiteGeo": "Escalier D",
+        "numeroRue": "7 rue Montmartre",
+        "codePostalVille": "75002 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 400,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "0000003",
+    "codePostal": "75003",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BERTRAND SIROIS",
+          "dateDeNaissance": "07081975",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JUDITH SIROIS",
+          "dateDeNaissance": "01041980",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [],
+      "adresse": {
+        "identite": "Monsieur Bertrand Sirois",
+        "complementIdentiteGeo": "",
+        "numeroRue": "21 rue Charlot",
+        "codePostalVille": "75003 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999001",
+    "codePostal": "33810",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "LOUISE ITALIE",
+          "dateDeNaissance": "01011967",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC ITALIE",
+          "dateDeNaissance": "01011989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE ITALIE",
+          "dateDeNaissance": "01012000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN ITALIE",
+          "dateDeNaissance": "01012001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme Italie Louise",
+        "complementIdentiteGeo": "",
+        "numeroRue": "28 Rue de la Prairie",
+        "codePostalVille": "33810 AMBES",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999002",
+    "codePostal": "33110",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "JEANINE ROME ",
+          "dateDeNaissance": "01011968",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC ROME ",
+          "dateDeNaissance": "01021989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE ROME ",
+          "dateDeNaissance": "01022000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN ROME ",
+          "dateDeNaissance": "01022001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme ROME Jeanine",
+        "complementIdentiteGeo": "",
+        "numeroRue": "29 Rue de la Prairie",
+        "codePostalVille": "33110 LE BOUSCAT",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 300,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999003",
+    "codePostal": "33130",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "KATIA PADOU",
+          "dateDeNaissance": "01011969",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC PADOU",
+          "dateDeNaissance": "01031989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE PADOU",
+          "dateDeNaissance": "01032000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN PADOU",
+          "dateDeNaissance": "01032001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme PADOU Katia",
+        "complementIdentiteGeo": "",
+        "numeroRue": "30 Rue de la Prairie",
+        "codePostalVille": "33130 BEGLES",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999004",
+    "codePostal": "33290",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ISABELLE VENISE ",
+          "dateDeNaissance": "01011970",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC VENISE ",
+          "dateDeNaissance": "01041989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE VENISE ",
+          "dateDeNaissance": "01042000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN VENISE ",
+          "dateDeNaissance": "01042001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme VENISE Isabelle",
+        "complementIdentiteGeo": "",
+        "numeroRue": "31 Rue de la Prairie",
+        "codePostalVille": "33290 BLANQUEFORT",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999005",
+    "codePostal": "33140",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ANTOINE BARI ",
+          "dateDeNaissance": "01011971",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC BARI ",
+          "dateDeNaissance": "01051989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE BARI ",
+          "dateDeNaissance": "01052000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN BARI ",
+          "dateDeNaissance": "01052001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. BARI Antoine",
+        "complementIdentiteGeo": "",
+        "numeroRue": "32 Rue de la Prairie",
+        "codePostalVille": "33140 VILLENAVE D ORNON",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999006",
+    "codePostal": "33270",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "FLEUR TRIESTE",
+          "dateDeNaissance": "01011972",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC TRIESTE",
+          "dateDeNaissance": "01061989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE TRIESTE",
+          "dateDeNaissance": "01062000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN TRIESTE",
+          "dateDeNaissance": "01062001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme TRIESTE Fleur",
+        "complementIdentiteGeo": "",
+        "numeroRue": "33 Rue de la Prairie",
+        "codePostalVille": "33270 BOULIAC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999007",
+    "codePostal": "33151",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "VICTOR CALVI",
+          "dateDeNaissance": "01011973",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC CALVI",
+          "dateDeNaissance": "01071989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE CALVI",
+          "dateDeNaissance": "01072000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN CALVI",
+          "dateDeNaissance": "01072001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. CALVI Victor",
+        "complementIdentiteGeo": "",
+        "numeroRue": "34 Rue de la Prairie",
+        "codePostalVille": "33150 CENON",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999008",
+    "codePostal": "33560",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ELENA SYRACUSE",
+          "dateDeNaissance": "01011974",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC SYRACUSE",
+          "dateDeNaissance": "01081989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE SYRACUSE",
+          "dateDeNaissance": "01082000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN SYRACUSE",
+          "dateDeNaissance": "01082001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SYRACUSE Elena",
+        "complementIdentiteGeo": "",
+        "numeroRue": "35 Rue de la Prairie",
+        "codePostalVille": "33560 CARBON BLANC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999009",
+    "codePostal": "33160",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BRIGITTE SARDAIGNE",
+          "dateDeNaissance": "01011975",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC SARDAIGNE",
+          "dateDeNaissance": "01091989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE SARDAIGNE",
+          "dateDeNaissance": "01092000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN SARDAIGNE",
+          "dateDeNaissance": "01092001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SARDAIGNE Brigitte",
+        "complementIdentiteGeo": "",
+        "numeroRue": "36 Rue de la Prairie",
+        "codePostalVille": "33160 ST AUBIN DE MEDOC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999010",
+    "codePostal": "33170",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ROMAIN CORSE",
+          "dateDeNaissance": "01011976",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC CORSE",
+          "dateDeNaissance": "01101989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE CORSE",
+          "dateDeNaissance": "01102000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN CORSE",
+          "dateDeNaissance": "01102001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M.CORSE Romain",
+        "complementIdentiteGeo": "",
+        "numeroRue": "37 Rue de la Prairie",
+        "codePostalVille": "33170 GRADIGNAN",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999011",
+    "codePostal": "33185",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "LUCIE HAWAÏ",
+          "dateDeNaissance": "01011977",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC HAWAÏ",
+          "dateDeNaissance": "01111989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE HAWAÏ",
+          "dateDeNaissance": "01112000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN HAWAÏ",
+          "dateDeNaissance": "01112001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme HAWAÏ Lucie",
+        "complementIdentiteGeo": "",
+        "numeroRue": "38 Rue de la Prairie",
+        "codePostalVille": "33185 LE HAILLAN",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999012",
+    "codePostal": "33270",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ALEXANDRA NEW-YORK",
+          "dateDeNaissance": "01011978",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC NEW-YORK",
+          "dateDeNaissance": "01121989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE NEW-YORK",
+          "dateDeNaissance": "01122000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN NEW-YORK",
+          "dateDeNaissance": "01122001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme NEW-YORK Alexandra",
+        "complementIdentiteGeo": "",
+        "numeroRue": "39 Rue de la Prairie",
+        "codePostalVille": "33270 FLOIRAC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999013",
+    "codePostal": "33310",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "KÉVIN FLORIDE",
+          "dateDeNaissance": "01011979",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC FLORIDE",
+          "dateDeNaissance": "01131989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE FLORIDE",
+          "dateDeNaissance": "01132000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN FLORIDE",
+          "dateDeNaissance": "01132001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. FLORIDE Kévin",
+        "complementIdentiteGeo": "",
+        "numeroRue": "40 Rue de la Prairie",
+        "codePostalVille": "33310 LORMONT",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999014",
+    "codePostal": "33320",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARTIN KEYS",
+          "dateDeNaissance": "01011980",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC KEYS",
+          "dateDeNaissance": "01141989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE KEYS",
+          "dateDeNaissance": "01142000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN KEYS",
+          "dateDeNaissance": "01142001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M.KEYS Martin",
+        "complementIdentiteGeo": "",
+        "numeroRue": "41 Rue de la Prairie",
+        "codePostalVille": "33320 EYSINES",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999015",
+    "codePostal": "33320",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PATRICE NAMIBIE",
+          "dateDeNaissance": "01011981",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC NAMIBIE",
+          "dateDeNaissance": "01151989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE NAMIBIE",
+          "dateDeNaissance": "01152000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN NAMIBIE",
+          "dateDeNaissance": "01152001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M.NAMIBIE Patrice",
+        "complementIdentiteGeo": "",
+        "numeroRue": "42 Rue de la Prairie",
+        "codePostalVille": "33320 LE TAILLAN MEDOC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999016",
+    "codePostal": "33370",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MICHEL KENYA",
+          "dateDeNaissance": "01011982",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC KENYA",
+          "dateDeNaissance": "01161989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE KENYA",
+          "dateDeNaissance": "01162000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN KENYA",
+          "dateDeNaissance": "01162001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M.KENYA Michel",
+        "complementIdentiteGeo": "",
+        "numeroRue": "43 Rue de la Prairie",
+        "codePostalVille": "33370 ARTIGUES PRES BORDEAUX",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999017",
+    "codePostal": "33127",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MUGUETTE MAROC",
+          "dateDeNaissance": "01011983",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC MAROC",
+          "dateDeNaissance": "01171989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE MAROC",
+          "dateDeNaissance": "01172000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN MAROC",
+          "dateDeNaissance": "01172001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme MAROC Muguette",
+        "complementIdentiteGeo": "",
+        "numeroRue": "44 Rue de la Prairie",
+        "codePostalVille": "33127 MARTIGNAS SUR JALLE",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999018",
+    "codePostal": "33440",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "HUGUETTE SENEGAL",
+          "dateDeNaissance": "01011984",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC SENEGAL",
+          "dateDeNaissance": "01181989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE SENEGAL",
+          "dateDeNaissance": "01182000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN SENEGAL",
+          "dateDeNaissance": "01182001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SENEGAL Huguette",
+        "complementIdentiteGeo": "",
+        "numeroRue": "45 Rue de la Prairie",
+        "codePostalVille": "33440 AMBARES ET LAGRAVE",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999019",
+    "codePostal": "33290",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "JOSEPH TUNISIE",
+          "dateDeNaissance": "01011985",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC TUNISIE",
+          "dateDeNaissance": "01191989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE TUNISIE",
+          "dateDeNaissance": "01192000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN TUNISIE",
+          "dateDeNaissance": "01192001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. TUNISIE Joseph",
+        "complementIdentiteGeo": "",
+        "numeroRue": "46 Rue de la Prairie",
+        "codePostalVille": "33290 PAREMPUYRE",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999020",
+    "codePostal": "33440",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ANTONIO OMAN",
+          "dateDeNaissance": "01011986",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC OMAN",
+          "dateDeNaissance": "01201989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE OMAN",
+          "dateDeNaissance": "01202000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN OMAN",
+          "dateDeNaissance": "01202001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. OMAN Antonio",
+        "complementIdentiteGeo": "",
+        "numeroRue": "47 Rue de la Prairie",
+        "codePostalVille": "33440 ST LOUIS DE MONTFERRANT",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999021",
+    "codePostal": "33520",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARINA ALBEROBELLO",
+          "dateDeNaissance": "01011987",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC ALBEROBELLO",
+          "dateDeNaissance": "01211989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE ALBEROBELLO",
+          "dateDeNaissance": "01212000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN ALBEROBELLO",
+          "dateDeNaissance": "01212001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme ALBEROBELLO Marina",
+        "complementIdentiteGeo": "",
+        "numeroRue": "48 Rue de la Prairie",
+        "codePostalVille": "33520 BRUGES",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999022",
+    "codePostal": "33530",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PAUL MATERA",
+          "dateDeNaissance": "01011988",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC MATERA",
+          "dateDeNaissance": "01221989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE MATERA",
+          "dateDeNaissance": "01222000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN MATERA",
+          "dateDeNaissance": "01222001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M.MATERA Paul",
+        "complementIdentiteGeo": "",
+        "numeroRue": "49 Rue de la Prairie",
+        "codePostalVille": "33530 BASSENS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999023",
+    "codePostal": "33603",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "JEAN-LOUIS PORTO",
+          "dateDeNaissance": "01011989",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC PORTO",
+          "dateDeNaissance": "01231989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE PORTO",
+          "dateDeNaissance": "01232000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN PORTO",
+          "dateDeNaissance": "01232001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. PORTO Jean-Louis",
+        "complementIdentiteGeo": "",
+        "numeroRue": "50 Rue de la Prairie",
+        "codePostalVille": "33603 PESSAC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 450,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999024",
+    "codePostal": "33160",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "CYRILLE PORTICCIO",
+          "dateDeNaissance": "01011990",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC PORTICCIO",
+          "dateDeNaissance": "01241989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE PORTICCIO",
+          "dateDeNaissance": "01242000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN PORTICCIO",
+          "dateDeNaissance": "01242001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. PORTICCIO Cyrille",
+        "complementIdentiteGeo": "",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33160 ST MEDARD EN JALLES",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 450,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999025",
+    "codePostal": "33440",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "FLORENCE BALI ",
+          "dateDeNaissance": "01011991",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC BALI ",
+          "dateDeNaissance": "01251989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE BALI ",
+          "dateDeNaissance": "01252000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN BALI ",
+          "dateDeNaissance": "01252001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme BALI Florence",
+        "complementIdentiteGeo": "",
+        "numeroRue": "52 Rue de la Prairie",
+        "codePostalVille": "33440 ST VINCENT DE PAUL",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 450,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999026",
+    "codePostal": "33400",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MAGALI BENGALORE",
+          "dateDeNaissance": "01011992",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC BENGALORE",
+          "dateDeNaissance": "01261989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE BENGALORE",
+          "dateDeNaissance": "01262000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN BENGALORE",
+          "dateDeNaissance": "01262001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme BENGALORE Magali",
+        "complementIdentiteGeo": "",
+        "numeroRue": "53 Rue de la Prairie",
+        "codePostalVille": "33400 TALENCE",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 450,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999027",
+    "codePostal": "33700",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PAUL WINDOECK",
+          "dateDeNaissance": "01011993",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC WINDOECK",
+          "dateDeNaissance": "01271989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE WINDOECK",
+          "dateDeNaissance": "01272000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN WINDOECK",
+          "dateDeNaissance": "01272001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "M. WINDOECK Paul",
+        "complementIdentiteGeo": "",
+        "numeroRue": "54 Rue de la Prairie",
+        "codePostalVille": "33700 MERIGNAC",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 450,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "9999028",
+    "codePostal": "33000",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARIE-REINE SINGAPOUR",
+          "dateDeNaissance": "01011994",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "ERIC SINGAPOUR",
+          "dateDeNaissance": "01281989",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "EVELYNNE SINGAPOUR",
+          "dateDeNaissance": "01282000",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "QUENTIN SINGAPOUR",
+          "dateDeNaissance": "01282001",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SINGAPOUR Marie-Reine",
+        "complementIdentiteGeo": "",
+        "numeroRue": "55 Rue de la Prairie",
+        "codePostalVille": "33000 BORDEAUX",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 450,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "8888017",
+    "codePostal": "75107",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ANGELA CLAIRE LOUISE DUBOIS",
+          "dateDeNaissance": "24081962",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "PHILIPPE DUBOIS",
+          "dateDeNaissance": "17021961",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "SYLVIE DUBOIS",
+          "dateDeNaissance": "05081983",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "CHRISTOPHE DUBOIS",
+          "dateDeNaissance": "25061985",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme DUBOIS Angela Claire Louise",
+        "complementIdentiteGeo": "",
+        "numeroRue": "20 avenue de Ségur",
+        "codePostalVille": "75107 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 34750,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "8888018",
+    "codePostal": "75107",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "JEAN PHILIPPE ARNAUD DUBIGNOT",
+          "dateDeNaissance": "15061943",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "VALENTIN DUBIGNOT",
+          "dateDeNaissance": "05081983",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mr DUBIGNOT Jean Philippe",
+        "complementIdentiteGeo": "",
+        "numeroRue": "20 avenue de Ségur",
+        "codePostalVille": "75107 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 29880,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "8888019",
+    "codePostal": "75107",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "JOELLE FRANCOISE DUBINORE",
+          "dateDeNaissance": "15081992",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "EMMANUEL ALEXANDRE NICOLAS DELALALALANDE",
+          "dateDeNaissance": "07011991",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "BENOIT DELALALALANDE",
+          "dateDeNaissance": "04042013",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme DUBINORE Joelle Françoise",
+        "complementIdentiteGeo": "",
+        "numeroRue": "109  rue La Boétie",
+        "codePostalVille": "75107 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 34990,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "8888020",
+    "codePostal": "75107",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "EMMANUEL ALEXANDRE NICOLAS DELALALALANDE",
+          "dateDeNaissance": "07011991",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JOELLE FRANCOISE DUBINORE",
+          "dateDeNaissance": "15081992",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "BENOIT DELALALALANDE",
+          "dateDeNaissance": "04042013",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mr DELALALALANDE Emmanuel Alexandre Nicolas",
+        "complementIdentiteGeo": "",
+        "numeroRue": "109  rue La Boétie",
+        "codePostalVille": "75107 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 34990,
+      "mois": 4,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "5843972",
+    "codePostal": "92110",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ERIC SNOW",
+          "dateDeNaissance": "07011991",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "SANSA SNOW",
+          "dateDeNaissance": "15081992",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "PAUL SNOW",
+          "dateDeNaissance": "04042018",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mr SNOW Eric",
+        "complementIdentiteGeo": "",
+        "numeroRue": "109  rue La Boétie",
+        "codePostalVille": "92110 Clichy",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 1856,
+      "annee": 2021
+    }
+  },
+  {
+    "numeroAllocataire": "7846951",
+    "codePostal": "92500",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PIERRE DUPONT",
+          "dateDeNaissance": "07011991",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "PIERRETTE DIPONT",
+          "dateDeNaissance": "15081992",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "LOUIS DUPONT",
+          "dateDeNaissance": "04042018",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Mr DUPONT Pierre",
+        "complementIdentiteGeo": "",
+        "numeroRue": "110 rue du Rond Point",
+        "codePostalVille": "92500 Rueil-Malmaison",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 2641,
+      "annee": 2021
+    }
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PARIS Louise",
+          "sexe": "F",
+          "dateDeNaissance": "01011979"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme PARIS Louise",
+        "complementIdentiteGeo": "",
+        "numeroRue": "40 Rue de la Prairie",
+        "codePostalVille": "33810 AMBES"
+      },
+      "quotientFamilial": "200",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33810",
+    "numeroAllocataire": "9999101"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "TOKYO Jeanine",
+          "sexe": "F",
+          "dateDeNaissance": "01011980"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme TOKYO Jeanine",
+        "complementIdentiteGeo": "",
+        "numeroRue": "41 Rue de la Prairie",
+        "codePostalVille": "33110 LE BOUSCAT"
+      },
+      "quotientFamilial": "400",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33110",
+    "numeroAllocataire": "9999102"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "DELABATTE Katia",
+          "sexe": "F",
+          "dateDeNaissance": "01011981"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme DELABATTE Katia",
+        "complementIdentiteGeo": "",
+        "numeroRue": "42 Rue de la Prairie",
+        "codePostalVille": "33130 BEGLES"
+      },
+      "quotientFamilial": "550",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33130",
+    "numeroAllocataire": "9999103"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BRAMART Isabelle",
+          "sexe": "F",
+          "dateDeNaissance": "01011982"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme BRAMART Isabelle",
+        "complementIdentiteGeo": "",
+        "numeroRue": "43 Rue de la Prairie",
+        "codePostalVille": "33290 BLANQUEFORT"
+      },
+      "quotientFamilial": "200",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33290",
+    "numeroAllocataire": "9999104"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "FLANTIER Antoine",
+          "sexe": "M",
+          "dateDeNaissance": "01011983"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme FLANTIER Antoine",
+        "complementIdentiteGeo": "",
+        "numeroRue": "44 Rue de la Prairie",
+        "codePostalVille": "33140 VILLENAVE D ORNON"
+      },
+      "quotientFamilial": "400",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33140",
+    "numeroAllocataire": "9999105"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "NOEL Fleur",
+          "sexe": "F",
+          "dateDeNaissance": "01011984"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme NOEL Fleur",
+        "complementIdentiteGeo": "",
+        "numeroRue": "45 Rue de la Prairie",
+        "codePostalVille": "33270 BOULIAC"
+      },
+      "quotientFamilial": "550",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "9999106"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "DUPONT Victor",
+          "sexe": "M",
+          "dateDeNaissance": "01011985"
+        }
+      ],
+      "adresse": {
+        "identite": "M DUPONT Victor",
+        "complementIdentiteGeo": "",
+        "numeroRue": "46 Rue de la Prairie",
+        "codePostalVille": "33151 CENON"
+      },
+      "quotientFamilial": "200",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33150",
+    "numeroAllocataire": "9999107"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BERLIN Elena",
+          "sexe": "F",
+          "dateDeNaissance": "01011986"
+        }
+      ],
+      "adresse": {
+        "identite": "M BERLIN Elena",
+        "complementIdentiteGeo": "",
+        "numeroRue": "47 Rue de la Prairie",
+        "codePostalVille": "33560 CARBON BLANC"
+      },
+      "quotientFamilial": "400",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "",
+          "Prenom": "",
+          "Sexe": "",
+          "dateDeNaissance": ""
+        }
+      ]
+    },
+    "codePostal": "33560",
+    "numeroAllocataire": "9999108"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "METZ Brigitte",
+          "sexe": "F",
+          "dateDeNaissance": "01011987"
+        }
+      ],
+      "adresse": {
+        "identite": "M METZ Brigitte",
+        "complementIdentiteGeo": "",
+        "numeroRue": "48 Rue de la Prairie",
+        "codePostalVille": "33160 ST AUBIN DE MEDOC"
+      },
+      "quotientFamilial": "550",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "METZ",
+          "Prenom": "Evelyne",
+          "Sexe": "F",
+          "dateDeNaissance": "09/01/2000"
+        },
+        {
+          "Nom": "METZ",
+          "Prenom": "Quentin",
+          "Sexe": "M",
+          "dateDeNaissance": "09/01/2000"
+        },
+        {
+          "Nom": "METZ",
+          "Prenom": "Jean",
+          "Sexe": "M",
+          "dateDeNaissance": "15/08/2000"
+        }
+      ]
+    },
+    "codePostal": "33160",
+    "numeroAllocataire": "9999109"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BORDEAUX Romain",
+          "sexe": "M",
+          "dateDeNaissance": "01011988"
+        }
+      ],
+      "adresse": {
+        "identite": "M BORDEAUX Romain",
+        "complementIdentiteGeo": "",
+        "numeroRue": "49 Rue de la Prairie",
+        "codePostalVille": "33170 GRADIGNAN"
+      },
+      "quotientFamilial": "200",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "BORDEAUX",
+          "Prenom": "Evelyne",
+          "Sexe": "F",
+          "dateDeNaissance": "10/01/2000"
+        },
+        {
+          "Nom": "BORDEAUX",
+          "Prenom": "Quentin",
+          "Sexe": "M",
+          "dateDeNaissance": "10/01/2000"
+        },
+        {
+          "Nom": "BORDEAUX",
+          "Prenom": "Jean",
+          "Sexe": "M",
+          "dateDeNaissance": "15/08/2000"
+        }
+      ]
+    },
+    "codePostal": "33170",
+    "numeroAllocataire": "9999110"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARSEILLE Lucie",
+          "sexe": "F",
+          "dateDeNaissance": "01011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M MARSEILLE Lucie",
+        "complementIdentiteGeo": "",
+        "numeroRue": "50 Rue de la Prairie",
+        "codePostalVille": "33185 LE HAILLAN"
+      },
+      "quotientFamilial": "400",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "MARSEILLE",
+          "Prenom": "Evelyne",
+          "Sexe": "F",
+          "dateDeNaissance": "11/01/2000"
+        },
+        {
+          "Nom": "MARSEILLE",
+          "Prenom": "Quentin",
+          "Sexe": "M",
+          "dateDeNaissance": "11/01/2000"
+        },
+        {
+          "Nom": "MARSEILLE",
+          "Prenom": "Jean",
+          "Sexe": "M",
+          "dateDeNaissance": "15/08/2000"
+        }
+      ]
+    },
+    "codePostal": "33185",
+    "numeroAllocataire": "9999111"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "LILLE Alexandra",
+          "sexe": "F",
+          "dateDeNaissance": "01011990"
+        }
+      ],
+      "adresse": {
+        "identite": "M LILLE Alexandra",
+        "complementIdentiteGeo": "",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33270 FLOIRAC"
+      },
+      "quotientFamilial": "550",
+      "mois": "4",
+      "annee": "2021",
+      "enfants": [
+        {
+          "Nom": "LILLE",
+          "Prenom": "Evelynne",
+          "Sexe": "F",
+          "dateDeNaissance": "12/01/2000"
+        },
+        {
+          "Nom": "LILLE",
+          "Prenom": "Quentin",
+          "Sexe": "M",
+          "dateDeNaissance": "12/01/2000"
+        },
+        {
+          "Nom": "LILLE",
+          "Prenom": "Jean",
+          "Sexe": "M",
+          "dateDeNaissance": "15/08/2000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "9999112"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "Italie Louise",
+          "sexe": "F",
+          "dateDeNaissance": "01011967"
+        },
+        {
+          "nomPrenom": "Italie Eric",
+          "sexe": "M",
+          "dateDeNaissance": "01011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme Italie Louise",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "28 Rue de la Prairie",
+        "codePostalVille": "33810 AMBES"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "Italie Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "01012000"
+        },
+        {
+          "nomPrenom": "Italie Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "01012001"
+        }
+      ]
+    },
+    "codePostal": "33810",
+    "numeroAllocataire": "6999001"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ROME Jeanine",
+          "sexe": "F",
+          "dateDeNaissance": "01011968"
+        },
+        {
+          "nomPrenom": "ROME Eric",
+          "sexe": "M",
+          "dateDeNaissance": "02011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme ROME Jeanine",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "29 Rue de la Prairie",
+        "codePostalVille": "33110 LE BOUSCAT"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "ROME Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "02012000"
+        },
+        {
+          "nomPrenom": "ROME Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "02012001"
+        }
+      ]
+    },
+    "codePostal": "33110",
+    "numeroAllocataire": "6999002"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PADOU Katia",
+          "sexe": "F",
+          "dateDeNaissance": "01011969"
+        },
+        {
+          "nomPrenom": "PADOU Eric",
+          "sexe": "M",
+          "dateDeNaissance": "03011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme PADOU Katia",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "30 Rue de la Prairie",
+        "codePostalVille": "33130 BEGLES"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "PADOU Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "03012000"
+        },
+        {
+          "nomPrenom": "PADOU Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "03012001"
+        }
+      ]
+    },
+    "codePostal": "33130",
+    "numeroAllocataire": "6999003"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "VENISE Isabelle",
+          "sexe": "F",
+          "dateDeNaissance": "01011970"
+        },
+        {
+          "nomPrenom": "VENISE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "04011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme VENISE Isabelle",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "31 Rue de la Prairie",
+        "codePostalVille": "33290 BLANQUEFORT"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "VENISE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "04012000"
+        },
+        {
+          "nomPrenom": "VENISE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "04012001"
+        }
+      ]
+    },
+    "codePostal": "33290",
+    "numeroAllocataire": "6999004"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BARI Antoine",
+          "sexe": "M",
+          "dateDeNaissance": "01011971"
+        },
+        {
+          "nomPrenom": "BARI Eric",
+          "sexe": "M",
+          "dateDeNaissance": "05011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. BARI Antoine",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "32 Rue de la Prairie",
+        "codePostalVille": "33140 VILLENAVE D ORNON"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "BARI Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "05012000"
+        },
+        {
+          "nomPrenom": "BARI Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "05012001"
+        }
+      ]
+    },
+    "codePostal": "33140",
+    "numeroAllocataire": "6999005"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "TRIESTE Fleur",
+          "sexe": "F",
+          "dateDeNaissance": "01011972"
+        },
+        {
+          "nomPrenom": "TRIESTE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "06011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme TRIESTE Fleur",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "33 Rue de la Prairie",
+        "codePostalVille": "33270 BOULIAC"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "TRIESTE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "06012000"
+        },
+        {
+          "nomPrenom": "TRIESTE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "06012001"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999006"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "CALVI Victor",
+          "sexe": "M",
+          "dateDeNaissance": "01011973"
+        },
+        {
+          "nomPrenom": "CALVI Eric",
+          "sexe": "M",
+          "dateDeNaissance": "07011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. CALVI Victor",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "34 Rue de la Prairie",
+        "codePostalVille": "33151 CENON"
+      },
+      "quotientFamilial": "300",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "CALVI Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "07012000"
+        },
+        {
+          "nomPrenom": "CALVI Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "07012001"
+        }
+      ]
+    },
+    "codePostal": "33150",
+    "numeroAllocataire": "6999007"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "SYRACUSE Elena",
+          "sexe": "F",
+          "dateDeNaissance": "01011974"
+        },
+        {
+          "nomPrenom": "SYRACUSE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "08011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SYRACUSE Elena",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "35 Rue de la Prairie",
+        "codePostalVille": "33560 CARBON BLANC"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "SYRACUSE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "08012000"
+        },
+        {
+          "nomPrenom": "SYRACUSE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "08012001"
+        }
+      ]
+    },
+    "codePostal": "33560",
+    "numeroAllocataire": "6999008"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "SARDAIGNE Brigitte",
+          "sexe": "F",
+          "dateDeNaissance": "01011975"
+        },
+        {
+          "nomPrenom": "SARDAIGNE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "09011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SARDAIGNE Brigitte",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "36 Rue de la Prairie",
+        "codePostalVille": "33160 ST AUBIN DE MEDOC"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "SARDAIGNE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "09012000"
+        },
+        {
+          "nomPrenom": "SARDAIGNE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "09012001"
+        }
+      ]
+    },
+    "codePostal": "33160",
+    "numeroAllocataire": "6999009"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "CORSE Romain",
+          "sexe": "M",
+          "dateDeNaissance": "01011976"
+        },
+        {
+          "nomPrenom": "CORSE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "10011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M.CORSE Romain",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "37 Rue de la Prairie",
+        "codePostalVille": "33170 GRADIGNAN"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "CORSE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "10012000"
+        },
+        {
+          "nomPrenom": "CORSE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "10012001"
+        }
+      ]
+    },
+    "codePostal": "33170",
+    "numeroAllocataire": "6999010"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "HAWAÏ Lucie",
+          "sexe": "F",
+          "dateDeNaissance": "01011977"
+        },
+        {
+          "nomPrenom": "HAWAÏ Eric",
+          "sexe": "M",
+          "dateDeNaissance": "11011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme HAWAÏ Lucie",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "38 Rue de la Prairie",
+        "codePostalVille": "33185 LE HAILLAN"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "HAWAÏ Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "11012000"
+        },
+        {
+          "nomPrenom": "HAWAÏ Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "11012001"
+        }
+      ]
+    },
+    "codePostal": "33185",
+    "numeroAllocataire": "6999011"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "NEW-YORK Alexandra",
+          "sexe": "F",
+          "dateDeNaissance": "01011978"
+        },
+        {
+          "nomPrenom": "NEW-YORK Eric",
+          "sexe": "M",
+          "dateDeNaissance": "12011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme NEW-YORK Alexandra",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "39 Rue de la Prairie",
+        "codePostalVille": "33270 FLOIRAC"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "NEW-YORK Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "12012000"
+        },
+        {
+          "nomPrenom": "NEW-YORK Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "12012001"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999012"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "FLORIDE Kévin",
+          "sexe": "F",
+          "dateDeNaissance": "01011979"
+        },
+        {
+          "nomPrenom": "FLORIDE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "13011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. FLORIDE Kévin",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "40 Rue de la Prairie",
+        "codePostalVille": "33310 LORMONT"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "FLORIDE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "13012000"
+        },
+        {
+          "nomPrenom": "FLORIDE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "13012001"
+        }
+      ]
+    },
+    "codePostal": "33310",
+    "numeroAllocataire": "6999013"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "KEYS Martin",
+          "sexe": "M",
+          "dateDeNaissance": "01011980"
+        },
+        {
+          "nomPrenom": "KEYS Eric",
+          "sexe": "M",
+          "dateDeNaissance": "14011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M.KEYS Martin",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "41 Rue de la Prairie",
+        "codePostalVille": "33320 EYSINES"
+      },
+      "quotientFamilial": "600",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "KEYS Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "14012000"
+        },
+        {
+          "nomPrenom": "KEYS Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "14012001"
+        }
+      ]
+    },
+    "codePostal": "33320",
+    "numeroAllocataire": "6999014"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "NAMIBIE Patrice",
+          "sexe": "M",
+          "dateDeNaissance": "01011981"
+        },
+        {
+          "nomPrenom": "NAMIBIE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "15011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M.NAMIBIE Patrice",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "42 Rue de la Prairie",
+        "codePostalVille": "33320 LE TAILLAN MEDOC"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "NAMIBIE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "15012000"
+        },
+        {
+          "nomPrenom": "NAMIBIE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "15012001"
+        }
+      ]
+    },
+    "codePostal": "33320",
+    "numeroAllocataire": "6999015"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "KENYA Michel",
+          "sexe": "M",
+          "dateDeNaissance": "01011982"
+        },
+        {
+          "nomPrenom": "KENYA Eric",
+          "sexe": "M",
+          "dateDeNaissance": "16011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M.KENYA Michel",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "43 Rue de la Prairie",
+        "codePostalVille": "33370 ARTIGUES PRES BORDEAUX"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "KENYA Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "16012000"
+        },
+        {
+          "nomPrenom": "KENYA Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "16012001"
+        }
+      ]
+    },
+    "codePostal": "33370",
+    "numeroAllocataire": "6999016"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MAROC Muguette",
+          "sexe": "F",
+          "dateDeNaissance": "01011983"
+        },
+        {
+          "nomPrenom": "MAROC Eric",
+          "sexe": "M",
+          "dateDeNaissance": "17011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme MAROC Muguette",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "44 Rue de la Prairie",
+        "codePostalVille": "33127 MARTIGNAS SUR JALLE"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "MAROC Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "17012000"
+        },
+        {
+          "nomPrenom": "MAROC Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "17012001"
+        }
+      ]
+    },
+    "codePostal": "33127",
+    "numeroAllocataire": "6999017"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "SENEGAL Huguette",
+          "sexe": "F",
+          "dateDeNaissance": "01011984"
+        },
+        {
+          "nomPrenom": "SENEGAL Eric",
+          "sexe": "M",
+          "dateDeNaissance": "18011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SENEGAL Huguette",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "45 Rue de la Prairie",
+        "codePostalVille": "33440 AMBARES ET LAGRAVE"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "SENEGAL Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "18012000"
+        },
+        {
+          "nomPrenom": "SENEGAL Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "18012001"
+        }
+      ]
+    },
+    "codePostal": "33440",
+    "numeroAllocataire": "6999018"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "TUNISIE Joseph",
+          "sexe": "M",
+          "dateDeNaissance": "01011985"
+        },
+        {
+          "nomPrenom": "TUNISIE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "19011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. TUNISIE Joseph",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "46 Rue de la Prairie",
+        "codePostalVille": "33290 PAREMPUYRE"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "TUNISIE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "19012000"
+        },
+        {
+          "nomPrenom": "TUNISIE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "19012001"
+        }
+      ]
+    },
+    "codePostal": "33290",
+    "numeroAllocataire": "6999019"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "OMAN Antonio",
+          "sexe": "M",
+          "dateDeNaissance": "01011986"
+        },
+        {
+          "nomPrenom": "OMAN Eric",
+          "sexe": "M",
+          "dateDeNaissance": "20011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. OMAN Antonio",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "47 Rue de la Prairie",
+        "codePostalVille": "33440 ST LOUIS DE MONTFERRANT"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "OMAN Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "20012000"
+        },
+        {
+          "nomPrenom": "OMAN Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "20012001"
+        }
+      ]
+    },
+    "codePostal": "33440",
+    "numeroAllocataire": "6999020"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "ALBEROBELLO Marina",
+          "sexe": "F",
+          "dateDeNaissance": "01011987"
+        },
+        {
+          "nomPrenom": "ALBEROBELLO Eric",
+          "sexe": "M",
+          "dateDeNaissance": "21011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme ALBEROBELLO Marina",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "48 Rue de la Prairie",
+        "codePostalVille": "33520 BRUGES"
+      },
+      "quotientFamilial": "700",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "ALBEROBELLO Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "21012000"
+        },
+        {
+          "nomPrenom": "ALBEROBELLO Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "21012001"
+        }
+      ]
+    },
+    "codePostal": "33520",
+    "numeroAllocataire": "6999021"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MATERA Paul",
+          "sexe": "M",
+          "dateDeNaissance": "01011988"
+        },
+        {
+          "nomPrenom": "MATERA Eric",
+          "sexe": "M",
+          "dateDeNaissance": "22011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M.MATERA Paul",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "49 Rue de la Prairie",
+        "codePostalVille": "33530 BASSENS"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "MATERA Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "22012000"
+        },
+        {
+          "nomPrenom": "MATERA Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "22012001"
+        }
+      ]
+    },
+    "codePostal": "33530",
+    "numeroAllocataire": "6999022"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PORTO Jean-Louis",
+          "sexe": "M",
+          "dateDeNaissance": "01011989"
+        },
+        {
+          "nomPrenom": "PORTO Eric",
+          "sexe": "M",
+          "dateDeNaissance": "23011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. PORTO Jean-Louis",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "50 Rue de la Prairie",
+        "codePostalVille": "33603 PESSAC"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "PORTO Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "23012000"
+        },
+        {
+          "nomPrenom": "PORTO Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "23012001"
+        }
+      ]
+    },
+    "codePostal": "33603",
+    "numeroAllocataire": "6999023"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PORTICCIO Cyrille",
+          "sexe": "M",
+          "dateDeNaissance": "01011990"
+        },
+        {
+          "nomPrenom": "PORTICCIO Eric",
+          "sexe": "M",
+          "dateDeNaissance": "24011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. PORTICCIO Cyrille",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33160 ST MEDARD EN JALLES"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "PORTICCIO Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "24012000"
+        },
+        {
+          "nomPrenom": "PORTICCIO Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "24012001"
+        }
+      ]
+    },
+    "codePostal": "33160",
+    "numeroAllocataire": "6999024"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BALI Florence",
+          "sexe": "F",
+          "dateDeNaissance": "01011991"
+        },
+        {
+          "nomPrenom": "BALI Eric",
+          "sexe": "M",
+          "dateDeNaissance": "25011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme BALI Florence",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "52 Rue de la Prairie",
+        "codePostalVille": "33440 ST VINCENT DE PAUL"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "BALI Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "25012000"
+        },
+        {
+          "nomPrenom": "BALI Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "25012001"
+        }
+      ]
+    },
+    "codePostal": "33440",
+    "numeroAllocataire": "6999025"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BENGALORE Magali",
+          "sexe": "F",
+          "dateDeNaissance": "01011992"
+        },
+        {
+          "nomPrenom": "BENGALORE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "26011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme BENGALORE Magali",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "53 Rue de la Prairie",
+        "codePostalVille": "33400 TALENCE"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "BENGALORE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "26012000"
+        },
+        {
+          "nomPrenom": "BENGALORE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "26012001"
+        }
+      ]
+    },
+    "codePostal": "33400",
+    "numeroAllocataire": "6999026"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "WINDOECK Paul",
+          "sexe": "M",
+          "dateDeNaissance": "01011993"
+        },
+        {
+          "nomPrenom": "WINDOECK Eric",
+          "sexe": "M",
+          "dateDeNaissance": "27011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M. WINDOECK Paul",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "54 Rue de la Prairie",
+        "codePostalVille": "33700 MERIGNAC"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "WINDOECK Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "27012000"
+        },
+        {
+          "nomPrenom": "WINDOECK Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "27012001"
+        }
+      ]
+    },
+    "codePostal": "33700",
+    "numeroAllocataire": "6999027"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "SINGAPOUR Marie-Reine",
+          "sexe": "F",
+          "dateDeNaissance": "01011994"
+        },
+        {
+          "nomPrenom": "SINGAPOUR Eric",
+          "sexe": "M",
+          "dateDeNaissance": "28011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme SINGAPOUR Marie-Reine",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "55 Rue de la Prairie",
+        "codePostalVille": "33000 BORDEAUX"
+      },
+      "quotientFamilial": "1000",
+      "mois": "6",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "SINGAPOUR Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "28012000"
+        },
+        {
+          "nomPrenom": "SINGAPOUR Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "28012001"
+        }
+      ]
+    },
+    "codePostal": "33000",
+    "numeroAllocataire": "6999028"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "PARIS Louise",
+          "sexe": "F",
+          "dateDeNaissance": "01011979"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme PARIS Louise",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "40 Rue de la Prairie",
+        "codePostalVille": "33810 AMBES"
+      },
+      "quotientFamilial": "300",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": []
+    },
+    "codePostal": "33810",
+    "numeroAllocataire": "6999029"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "TOKYO Jeanine",
+          "sexe": "F",
+          "dateDeNaissance": "01011980"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme TOKYO Jeanine",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "41 Rue de la Prairie",
+        "codePostalVille": "33110 LE BOUSCAT"
+      },
+      "quotientFamilial": "700",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": []
+    },
+    "codePostal": "33110",
+    "numeroAllocataire": "6999030"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "DELABATTE Katia",
+          "sexe": "F",
+          "dateDeNaissance": "01011981"
+        },
+        {
+          "nomPrenom": "DELABATTE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "03011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme DELABATTE Katia",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "42 Rue de la Prairie",
+        "codePostalVille": "33130 BEGLES"
+      },
+      "quotientFamilial": "300",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": []
+    },
+    "codePostal": "33130",
+    "numeroAllocataire": "6999031"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BRAMART Isabelle",
+          "sexe": "F",
+          "dateDeNaissance": "01011982"
+        },
+        {
+          "nomPrenom": "BRAMART Eric",
+          "sexe": "M",
+          "dateDeNaissance": "04011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme BRAMART Isabelle",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "43 Rue de la Prairie",
+        "codePostalVille": "33290 BLANQUEFORT"
+      },
+      "quotientFamilial": "700",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": []
+    },
+    "codePostal": "33290",
+    "numeroAllocataire": "6999032"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "FLANTIER Antoine",
+          "sexe": "M",
+          "dateDeNaissance": "01011983"
+        },
+        {
+          "nomPrenom": "FLANTIER Eric",
+          "sexe": "M",
+          "dateDeNaissance": "05011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme FLANTIER Antoine",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "44 Rue de la Prairie",
+        "codePostalVille": "33140 VILLENAVE D ORNON"
+      },
+      "quotientFamilial": "300",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "FLANTIER Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "05012000"
+        }
+      ]
+    },
+    "codePostal": "33140",
+    "numeroAllocataire": "6999033"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "NOEL Fleur",
+          "sexe": "F",
+          "dateDeNaissance": "01011984"
+        },
+        {
+          "nomPrenom": "NOEL Eric",
+          "sexe": "M",
+          "dateDeNaissance": "06011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme NOEL Fleur",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "45 Rue de la Prairie",
+        "codePostalVille": "33270 BOULIAC"
+      },
+      "quotientFamilial": "700",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "NOEL Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "06012000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999034"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "DUPONT Victor",
+          "sexe": "M",
+          "dateDeNaissance": "01011985"
+        },
+        {
+          "nomPrenom": "DUPONT Eric",
+          "sexe": "M",
+          "dateDeNaissance": "07011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M DUPONT Victor",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "46 Rue de la Prairie",
+        "codePostalVille": "33151 CENON"
+      },
+      "quotientFamilial": "300",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "DUPONT Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "07012000"
+        }
+      ]
+    },
+    "codePostal": "33150",
+    "numeroAllocataire": "6999035"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BERLIN Elena",
+          "sexe": "F",
+          "dateDeNaissance": "01011986"
+        },
+        {
+          "nomPrenom": "BERLIN Eric",
+          "sexe": "M",
+          "dateDeNaissance": "08011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M BERLIN Elena",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "47 Rue de la Prairie",
+        "codePostalVille": "33560 CARBON BLANC"
+      },
+      "quotientFamilial": "700",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "BERLIN Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "08012000"
+        }
+      ]
+    },
+    "codePostal": "33560",
+    "numeroAllocataire": "6999036"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "METZ Brigitte",
+          "sexe": "F",
+          "dateDeNaissance": "01011987"
+        },
+        {
+          "nomPrenom": "METZ Eric",
+          "sexe": "M",
+          "dateDeNaissance": "09011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M METZ Brigitte",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "48 Rue de la Prairie",
+        "codePostalVille": "33160 ST AUBIN DE MEDOC"
+      },
+      "quotientFamilial": "300",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "METZ Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "09012000"
+        },
+        {
+          "nomPrenom": "METZ Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "09012001"
+        },
+        {
+          "nomPrenom": "METZ Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33160",
+    "numeroAllocataire": "6999037"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BORDEAUX Romain",
+          "sexe": "M",
+          "dateDeNaissance": "01011988"
+        },
+        {
+          "nomPrenom": "BORDEAUX Eric",
+          "sexe": "M",
+          "dateDeNaissance": "10011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M BORDEAUX Romain",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "49 Rue de la Prairie",
+        "codePostalVille": "33170 GRADIGNAN"
+      },
+      "quotientFamilial": "700",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "BORDEAUX Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "10012000"
+        },
+        {
+          "nomPrenom": "BORDEAUX Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "10012001"
+        },
+        {
+          "nomPrenom": "BORDEAUX Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33170",
+    "numeroAllocataire": "6999038"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARSEILLE Lucie",
+          "sexe": "F",
+          "dateDeNaissance": "01011989"
+        },
+        {
+          "nomPrenom": "MARSEILLE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "11011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme MARSEILLE Lucie",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "50 Rue de la Prairie",
+        "codePostalVille": "33185 LE HAILLAN"
+      },
+      "quotientFamilial": "300",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "MARSEILLE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "11012000"
+        },
+        {
+          "nomPrenom": "MARSEILLE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "11012001"
+        },
+        {
+          "nomPrenom": "MARSEILLE Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33185",
+    "numeroAllocataire": "6999039"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "LILLE Alexandra",
+          "sexe": "F",
+          "dateDeNaissance": "01011990"
+        },
+        {
+          "nomPrenom": "LILLE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "12011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme LILLE Alexandra",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33270 FLOIRAC"
+      },
+      "quotientFamilial": "700",
+      "mois": "5",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "LILLE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "12012000"
+        },
+        {
+          "nomPrenom": "LILLE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "12012001"
+        },
+        {
+          "nomPrenom": "LILLE Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999040"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BOURGE John",
+          "sexe": "M",
+          "dateDeNaissance": "01011991"
+        },
+        {
+          "nomPrenom": "BOURGE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "12011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M BOURGE John",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33560 CARBON BLANC"
+      },
+      "quotientFamilial": "300",
+      "mois": "1",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "BOURGE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "12012000"
+        },
+        {
+          "nomPrenom": "BOURGE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "12012001"
+        },
+        {
+          "nomPrenom": "BOURGE Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999041"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "CASTRE Celia",
+          "sexe": "F",
+          "dateDeNaissance": "01011992"
+        },
+        {
+          "nomPrenom": "CASTRE Eric",
+          "sexe": "M",
+          "dateDeNaissance": "12011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme CASTRE Celia",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33160 ST AUBIN DE MEDOC"
+      },
+      "quotientFamilial": "400",
+      "mois": "1",
+      "annee": "2021",
+      "enfants": [
+        {
+          "nomPrenom": "CASTRE Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "12012000"
+        },
+        {
+          "nomPrenom": "CASTRE Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "12012001"
+        },
+        {
+          "nomPrenom": "CASTRE Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999042"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MUNSTER François",
+          "sexe": "M",
+          "dateDeNaissance": "01011993"
+        },
+        {
+          "nomPrenom": "MUNSTER Eric",
+          "sexe": "M",
+          "dateDeNaissance": "12011989"
+        }
+      ],
+      "adresse": {
+        "identite": "M MUNSTER François",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33170 GRADIGNAN"
+      },
+      "quotientFamilial": "500",
+      "mois": "5",
+      "annee": "2018",
+      "enfants": [
+        {
+          "nomPrenom": "MUNSTER Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "12012000"
+        },
+        {
+          "nomPrenom": "MUNSTER Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "12012001"
+        },
+        {
+          "nomPrenom": "MUNSTER Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999043"
+  },
+  {
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "EPINAL Elise",
+          "sexe": "F",
+          "dateDeNaissance": "01011994"
+        },
+        {
+          "nomPrenom": "EPINAL Eric",
+          "sexe": "M",
+          "dateDeNaissance": "12011989"
+        }
+      ],
+      "adresse": {
+        "identite": "Mme EPINAL Elise",
+        "complementIdentiteGeo": "0",
+        "numeroRue": "51 Rue de la Prairie",
+        "codePostalVille": "33270 FLOIRAC"
+      },
+      "quotientFamilial": "600",
+      "mois": "5",
+      "annee": "2019",
+      "enfants": [
+        {
+          "nomPrenom": "EPINAL Evelynne",
+          "sexe": "F",
+          "dateDeNaissance": "12012000"
+        },
+        {
+          "nomPrenom": "EPINAL Quentin",
+          "sexe": "M",
+          "dateDeNaissance": "12012001"
+        },
+        {
+          "nomPrenom": "EPINAL Jean",
+          "sexe": "M",
+          "dateDeNaissance": "15082000"
+        }
+      ]
+    },
+    "codePostal": "33270",
+    "numeroAllocataire": "6999044"
+  }
+]
