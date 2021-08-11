@@ -18,6 +18,7 @@ import {redisConnection} from 'src/infrastructure/configuration/redis';
   console.log('Removing projections');
 
   await postgresPool.query('DELETE FROM applications');
+  await postgresPool.query('DELETE FROM tokens');
 
   console.log(`Publishing ${events.length} events`);
 
