@@ -67,3 +67,23 @@ export const fetchPoleEmploiDataControllerBuidler =
       return next(error);
     }
   };
+
+export const fetchMesriDataControllerBuidler =
+  () => async (req: Request, res: Response, next: NextFunction) => {
+    const tokenValue = req.header('X-Api-Key') as TokenValue;
+    try {
+      const data = await fetchDataUsecase.fetchMesriData(
+        tokenValue,
+        res.locals.input,
+        req.baseUrl + req.path,
+        (token: Token) => {
+          res.locals.token = token;
+        }
+      );
+
+      res.json(data);
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  };

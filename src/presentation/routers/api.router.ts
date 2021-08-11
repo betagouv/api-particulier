@@ -4,6 +4,7 @@ import {createApplicationController} from 'src/presentation/controllers/create-a
 import {
   fetchCnafDataControllerBuidler,
   fetchDgfipDataControllerBuidler,
+  fetchMesriDataControllerBuidler,
   fetchPoleEmploiDataControllerBuidler,
 } from 'src/presentation/controllers/fetch-data.controller';
 import {introspectController} from 'src/presentation/controllers/introspect.controller';
@@ -17,6 +18,7 @@ import {manageErrorMiddleware} from 'src/presentation/middlewares/error-manageme
 import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware';
 import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
 import {poleEmploiInputValidationMiddleware} from 'src/presentation/middlewares/pole-emploi-input-validation.middleware';
+import {mesriInputValidationMiddleware} from 'src/presentation/middlewares/mesri-input-validation.middleware';
 
 export const apiRouter = Router();
 
@@ -69,6 +71,17 @@ apiRouter.get(
   discrepancyCheckerMiddleware,
   poleEmploiInputValidationMiddleware,
   fetchPoleEmploiDataControllerBuidler(),
+  manageErrorMiddleware,
+  journalMiddleware
+);
+
+apiRouter.get(
+  '/v2/etudiants',
+  apiKeyValidationMiddleware,
+  timingMiddleware,
+  discrepancyCheckerMiddleware,
+  mesriInputValidationMiddleware,
+  fetchMesriDataControllerBuidler(),
   manageErrorMiddleware,
   journalMiddleware
 );

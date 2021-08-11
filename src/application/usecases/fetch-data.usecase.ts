@@ -1,6 +1,7 @@
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
+import {MesriInput} from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
@@ -66,6 +67,26 @@ export class FetchDataUsecase {
       const token = await this.tokenRepository.findByTokenValue(tokenValue);
       setCurrentToken(token);
       return this.dataProviderClient.consumePoleEmploi(input, token, route);
+    } catch (error) {
+      if (error instanceof TokenNotFoundError) {
+        await this.eventBus.publish(
+          new TokenNotFound('', new Date(), tokenValue)
+        );
+      }
+      throw error;
+    }
+  }
+
+  async fetchMesriData(
+    tokenValue: TokenValue,
+    input: MesriInput,
+    route: string,
+    setCurrentToken: (token: Token) => void
+  ) {
+    try {
+      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      setCurrentToken(token);
+      return this.dataProviderClient.consumeMesri(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
         await this.eventBus.publish(
