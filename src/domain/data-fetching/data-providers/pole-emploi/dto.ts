@@ -22,9 +22,9 @@ export type PoleEmploiOutput = {
   libelleCategorieInscription: string;
   civilite: string;
   codeCertificationCNAV: string;
-  dateCessationInscription: Date;
-  dateInscription: Date;
-  dateNaissance: Date;
+  dateCessationInscription?: Date;
+  dateInscription?: Date;
+  dateNaissance?: Date;
   email: string;
   nom: string;
   nomUsage: string;

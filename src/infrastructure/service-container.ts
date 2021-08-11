@@ -36,6 +36,7 @@ import {RandomTokenValueFactory} from 'src/infrastructure/token-value.factory';
 import {CreateApplicationUsecase} from 'src/application/usecases/create-application.usecase';
 import {PoleEmploiApiDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-api.data-provider';
 import {AirtableCnafDataProvider} from 'src/infrastructure/data-providers/cnaf/airtable';
+import {PoleEmploiAirtableDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-airtable.data-provider';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -79,8 +80,16 @@ localLogger.log(
     process.env.SANDBOXED ? 'stubbed' : 'real'
   }`
 );
-const poleEmploiDataProvider = new PoleEmploiApiDataProvider();
-localLogger.log('info', 'Pole Emploi data provider initialized');
+const poleEmploiDataProvider =
+  process.env.SANDBOXED === 'false'
+    ? new PoleEmploiApiDataProvider()
+    : new PoleEmploiAirtableDataProvider();
+localLogger.log(
+  'info',
+  `Pôle Emploi data provider initialized - ${
+    process.env.SANDBOXED ? 'stubbed' : 'real'
+  }`
+);
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
