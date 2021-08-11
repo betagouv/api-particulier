@@ -6,6 +6,10 @@ import {Issuer, Strategy, TokenSet} from 'openid-client';
 import passport from 'passport';
 import session from 'express-session';
 import {redirectToPortailDomain} from 'src/presentation/middlewares/redirect-to-portail-domain.middleware';
+import connectRedis from 'connect-redis';
+import {redisConnection} from 'src/infrastructure/configuration/redis';
+
+const RedisStore = connectRedis(session);
 
 export const initPortail = (app: Express) => {
   app.engine('handlebars', expressHandlebars());
@@ -52,6 +56,7 @@ portailRouter.use(
     secret: process.env.SESSION_SECRET!,
     saveUninitialized: true,
     resave: true,
+    store: new RedisStore({client: redisConnection}),
   })
 );
 portailRouter.use(passport.initialize());
