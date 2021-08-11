@@ -6,20 +6,22 @@ export type MesriInput = {
   ine: MesriId;
 };
 
+export type Inscription = {
+  dateDebutInscription: Date;
+  dateFinInscription: Date;
+  statut: 'admis' | 'inscrit';
+  regime: 'formation initiale' | 'formation continue';
+  codeCommune: string;
+  etablissement: {
+    uai: string;
+    nom: string;
+  };
+};
+
 export type MesriOutput = {
   ine: MesriId;
   nom: string;
   prenom: string;
   dateNaissance: Date;
-  inscriptions: {
-    dateDebutInscription: Date;
-    dateFinInscription: Date;
-    statut: 'admis' | 'inscrit';
-    regime: 'formation initiale' | 'formation continue';
-    codeCommune: string;
-    etablissement: {
-      uai: string;
-      nom: string;
-    };
-  }[];
+  inscriptions: Inscription[];
 };
