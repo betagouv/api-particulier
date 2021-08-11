@@ -22,5 +22,8 @@ export class CreateApplicationDto {
     if (some(scopes, scope => scope.startsWith('pole_emploi'))) {
       this.subscriptions.push('POLE_EMPLOI');
     }
+    if (some(scopes, scope => scope.startsWith('mesri'))) {
+      this.subscriptions.push('MESRI');
+    }
   }
 }

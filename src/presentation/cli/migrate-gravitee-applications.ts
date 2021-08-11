@@ -64,6 +64,9 @@ const getApplicationToImport = async (
     if (row.scopes[0].indexOf('pole_emploi') !== -1) {
       subscriptions.push('POLE_EMPLOI');
     }
+    if (row.scopes[0].indexOf('mesri') !== -1) {
+      subscriptions.push('MESRI');
+    }
     const filteredLegacyTokenHash = row.legacy_token_hash.filter(
       (hash: string) => hash !== null
     );

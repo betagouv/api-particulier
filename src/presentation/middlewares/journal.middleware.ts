@@ -41,6 +41,8 @@ const getSubscriptionFromRoute = (route: string): Subscription => {
       return 'CNAF';
     case '/api/v2/situations-pole-emploi':
       return 'POLE_EMPLOI';
+    case '/api/v2/etudiants':
+      return 'MESRI';
     default:
       throw new Error(`No subscription found for route ${route}`);
   }

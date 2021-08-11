@@ -37,6 +37,7 @@ import {CreateApplicationUsecase} from 'src/application/usecases/create-applicat
 import {PoleEmploiApiDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-api.data-provider';
 import {AirtableCnafDataProvider} from 'src/infrastructure/data-providers/cnaf/airtable';
 import {PoleEmploiAirtableDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-airtable.data-provider';
+import {MesriAirtableDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-airtable.data-provider';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -90,11 +91,14 @@ localLogger.log(
     process.env.SANDBOXED ? 'stubbed' : 'real'
   }`
 );
+const mesriDataProvider = new MesriAirtableDataProvider();
+localLogger.log('info', 'Pôle Emploi data provider initialized - stubbed');
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
   dgfipDataProvider,
-  poleEmploiDataProvider
+  poleEmploiDataProvider,
+  mesriDataProvider
 );
 localLogger.log('info', 'Data provider client initialized');
 
