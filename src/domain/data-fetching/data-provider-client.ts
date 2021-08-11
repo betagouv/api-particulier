@@ -10,20 +10,25 @@ import {DataProvider} from 'src/domain/data-fetching/data-providers/data-provide
 import {Subscription} from 'src/domain/subscription';
 import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
 import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/pole-emploi/data-provider';
+import {MesriInput} from 'src/domain/data-fetching/data-providers/mesri/dto';
+import {MesriDataProvider} from 'src/domain/data-fetching/data-providers/mesri/data-provider';
+import {MesriScopesFilter} from 'src/domain/data-fetching/scopes-filters/mesri.scopes-filter';
 
 const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
   unifiedScopesConfiguration
 );
+const mesriScopesFilter = new MesriScopesFilter();
 
 export class DataProviderClient {
   constructor(
     private readonly cnafDataProvider: CnafDataProvider,
     private readonly dgfipDataProvider: DgfipDataProvider,
-    private readonly poleEmploiDataProvider: PoleEmploiDataProvider
+    private readonly poleEmploiDataProvider: PoleEmploiDataProvider,
+    private readonly mesriDataProvider: MesriDataProvider
   ) {}
 
-  consumeDgfip(input: DgfipInput, token: Token, route: string) {
-    return this.callDataProvider(
+  async consumeDgfip(input: DgfipInput, token: Token, route: string) {
+    return await this.callDataProvider(
       input,
       token,
       route,
@@ -32,8 +37,8 @@ export class DataProviderClient {
     );
   }
 
-  consumeCnaf(input: CnafInput, token: Token, route: string) {
-    return this.callDataProvider(
+  async consumeCnaf(input: CnafInput, token: Token, route: string) {
+    return await this.callDataProvider(
       input,
       token,
       route,
@@ -42,8 +47,8 @@ export class DataProviderClient {
     );
   }
 
-  consumePoleEmploi(input: PoleEmploiInput, token: Token, route: string) {
-    return this.callDataProvider(
+  async consumePoleEmploi(input: PoleEmploiInput, token: Token, route: string) {
+    return await this.callDataProvider(
       input,
       token,
       route,
@@ -52,13 +57,31 @@ export class DataProviderClient {
     );
   }
 
+  async consumeMesri(input: MesriInput, token: Token, route: string) {
+    const propertyFilteredResult = await this.callDataProvider(
+      input,
+      token,
+      route,
+      this.mesriDataProvider,
+      'MESRI'
+    );
+
+    return {
+      ...propertyFilteredResult,
+      inscriptions: mesriScopesFilter.filterInsriptions(
+        token.scopes,
+        propertyFilteredResult.inscriptions ?? []
+      ),
+    };
+  }
+
   private async callDataProvider<I, O>(
     input: I,
     token: Token,
     route: string,
     dataProvider: DataProvider<I, O>,
     neededSubscription: Subscription
-  ) {
+  ): Promise<Partial<O>> {
     if (!token.subscriptions.includes(neededSubscription)) {
       throw new ApplicationNotSubscribedError(
         token.applicationId,

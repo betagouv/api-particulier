@@ -10,20 +10,16 @@ import {
   DgfipScope,
   scopesConfiguration as dgfipScopesConfiguration,
 } from './data-fetching/data-providers/dgfip/scopes';
+import {
+  MesriScope,
+  scopesConfiguration as mesriScopesConfiguration,
+} from './data-fetching/data-providers/mesri/scopes';
 
-export const isCnafScope = (scope: AnyScope): scope is CnafScope =>
-  scope.startsWith('cnaf_');
-
-export const isDgfipScope = (scope: AnyScope): scope is DgfipScope =>
-  scope.startsWith('dgfip_');
-
-export const isPoleEmploiScope = (scope: AnyScope): scope is PoleEmploiScope =>
-  scope.startsWith('pole_emploi_');
-
-export type AnyScope = CnafScope | DgfipScope | PoleEmploiScope;
+export type AnyScope = CnafScope | DgfipScope | PoleEmploiScope | MesriScope;
 
 export const unifiedScopesConfiguration = {
   ...cnafScopesConfiguration,
   ...dgfipScopesConfiguration,
   ...poleEmploiScopesConfiguration,
+  ...mesriScopesConfiguration,
 };

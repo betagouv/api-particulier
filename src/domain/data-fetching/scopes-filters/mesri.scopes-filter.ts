@@ -1,26 +1,10 @@
 import {isEmpty} from 'lodash';
-import {
-  Inscription,
-  MesriOutput,
-} from 'src/domain/data-fetching/data-providers/mesri/dto';
-import {MesriScope} from 'src/domain/data-fetching/data-providers/mesri/scopes';
-import {PropertyBasedScopesFilter} from 'src/domain/data-fetching/scopes-filters/property-based.scopes-filter';
+import {Inscription} from 'src/domain/data-fetching/data-providers/mesri/dto';
+import {AnyScope} from 'src/domain/scopes';
 
 export class MesriScopesFilter {
-  constructor(
-    private readonly propertyBasedScopesFilter: PropertyBasedScopesFilter<
-      MesriScope,
-      MesriOutput
-    >
-  ) {}
-
-  filter(scopes: MesriScope[], input: Partial<MesriOutput>) {
-    const partialResponse = this.propertyBasedScopesFilter.filter(
-      scopes,
-      input
-    );
-
-    const partialInscriptions = (input.inscriptions
+  filterInsriptions(scopes: AnyScope[], inscriptions: Inscription[] = []) {
+    const partialInscriptions = (inscriptions
       ?.map(inscription => {
         let result: object = {};
         if (
@@ -86,9 +70,6 @@ export class MesriScopesFilter {
       })
       .filter(partial => !isEmpty(partial)) ?? []) as Partial<Inscription>[];
 
-    return {
-      ...partialResponse,
-      inscriptions: partialInscriptions,
-    };
+    return partialInscriptions;
   }
 }
