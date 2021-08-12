@@ -1,0 +1,3 @@
+/api/ping           pong
+/api/impots/ping    pong
+/api/caf/ping       pong
