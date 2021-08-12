@@ -1,5 +1,8 @@
 import {expect} from 'chai';
-import {parseEuro} from 'src/infrastructure/data-providers/dgfip/parsing-functions';
+import {
+  parseDateOrString,
+  parseEuro,
+} from 'src/infrastructure/data-providers/dgfip/parsing-functions';
 
 describe('Parse ', () => {
   describe('parse Euro', () => {
@@ -25,6 +28,18 @@ describe('Parse ', () => {
 
     it('returns undefined if no data', () => {
       expect(parseEuro('')).to.be.undefined;
+    });
+  });
+
+  describe('parse dates', () => {
+    it('reads strings with /', () => {
+      expect(parseDateOrString('03/05/1991')).to.be.a('Date');
+    });
+
+    it('reads strings with -', () => {
+      expect(parseDateOrString('1991-05-03')).to.deep.equal(
+        new Date(1991, 4, 3)
+      );
     });
   });
 });

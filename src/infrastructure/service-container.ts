@@ -92,7 +92,7 @@ localLogger.log(
   }`
 );
 const mesriDataProvider = new MesriAirtableDataProvider();
-localLogger.log('info', 'Pôle Emploi data provider initialized - stubbed');
+localLogger.log('info', 'MESRI data provider initialized - stubbed');
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,

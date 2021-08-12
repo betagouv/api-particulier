@@ -1,3 +1,5 @@
+import {parse} from 'date-fns';
+
 export function parseEuro(str?: string): number | undefined {
   if (str === undefined) {
     return undefined;
@@ -21,6 +23,9 @@ export function parseDateOrString(
   }
   if (str.trim() === '-') {
     return '-';
+  }
+  if (str.trim().match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return parse(str.trim(), 'yyyy-MM-dd', new Date());
   }
   if (str.indexOf('/') === -1) {
     return str.trim();
