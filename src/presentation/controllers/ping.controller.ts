@@ -6,9 +6,7 @@ export const pingControllerBuilder =
     let status: number;
     try {
       const response = await axios.get(
-        (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') +
-          req.header('host') +
-          path,
+        `http://localhost:${process.env.PORT}${path}`,
         {
           headers: {
             'X-Api-Key': process.env.PING_TOKEN,
