@@ -5,7 +5,6 @@ import {listApplications} from 'src/presentation/controllers/list-applications.c
 import {Issuer, Strategy, TokenSet} from 'openid-client';
 import passport from 'passport';
 import session from 'express-session';
-import {redirectToPortailDomain} from 'src/presentation/middlewares/redirect-to-portail-domain.middleware';
 import connectRedis from 'connect-redis';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 
@@ -61,7 +60,7 @@ portailRouter.use(
 );
 portailRouter.use(passport.initialize());
 portailRouter.use(passport.session());
-portailRouter.get('/', redirectToPortailDomain, listApplications);
+portailRouter.get('/', listApplications);
 portailRouter.get('/login', passport.authenticate('openid'));
 portailRouter.get(
   '/callback',
