@@ -24,7 +24,6 @@
   "dependencies": {
     "@bull-board/api": "^3.4.0",
     "@bull-board/express": "^3.4.0",
-    "@gouvfr/all": "^0.5.3",
     "@gouvfr/dsfr": "^1.1.0",
     "@sentry/node": "^6.10.0",
     "@sentry/tracing": "^6.10.0",
