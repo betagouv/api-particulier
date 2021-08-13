@@ -7,8 +7,15 @@ export const isAdminMiddleware = (
 ) => {
   const userIsAdmin =
     req.user &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     req.user.email &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    req.user.email_verified &&
     process.env.ADMIN_USERS &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     process.env.ADMIN_USERS.split(',').includes(req.user.email);
   if (userIsAdmin) {
     next();
