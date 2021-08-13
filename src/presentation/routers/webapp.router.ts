@@ -60,6 +60,15 @@ webappRouter.use(
 webappRouter.use(passport.initialize());
 webappRouter.use(passport.session());
 webappRouter.get('/login', passport.authenticate('openid'));
+webappRouter.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect(
+    `https://${
+      // eslint-disable-next-line node/no-unsupported-features/node-builtins
+      new URL(process.env.ISSUER_URL!).hostname
+    }/oauth/logout`
+  );
+});
 webappRouter.get(
   '/callback',
   passport.authenticate('openid', {
