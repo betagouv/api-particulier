@@ -11,7 +11,7 @@ const postcss = () => {
 
 const fonts = () => {
   return gulp
-    .src('node_modules/@gouvfr/all/dist/fonts/*')
+    .src('node_modules/@gouvfr/dsfr/dist/fonts/*')
     .pipe(gulp.dest('./public/fonts'));
 };
 
