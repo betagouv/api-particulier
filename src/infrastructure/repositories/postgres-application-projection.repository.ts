@@ -17,6 +17,34 @@ export class PostgresApplicationProjectionRepository
 
   constructor(private readonly pg: Pool) {}
 
+  async findAll(): Promise<ApplicationProjection[]> {
+    this.logger.log('debug', 'Finding all application projections');
+    const query = 'SELECT * FROM applications';
+
+    const result = await this.pg.query(query);
+
+    const applications = result.rows.map(
+      rawApplication =>
+        new ApplicationProjection(
+          rawApplication.id,
+          rawApplication.name,
+          rawApplication.user_emails as UserEmail[],
+          rawApplication.scopes as AnyScope[],
+          rawApplication.subscriptions as Subscription[],
+          rawApplication.data_pass_id,
+          rawApplication.created_at,
+          rawApplication.tokens
+        )
+    );
+
+    this.logger.log(
+      'debug',
+      `Found ${applications.length} application projections`
+    );
+
+    return applications;
+  }
+
   async findByTokenValue(
     tokenValue: TokenValue
   ): Promise<ApplicationProjection> {
