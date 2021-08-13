@@ -1,5 +1,5 @@
 import express, {Express, Router} from 'express';
-import expressHandlebars from 'express-handlebars';
+import nunjucks from 'nunjucks';
 import path from 'path';
 import {Issuer, Strategy, TokenSet} from 'openid-client';
 import passport from 'passport';
@@ -10,9 +10,12 @@ import {redisConnection} from 'src/infrastructure/configuration/redis';
 const RedisStore = connectRedis(session);
 
 export const initWebapp = (app: Express) => {
-  app.engine('handlebars', expressHandlebars());
-  app.set('view engine', 'handlebars');
-  app.set('views', path.join(__dirname, '../frontend/views/'));
+  nunjucks.configure(path.join(__dirname, '../frontend/views/'), {
+    autoescape: true,
+    express: app,
+    watch: process.env.NODE_ENV !== 'production',
+  });
+  app.set('view engine', 'njk');
   app.use(express.static('public'));
 };
 

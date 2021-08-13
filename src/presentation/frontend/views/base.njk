@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'includes/head.njk' %}
+    </head>
+    <body class="flex flex-col min-h-screen justify-between">
+        {% include 'includes/header.njk' %}
+        <div class="md:max-w-screen-md mx-auto mt-16 flex-1">
+            {% block body %}{% endblock %}
+        </div>
+        {% include 'includes/footer.njk' %}
+    </body>
+    <script src="index.js"></script>
+</html>

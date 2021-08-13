@@ -1,0 +1,18 @@
+{% extends 'base.njk' %}
+{% block body %}
+    <div class="fr-mt-4w container mx-auto mb-auto px-4">
+        <h3>Détails de votre jeton d'accès</h3>
+        {% if applications.lenght > 0 %}
+            {% for application in applications %}
+                {% include 'includes/subscription.njk' %}
+            {% endfor %}
+            <br>
+            <h3>Quel faire de mon jeton ?</h3>
+            <p>Transmettez ce jeton au
+                <strong>responsable technique</strong>
+                de l'application qui intègre API Particulier.</p>
+        {% else %}
+            {% include 'includes/no-token.njk' %}
+        {% endif %}
+    </div>
+{% endblock %}

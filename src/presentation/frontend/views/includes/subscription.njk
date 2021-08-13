@@ -1,0 +1,16 @@
+{% for token in application.tokens %}
+    <div class="fr-tile fr-tile--horizontal fr-mb-4w">
+        <div data-controller="clipboard" class="fr-m-4w w-full flex flex-row items-center">
+            <div>
+                <strong>{{ application.name }}</strong>
+            </div>
+            <div class="flex-1 text-center mx-4">
+                <input data-clipboard-target="source" type="textarea" value="{{ token }}" readonly
+                class="absolute opacity-0 -left-32">
+                <div class="select-all truncate max-w-prose">{{ token }}</div>
+            </div>
+            <button data-action="clipboard#copy" data-clipboard-target="button" class="fr-btn hidden">Copier dans le
+            presse-papier</button>
+        </div>
+    </div>
+{% endfor %}
