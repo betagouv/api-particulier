@@ -24,11 +24,13 @@
                                             <div class="text-sm font-medium text-gray-900 truncate">{{ application.name }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">{{ application.dataPassId }}</div>
+                                            <div class="text-sm text-gray-500">
+                                                <a href="https://datapass.api.gouv.fr/api-particulier/{{ application.dataPassId }}" class="text-indigo-600 hover:text-indigo-900">{{ application.dataPassId }}</a>
+                                            </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {% for subscription in application.subscriptions %}
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ subscription }}</span>
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-800 text-blue-100">{{ subscription }}</span>
                                             {% endfor %}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
