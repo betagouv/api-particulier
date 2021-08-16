@@ -39,9 +39,12 @@ import {AirtableCnafDataProvider} from 'src/infrastructure/data-providers/cnaf/a
 import {PoleEmploiAirtableDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-airtable.data-provider';
 import {MesriAirtableDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-airtable.data-provider';
 import {SubscribeUserUsecase} from 'src/application/usecases/subscribe-user.usecase';
+import {MesriSupdataDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-supdata.data-provider';
 
 const logger = new ChalkLogger();
 setInstance(logger);
+
+const sandboxed = process.env.SANDBOXED !== 'false';
 
 const localLogger = logFor('ServiceContainer');
 
@@ -62,38 +65,34 @@ localLogger.log('info', 'Postgres token repository initialized');
 export const eventBus: EventBus = new BullEventBus(redisConnection);
 localLogger.log('info', 'Event bus initialized');
 
-const cnafDataProvider =
-  process.env.SANDBOXED === 'false'
-    ? new SoapDataProvider()
-    : new AirtableCnafDataProvider();
+const cnafDataProvider = sandboxed
+  ? new AirtableCnafDataProvider()
+  : new SoapDataProvider();
 localLogger.log(
   'info',
-  `CNAF data provider initialized - ${
-    process.env.SANDBOXED ? 'stubbed' : 'real'
-  }`
+  `CNAF data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
 );
-const dgfipDataProvider =
-  process.env.SANDBOXED === 'false'
-    ? new SvairDataProvider()
-    : new AirtableDgfipDataProvider();
+const dgfipDataProvider = sandboxed
+  ? new AirtableDgfipDataProvider()
+  : new SvairDataProvider();
 localLogger.log(
   'info',
-  `DGFIP data provider initialized - ${
-    process.env.SANDBOXED ? 'stubbed' : 'real'
-  }`
+  `DGFIP data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
 );
-const poleEmploiDataProvider =
-  process.env.SANDBOXED === 'false'
-    ? new PoleEmploiApiDataProvider()
-    : new PoleEmploiAirtableDataProvider();
+const poleEmploiDataProvider = sandboxed
+  ? new PoleEmploiAirtableDataProvider()
+  : new PoleEmploiApiDataProvider();
 localLogger.log(
   'info',
-  `Pôle Emploi data provider initialized - ${
-    process.env.SANDBOXED ? 'stubbed' : 'real'
-  }`
+  `Pôle Emploi data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
 );
-const mesriDataProvider = new MesriAirtableDataProvider();
-localLogger.log('info', 'MESRI data provider initialized - stubbed');
+const mesriDataProvider = sandboxed
+  ? new MesriAirtableDataProvider()
+  : new MesriSupdataDataProvider();
+localLogger.log(
+  'info',
+  `MESRI data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
+);
 
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,

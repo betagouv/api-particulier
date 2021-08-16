@@ -63,7 +63,10 @@ export class DataProviderClient {
       token,
       route,
       this.mesriDataProvider,
-      'MESRI'
+      'MESRI',
+      {
+        caller: token.applicationId,
+      }
     );
 
     return {
@@ -75,12 +78,13 @@ export class DataProviderClient {
     };
   }
 
-  private async callDataProvider<I, O>(
+  private async callDataProvider<I, O, M>(
     input: I,
     token: Token,
     route: string,
-    dataProvider: DataProvider<I, O>,
-    neededSubscription: Subscription
+    dataProvider: DataProvider<I, O, M>,
+    neededSubscription: Subscription,
+    metadata?: M
   ): Promise<Partial<O>> {
     if (!token.subscriptions.includes(neededSubscription)) {
       throw new ApplicationNotSubscribedError(
@@ -88,7 +92,7 @@ export class DataProviderClient {
         neededSubscription
       );
     }
-    const unfilteredData = await dataProvider.fetch(input);
+    const unfilteredData = await dataProvider.fetch(input, metadata);
 
     return propertyBasedScopesFilter.filter(token.scopes, unfilteredData);
   }
