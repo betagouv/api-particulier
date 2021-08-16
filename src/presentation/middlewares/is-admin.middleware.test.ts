@@ -15,6 +15,7 @@ describe('The admin checker middleware', () => {
     const req = <Request>{
       user: {
         email: adminEmail,
+        email_verified: true,
       },
     };
 
@@ -29,6 +30,7 @@ describe('The admin checker middleware', () => {
     const req = <Request>{
       user: {
         email: 'jean@lol.fr',
+        email_verified: true,
       },
     };
     res.status.returnsThis();

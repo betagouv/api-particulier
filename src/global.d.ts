@@ -4,6 +4,7 @@ declare global {
   namespace Express {
     interface User {
       email: UserEmail;
+      email_verified: boolean;
     }
   }
 }
