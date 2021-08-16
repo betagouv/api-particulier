@@ -1,3 +1,3 @@
-export type DataProvider<InputType, OutputType> = {
-  fetch(input: InputType): Promise<OutputType>;
+export type DataProvider<InputType, OutputType, MetadataType = object> = {
+  fetch(input: InputType, metadata?: MetadataType): Promise<OutputType>;
 };

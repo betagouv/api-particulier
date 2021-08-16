@@ -16,6 +16,10 @@ export type CiviliteMesriInput = {
 
 export type MesriInput = IneMesriInput | CiviliteMesriInput;
 
+export type MesriMetadata = {
+  caller: string;
+};
+
 export const isIneInput = (input: MesriInput): input is IneMesriInput => {
   return 'ine' in input;
 };
