@@ -14,5 +14,5 @@ describe('The soap data provider', () => {
     const output = await dataProvider.fetch(input);
 
     expect(output.quotientFamilial).to.be.a('number');
-  });
+  }).timeout(10000);
 });
