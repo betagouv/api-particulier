@@ -9,4 +9,4 @@ export const portailRouter = Router();
 portailRouter.use(webappRouter);
 portailRouter.use(isLoggedInMiddleware);
 portailRouter.get('/', listUserApplications);
-portailRouter.get('/admin', adminRouter);
+portailRouter.use('/admin', adminRouter);

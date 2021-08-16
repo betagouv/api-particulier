@@ -1,4 +1,5 @@
 import {Pool} from 'pg';
+import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationProjection} from 'src/domain/application-management/projections/application.projection';
 import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
 import {UserEmail} from 'src/domain/application-management/user';
@@ -16,6 +17,32 @@ export class PostgresApplicationProjectionRepository
   );
 
   constructor(private readonly pg: Pool) {}
+
+  async findById(id: ApplicationId): Promise<ApplicationProjection> {
+    this.logger.log('debug', `Finding application projection "${id}"`);
+    const query = 'SELECT * FROM applications WHERE id = $1';
+    const values = [id];
+
+    const result = await this.pg.query(query, values);
+
+    if (result.rowCount === 0) {
+      throw new Error('Application not found');
+    }
+
+    const rawApplication = result.rows[0];
+    const application = new ApplicationProjection(
+      rawApplication.id,
+      rawApplication.name,
+      rawApplication.user_emails as UserEmail[],
+      rawApplication.scopes as AnyScope[],
+      rawApplication.subscriptions as Subscription[],
+      rawApplication.data_pass_id,
+      rawApplication.created_at,
+      rawApplication.tokens
+    );
+
+    return application;
+  }
 
   async findAll(): Promise<ApplicationProjection[]> {
     this.logger.log('debug', 'Finding all application projections');
