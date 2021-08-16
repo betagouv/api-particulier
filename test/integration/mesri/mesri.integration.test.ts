@@ -5,7 +5,7 @@ import {
 } from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {MesriSupdataDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-supdata.data-provider';
 
-describe('The Supdata Mesri data provider', () => {
+describe.skip('The Supdata Mesri data provider', () => {
   const dataProvider = new MesriSupdataDataProvider();
 
   it('returns data when input is a correct ine', async () => {
