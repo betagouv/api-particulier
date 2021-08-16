@@ -67,7 +67,6 @@ export class MesriSupdataDataProvider implements MesriDataProvider {
       if (axios.isAxiosError(error) && error.response?.status === 404) {
         throw new NotFoundError();
       }
-      console.log(error);
       throw transformError(error);
     }
   }
