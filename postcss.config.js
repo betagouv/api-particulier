@@ -4,7 +4,7 @@ const postcssUrl = require('postcss-url');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 
-const purgecss = require('@fullhuman/postcss-purgecss')({
+const purgeConfig = {
   // Specify the paths to all of the template files in your project
   content: ['./src/presentation/frontend/views/**/*.njk'],
   // This is the function used to extract class names from your templates
@@ -17,13 +17,13 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 
     return broadMatches.concat(innerMatches);
   },
-});
+};
+const purgecss = require('@fullhuman/postcss-purgecss')(purgeConfig);
 
 module.exports = {
   plugins: [
     postcssImport(),
     tailwincss({
-      purge: ['**/*.njk'],
       darkMode: false,
     }),
     purgecss,
