@@ -38,6 +38,7 @@ import {PoleEmploiApiDataProvider} from 'src/infrastructure/data-providers/pole-
 import {AirtableCnafDataProvider} from 'src/infrastructure/data-providers/cnaf/airtable';
 import {PoleEmploiAirtableDataProvider} from 'src/infrastructure/data-providers/pole-emploi/pole-emploi-airtable.data-provider';
 import {MesriAirtableDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-airtable.data-provider';
+import {SubscribeUserUsecase} from 'src/application/usecases/subscribe-user.usecase';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -177,6 +178,11 @@ export const introspectUsecase = new IntrospectUsecase(
   redisTokenRepository
 );
 localLogger.log('info', 'Introspect usecase initialized');
+
+export const subscribeUserUsecase = new SubscribeUserUsecase(
+  applicationTransactionManager
+);
+localLogger.log('info', 'Subscribe user usecase initialized');
 
 export const createApplicationUsecase = new CreateApplicationUsecase(
   applicationTransactionManager,

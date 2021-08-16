@@ -1,6 +1,7 @@
 import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {ApplicationProjection} from 'src/domain/application-management/projections/application.projection';
 import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
 
@@ -37,5 +38,18 @@ export class ApplicationProjector {
     );
 
     return this.applicationProjectionRepository.save(applicationProjection);
+  }
+
+  async onUserSubscribed(event: UserSubscribed): Promise<void> {
+    const applicationProjection =
+      await this.applicationProjectionRepository.findById(
+        <ApplicationId>event.aggregateId
+      );
+
+    await this.applicationProjectionRepository.update({
+      ...applicationProjection,
+      userEmails: [...applicationProjection.userEmails, event.userEmail],
+    });
+    return;
   }
 }

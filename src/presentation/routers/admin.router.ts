@@ -1,5 +1,7 @@
+import {urlencoded} from 'body-parser';
 import {Router} from 'express';
 import {
+  addUserToApplication,
   applicationDetails,
   listApplications,
 } from 'src/presentation/controllers/list-applications.controller';
@@ -11,3 +13,8 @@ adminRouter.use(isAdminMiddleware);
 
 adminRouter.get('/', listApplications);
 adminRouter.get('/applications/:id', applicationDetails);
+adminRouter.post(
+  '/applications/:id/users',
+  urlencoded({extended: true}),
+  addUserToApplication
+);

@@ -1,6 +1,9 @@
 import {Request, Response} from 'express';
 import {ApplicationId} from 'src/domain/application-id';
-import {applicationProjectionRepository} from 'src/infrastructure/service-container';
+import {
+  applicationProjectionRepository,
+  subscribeUserUsecase,
+} from 'src/infrastructure/service-container';
 
 export const listApplications = async (req: Request, res: Response) => {
   const applications = await applicationProjectionRepository.findAll();
@@ -14,4 +17,13 @@ export const applicationDetails = async (req: Request, res: Response) => {
   );
 
   res.render('admin/application-details', {application, user: req.user});
+};
+
+export const addUserToApplication = async (req: Request, res: Response) => {
+  const email = req.body.email;
+  const id = req.params.id;
+
+  await subscribeUserUsecase.subscribe(email, <ApplicationId>id);
+
+  res.redirect(`/admin/applications/${id}`);
 };

@@ -1,6 +1,7 @@
 import {configureScope} from '@sentry/node';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {ResponseSent} from 'src/domain/data-fetching/events/response-sent.event';
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
@@ -82,6 +83,14 @@ new BullWorker(redisConnection, {
         qualityMonitor,
         event as ResponseSent
       );
+    },
+  ],
+  [UserSubscribed.name]: [
+    (event: Event) => {
+      configureScope(scope => {
+        scope.setUser({id: (event as UserSubscribed).aggregateId});
+      });
+      return applicationProjector.onUserSubscribed(<UserSubscribed>event);
     },
   ],
 });

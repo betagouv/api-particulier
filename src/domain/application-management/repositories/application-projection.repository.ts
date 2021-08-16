@@ -13,4 +13,6 @@ export interface ApplicationProjectionRepository {
   findById(id: ApplicationId): Promise<ApplicationProjection>;
 
   save(applicationProjection: ApplicationProjection): Promise<void>;
+
+  update(applicationProjection: ApplicationProjection): Promise<void>;
 }

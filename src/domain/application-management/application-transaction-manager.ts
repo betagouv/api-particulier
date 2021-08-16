@@ -27,8 +27,9 @@ export class ApplicationTransactionManager {
     application = handler(application);
 
     await Promise.all(
-      application.getPendingEvents().map(event => {
-        return this.eventBus.publish(event);
+      application.getPendingEvents().map(async event => {
+        await this.eventStore.append(event);
+        await this.eventBus.publish(event);
       })
     );
     this.logger.log(

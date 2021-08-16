@@ -167,4 +167,27 @@ export class PostgresApplicationProjectionRepository
     await this.pg.query(query, values);
     return;
   }
+
+  async update(applicationProjection: ApplicationProjection): Promise<void> {
+    this.logger.log(
+      'debug',
+      `Updating application projection "${applicationProjection.id}"`,
+      {applicationProjection}
+    );
+    const query =
+      'UPDATE applications SET (name, scopes, subscriptions, data_pass_id, user_emails, created_at, tokens) = ($2, $3, $4, $5, $6, $7, $8) WHERE id = $1';
+    const values = [
+      applicationProjection.id,
+      applicationProjection.name,
+      JSON.stringify(applicationProjection.scopes),
+      JSON.stringify(applicationProjection.subscriptions),
+      applicationProjection.dataPassId,
+      JSON.stringify(applicationProjection.userEmails),
+      applicationProjection.createdAt,
+      JSON.stringify(applicationProjection.tokens),
+    ];
+
+    await this.pg.query(query, values);
+    return;
+  }
 }
