@@ -2,8 +2,33 @@ import {Brand} from 'src/domain/branded-types';
 
 export type MesriId = Brand<string, 'MesriIr'>;
 
-export type MesriInput = {
+export type IneMesriInput = {
   ine: MesriId;
+};
+
+export type CiviliteMesriInput = {
+  prenom: string;
+  nomFamille: string;
+  dateNaissance: Date;
+  sexe: string;
+  lieuNaissance: string;
+};
+
+export type MesriInput = IneMesriInput | CiviliteMesriInput;
+
+export const isIneInput = (input: MesriInput): input is IneMesriInput => {
+  return 'ine' in input;
+};
+export const isCiviliteInput = (
+  input: MesriInput
+): input is CiviliteMesriInput => {
+  return (
+    'prenom' in input &&
+    'nomFamille' in input &&
+    'dateNaissance' in input &&
+    'sexe' in input &&
+    'lieuNaissance' in input
+  );
 };
 
 export type Inscription = {

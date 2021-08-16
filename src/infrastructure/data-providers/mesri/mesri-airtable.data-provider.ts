@@ -3,6 +3,7 @@ import {lowerCase} from 'lodash';
 import {MesriDataProvider} from 'src/domain/data-fetching/data-providers/mesri/data-provider';
 import {
   Inscription,
+  isIneInput,
   MesriInput,
   MesriOutput,
 } from 'src/domain/data-fetching/data-providers/mesri/dto';
@@ -12,18 +13,33 @@ import {transformError} from 'src/infrastructure/data-providers/error-transforme
 export class MesriAirtableDataProvider implements MesriDataProvider {
   async fetch(input: MesriInput): Promise<MesriOutput> {
     try {
-      const {data} = await axios.get(
-        `${process.env.AIRTABLE_MESRI_API_URL}/%C3%89tudiants`,
-        {
-          headers: {Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`},
-          params: {
-            filterByFormula: `{ine} = '${input.ine}'`,
-          },
-        }
-      );
+      let data;
+      if (isIneInput(input)) {
+        const response = await axios.get(
+          `${process.env.AIRTABLE_MESRI_API_URL}/%C3%89tudiants`,
+          {
+            headers: {Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`},
+            params: {
+              filterByFormula: `{ine} = '${input.ine}'`,
+            },
+          }
+        );
+        data = response.data;
+      } else {
+        const response = await axios.get(
+          `${process.env.AIRTABLE_MESRI_API_URL}/%C3%89tudiants`,
+          {
+            headers: {Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`},
+            params: {
+              filterByFormula: `AND({nom}='${input.nomFamille}', {prenom}='${input.prenom}', {dateNaissance}='${input.dateNaissance}')`,
+            },
+          }
+        );
+        data = response.data;
+      }
 
       if (data.records.length === 0) {
-        throw new NotFoundError(input.ine);
+        throw new NotFoundError();
       }
 
       const fields = data.records[0].fields;

@@ -1,9 +1,7 @@
-import {MesriId} from 'src/domain/data-fetching/data-providers/mesri/dto';
-
 export class NotFoundError extends Error {
-  constructor(ine: MesriId) {
+  constructor() {
     super(
-      `Impossible de trouver la situation de l'étudiant correspondant à l'identifiant ${ine}`
+      "Impossible de trouver la situation de l'étudiant correspondant à la recherche"
     );
   }
 }
