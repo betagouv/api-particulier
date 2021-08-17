@@ -14,19 +14,23 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.dropMaterializedView('consumptions_summary_hourly');
   pgm.dropMaterializedView('consumptions_summary_daily');
 
-  pgm.renameColumn('journal_entries', 'application_id', 'token_id');
+  pgm.renameColumn('journal_entries', 'application_id', 'token_value');
+  pgm.alterColumn('journal_entries', 'token_value', {
+    type: 'varchar(200)',
+    notNull: true,
+  });
 
   pgm.sql(`
     CREATE MATERIALIZED VIEW consumptions_summary_hourly
     WITH (timescaledb.continuous) AS
-    SELECT token_id, subscription, route, status_code,
+    SELECT token_value, subscription, route, status_code,
        time_bucket(INTERVAL '1 hour', date) AS bucket,
        AVG(time) as avg_time,
        MAX(time) as max_time,
        MIN(time) as min_time,
        count(*) as count
     FROM journal_entries
-    GROUP BY token_id, subscription, route, status_code, bucket;
+    GROUP BY token_value, subscription, route, status_code, bucket;
   `);
   pgm.sql(`
     SELECT add_continuous_aggregate_policy('consumptions_summary_hourly',
@@ -37,14 +41,14 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.sql(`
     CREATE MATERIALIZED VIEW consumptions_summary_daily
     WITH (timescaledb.continuous) AS
-    SELECT token_id, subscription, route, status_code,
+    SELECT token_value, subscription, route, status_code,
        time_bucket(INTERVAL '1 day', date) AS bucket,
        AVG(time) as avg_time,
        MAX(time) as max_time,
        MIN(time) as min_time,
        count(*) as count
     FROM journal_entries
-    GROUP BY token_id, subscription, route, status_code, bucket;
+    GROUP BY token_value, subscription, route, status_code, bucket;
   `);
   pgm.sql(`
     SELECT add_continuous_aggregate_policy('consumptions_summary_daily',
@@ -72,7 +76,11 @@ export async function down(pgm: MigrationBuilder): Promise<void> {
   pgm.dropMaterializedView('consumptions_summary_hourly');
   pgm.dropMaterializedView('consumptions_summary_daily');
 
-  pgm.renameColumn('journal_entries', 'token_id', 'application_id');
+  pgm.renameColumn('journal_entries', 'token_value', 'application_id');
+  pgm.alterColumn('journal_entries', 'application_id', {
+    type: 'uuid',
+    notNull: true,
+  });
 
   pgm.sql(`
     CREATE MATERIALIZED VIEW consumptions_summary_hourly

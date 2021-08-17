@@ -1,9 +1,8 @@
-import {ApplicationId} from 'src/domain/application-id';
 import {Subscription} from 'src/domain/subscription';
 
 export class Entry {
   constructor(
-    readonly applicationId: ApplicationId,
+    readonly tokenValue: string,
     readonly date: Date,
     readonly subscription: Subscription,
     readonly route: string,

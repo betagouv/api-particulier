@@ -22,6 +22,7 @@ export const journalMiddleware = async (
     new TokenConsumed(
       token.applicationId,
       new Date(),
+      token.value,
       subscription,
       req.baseUrl + req.path,
       res.statusCode,

@@ -5,6 +5,7 @@ export class TokenConsumed implements Event {
   constructor(
     readonly aggregateId: string,
     readonly date: Date,
+    readonly tokenValue: string,
     readonly subscription: Subscription,
     readonly route: string,
     readonly statusCode: number,

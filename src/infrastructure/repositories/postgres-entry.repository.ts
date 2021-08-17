@@ -7,10 +7,10 @@ export class PostgresEntryRepository implements EntryRepository {
 
   async save(entry: Entry): Promise<void> {
     const query =
-      'INSERT INTO journal_entries(date, application_id, subscription, route, status_code, time) VALUES ($1, $2, $3, $4, $5, $6)';
+      'INSERT INTO journal_entries(date, token_value, subscription, route, status_code, time) VALUES ($1, $2, $3, $4, $5, $6)';
     const values = [
       entry.date,
-      entry.applicationId,
+      entry.tokenValue,
       entry.subscription,
       entry.route,
       entry.statusCode,
