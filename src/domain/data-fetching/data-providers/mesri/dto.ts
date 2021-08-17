@@ -1,6 +1,6 @@
 import {Brand} from 'src/domain/branded-types';
 
-export type MesriId = Brand<string, 'MesriIr'>;
+export type MesriId = Brand<string, 'MesriId'>;
 
 export type IneMesriInput = {
   ine: MesriId;

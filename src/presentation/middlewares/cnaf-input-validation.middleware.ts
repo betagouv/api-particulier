@@ -1,5 +1,6 @@
 import {z} from 'zod';
 import {inputValidationMiddlewareBuilder} from 'src/presentation/middlewares/input-validation.middleware';
+import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 
 export const cnafInputSchema = z.object({
   numeroAllocataire: z.string().nonempty(),
@@ -7,4 +8,4 @@ export const cnafInputSchema = z.object({
 });
 
 export const cnafInputValidationMiddleware =
-  inputValidationMiddlewareBuilder(cnafInputSchema);
+  inputValidationMiddlewareBuilder<CnafInput>(cnafInputSchema);

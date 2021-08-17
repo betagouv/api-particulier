@@ -1,5 +1,6 @@
 import {z} from 'zod';
 import {inputValidationMiddlewareBuilder} from 'src/presentation/middlewares/input-validation.middleware';
+import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 
 export const dgfipInputSchema = z
   .object({
@@ -18,4 +19,4 @@ export const dgfipInputSchema = z
   }));
 
 export const dfdipInputValidationMiddleware =
-  inputValidationMiddlewareBuilder(dgfipInputSchema);
+  inputValidationMiddlewareBuilder<DgfipInput>(dgfipInputSchema);
