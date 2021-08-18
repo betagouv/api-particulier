@@ -94,6 +94,7 @@
     "cssnano": "^5.0.7",
     "cypress": "^8.3.0",
     "esbuild": "^0.12.19",
+    "eslint-plugin-cypress": "^2.11.3",
     "gts": "^3.1.0",
     "gulp": "^4.0.0",
     "gulp-esbuild": "^0.8.5",
