@@ -4,7 +4,7 @@
   "scripts": {
     "test": "mocha \"src/**/*.test.ts\"",
     "coverage": "nyc --reporter=lcov mocha \"src/**/*.test.ts\"",
-    "test:integration": "mocha -r dotenv/config -r test/integration/database-register.js \"test/**/*.test.ts\"",
+    "test:integration": "mocha -r dotenv/config -r test/integration/database-register.js \"test/integration/**/*.test.ts\"",
     "lint": "gts lint",
     "clean": "gts clean",
     "type-check": "tsc --noEmit",
