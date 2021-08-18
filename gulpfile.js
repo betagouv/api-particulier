@@ -35,7 +35,7 @@ exports.dev = () => {
   gulp.watch(
     [
       'src/presentation/frontend/index.css',
-      'src/presentation/frontend/views/**/*.handlebars',
+      'src/presentation/frontend/views/**/*.njk',
     ],
     {ignoreInitial: false},
     css
