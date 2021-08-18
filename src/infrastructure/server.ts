@@ -1,5 +1,5 @@
 const express = require('express');
-import vhost from 'vhost';
+import {default as vhost} from 'vhost';
 import {logFor} from 'src/domain/logger';
 import {apiRouter} from 'src/presentation/routers/api.router';
 import {portailRouter} from 'src/presentation/routers/portail.router';

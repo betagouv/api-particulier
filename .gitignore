@@ -4,3 +4,5 @@ build
 coverage
 .nyc_output
 public
+cypress/screenshots
+cypress/videos
