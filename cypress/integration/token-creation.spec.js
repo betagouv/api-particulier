@@ -22,5 +22,23 @@ describe('The portail', () => {
     cy.get('form').submit();
 
     cy.contains("Vous n'avez pas de jeton associé à votre email");
+
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:3000/api/applications',
+      body: {
+        name: 'Application de test',
+        technical_contact_email: 'api-particulier@yopmail.com',
+        author_email: 'api-particulier@yopmail.com',
+        data_pass_id: 0,
+        scopes: ['cnaf_adresse', 'dgfip_declarant1_nom', 'pole_emploi_adresse'],
+      },
+      headers: {
+        'X-Api-Key': Cypress.env('DATAPASS_API_KEY'),
+      },
+    });
+
+    cy.visit(Cypress.env('BASE_URL'), {failOnStatusCode: false});
+    cy.contains('Application de test');
   });
 });

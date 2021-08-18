@@ -5,6 +5,7 @@ module.exports = (on, config) => {
   config.env.TEST_OIDC_EMAIL = process.env.TEST_OIDC_EMAIL;
   config.env.TEST_OIDC_PASSWORD = process.env.TEST_OIDC_PASSWORD;
   config.env.BASE_URL = process.env.BASE_URL;
+  config.env.DATAPASS_API_KEY = process.env.DATAPASS_API_KEY;
 
   return config;
 };

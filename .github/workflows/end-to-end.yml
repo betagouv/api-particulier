@@ -35,7 +35,7 @@ jobs:
           wait-on: http://localhost:3000/api/ping
           config: chromeWebSecurity=false
           build: npm run migrate up
-          start: npm start
+          start: npm start, npm run start:worker
           install: false
         env:
           CAF_CERTIFICATE: ${{ secrets.CAF_CERTIFICATE }}
