@@ -22,5 +22,58 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14.x"
-      - run: npm ci
-      - run: npm run build
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 mon.portail.local" | sudo tee -a /etc/hosts
+      - name: Install dependencies
+        run: npm ci
+      - name: Build sources
+        run: npm run build
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          wait-on: http://localhost:3000/api/ping
+          config: chromeWebSecurity=false
+          build: npm run migrate up
+          start: npm start
+          install: false
+        env:
+          CAF_CERTIFICATE: ${{ secrets.CAF_CERTIFICATE }}
+          CAF_PRIVATE_KEY: ${{ secrets.CAF_PRIVATE_KEY }}
+          CAF_HOST: ${{ secrets.CAF_HOST }}
+          POLE_EMPLOI_TOKEN_URL: ${{ secrets.POLE_EMPLOI_TOKEN_URL }}
+          POLE_EMPLOI_CLIENT_ID: ${{ secrets.POLE_EMPLOI_CLIENT_ID }}
+          POLE_EMPLOI_CLIENT_SECRET: ${{ secrets.POLE_EMPLOI_CLIENT_SECRET }}
+          POLE_EMPLOI_SCOPES: ${{ secrets.POLE_EMPLOI_SCOPES }}
+          POLE_EMPLOI_API_URL: ${{ secrets.POLE_EMPLOI_API_URL }}
+          SUPDATA_API_URL: ${{ secrets.SUPDATA_API_URL }}
+          SUPDATA_INE_API_KEY: ${{ secrets.SUPDATA_INE_API_KEY }}
+          SUPDATA_CIVILITE_API_KEY: ${{ secrets.SUPDATA_CIVILITE_API_KEY }}
+          ISSUER_URL: ${{ secrets.ISSUER_URL }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          BASE_URL: "http://mon.portail.local:3000"
+          REDIRECT_URL: "http://mon.portail.local:3000/callback"
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          TEST_OIDC_EMAIL: ${{ secrets.TEST_OIDC_EMAIL }}
+          TEST_OIDC_PASSWORD: ${{ secrets.TEST_OIDC_PASSWORD }}
+          PORT: 3000
+          NODE_ENV: 'production'
+          LOG_LEVEL: '1'
+          SENTRY_DSN: 'https://public@sentry.example.com/1'
+          ENV: 'test-real'
+          SANDBOXED: 'false'
+          SENTRY_ENABLED: 'false'
+          MONITOR_QUALITY: 'false'
+          DATAPASS_API_KEY: 'lolilol'
+          SESSION_SECRET: 'yolo'
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
