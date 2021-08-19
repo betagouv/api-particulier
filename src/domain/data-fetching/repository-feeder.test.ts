@@ -18,7 +18,7 @@ describe('The token feeder', () => {
   describe('calls the fallback repository when token is not found', () => {
     it('and does nothing if token is not found in fallback repo', async () => {
       const tokenValue = 'token value' as TokenValue;
-      const notFoundEvent = new TokenNotFound('', new Date(), tokenValue);
+      const notFoundEvent = new TokenNotFound(tokenValue);
 
       fallbackRepository.findByTokenValue.rejects(
         new TokenNotFoundError(tokenValue)
@@ -35,7 +35,7 @@ describe('The token feeder', () => {
     it('and saves it in the main repo when fallback repo finds one', async () => {
       const tokenValue = 'token value' as TokenValue;
       const foundToken = Symbol('Found token') as unknown as Token;
-      const notFoundEvent = new TokenNotFound('', new Date(), tokenValue);
+      const notFoundEvent = new TokenNotFound(tokenValue);
 
       fallbackRepository.findByTokenValue.resolves(foundToken);
 
@@ -49,7 +49,7 @@ describe('The token feeder', () => {
 
     it('and throw an error if fallback repo throws an error different from token not found', async () => {
       const tokenValue = 'token value' as TokenValue;
-      const notFoundEvent = new TokenNotFound('', new Date(), tokenValue);
+      const notFoundEvent = new TokenNotFound(tokenValue);
 
       fallbackRepository.findByTokenValue.rejects(
         new Error('La barbe de la femme à Georges Moustaki')

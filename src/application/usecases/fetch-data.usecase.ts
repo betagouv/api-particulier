@@ -29,9 +29,7 @@ export class FetchDataUsecase {
       return this.dataProviderClient.consumeDgfip(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(
-          new TokenNotFound('', new Date(), tokenValue)
-        );
+        await this.eventBus.publish(new TokenNotFound(tokenValue));
       }
       throw error;
     }
@@ -49,9 +47,7 @@ export class FetchDataUsecase {
       return this.dataProviderClient.consumeCnaf(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(
-          new TokenNotFound('', new Date(), tokenValue)
-        );
+        await this.eventBus.publish(new TokenNotFound(tokenValue));
       }
       throw error;
     }
@@ -69,9 +65,7 @@ export class FetchDataUsecase {
       return this.dataProviderClient.consumePoleEmploi(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(
-          new TokenNotFound('', new Date(), tokenValue)
-        );
+        await this.eventBus.publish(new TokenNotFound(tokenValue));
       }
       throw error;
     }
@@ -89,9 +83,7 @@ export class FetchDataUsecase {
       return this.dataProviderClient.consumeMesri(input, token, route);
     } catch (error) {
       if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(
-          new TokenNotFound('', new Date(), tokenValue)
-        );
+        await this.eventBus.publish(new TokenNotFound(tokenValue));
       }
       throw error;
     }

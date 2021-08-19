@@ -3,7 +3,6 @@ import {Subscription} from 'src/domain/subscription';
 
 export class TokenConsumed implements Event {
   constructor(
-    readonly aggregateId: string,
     readonly date: Date,
     readonly tokenValue: string,
     readonly subscription: Subscription,

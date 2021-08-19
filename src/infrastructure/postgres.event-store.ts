@@ -1,8 +1,8 @@
 import {Pool} from 'pg';
+import {AggregateEvent} from 'src/domain/aggregate-event';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
-import {Event} from 'src/domain/event';
 import {EventStore} from 'src/domain/event-store';
 import {logFor} from 'src/domain/logger';
 
@@ -11,7 +11,7 @@ export class PostgresEventStore implements EventStore {
 
   constructor(private readonly pool: Pool) {}
 
-  async append(event: Event): Promise<void> {
+  async append(event: AggregateEvent): Promise<void> {
     this.logger.log(
       'debug',
       `Appending event ${event.constructor.name} to Postgres`,
@@ -32,7 +32,7 @@ export class PostgresEventStore implements EventStore {
   async listAggregateEvents(
     aggregate: string,
     aggregateId: string
-  ): Promise<Event[]> {
+  ): Promise<AggregateEvent[]> {
     const selectQuery =
       'SELECT event_name, payload FROM events WHERE aggregate_name = $1 AND aggregate_id = $2 ORDER BY created_at';
     const {rows} = await this.pool.query(selectQuery, [aggregate, aggregateId]);
@@ -47,7 +47,7 @@ export class PostgresEventStore implements EventStore {
     return events;
   }
 
-  async listEvents(): Promise<Event[]> {
+  async listEvents(): Promise<AggregateEvent[]> {
     const selectQuery =
       'SELECT event_name, payload FROM events ORDER BY created_at';
     const {rows} = await this.pool.query(selectQuery, []);
@@ -59,7 +59,7 @@ export class PostgresEventStore implements EventStore {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private constructEventsFromRows(rows: any[]): Event[] {
+  private constructEventsFromRows(rows: any[]): AggregateEvent[] {
     return rows.map(row => {
       switch (row.event_name) {
         case ApplicationImported.name:

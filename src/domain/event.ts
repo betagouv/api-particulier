@@ -1,4 +1,2 @@
-export interface Event {
-  readonly aggregateId: string;
-  readonly date: Date;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Event {}
