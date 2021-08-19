@@ -165,7 +165,7 @@ localLogger.log('info', 'Application projector initialized');
 export const fetchDataUsecase = new FetchDataUsecase(
   redisTokenRepository,
   dataProviderClient,
-  eventBus
+  eventBus2
 );
 localLogger.log('info', 'Fetch data usecase initialized');
 

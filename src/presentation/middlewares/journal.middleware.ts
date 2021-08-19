@@ -2,7 +2,7 @@ import {Request, Response, NextFunction} from 'express';
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {Subscription} from 'src/domain/subscription';
-import {eventBus} from 'src/infrastructure/service-container';
+import {eventBus2} from 'src/infrastructure/service-container';
 
 export const journalMiddleware = async (
   req: Request,
@@ -18,7 +18,7 @@ export const journalMiddleware = async (
   }
   const timeSpent = new Date().getTime() - startTime;
   const subscription = getSubscriptionFromRoute(req.baseUrl + req.path);
-  await eventBus.publish(
+  await eventBus2.publish(
     new TokenConsumed(
       new Date(),
       token.value,
