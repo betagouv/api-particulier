@@ -34,9 +34,7 @@ describe('The token feeder', () => {
       redisRepository.findByTokenValue(token.value)
     ).to.be.rejectedWith(TokenNotFoundError);
 
-    await repositoryFeeder.onTokenNotFound(
-      new TokenNotFound(token.applicationId, new Date(), token.value)
-    );
+    await repositoryFeeder.onTokenNotFound(new TokenNotFound(token.value));
 
     const foundToken = await redisRepository.findByTokenValue(token.value);
 

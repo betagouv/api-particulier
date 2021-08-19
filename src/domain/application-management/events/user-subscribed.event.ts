@@ -1,7 +1,7 @@
+import {AggregateEvent} from 'src/domain/aggregate-event';
 import {UserEmail} from 'src/domain/application-management/user';
-import {Event} from 'src/domain/event';
 
-export class UserSubscribed implements Event {
+export class UserSubscribed implements AggregateEvent {
   constructor(
     readonly aggregateId: string,
     readonly date: Date,

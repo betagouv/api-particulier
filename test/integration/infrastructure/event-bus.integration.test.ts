@@ -19,7 +19,7 @@ describe('The event bus', () => {
     worker = new BullWorker(redisConnection, {
       [ApplicationCreated.name]: [
         (event: Event) => {
-          expect(event.aggregateId).to.exist;
+          expect('aggregateId' in event).to.be.true;
           done();
         },
       ],

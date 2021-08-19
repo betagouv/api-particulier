@@ -1,9 +1,12 @@
-import {Event} from 'src/domain/event';
+import {AggregateEvent} from 'src/domain/aggregate-event';
 
 export interface EventStore {
-  append(event: Event): Promise<void>;
+  append(event: AggregateEvent): Promise<void>;
 
-  listAggregateEvents(aggregate: string, aggregateId: string): Promise<Event[]>;
+  listAggregateEvents(
+    aggregate: string,
+    aggregateId: string
+  ): Promise<AggregateEvent[]>;
 
-  listEvents(): Promise<Event[]>;
+  listEvents(): Promise<AggregateEvent[]>;
 }

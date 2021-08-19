@@ -1,10 +1,10 @@
 import {AnyScope} from 'src/domain/scopes';
 import {UserEmail} from 'src/domain/application-management/user';
 import {Subscription} from 'src/domain/subscription';
-import {Event} from 'src/domain/event';
 import {Token} from 'src/domain/application-management/application.aggregate';
+import {AggregateEvent} from 'src/domain/aggregate-event';
 
-export class ApplicationImported implements Event {
+export class ApplicationImported implements AggregateEvent {
   constructor(
     readonly aggregateId: string,
     readonly date: Date,
