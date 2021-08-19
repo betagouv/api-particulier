@@ -51,7 +51,6 @@ jobs:
           SUPDATA_INE_API_KEY: ${{ secrets.SUPDATA_INE_API_KEY }}
           SUPDATA_CIVILITE_API_KEY: ${{ secrets.SUPDATA_CIVILITE_API_KEY }}
           TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-      - run: npm run compile
   coverage:
     needs: [ test ]
     name: coverage
