@@ -5,9 +5,9 @@ import {UserSubscribed} from 'src/domain/application-management/events/user-subs
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Event} from 'src/domain/event';
-import {EventBus2} from 'src/domain/event-bus';
+import {EventBus} from 'src/domain/event-bus';
 
-export class EventEmitterEventBus implements EventBus2 {
+export class EventEmitterEventBus implements EventBus {
   private readonly eventEmitter = new EventEmitter();
 
   publish(event: Event): void {

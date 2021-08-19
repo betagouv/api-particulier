@@ -6,7 +6,7 @@ import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
 import {EventStore} from 'src/domain/event-store';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
-import {EventBus2} from 'src/domain/event-bus';
+import {EventBus} from 'src/domain/event-bus';
 import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
@@ -61,7 +61,7 @@ export const postgresTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresPool));
 localLogger.log('info', 'Postgres token repository initialized');
 
-export const eventBus2: EventBus2 = new EventEmitterEventBus();
+export const eventBus: EventBus = new EventEmitterEventBus();
 localLogger.log('info', 'Event bus initialized');
 
 const cnafDataProvider = sandboxed
@@ -121,7 +121,7 @@ localLogger.log('info', 'Application repository initialized');
 
 export const applicationTransactionManager = new ApplicationTransactionManager(
   applicationRepository,
-  eventBus2,
+  eventBus,
   eventStore
 );
 localLogger.log('info', 'Application transaction manager initialized');
@@ -161,7 +161,7 @@ localLogger.log('info', 'Application projector initialized');
 export const fetchDataUsecase = new FetchDataUsecase(
   redisTokenRepository,
   dataProviderClient,
-  eventBus2
+  eventBus
 );
 localLogger.log('info', 'Fetch data usecase initialized');
 

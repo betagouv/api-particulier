@@ -1,42 +1,40 @@
 import {
   applicationProjector,
   entryProjector,
-  eventBus2,
+  eventBus,
   postgresTokenProjector,
   redisTokenProjector,
   repositoryFeeder,
 } from 'src/infrastructure/service-container';
 
 export const routeEvents = () => {
-  eventBus2.onApplicationCreated(
+  eventBus.onApplicationCreated(
     redisTokenProjector.onApplicationCreated.bind(redisTokenProjector)
   );
-  eventBus2.onApplicationCreated(
+  eventBus.onApplicationCreated(
     postgresTokenProjector.onApplicationCreated.bind(postgresTokenProjector)
   );
-  eventBus2.onApplicationCreated(
+  eventBus.onApplicationCreated(
     applicationProjector.onApplicationCreated.bind(applicationProjector)
   );
 
-  eventBus2.onApplicationImported(
+  eventBus.onApplicationImported(
     redisTokenProjector.onApplicationImported.bind(redisTokenProjector)
   );
-  eventBus2.onApplicationImported(
+  eventBus.onApplicationImported(
     postgresTokenProjector.onApplicationImported.bind(postgresTokenProjector)
   );
-  eventBus2.onApplicationImported(
+  eventBus.onApplicationImported(
     applicationProjector.onApplicationImported.bind(applicationProjector)
   );
 
-  eventBus2.onUserSubscribed(
+  eventBus.onUserSubscribed(
     applicationProjector.onUserSubscribed.bind(applicationProjector)
   );
 
-  eventBus2.onTokenNotFound(
+  eventBus.onTokenNotFound(
     repositoryFeeder.onTokenNotFound.bind(repositoryFeeder)
   );
 
-  eventBus2.onTokenConsumed(
-    entryProjector.onTokenConsumed.bind(entryProjector)
-  );
+  eventBus.onTokenConsumed(entryProjector.onTokenConsumed.bind(entryProjector));
 };
