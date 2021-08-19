@@ -7,14 +7,14 @@ import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-foun
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
-import {EventBus2} from 'src/domain/event-bus';
+import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
 
 export class FetchDataUsecase {
   constructor(
     private readonly tokenRepository: TokenRepository,
     private readonly dataProviderClient: DataProviderClient,
-    private readonly eventBus: EventBus2
+    private readonly eventBus: EventBus
   ) {}
 
   async fetchDgfipData(

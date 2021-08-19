@@ -1,4 +1,4 @@
-import {EventBus2} from 'src/domain/event-bus';
+import {EventBus} from 'src/domain/event-bus';
 import {EventStore} from 'src/domain/event-store';
 import {ApplicationId} from 'src/domain/application-id';
 import {Application} from 'src/domain/application-management/application.aggregate';
@@ -10,7 +10,7 @@ export class ApplicationTransactionManager {
 
   constructor(
     private readonly applicationRepository: ApplicationRepository,
-    private readonly eventBus: EventBus2,
+    private readonly eventBus: EventBus,
     private readonly eventStore: EventStore
   ) {}
 
