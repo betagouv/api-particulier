@@ -18,6 +18,7 @@ import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware
 import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
 import {poleEmploiInputValidationMiddleware} from 'src/presentation/middlewares/pole-emploi-input-validation.middleware';
 import {mesriInputValidationMiddleware} from 'src/presentation/middlewares/mesri-input-validation.middleware';
+import {schema} from 'src/presentation/schema';
 
 export const apiRouter = Router();
 
@@ -116,3 +117,7 @@ apiRouter.post(
   createApplicationController,
   manageErrorMiddleware
 );
+
+apiRouter.get('/open-api.yml', (_req: Request, res: Response) => {
+  res.type('text/yaml').send(schema.getSpecAsYaml());
+});
