@@ -1,13 +1,12 @@
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';
-import {BullEventBus} from 'src/infrastructure/event-bus/bull.event-bus';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
 import {EventStore} from 'src/domain/event-store';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
-import {EventBus, EventBus2} from 'src/domain/event-bus';
+import {EventBus2} from 'src/domain/event-bus';
 import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
@@ -62,11 +61,8 @@ export const postgresTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresPool));
 localLogger.log('info', 'Postgres token repository initialized');
 
-export const eventBus: EventBus = new BullEventBus(redisConnection);
-localLogger.log('info', 'Event bus initialized');
-
 export const eventBus2: EventBus2 = new EventEmitterEventBus();
-localLogger.log('info', 'Event bus 2 initialized');
+localLogger.log('info', 'Event bus initialized');
 
 const cnafDataProvider = sandboxed
   ? new AirtableCnafDataProvider()
