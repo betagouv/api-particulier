@@ -13,7 +13,6 @@ import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-v
 import {cnafInputValidationMiddleware} from 'src/presentation/middlewares/cnaf-input-validation.middleware';
 import {createApplicationValidationMiddleware} from 'src/presentation/middlewares/create-application-validation.middleware';
 import {dfdipInputValidationMiddleware} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
-import {discrepancyCheckerMiddleware} from 'src/presentation/middlewares/discrepancy-spotter.middleware';
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
 import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware';
 import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
@@ -26,7 +25,6 @@ apiRouter.get(
   '/impots/svair',
   apiKeyValidationMiddleware,
   timingMiddleware,
-  discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(false),
   manageErrorMiddleware,
@@ -36,7 +34,6 @@ apiRouter.get(
   '/v2/avis-imposition',
   apiKeyValidationMiddleware,
   timingMiddleware,
-  discrepancyCheckerMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
   manageErrorMiddleware,
@@ -47,7 +44,6 @@ apiRouter.get(
   '/caf/famille',
   apiKeyValidationMiddleware,
   timingMiddleware,
-  discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
   manageErrorMiddleware,
@@ -57,7 +53,6 @@ apiRouter.get(
   '/v2/composition-familiale',
   apiKeyValidationMiddleware,
   timingMiddleware,
-  discrepancyCheckerMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
   manageErrorMiddleware,
@@ -68,7 +63,6 @@ apiRouter.get(
   '/v2/situations-pole-emploi',
   apiKeyValidationMiddleware,
   timingMiddleware,
-  discrepancyCheckerMiddleware,
   poleEmploiInputValidationMiddleware,
   fetchPoleEmploiDataControllerBuidler(),
   manageErrorMiddleware,
@@ -79,7 +73,6 @@ apiRouter.get(
   '/v2/etudiants',
   apiKeyValidationMiddleware,
   timingMiddleware,
-  discrepancyCheckerMiddleware,
   mesriInputValidationMiddleware,
   fetchMesriDataControllerBuidler(),
   manageErrorMiddleware,
