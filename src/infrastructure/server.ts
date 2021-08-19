@@ -3,7 +3,6 @@ import {default as vhost} from 'vhost';
 import {logFor} from 'src/domain/logger';
 import {apiRouter} from 'src/presentation/routers/api.router';
 import {portailRouter} from 'src/presentation/routers/portail.router';
-import {queueAdminRouter} from 'src/presentation/routers/queue-admin.router';
 import {initSentry, sentryRouter} from 'src/presentation/routers/sentry.router';
 import {initWebapp} from 'src/presentation/routers/webapp.router';
 
@@ -14,7 +13,6 @@ initSentry(app);
 initWebapp(app);
 
 app.use(sentryRouter);
-app.use('/admin/queues', queueAdminRouter);
 app.use('/api', apiRouter);
 app.use(
   '/',

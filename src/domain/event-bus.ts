@@ -7,10 +7,6 @@ import {Event} from 'src/domain/event';
 
 type Handler<T> = (event: T) => Promise<void>;
 
-export interface EventBus {
-  publish(event: Event): Promise<void>;
-}
-
 export interface EventBus2 {
   publish(event: Event): void;
   onApplicationCreated(handler: Handler<ApplicationCreated>): void;
