@@ -2,9 +2,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import {Command} from 'commander';
 import {postgresPool} from 'src/infrastructure/configuration/postgres';
-import {BullEventBus} from 'src/infrastructure/event-bus/bull.event-bus';
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
-import {redisConnection} from 'src/infrastructure/configuration/redis';
+import {EventEmitterEventBus} from 'src/infrastructure/event-bus/event-emitter.event-bus';
 
 (async () => {
   const program = new Command();
@@ -12,7 +11,7 @@ import {redisConnection} from 'src/infrastructure/configuration/redis';
   program.parse(process.argv);
 
   const eventStore = new PostgresEventStore(postgresPool);
-  const eventBus = new BullEventBus(redisConnection);
+  const eventBus = new EventEmitterEventBus();
   const events = await eventStore.listEvents();
 
   console.log('Removing projections');
