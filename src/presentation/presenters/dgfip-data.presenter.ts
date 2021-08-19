@@ -1,8 +1,9 @@
 import {format} from 'date-fns';
-import {get, identity, set} from 'lodash';
+import {get, set} from 'lodash';
 import {DgfipOutput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {logFor} from 'src/domain/logger';
 
+const identity = (value: unknown) => value;
 const dateToString = (date?: Date) => {
   if (!date) {
     return '';
@@ -67,9 +68,8 @@ export class DgfipDataPresenter {
       situationPartielle: identity,
     };
 
-    const result = Object.keys(config).reduce((result, key) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+    type Key = keyof typeof config;
+    const result = (<Key[]>Object.keys(config)).reduce((result, key) => {
       return set(result, key, config[key](get(input, key)));
     }, {}) as Record<string, unknown>;
 
