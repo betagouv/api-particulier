@@ -7,7 +7,7 @@ import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
 import {EventStore} from 'src/domain/event-store';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
-import {EventBus} from 'src/domain/event-bus';
+import {EventBus, EventBus2} from 'src/domain/event-bus';
 import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
@@ -38,6 +38,8 @@ import {PoleEmploiAirtableDataProvider} from 'src/infrastructure/data-providers/
 import {MesriAirtableDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-airtable.data-provider';
 import {SubscribeUserUsecase} from 'src/application/usecases/subscribe-user.usecase';
 import {MesriSupdataDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-supdata.data-provider';
+import {EventEmitterEventBus} from 'src/infrastructure/event-bus/event-emitter.event-bus';
+import {routeEvents} from 'src/infrastructure/event-router';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -62,6 +64,9 @@ localLogger.log('info', 'Postgres token repository initialized');
 
 export const eventBus: EventBus = new BullEventBus(redisConnection);
 localLogger.log('info', 'Event bus initialized');
+
+export const eventBus2: EventBus2 = new EventEmitterEventBus();
+localLogger.log('info', 'Event bus 2 initialized');
 
 const cnafDataProvider = sandboxed
   ? new AirtableCnafDataProvider()
@@ -120,7 +125,7 @@ localLogger.log('info', 'Application repository initialized');
 
 export const applicationTransactionManager = new ApplicationTransactionManager(
   applicationRepository,
-  eventBus,
+  eventBus2,
   eventStore
 );
 localLogger.log('info', 'Application transaction manager initialized');
@@ -181,3 +186,5 @@ export const createApplicationUsecase = new CreateApplicationUsecase(
   tokenValueFactory
 );
 localLogger.log('info', 'Create application usecase initialized');
+
+routeEvents();
