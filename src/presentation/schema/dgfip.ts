@@ -39,7 +39,7 @@ const yearSchema: SchemaObject = {
 };
 
 export const dgfipPaths = <PathsObject>{
-  '/api/impots/svair': {
+  '/impots/svair': {
     get: {
       summary: "Service de vérification de l'avis d'impôt sur le revenu",
       description:
@@ -118,7 +118,7 @@ export const dgfipPaths = <PathsObject>{
       },
     },
   },
-  '/api/v2/avis-imposition': {
+  '/v2/avis-imposition': {
     get: {
       summary: "Service de vérification de l'avis d'impôt sur le revenu",
       description:

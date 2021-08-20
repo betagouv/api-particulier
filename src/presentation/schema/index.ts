@@ -1,6 +1,7 @@
 import {readFileSync} from 'fs';
 import {OpenApiBuilder} from 'openapi3-ts';
 import {join} from 'path';
+import {cafPaths} from 'src/presentation/schema/caf';
 import {dgfipPaths} from 'src/presentation/schema/dgfip';
 
 export const schema = new OpenApiBuilder({
@@ -22,15 +23,16 @@ export const schema = new OpenApiBuilder({
   openapi: '3.0.0',
   servers: [
     {
-      url: 'https://particulier-test.api.gouv.fr',
+      url: 'https://particulier-test.api.gouv.fr/api',
       description: 'Serveur de bac à sable',
     },
     {
-      url: 'https://particulier.api.gouv.fr',
+      url: 'https://particulier.api.gouv.fr/api',
       description: 'Serveur de production',
     },
   ],
   paths: {
     ...dgfipPaths,
+    ...cafPaths,
   },
 });
