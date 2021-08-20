@@ -9,7 +9,19 @@ import {
 export const poleEmploiPaths: PathsObject = {
   '/v2/situations-pole-emploi': {
     get: <OperationObject>{
-      summary: "Recherche de la situation Pôle Emploi d'un individu",
+      summary: "Recherche de la situation Pôle Emploi d'un particulier",
+      description: `Le service permet de récupérer la situation Pôle Emploi d'un particulier, avec ses données d'état civil et ses données relatives à son inscription à Pôle Emploi.
+
+**Paramètres d'appel :** identifiant "PeamU" Pôle Emploi choisi par le particulier lors de la création de son compte en ligne
+
+**Jetons de bac à sable associés à cette route :**
+ - Pôle Emploi - Identité, Contact, Adresse et Inscription : fd38830c480221d0ff0b6013c4de6c32
+ - Pôle Emploi - Identité : d76d8c36-f49d-4c26-b849-7466a9faf0d6
+ - Pôle Emploi - Contact : b70015d5-6ecd-48a6-9a2b-9fdb9fdf1c67
+ - Pôle Emploi - Adresse : 438e839a-da85-4e10-a314-98092b856989
+ - Pôle Emploi - Inscription : d726502d-ac6d-483f-b8b8-c9ba239547a6
+ 
+**Données disponibles en bac à sable :** [liste](https://airtable.com/invite/l?inviteId=inv1n0CkFzq3Y0pvn&inviteToken=a5b49ec5bb9d2323df4adbdfc6c65da35a2248af30c38095101b3cca6ea0898a&utm_source=email)`,
       parameters: [
         {
           name: 'identifiant',
