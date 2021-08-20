@@ -3,9 +3,12 @@ import {
   cnafDataPresenter,
   dgfipDataPresenter,
   fetchDataUsecase,
+  mesriDataPresenter,
+  poleEmploiDataPresenter,
 } from 'src/infrastructure/service-container';
 import {TokenValue} from 'src/domain/token-value';
 import {Token} from 'src/domain/data-fetching/projections/token';
+import {MesriOutput} from 'src/domain/data-fetching/data-providers/mesri/dto';
 
 export const fetchDgfipDataControllerBuidler =
   (withNulls: boolean) =>
@@ -61,7 +64,7 @@ export const fetchPoleEmploiDataControllerBuidler =
         }
       );
 
-      res.json(data);
+      res.json(poleEmploiDataPresenter.presentData(data));
       return next();
     } catch (error) {
       return next(error);
@@ -81,7 +84,7 @@ export const fetchMesriDataControllerBuidler =
         }
       );
 
-      res.json(data);
+      res.json(mesriDataPresenter.presentData(<Partial<MesriOutput>>data));
       return next();
     } catch (error) {
       return next(error);

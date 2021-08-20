@@ -39,6 +39,8 @@ import {SubscribeUserUsecase} from 'src/application/usecases/subscribe-user.usec
 import {MesriSupdataDataProvider} from 'src/infrastructure/data-providers/mesri/mesri-supdata.data-provider';
 import {EventEmitterEventBus} from 'src/infrastructure/event-bus/event-emitter.event-bus';
 import {routeEvents} from 'src/infrastructure/event-router';
+import {MesriDataPresenter} from 'src/presentation/presenters/mesri-data.presenter';
+import {PoleEmploiDataPresenter} from 'src/presentation/presenters/pole-emploi-data.presenter';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -137,6 +139,12 @@ localLogger.log('info', 'DGFIP data presenter initialized');
 
 export const cnafDataPresenter = new CnafDataPresenter();
 localLogger.log('info', 'CNAF data presenter initialized');
+
+export const poleEmploiDataPresenter = new PoleEmploiDataPresenter();
+localLogger.log('info', 'Pole Emploi data presenter initialized');
+
+export const mesriDataPresenter = new MesriDataPresenter();
+localLogger.log('info', 'MESRI data presenter initialized');
 
 export const introspectDataPresenter = new IntrospectDataPresenter();
 localLogger.log('info', 'Introspect data presenter initialized');
