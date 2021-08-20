@@ -4,7 +4,6 @@ import {ApplicationImported} from 'src/domain/application-management/events/appl
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {logFor, Logger} from 'src/domain/logger';
-import {eventBus} from 'src/infrastructure/service-container';
 
 export class TokenProjector {
   private readonly logger: Logger;
