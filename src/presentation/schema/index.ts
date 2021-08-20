@@ -35,6 +35,22 @@ export const schema = new OpenApiBuilder({
       description: 'Serveur de production',
     },
   ],
+  security: [
+    {
+      Jeton: [],
+    },
+  ],
+  components: {
+    securitySchemes: {
+      Jeton: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'X-Api-Key',
+        description:
+          'Jeton d\'authentification obtenu suite à la validation de votre <a href="https://datapass.api.gouv.fr/">demande d\'habilitation</a>, visible sur <a href="https://mon.portail.api.gouv.fr">le portail API Particulier</a>',
+      },
+    },
+  },
   paths: {
     ...dgfipPaths,
     ...cafPaths,
