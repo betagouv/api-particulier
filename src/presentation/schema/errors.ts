@@ -57,6 +57,16 @@ export const networkError = errorResponseBuilder({
   reason: 'timeout of 10000 ms exceeded',
   message: "Une erreur est survenue lors de l'appel au fournisseur de donnée",
 });
+export const cafNotFoundError = errorResponseBuilder({
+  error: 'not_found',
+  reason: 'Dossier allocataire inexistant. Le document ne peut être édité.',
+  message: 'Dossier allocataire inexistant. Le document ne peut être édité.',
+});
+export const cafError = errorResponseBuilder({
+  error: 'data_provider_error',
+  reason: 'Unknown error code 134',
+  message: 'rreur inconnue du fournisseur de donnée CAF',
+});
 export const internalServerError = errorResponseBuilder({
   error: 'error',
   reason: 'Internal server error',
