@@ -27,6 +27,7 @@
     "@gouvfr/dsfr": "^1.1.0",
     "@sentry/node": "^6.10.0",
     "@sentry/tracing": "^6.10.0",
+    "@xmldom/xmldom": "^0.7.1",
     "axios": "^0.21.1",
     "axios-oauth-client": "^1.4.3",
     "axios-token-interceptor": "^0.2.0",
@@ -57,7 +58,6 @@
     "stimulus": "^2.0.0",
     "uuid": "^8.3.2",
     "vhost": "^3.0.2",
-    "xmldom": "^0.6.0",
     "xpath": "0.0.32",
     "zod": "^3.5.1"
   },

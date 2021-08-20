@@ -6,7 +6,7 @@ const {
 const _ = require('lodash');
 const xpath = require('xpath');
 const select = xpath.useNamespaces({h: 'http://www.w3.org/1999/xhtml'});
-const dom = require('xmldom').DOMParser;
+const dom = require('@xmldom/xmldom').DOMParser;
 const {
   InvalidCredentialsError,
 } = require('../../../../domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error');
