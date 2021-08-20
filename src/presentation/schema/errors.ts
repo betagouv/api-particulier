@@ -73,6 +73,12 @@ export const poleEmploiNotFoundError = errorResponseBuilder({
   message:
     "Aucune situation Pôle Emploi n'a pu être trouvée avec les critères de recherche fournis",
 });
+export const mesriNotFoundError = errorResponseBuilder({
+  error: 'not_found',
+  reason: 'Student not found',
+  message:
+    "Aucun étudiant n'a pu être trouvé avec les critères de recherche fournis",
+});
 export const internalServerError = errorResponseBuilder({
   error: 'error',
   reason: 'Internal server error',

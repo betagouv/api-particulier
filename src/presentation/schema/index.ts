@@ -3,6 +3,7 @@ import {OpenApiBuilder} from 'openapi3-ts';
 import {join} from 'path';
 import {cafPaths} from 'src/presentation/schema/caf';
 import {dgfipPaths} from 'src/presentation/schema/dgfip';
+import {mesriPaths} from 'src/presentation/schema/mesri';
 import {poleEmploiPaths} from 'src/presentation/schema/pole-emploi';
 
 export const schema = new OpenApiBuilder({
@@ -36,5 +37,6 @@ export const schema = new OpenApiBuilder({
     ...dgfipPaths,
     ...cafPaths,
     ...poleEmploiPaths,
+    ...mesriPaths,
   },
 });
