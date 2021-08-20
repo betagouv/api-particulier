@@ -54,7 +54,7 @@ const buildQuery = (
 
 const buildHttpsAgent = (): Agent =>
   new Agent({
-    rejectUnauthorized: false,
+    rejectUnauthorized: true,
     cert: process.env.CAF_CERTIFICATE,
     key: process.env.CAF_PRIVATE_KEY,
   });
