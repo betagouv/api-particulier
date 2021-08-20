@@ -8,7 +8,11 @@ import {Event} from 'src/domain/event';
 import {EventBus} from 'src/domain/event-bus';
 
 export class EventEmitterEventBus implements EventBus {
-  private readonly eventEmitter = new EventEmitter();
+  private readonly eventEmitter = new EventEmitter({captureRejections: true});
+
+  constructor() {
+    this.eventEmitter.on('error', console.log);
+  }
 
   publish(event: Event): void {
     this.eventEmitter.emit(event.constructor.name, event);
