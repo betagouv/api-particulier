@@ -20,6 +20,17 @@ export const mesriPaths: PathsObject = {
           required: true,
         },
       ],
+      summary: "Recherche du statut étudiant d'un particulier",
+      description: `Le service permet de récupérer le statut étudiant d'un particulier, avec ses données d'inscriptions scolaires.
+
+**Paramètres d'appel :** (mutuellement exclusifs, l'appel par INE est réservé aux acteurs de la sphère de l'enseignement)
+ - INE, l'Identifiant National Étudiant
+ - état civil, constitué du nom, prénom, date de naissance, sexe et lieu de naissance
+
+**Jetons de bac à sable associés à cette route :**
+ - Statut Étudiant : 1b8bea9a1df409af64c995e58014f642
+
+**Données disponibles en bac à sable :** [liste](https://airtable.com/invite/l?inviteId=invaqM68okWdPDzc5&inviteToken=43864c010a85095fd8acc6770f6528ce3beff684f60e7aab58e248c29e6d0433&utm_source=email)`,
       responses: {
         '200': <ResponseObject>{
           description: "La situation d'un étudiant et ses inscriptions",

@@ -8,6 +8,45 @@ import {
   unauthorizedResponse,
 } from 'src/presentation/schema/errors';
 
+const commonAttributes = {
+  description: `Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager.
+
+**Paramètres d'appel :** numéro fiscal et numéro d'avis d'imposition
+
+**Jetons de bac à sable associés à cette route :**
+ - DGFIP - Avis d'imposition : *83c68bf0b6013c4daf3f8213f7212aa5*
+ - DGFIP - Adresse : *02013fe1b5221dd7d914e4406fb88891*
+ - DGFIP - Avis d'imposition et CNAF - Situation familiale : d7e9c9f4c3ca00caadde31f50fd4521a
+ - DGFIP - Avis d'imposition, CNAF - Situation familiale et CNAF - Quotient Familial : fb156a4e-d497-480f-b3ef-9bc1bccdfbb9
+ 
+**Données disponibles en bac à sable :** [liste](https://airtable.com/invite/l?inviteId=inv3ImCypw30uuLK9&inviteToken=0482ffbcc5d830fb6a409161fc372635a48b6bbcffdcde552f5be4290f80db50)`,
+  summary: "Service de vérification de l'avis d'impôt sur le revenu",
+  parameters: [
+    {
+      name: 'numeroFiscal',
+      in: 'query',
+      description:
+        'Numéro fiscal propre à chaque citoyen (identifiant numérique de 13 chiffres)',
+      required: true,
+      schema: {
+        type: 'number',
+        format: 'string',
+      },
+    },
+    {
+      name: 'referenceAvis',
+      in: 'query',
+      description:
+        "Référence de l'avis fiscal (identifiant alphanumérique de 13 caractères). Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la fin de sa référence d'avis. Il s'agit d'une clé de vérification, il est nécessaire de l'enlever avant de l'envoyer sur l'API Particulier.",
+      required: true,
+      schema: {
+        type: 'number',
+        format: 'string',
+      },
+    },
+  ],
+  tags: ["Avis d'imposition"],
+};
 const declarantSchema: SchemaObject = {
   type: 'object',
   properties: {
@@ -41,35 +80,8 @@ const yearSchema: SchemaObject = {
 export const dgfipPaths = <PathsObject>{
   '/impots/svair': {
     get: {
-      summary: "Service de vérification de l'avis d'impôt sur le revenu",
-      description:
-        "Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager",
-      parameters: [
-        {
-          name: 'numeroFiscal',
-          in: 'query',
-          description:
-            'Numéro fiscal propre à chaque citoyen (identifiant numérique de 13 chiffres)',
-          required: true,
-          schema: {
-            type: 'number',
-            format: 'string',
-          },
-        },
-        {
-          name: 'referenceAvis',
-          in: 'query',
-          description:
-            "Référence de l'avis fiscal (identifiant alphanumérique de 13 caractères). Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la fin de sa référence d'avis. Il s'agit d'une clé de vérification, il est nécessaire de l'enlever avant de l'envoyer sur l'API Particulier.",
-          required: true,
-          schema: {
-            type: 'number',
-            format: 'string',
-          },
-        },
-      ],
+      ...commonAttributes,
       deprecated: true,
-      tags: ["Avis d'imposition"],
       responses: {
         '200': {
           description: "Avis d'imposition",
@@ -120,34 +132,7 @@ export const dgfipPaths = <PathsObject>{
   },
   '/v2/avis-imposition': {
     get: {
-      summary: "Service de vérification de l'avis d'impôt sur le revenu",
-      description:
-        "Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager",
-      parameters: [
-        {
-          name: 'numeroFiscal',
-          in: 'query',
-          description:
-            'Numéro fiscal propre à chaque citoyen (identifiant numérique de 13 chiffres)',
-          required: true,
-          schema: {
-            type: 'number',
-            format: 'string',
-          },
-        },
-        {
-          name: 'referenceAvis',
-          in: 'query',
-          description:
-            "Référence de l'avis fiscal (identifiant alphanumérique de 13 caractères). Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la fin de sa référence d'avis. Il s'agit d'une clé de vérification, il est nécessaire de l'enlever avant de l'envoyer sur l'API Particulier.",
-          required: true,
-          schema: {
-            type: 'number',
-            format: 'string',
-          },
-        },
-      ],
-      tags: ["Avis d'imposition"],
+      ...commonAttributes,
       responses: {
         '200': {
           description: "Avis d'imposition",
