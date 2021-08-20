@@ -45,14 +45,20 @@ export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
         nomUsage: data.nomUsage,
         prenom: data.prenom,
         sexe: data.sexe,
-        dateNaissance: data.dateNaissance,
+        dateNaissance: data.dateNaissance
+          ? new Date(data.dateNaissance)
+          : undefined,
         codeCertificationCNAV: data.codeCertificationCNAV,
         telephone: data.telephone,
         telephone2: data.telephone2,
         email: data.email,
         adresse: data.adresse,
-        dateInscription: data.dateInscription,
-        dateCessationInscription: data.dateCessationInscription,
+        dateInscription: data.dateInscription
+          ? new Date(data.dateInscription)
+          : undefined,
+        dateCessationInscription: data.dateCessationInscription
+          ? new Date(data.dateCessationInscription)
+          : undefined,
         codeCategorieInscription: data.categorieInscription
           ? parseInt(data.categorieInscription)
           : undefined,
