@@ -1,5 +1,6 @@
 import {Router, Request, Response} from 'express';
 import {json} from 'body-parser';
+import {default as cors} from 'cors';
 import {createApplicationController} from 'src/presentation/controllers/create-application.controller';
 import {
   fetchCnafDataControllerBuidler,
@@ -21,6 +22,10 @@ import {mesriInputValidationMiddleware} from 'src/presentation/middlewares/mesri
 import {schema} from 'src/presentation/schema';
 
 export const apiRouter = Router();
+
+if (process.env.SANDBOXED === 'true') {
+  apiRouter.use(cors({methods: 'GET', origin: /\.api\.gouv\.fr$/}));
+}
 
 apiRouter.get(
   '/impots/svair',
