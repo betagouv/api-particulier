@@ -16,8 +16,44 @@ export const mesriPaths: PathsObject = {
           in: 'query',
           schema: {
             type: 'string',
+            pattern: '^[0-9a-zA-Z]{11}$',
           },
-          required: true,
+        },
+        {
+          name: 'nom',
+          in: 'query',
+          schema: {
+            type: 'string',
+          },
+        },
+        {
+          name: 'prenom',
+          in: 'query',
+          schema: {
+            type: 'string',
+          },
+        },
+        {
+          name: 'dateDeNaissance',
+          in: 'query',
+          schema: {
+            type: 'string',
+            pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+          },
+        },
+        {
+          name: 'lieuDeNaissance',
+          in: 'query',
+          schema: {
+            type: 'string',
+          },
+        },
+        {
+          name: 'sexe',
+          in: 'query',
+          schema: {
+            type: 'string',
+          },
         },
       ],
       summary: "Recherche du statut étudiant d'un particulier",
