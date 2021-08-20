@@ -23,7 +23,7 @@ import {schema} from 'src/presentation/schema';
 
 export const apiRouter = Router();
 
-const corsMiddleware = cors({methods: 'GET', origin: /\.api\.gouv\.fr$/});
+const corsMiddleware = cors({methods: 'GET', origin: /api\.gouv\.fr$/});
 
 if (process.env.SANDBOXED === 'true') {
   apiRouter.use(corsMiddleware);
