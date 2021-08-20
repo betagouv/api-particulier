@@ -69,7 +69,7 @@ export const dgfipPaths = <PathsObject>{
         },
       ],
       deprecated: true,
-      tags: ['Impôts', 'DGFIP'],
+      tags: ["Avis d'imposition"],
       responses: {
         '200': {
           description: "Avis d'imposition",
@@ -147,7 +147,7 @@ export const dgfipPaths = <PathsObject>{
           },
         },
       ],
-      tags: ['Impôts', 'DGFIP'],
+      tags: ["Avis d'imposition"],
       responses: {
         '200': {
           description: "Avis d'imposition",

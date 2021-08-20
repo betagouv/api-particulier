@@ -20,6 +20,7 @@ export const poleEmploiPaths: PathsObject = {
           schema: {type: 'string'},
         },
       ],
+      tags: ['Situation Pôle Emploi'],
       responses: {
         '200': <ResponseObject>{
           description: "La situation Pôle Emploi d'un individu",

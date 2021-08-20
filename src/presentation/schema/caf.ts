@@ -53,7 +53,7 @@ const cafPathBuilder = (deprecated: boolean): PathObject => ({
       },
     ],
     deprecated,
-    tags: ['QF', 'CAF'],
+    tags: ['Situation CAF'],
     responses: {
       '200': {
         description: "Foyer tel qu'il est déclaré à la CAF",
@@ -72,30 +72,39 @@ const cafPathBuilder = (deprecated: boolean): PathObject => ({
                 },
                 adresse: {
                   type: 'object',
+                  description: 'Adresse au format de la poste',
                   properties: {
-                    codePostal: {
+                    identite: {
                       type: 'string',
+                      description:
+                        'Identité du destinataire : Civilité, titre ou qualité + nom et prénom',
                     },
-                    INSEECommune: {
+                    complementIdentite: {
                       type: 'string',
+                      description:
+                        "Complément d'information du destinataire ou point de remise : Numéro d'appartement, Escalier",
                     },
-                    localite: {
+                    complementIdentiteGeo: {
                       type: 'string',
+                      description:
+                        "Complément d'information du point géographique : Entrée, tour, immeuble, bâtiment, Résidence",
                     },
-                    ligneVoie: {
+                    numeroRue: {
                       type: 'string',
+                      description: 'Numéro et libellé de la voie',
                     },
-                    ligneComplementDestinaire: {
+                    lieuDit: {
                       type: 'string',
+                      description:
+                        'Lieu-dit ou service particulier de distribution : poste restante, boîte postale',
                     },
-                    ligneComplementAdresse: {
+                    codePostalVille: {
                       type: 'string',
+                      description: 'Code postale et localité de destination',
                     },
-                    ligneComplementDistribution: {
+                    pays: {
                       type: 'string',
-                    },
-                    ligneNom: {
-                      type: 'string',
+                      description: 'Pays',
                     },
                   },
                 },
