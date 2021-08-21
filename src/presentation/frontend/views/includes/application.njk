@@ -1,18 +1,44 @@
 {% for token in application.tokens %}
     <div class="fr-tile fr-tile--horizontal w-full mb-4">
-        <div data-controller="clipboard" class="w-full flex flex-row items-center p-4">
-            <div class="whitespace-nowrap truncate flex-shrink-0 max-w-lg">
-                <strong>{{ application.name }}</strong>
+        <div class="w-full">
+            <div class="p-4">
+                <div class="w-full flex flex-row items-center">
+                    <div class="flex-shrink flex-1 truncate text-lg">
+                        <strong>{{ application.name }}</strong>
+                    </div>
+                    {% if application.dataPassId %}
+                        <div class="flex-shrink-0">
+                            <a
+                                class="text-blue-800 hover:text-blue-900"
+                                href="https://datapass.api.gouv.fr/api-particulier/{{ application.dataPassId }}">DataPass n°{{ application.dataPassId }}</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="text-sm text-gray-400">
+                    <i>{{ application.createdAt }}</i>
+                </div>
             </div>
-            <div class="flex-shrink flex-1 truncate text-center mx-4">
-                <input data-clipboard-target="source" type="textarea" value="{{ token }}" readonly
-                class="absolute opacity-0 -left-32">
-                <div class="select-all truncate">{{ token }}</div>
+            <div class="flex px-4 pt-2">
+                <div class="mr-4">
+                    <strong>Périmètre</strong>
+                </div>
+                <div class="flex space-x-2">
+                    {% for subscription in application.subscriptions %}
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-900 text-blue-100">{{ subscription }}</span>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="flex-shrink-0">
-                <div>
-                    <button data-action="clipboard#copy" data-clipboard-target="button" class="fr-btn hidden whitespace-nowrap">Copier dans le
-            presse-papier</button>
+            <div data-controller="clipboard" class="w-full flex flex-row items-center px-4 pb-4 pt-1">
+                <div class="whitespace-nowrap truncate flex-shrink-0 max-w-lg">
+                    <strong>Jeton</strong>
+                </div>
+                <div class="flex-shrink flex-1 truncate text-center mx-4">
+                    <input data-clipboard-target="source" type="textarea" value="{{ token }}" readonly class="absolute opacity-0 -left-32"/>
+                    <div class="select-all truncate">{{ token }}</div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button data-action="clipboard#copy" data-clipboard-target="button" class="fr-btn hidden whitespace-nowrap">Copier dans
+                        le presse-papier</button>
                 </div>
             </div>
         </div>
