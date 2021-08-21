@@ -6,14 +6,22 @@ import passport from 'passport';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
+import {format} from 'date-fns';
+import {fr} from 'date-fns/locale';
 
 const RedisStore = connectRedis(session);
 
 export const initWebapp = (app: Express) => {
-  nunjucks.configure(path.join(__dirname, '../frontend/views/'), {
-    autoescape: true,
-    express: app,
-    watch: process.env.NODE_ENV !== 'production',
+  const nunjuckEnvironment = nunjucks.configure(
+    path.join(__dirname, '../frontend/views/'),
+    {
+      autoescape: true,
+      express: app,
+      watch: process.env.NODE_ENV !== 'production',
+    }
+  );
+  nunjuckEnvironment.addFilter('date', (date: Date) => {
+    return format(date, 'P p', {locale: fr});
   });
   app.set('view engine', 'njk');
   app.use(express.static('public'));
