@@ -3,9 +3,7 @@ import {applicationProjectionRepository} from 'src/infrastructure/service-contai
 
 export const listUserApplications = async (req: Request, res: Response) => {
   const applications = await applicationProjectionRepository.findAllByUserEmail(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    req.user.email
+    req.user!.email
   );
 
   res.render('index', {applications, user: req.user});
