@@ -25,6 +25,7 @@ module.exports = {
     postcssImport(),
     tailwincss({
       darkMode: false,
+      purge: false,
     }),
     purgecss,
     autoprefixer(),
