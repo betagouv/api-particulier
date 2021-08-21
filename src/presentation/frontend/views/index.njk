@@ -1,8 +1,8 @@
 {% extends 'base.njk' %}
 {% block body %}
   <div class="fr-mt-4w container mx-auto mb-auto px-4">
-    <h3>Détails de
-      {% if applications.length > 1 %}vos jetons{% else %}votre jeton{% endif %}
+    <h3>
+      {% if applications.length > 1 %}Vos jetons{% else %}Votre jeton{% endif %}
       d'accès</h3>
     {% if applications.length > 0 %}
       <div class="">
