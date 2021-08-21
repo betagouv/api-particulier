@@ -8,45 +8,49 @@
                             <p class="fr-logo">
                                 République
                                 <br>Française
-                            </p>
+                                </p>
+                            </div>
+                            <div class="fr-header__navbar">
+                                <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-833" aria-haspopup="menu" title="Menu">
+                                    Menu
+                                </button>
+                            </div>
                         </div>
-                        <div class="fr-header__navbar">
-                            <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-833"
-                                aria-haspopup="menu" title="Menu">
-                                Menu
-                            </button>
+                        <div class="fr-header__service relative">
+                            <a href="{{ process.env.BASE_URL }}" title="Portail API Particulier">
+                                <p class="fr-header__service-title">Portail API Particulier</p>
+                                {% if sandbox %}
+                                    <div class="absolute rounded bg-red-800 text-white px-2 py-1 -right-20 top-6 uppercase transform rotate-12 shadow">
+                                        <strong>Édition bac à sable</strong>
+                                    </div>
+                                {% endif %}
+                            </a>
+                            <p class="fr-header__service-tagline">Gérez vos accès en toute simplicité</p>
                         </div>
                     </div>
-                    <div class="fr-header__service">
-                        <a href="{{ process.env.BASE_URL }}" title="Portail API Particulier">
-                            <p class="fr-header__service-title">Portail API Particulier</p>
-                        </a>
-                        <p class="fr-header__service-tagline">Gérez vos accès en toute simplicité</p>
+                    <div class="fr-header__tools">
+                        <div class="fr-header__tools-links">
+                            <ul class="fr-links-group">
+                                <li>
+                                    <a class="fr-link fr-fi-account-line" href="#">{{ user.email }}</a>
+                                </li>
+                                <li>
+                                    <a class="fr-link fr-fi-lock-line" href="/logout">Se déconnecter</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="fr-header__tools">
-                    <div class="fr-header__tools-links">
-                        <ul class="fr-links-group">
-                            <li>
-                                <a class="fr-link fr-fi-account-line" href="#">{{ user.email }}</a>
-                            </li>
-                            <li>
-                                <a class="fr-link fr-fi-lock-line" href="/logout">Se déconnecter</a>
-                            </li>
-                        </ul>
+                <!-- Navigation principale -->
+                <div class="fr-header__menu fr-modal" id="modal-833" aria-labelledby="button-834">
+                    <div class="fr-container">
+                        <button class="fr-link--close fr-link" aria-controls="modal-833">Fermer</button>
+                        <div class="fr-header__menu-links"></div>
+                        <nav class="fr-nav" id="navigation-832" role="navigation" aria-label="Menu principal">
+                            <ul class="fr-nav__list"></ul>
+                        </nav>
                     </div>
-                </div>
-            </div>
-            <!-- Navigation principale -->
-            <div class="fr-header__menu fr-modal" id="modal-833" aria-labelledby="button-834">
-                <div class="fr-container">
-                    <button class="fr-link--close fr-link" aria-controls="modal-833">Fermer</button>
-                    <div class="fr-header__menu-links"></div>
-                    <nav class="fr-nav" id="navigation-832" role="navigation" aria-label="Menu principal">
-                        <ul class="fr-nav__list"></ul>
-                    </nav>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>

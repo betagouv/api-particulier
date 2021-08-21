@@ -23,6 +23,7 @@ export const initWebapp = (app: Express) => {
   nunjuckEnvironment.addFilter('date', (date: Date) => {
     return format(date, 'P p', {locale: fr});
   });
+  nunjuckEnvironment.addGlobal('sandbox', process.env.SANDBOXED === 'true');
   app.set('view engine', 'njk');
   app.use(express.static('public'));
 };
