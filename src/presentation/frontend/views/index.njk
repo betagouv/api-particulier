@@ -9,6 +9,9 @@
         {% for application in applications %}
           {% include 'includes/application.njk' %}
         {% endfor %}
+        {% if sandbox %}
+          {% include 'includes/new-application.njk' %}
+        {% endif %}
       </div>
       <br/>
       <h3>Quel faire de mon jeton ?</h3>
