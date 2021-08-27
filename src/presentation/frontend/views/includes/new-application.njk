@@ -1,4 +1,10 @@
-<div class="w-full rounded border-dashed border-2 bg-gray-50 hover:bg-gray-100 border-gray-300 h-48 cursor-pointer flex
-        justify-center items-center">
-    <span class="fr-fi-add-line" aria-hidden="true"></span>
+<div data-controller="new-application">
+    <div
+        data-new-application-target="button"
+        data-action="click->new-application#reveal"
+        class="w-full rounded border-dashed border-2 bg-gray-50 hover:bg-gray-100 border-gray-300 h-48 cursor-pointer flex
+            justify-center items-center">
+        <i data-feather="plus" class="h-16 w-16 text-gray-300 stroke-1"></i>
+    </div>
+    <div data-new-application-target="form" class="hidden w-full">Form</div>
 </div>
