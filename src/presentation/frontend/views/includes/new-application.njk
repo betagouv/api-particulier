@@ -7,11 +7,11 @@
         <i data-feather="plus" class="h-16 w-16 text-gray-300 stroke-1"></i>
     </div>
     <div data-new-application-target="form" class="hidden w-full rounded bg-gray-50 p-6">
-        <form>
+        <form method="POST" action="/new">
             <label class="fr-label" for="text-input-name">
                 <strong>Nom de l'application</strong>
             </label>
-            <input class="fr-input" type="text" id="text-input-name" name="text-input-name"/>
+            <input class="fr-input" type="text" id="text-input-name" name="name"/>
             <div class="mt-3">
                 <strong>Scopes</strong>
             </div>
@@ -23,16 +23,20 @@
                     {% for scope, label in scopes %}
                         <div class="flex items-center mr-2">
                             <input
+                                class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent
+                                    focus:outline-none mr-1 mt-1"
                                 type="checkbox"
-                                class="form-tick h-4 w-4 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent
-                                    focus:outline-none cursor-pointer mr-1 mt-1"
+                                id="scopes[{{ scope }}]"
                                 name="scopes[{{ scope }}]"/>
-                            <label class="fr-label" for="checkboxes-inline-1">{{ label }}
+                            <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
                             </label>
                         </div>
                     {% endfor %}
                 </div>
             {% endfor %}
+            <div class="mt-4 flex justify-end">
+                <input type="submit" class="fr-btn" value="Créer l'application"/>
+            </div>
         </form>
     </div>
 </div>
