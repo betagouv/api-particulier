@@ -21,5 +21,8 @@ app.use(
 );
 
 app.listen(process.env.PORT || 3000, () => {
-  logger.log('info', `App listening on port ${process.env.PORT || 3000}`);
+  logger.log(
+    'info',
+    `App listening on http://localhost:${process.env.PORT || 3000}`
+  );
 });
