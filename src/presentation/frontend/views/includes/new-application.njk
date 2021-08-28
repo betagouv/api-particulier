@@ -7,36 +7,46 @@
         <i data-feather="plus" class="h-16 w-16 text-gray-300 stroke-1"></i>
     </div>
     <div data-new-application-target="form" class="hidden w-full rounded bg-gray-50 p-6">
-        <form method="POST" action="/new" data-action="new-application#onSubmit">
-            <label class="fr-label" for="text-input-name">
-                <strong>Nom de l'application</strong>
-            </label>
-            <input class="fr-input" type="text" id="text-input-name" name="name"/>
-            <div class="mt-3">
-                <strong>Scopes</strong>
-            </div>
-            {% for sectionName, scopes in scopesConfiguration %}
-                <div class="mt-1 text-blue-900">
-                    <i>{{ sectionName }}</i>
+        <turbo-frame id="new-application-form">
+            <form method="POST" action="/new" data-action="new-application#onSubmit" data-turbo-frame="user-applications">
+                <div class="fr-input-group {% if errors.name %}fr-input-group--error{% endif %}">
+                    <label class="fr-label" for="text-input-name">
+                        <strong>Nom de l'application</strong>
+                    </label>
+                    <input class="fr-input {% if errors.name %}fr-input--error{% endif %}" type="text" id="text-input-name" name="name" value="{{ input.name }}"/>
+                    {% if errors.name %}
+                        <p id="text-input-name-error-desc" class="fr-error-text">
+                            Veuillez renseigner un nom pour l'application
+                        </p>
+                    {% endif %}
                 </div>
-                <div class="flex flex-wrap mt-1">
-                    {% for scope, label in scopes %}
-                        <div class="flex items-center mr-2">
-                            <input
-                                class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent
-                                    focus:outline-none mr-1 mt-1"
-                                type="checkbox"
-                                id="scopes[{{ scope }}]"
-                                name="scopes[{{ scope }}]"/>
-                            <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
-                            </label>
-                        </div>
-                    {% endfor %}
+                <div class="mt-3">
+                    <strong>Scopes</strong>
                 </div>
-            {% endfor %}
-            <div class="mt-4 flex justify-end">
-                <input data-new-application-target="submitButton" type="submit" class="fr-btn" value="Créer l'application"/>
-            </div>
-        </form>
+                {% for sectionName, scopes in scopesConfiguration %}
+                    <div class="mt-1 text-blue-900">
+                        <i>{{ sectionName }}</i>
+                    </div>
+                    <div class="flex flex-wrap mt-1">
+                        {% for scope, label in scopes %}
+                            <div class="flex items-center mr-2">
+                                <input class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent
+                                                                                                                                                    focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if input.scopes[scope] %} checked {% endif %}/>
+                                <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                {% if errors.scopes %}
+                    <p id="checkbox-input-name-error-desc" class="fr-error-text">
+                        Veuillez cocher au moins un scope
+                    </p>
+                {% endif %}
+                <div class="mt-4 flex justify-end">
+                    <input data-new-application-target="submitButton" type="submit" class="fr-btn" value="Créer l'application"/>
+                </div>
+            </form>
+        </turbo-frame>
     </div>
 </div>

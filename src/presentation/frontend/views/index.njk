@@ -4,24 +4,26 @@
     <h3>
       {% if applications.length > 1 %}Vos jetons{% else %}Votre jeton{% endif %}
       d'accès</h3>
-    {% if applications.length > 0 %}
-      <div class="">
-        {% for application in applications %}
-          {% include 'includes/application.njk' %}
-        {% endfor %}
-        {% if sandbox %}
-          {% include 'includes/new-application.njk' %}
-        {% endif %}
-      </div>
-      <br/>
-      <h3>Quel faire de mon jeton ?</h3>
-      <p>
-        Transmettez ce jeton au
-        <strong>responsable technique</strong>
-        de l'application qui intègre API Particulier.
-      </p>
-    {% else %}
-      {% include 'includes/no-token.njk' %}
-    {% endif %}
+    <turbo-frame id="user-applications">
+      {% if applications.length > 0 %}
+        <div>
+          {% for application in applications %}
+            {% include 'includes/application.njk' %}
+          {% endfor %}
+          {% if sandbox %}
+            {% include 'includes/new-application.njk' %}
+          {% endif %}
+        </div>
+        <br/>
+        <h3>Quel faire de mon jeton ?</h3>
+        <p>
+          Transmettez ce jeton au
+          <strong>responsable technique</strong>
+          de l'application qui intègre API Particulier.
+        </p>
+      {% else %}
+        {% include 'includes/no-token.njk' %}
+      {% endif %}
+    </turbo-frame>
   </div>
 {% endblock %}
