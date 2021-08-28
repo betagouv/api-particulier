@@ -40,7 +40,7 @@ exports.dev = () => {
     {ignoreInitial: false},
     css
   );
-  gulp.watch('src/presentation/frontend/index.ts', {ignoreInitial: false}, js);
+  gulp.watch('src/presentation/frontend/**/*.ts', {ignoreInitial: false}, js);
 };
 
 exports.build = gulp.parallel(js, css);

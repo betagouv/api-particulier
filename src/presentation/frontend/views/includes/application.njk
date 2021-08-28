@@ -18,13 +18,13 @@
                     <i>{{ application.createdAt | date }}</i>
                 </div>
             </div>
-            <div class="flex px-4 pt-4 pb-2">
+            <div class="flex items-center px-4 pt-4 pb-2">
                 <div class="mr-4">
                     <strong>Périmètre</strong>
                 </div>
                 <div class="flex space-x-2">
                     {% for subscription in application.subscriptions %}
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold bg-gray-400 text-white rounded-sm">{{ subscription }}</span>
+                        <span class="fr-tag">{{ subscription }}</span>
                     {% endfor %}
                 </div>
             </div>
