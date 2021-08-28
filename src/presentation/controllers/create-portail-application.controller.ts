@@ -11,9 +11,9 @@ export const createPortailApplicationController = async (
   try {
     await createApplicationUsecase.createApplication(
       new CreateApplicationDto(
-        req.body.name,
+        res.locals.input.name,
         '0',
-        <AnyScope[]>Object.keys(req.body.scopes),
+        <AnyScope[]>res.locals.input.scopes,
         [req.user!.email]
       )
     );

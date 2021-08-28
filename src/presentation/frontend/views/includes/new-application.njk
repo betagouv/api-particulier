@@ -7,7 +7,7 @@
         <i data-feather="plus" class="h-16 w-16 text-gray-300 stroke-1"></i>
     </div>
     <div data-new-application-target="form" class="hidden w-full rounded bg-gray-50 p-6">
-        <form method="POST" action="/new">
+        <form method="POST" action="/new" data-action="new-application#onSubmit">
             <label class="fr-label" for="text-input-name">
                 <strong>Nom de l'application</strong>
             </label>
@@ -35,12 +35,7 @@
                 </div>
             {% endfor %}
             <div class="mt-4 flex justify-end">
-                <input
-                    data-new-application-target="submitButton"
-                    type="submit"
-                    data-action="click->new-application#onSubmit"
-                    class="fr-btn"
-                    value="Créer l'application"/>
+                <input data-new-application-target="submitButton" type="submit" class="fr-btn" value="Créer l'application"/>
             </div>
         </form>
     </div>
