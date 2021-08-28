@@ -4,7 +4,7 @@ import ClipboardController from './clipboard.controller';
 import NewApplicationController from './new-application.controller';
 import '@hotwired/turbo';
 
-feather.replace();
+window.feather = feather;
 
 const application = Application.start();
 application.register('clipboard', ClipboardController);
