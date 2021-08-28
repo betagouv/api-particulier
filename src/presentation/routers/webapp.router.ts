@@ -4,6 +4,7 @@ import path from 'path';
 import {Issuer, Strategy, TokenSet} from 'openid-client';
 import passport from 'passport';
 import session from 'express-session';
+import {flash} from 'express-flash-message';
 import connectRedis from 'connect-redis';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {format} from 'date-fns';
@@ -69,6 +70,7 @@ webappRouter.use(
     store: new RedisStore({client: redisConnection}),
   })
 );
+webappRouter.use(flash());
 webappRouter.use(passport.initialize());
 webappRouter.use(passport.session());
 webappRouter.get('/login', passport.authenticate('openid'));
