@@ -1,4 +1,4 @@
 {
     "dockerComposeFile": "docker-compose.yml",
-    "postCreateCommand": "sudo echo \"127.0.0.1 mon.portail.local\" | sudo tee -a /etc/hosts"
+    "postCreateCommand": "sudo echo \"127.0.0.1 mon.portail.local\" | sudo tee -a /etc/hosts && npm run migrate up"
 }

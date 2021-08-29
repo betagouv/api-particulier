@@ -4,9 +4,9 @@ services:
   postgres:
     image: timescale/timescaledb:latest-pg13
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
   redis:
     image: redis
   web:
@@ -14,6 +14,9 @@ services:
     command: npm run start:dev:backend
     volumes:
       - .:/usr/src/app
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      REDIS_URL: redis://redis/
     ports:
       - '3000:3000'
     depends_on:
