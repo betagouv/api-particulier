@@ -52,4 +52,19 @@ describe('An application', () => {
 
     expect(application.createdOn).to.exist.and.to.be.a('date');
   });
+
+  it('can be removed', () => {
+    const application = Application.import(
+      'id' as ApplicationId,
+      'yolo',
+      '4',
+      [],
+      [],
+      ['georges@moustaki.fr' as UserEmail],
+      ['token' as TokenValue]
+    );
+    application.remove();
+
+    expect(application).to.exist;
+  });
 });
