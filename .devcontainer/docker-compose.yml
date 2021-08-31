@@ -10,6 +10,8 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    ports:
+      - 5444:5432
   test-db:
     image: timescale/timescaledb:latest-pg13
     restart: unless-stopped
