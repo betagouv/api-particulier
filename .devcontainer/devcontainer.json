@@ -16,11 +16,21 @@
 				"password": "postgres"
 			}
 		],
-		"editor.codeActionsOnSave": {
-			"source.fixAll": true
-		},
 		"testExplorer.gutterDecoration": true,
-		"testExplorer.codeLens": true
+		"testExplorer.codeLens": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"[typescript]": {
+			"editor.formatOnSave": false
+		},
+		"[javascript]": {
+			"editor.formatOnSave": false
+		},
+		"eslint.validate": [
+			"javascript",
+			"typescript"
+		]
 	},
 	"extensions": [
 		"dbaeumer.vscode-eslint",
