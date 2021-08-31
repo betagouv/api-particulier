@@ -9,17 +9,24 @@
 				"name": "Container database",
 				"driver": "PostgreSQL",
 				"previewLimit": 50,
-				"server": "localhost",
+				"server": "db",
 				"port": 5432,
 				"database": "postgres",
 				"username": "postgres",
 				"password": "postgres"
 			}
-		]
+		],
+		"editor.codeActionsOnSave": {
+			"source.fixAll": true
+		},
+		"testExplorer.gutterDecoration": true,
+		"testExplorer.codeLens": true
 	},
 	"extensions": [
+		"dbaeumer.vscode-eslint",
 		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"mtxr.sqltools-driver-pg",
+		"eseom.nunjucks-template"
 	],
 	"postCreateCommand": "npm install && npm run migrate up"
 }
