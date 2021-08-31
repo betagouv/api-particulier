@@ -10,6 +10,7 @@ import {TokenValue} from 'src/domain/token-value';
 import {Subscription} from 'src/domain/subscription';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {logFor} from 'src/domain/logger';
+import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
 
 export type Token = {
   value: TokenValue;
@@ -92,6 +93,12 @@ export class Application extends AggregateRoot {
     this.raiseAndApply(event);
   }
 
+  remove() {
+    const event = new ApplicationRemoved(this.id, new Date());
+
+    this.raiseAndApply(event);
+  }
+
   private applyApplicationCreated(event: ApplicationCreated) {
     this.logger.log('debug', `Creating application "${event.name}"`, {event});
 
@@ -124,5 +131,9 @@ export class Application extends AggregateRoot {
     });
 
     this.userEmails.push(event.userEmail);
+  }
+
+  private applyApplicationRemoved(event: ApplicationRemoved) {
+    this.logger.log('debug', `Removed application "${event.aggregateId}"`);
   }
 }
