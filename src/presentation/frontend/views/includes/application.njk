@@ -1,5 +1,5 @@
 {% for token in application.tokens %}
-    <div class="fr-tile fr-tile--horizontal w-full mb-4 rounded">
+    <div data-controller="application" class="fr-tile fr-tile--horizontal w-full mb-4 rounded">
         <div class="w-full">
             <div class="p-4 border-b border-gray-200">
                 <div class="w-full flex flex-row items-center">
@@ -22,23 +22,44 @@
                 <div class="mr-4">
                     <strong>Périmètre</strong>
                 </div>
-                <div class="flex space-x-2">
+                <div class="flex space-x-2 items-center">
                     {% for subscription in application.subscriptions %}
                         <span class="fr-tag">{{ subscription }}</span>
                     {% endfor %}
+                    <span
+                        class="text-blue-800 hover:text-blue-900 text-sm hover:underline cursor-pointer"
+                        data-action="click->application#toggleScopesDisplay">
+                        <i data-application-target="displayScopesLink">Afficher les scopes</i>
+                    </span>
                 </div>
             </div>
-            <div data-controller="clipboard" class="w-full flex flex-row items-center px-4 pb-4 pt-1">
+            <div class="hidden p-4" data-application-target="scopes">
+                {% for sectionName, scopes in scopesConfiguration %}
+                    <div class="mt-1 text-blue-900">
+                        <i>{{ sectionName }}</i>
+                    </div>
+                    <div class="flex flex-wrap mt-1">
+                        {% for scope, label in scopes %}
+                            <div class="flex items-center mr-2">
+                                <input class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if application.scopes.includes(scope) %} checked {% endif %} disabled/>
+                                <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="w-full flex flex-row items-center px-4 pb-4 pt-1">
                 <div class="whitespace-nowrap truncate flex-shrink-0 max-w-lg">
                     <strong>Jeton</strong>
                 </div>
                 <div class="flex-shrink flex-1 truncate text-center mx-4">
-                    <input data-clipboard-target="source" type="textarea" value="{{ token }}" readonly class="absolute opacity-0 -left-32"/>
+                    <input data-application-target="source" type="textarea" value="{{ token }}" readonly class="absolute opacity-0 -left-32"/>
                     <div class="select-all truncate">{{ token }}</div>
                 </div>
                 <div class="flex-shrink-0">
-                    <button data-action="clipboard#copy" data-clipboard-target="button" class="fr-btn hidden whitespace-nowrap">Copier dans
-                        le presse-papier</button>
+                    <button data-action="application#copy" data-application-target="button" class="fr-btn hidden whitespace-nowrap">Copier
+                        dans le presse-papier</button>
                 </div>
             </div>
         </div>
