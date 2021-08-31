@@ -13,11 +13,13 @@ export const portailRouter = Router();
 portailRouter.use(webappRouter);
 portailRouter.use(isLoggedInMiddleware);
 portailRouter.get('/', listUserApplications);
-portailRouter.post(
-  '/new',
-  urlencoded({extended: true}),
-  createUserApplicationValidationMiddleware,
-  createPortailApplicationController,
-  portailErrorMiddleware
-);
+if (process.env.SANDBOXED === 'true') {
+  portailRouter.post(
+    '/new',
+    urlencoded({extended: true}),
+    createUserApplicationValidationMiddleware,
+    createPortailApplicationController,
+    portailErrorMiddleware
+  );
+}
 portailRouter.use('/admin', adminRouter);
