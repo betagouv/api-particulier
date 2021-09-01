@@ -1,6 +1,7 @@
 import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {logFor, Logger} from 'src/domain/logger';
@@ -39,5 +40,16 @@ export class TokenProjector {
 
     await Promise.all(tokens.map(token => this.tokenRepository.save(token)));
     this.logger.log('debug', 'Projected tokens from event', {event});
+  }
+
+  async onApplicationRemoved(event: ApplicationRemoved): Promise<void> {
+    await this.tokenRepository.removeByApplicationId(
+      <ApplicationId>event.aggregateId
+    );
+    this.logger.log(
+      'debug',
+      `Removed tokens for application ${event.aggregateId}`,
+      {event}
+    );
   }
 }

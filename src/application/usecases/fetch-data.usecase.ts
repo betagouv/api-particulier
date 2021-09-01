@@ -1,3 +1,4 @@
+import {setUser} from '@sentry/node';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
@@ -25,6 +26,7 @@ export class FetchDataUsecase {
   ) {
     try {
       const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      setUser({id: token.applicationId});
       setCurrentToken(token);
       return this.dataProviderClient.consumeDgfip(input, token, route);
     } catch (error) {

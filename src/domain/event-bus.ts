@@ -1,5 +1,6 @@
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
@@ -11,6 +12,7 @@ export interface EventBus {
   publish(event: Event): void;
   onApplicationCreated(handler: Handler<ApplicationCreated>): void;
   onApplicationImported(handler: Handler<ApplicationImported>): void;
+  onApplicationRemoved(handler: Handler<ApplicationRemoved>): void;
   onUserSubscribed(handler: Handler<UserSubscribed>): void;
   onTokenConsumed(handler: Handler<TokenConsumed>): void;
   onTokenNotFound(handler: Handler<TokenNotFound>): void;

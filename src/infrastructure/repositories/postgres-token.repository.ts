@@ -1,4 +1,5 @@
 import {Pool} from 'pg';
+import {ApplicationId} from 'src/domain/application-id';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
@@ -43,6 +44,15 @@ export class PostgresTokenRepository implements TokenRepository {
       JSON.stringify(token.scopes),
       JSON.stringify(token.subscriptions),
     ];
+
+    await this.pg.query(query, values);
+    return;
+  }
+
+  async removeByApplicationId(id: ApplicationId): Promise<void> {
+    this.logger.log('debug', `Removing tokens for application "${id}"`);
+    const query = 'DELETE FROM tokens WHERE application_id = $1';
+    const values = [id];
 
     await this.pg.query(query, values);
     return;

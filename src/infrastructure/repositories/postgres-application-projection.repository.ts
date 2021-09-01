@@ -190,4 +190,13 @@ export class PostgresApplicationProjectionRepository
     await this.pg.query(query, values);
     return;
   }
+
+  async remove(id: ApplicationId): Promise<void> {
+    this.logger.log('debug', `Removing application projection "${id}"`);
+    const query = 'DELETE FROM applications WHERE id = $1';
+    const values = [id];
+
+    await this.pg.query(query, values);
+    return;
+  }
 }
