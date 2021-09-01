@@ -23,6 +23,11 @@
         </p>
       {% else %}
         {% include 'includes/no-token.njk' %}
+        {% if sandbox %}
+          <div class="mt-4">
+            {% include 'includes/new-application.njk' %}
+          </div>
+        {% endif %}
       {% endif %}
     </turbo-frame>
   </div>

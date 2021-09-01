@@ -1,1 +1,7 @@
-Vous n'avez pas de jeton associé à votre email <strong>{{ user.email }}.</strong>
+<p>Vous n'avez pas de jeton associé à votre email
+    <strong>{{ user.email }}.</strong>
+</p>
+{% if sandbox %}
+    <p>Néanmoins, comme vous vous trouvez ici sur le bac à sable de l'API Particulier, vous avez la possibilité de créer à
+        votre convenance les jetons de votre choix.</p>
+{% endif %}
