@@ -1,4 +1,5 @@
 import * as crypto from 'crypto';
+import {ApplicationId} from 'src/domain/application-id';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
@@ -33,5 +34,9 @@ export class TokenRepositoryWithHashRetry implements TokenRepository {
     const hashedValue = hash.update(tokenValue);
 
     return hashedValue.digest('hex') as TokenValue;
+  }
+
+  removeByApplicationId(id: ApplicationId): Promise<void> {
+    return this.decoratedRepository.removeByApplicationId(id);
   }
 }
