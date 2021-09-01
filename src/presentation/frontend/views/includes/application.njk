@@ -14,8 +14,25 @@
                         </div>
                     {% endif %}
                 </div>
-                <div class="text-sm text-gray-400">
-                    <i>{{ application.createdAt | date }}</i>
+                <div class="w-full flex justify-between">
+                    <div class="text-sm text-gray-400">
+                        <i>{{ application.createdAt | date }}</i>
+                    </div>
+                    {% if sandbox %}
+                        <form
+                            data-application-target="deleteForm"
+                            method="POST"
+                            action="/applications/{{ application.id }}?_method=DELETE"
+                            data-turbo-frame="user-applications">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <div>
+                                <i
+                                    data-feather="trash-2"
+                                    class="h-6 w-6 text-gray-400 hover:text-gray-900 cursor-pointer"
+                                    data-action="click->application#delete"></i>
+                            </div>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
             <div class="flex items-center px-4 pt-4 pb-2">

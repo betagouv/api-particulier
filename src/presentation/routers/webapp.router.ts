@@ -9,6 +9,7 @@ import connectRedis from 'connect-redis';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {format} from 'date-fns';
 import {fr} from 'date-fns/locale';
+import methodOverride from 'method-override';
 
 const RedisStore = connectRedis(session);
 
@@ -70,6 +71,7 @@ webappRouter.use(
     store: new RedisStore({client: redisConnection}),
   })
 );
+webappRouter.use(methodOverride('_method'));
 webappRouter.use(flash());
 webappRouter.use(passport.initialize());
 webappRouter.use(passport.session());
