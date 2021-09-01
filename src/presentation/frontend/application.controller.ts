@@ -1,11 +1,18 @@
 import {Controller} from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['source', 'button', 'scopes', 'displayScopesLink'];
+  static targets = [
+    'source',
+    'button',
+    'scopes',
+    'displayScopesLink',
+    'deleteForm',
+  ];
   sourceTarget!: Element;
   buttonTarget!: Element;
   scopesTarget!: Element;
   displayScopesLinkTarget!: Element;
+  deleteFormTarget!: HTMLFormElement;
 
   connect() {
     if (document.queryCommandSupported('copy')) {
@@ -27,5 +34,9 @@ export default class extends Controller {
       this.scopesTarget.classList.contains('hidden')
         ? 'Afficher les scopes'
         : 'Cacher les scopes';
+  }
+
+  delete() {
+    this.deleteFormTarget.submit();
   }
 }

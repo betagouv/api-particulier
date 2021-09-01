@@ -41,6 +41,7 @@ import {EventEmitterEventBus} from 'src/infrastructure/event-bus/event-emitter.e
 import {routeEvents} from 'src/infrastructure/event-router';
 import {MesriDataPresenter} from 'src/presentation/presenters/mesri-data.presenter';
 import {PoleEmploiDataPresenter} from 'src/presentation/presenters/pole-emploi-data.presenter';
+import {RemoveApplicationUsecase} from 'src/application/usecases/remove-application.usecase';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -190,5 +191,10 @@ export const createApplicationUsecase = new CreateApplicationUsecase(
   tokenValueFactory
 );
 localLogger.log('info', 'Create application usecase initialized');
+
+export const removeApplicationUsecase = new RemoveApplicationUsecase(
+  applicationTransactionManager
+);
+localLogger.log('info', 'Remove application usecase initialized');
 
 routeEvents();

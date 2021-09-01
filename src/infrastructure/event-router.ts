@@ -43,10 +43,10 @@ export const routeEvents = () => {
   );
 
   eventBus.onApplicationRemoved(
-    redisTokenProjector.onApplicationRemoved.bind(applicationProjector)
+    redisTokenProjector.onApplicationRemoved.bind(redisTokenProjector)
   );
 
   eventBus.onApplicationRemoved(
-    postgresTokenProjector.onApplicationRemoved.bind(applicationProjector)
+    postgresTokenProjector.onApplicationRemoved.bind(postgresTokenProjector)
   );
 };
