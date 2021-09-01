@@ -17,7 +17,7 @@
     "start:dev:backend": "ts-node-dev --files -r dotenv/config -r tsconfig-paths/register src/infrastructure/server.ts",
     "start:dev:frontend": "gulp dev",
     "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts",
-    "load:fixtures": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts",
+    "fixtures:load": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts",
     "publish-all-events": "ts-node -r tsconfig-paths/register src/presentation/cli/publish-all-events.ts"
   },
   "dependencies": {
