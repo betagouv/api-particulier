@@ -15,4 +15,6 @@ export interface ApplicationProjectionRepository {
   save(applicationProjection: ApplicationProjection): Promise<void>;
 
   update(applicationProjection: ApplicationProjection): Promise<void>;
+
+  remove(id: ApplicationId): Promise<void>;
 }

@@ -1,6 +1,7 @@
 import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
+import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {ApplicationProjection} from 'src/domain/application-management/projections/application.projection';
 import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
@@ -50,6 +51,13 @@ export class ApplicationProjector {
       ...applicationProjection,
       userEmails: [...applicationProjection.userEmails, event.userEmail],
     });
+    return;
+  }
+
+  async onApplicationRemoved(event: ApplicationRemoved): Promise<void> {
+    await this.applicationProjectionRepository.remove(
+      <ApplicationId>event.aggregateId
+    );
     return;
   }
 }
