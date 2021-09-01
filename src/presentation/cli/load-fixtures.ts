@@ -1,5 +1,5 @@
 import {Command} from 'commander';
-import * as faker from 'faker';
+import faker from 'faker';
 import {fill} from 'lodash';
 import {UserEmail} from 'src/domain/application-management/user';
 import {CreateApplicationDto} from 'src/domain/data-fetching/dtos/create-application.dto';
@@ -8,6 +8,7 @@ import {Subscription} from 'src/domain/subscription';
 import {createApplicationUsecase} from 'src/infrastructure/service-container';
 
 (async () => {
+  faker.setLocale('fr');
   const program = new Command();
   program.version('0.0.1');
   program.parse(process.argv);
