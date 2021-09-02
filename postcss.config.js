@@ -22,8 +22,9 @@ const purgecss = require('@fullhuman/postcss-purgecss')(purgeConfig);
 
 const plugins = [
   tailwincss({
+    mode: 'jit',
     darkMode: false,
-    purge: false,
+    purge: purgeConfig,
   }),
 ];
 
