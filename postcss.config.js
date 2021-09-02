@@ -1,8 +1,5 @@
 const tailwincss = require('tailwindcss');
-const postcssImport = require('postcss-import');
-const postcssUrl = require('postcss-url');
 const autoprefixer = require('autoprefixer');
-const path = require('path');
 
 const purgeConfig = {
   // Specify the paths to all of the template files in your project
@@ -23,18 +20,19 @@ const purgeConfig = {
 };
 const purgecss = require('@fullhuman/postcss-purgecss')(purgeConfig);
 
+const plugins = [
+  tailwincss({
+    darkMode: false,
+    purge: false,
+  }),
+];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(purgecss);
+  plugins.push(autoprefixer());
+  plugins.push(require('cssnano'));
+}
+
 module.exports = {
-  plugins: [
-    postcssImport(),
-    tailwincss({
-      darkMode: false,
-      purge: false,
-    }),
-    purgecss,
-    autoprefixer(),
-    postcssUrl({
-      assetsPath: path.join(__dirname, 'node_modules/@gouvfr/dsfr/dist'),
-    }),
-    require('cssnano'),
-  ],
+  plugins,
 };

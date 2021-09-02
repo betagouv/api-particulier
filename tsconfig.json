@@ -2,11 +2,16 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "rootDirs": ["src", "test"],
+    "rootDirs": [
+      "src",
+      "test"
+    ],
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
-      "src/*": ["./src/*"]
+      "src/*": [
+        "./src/*"
+      ]
     },
     "sourceMap": true,
     "inlineSources": true,
@@ -15,7 +20,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
   },
-  "files": ["src/global.d.ts"],
+  "files": [
+    "src/global.d.ts"
+  ],
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
