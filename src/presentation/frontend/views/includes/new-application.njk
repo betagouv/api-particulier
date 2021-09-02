@@ -3,8 +3,13 @@
         data-new-application-target="button"
         data-action="click->new-application#reveal"
         class="w-full rounded border-dashed border-2 bg-gray-50 hover:bg-gray-100 border-gray-300 h-48 cursor-pointer flex
-            justify-center items-center">
-        <i data-feather="plus" class="h-16 w-16 text-gray-300 stroke-1"></i>
+            flex-col justify-center items-center">
+        <div>
+            <i class="text-gray-500 far fa-file fa-2x"></i>
+        </div>
+        <div>
+            <i class="text-gray-500">Créer un nouveau jeton de test</i>
+        </div>
     </div>
     <div data-new-application-target="form" class="hidden w-full rounded bg-gray-50 p-6">
         <turbo-frame id="new-application-form">
@@ -31,7 +36,7 @@
                         {% for scope, label in scopes %}
                             <div class="flex items-center mr-2">
                                 <input class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent
-                                                                                                                                                    focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if input.scopes[scope] %} checked {% endif %}/>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if input.scopes[scope] %} checked {% endif %}/>
                                 <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
                                 </label>
                             </div>
