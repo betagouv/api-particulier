@@ -147,5 +147,5 @@ const cafPathBuilder = (deprecated: boolean): PathObject => ({
 
 export const cafPaths: PathsObject = {
   '/caf/famille': cafPathBuilder(true),
-  '/v2/situation-familiale': cafPathBuilder(false),
+  '/v2/composition-familiale': cafPathBuilder(false),
 };
