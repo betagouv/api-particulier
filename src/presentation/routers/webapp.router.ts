@@ -26,6 +26,14 @@ export const initWebapp = (app: Express) => {
     return format(date, 'P p', {locale: fr});
   });
   nunjuckEnvironment.addGlobal('sandbox', process.env.SANDBOXED === 'true');
+  nunjuckEnvironment.addGlobal(
+    'production',
+    process.env.NODE_ENV === 'production'
+  );
+  if (process.env.NODE_ENV === 'production') {
+    const manifest = require('../../../public/manifest.json');
+    nunjuckEnvironment.addGlobal('manifest', manifest);
+  }
   app.set('view engine', 'njk');
   app.use(express.static('public'));
 };

@@ -1,9 +1,17 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <title>Portail développeur | API Particulier</title>
-<link rel="stylesheet" type="text/css" href="/index.css"/>
 <link rel="apple-touch-icon" href="https://api.gouv.fr/favicons/apple-touch-icon.png"/>
 <link rel="icon" href="https://api.gouv.fr/favicons/favicon.svg" type="image/svg+xml"/>
 <link rel="shortcut icon" href="https://api.gouv.fr/favicons/favicon.ico" type="image/x-icon"/>
 <meta name="viewport" content="width=device-width"/>
-<script src="/index.js"></script>
+{% if production %}
+    <link rel="stylesheet" type="text/css" href="/{{ manifest['src/presentation/frontend/production.ts'].css }}"/>
+    <script type="module" src="/{{ manifest['src/presentation/frontend/production.ts'].file }}"></script>
+    <script nomodule="nomodule" src="/{{ manifest['src/presentation/frontend/production-legacy.ts'].file }}"></script>
+{% else %}
+    <link rel="stylesheet" type="text/css" href="http://localhost:3001/src/presentation/frontend/index.css"/>
+    <script type="module" src="http://localhost:3001/@vite/client"></script>
+    <script type="module" src="http://localhost:3001/src/presentation/frontend/index.ts"></script>
+    <script nomodule="nomodule" src="http://localhost:3001/src/presentation/frontend/index-legacy.ts"></script>
+{% endif %}
