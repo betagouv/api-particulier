@@ -5,11 +5,8 @@
     </head>
     <body class="flex flex-col min-h-screen justify-between">
         {% include 'includes/header.njk' %}
-        <div class="max-w-6xl mx-auto lg:px-8 mt-4 flex-1"> {% block body %}{% endblock %}
+        <div class="fr-container mt-4 flex-1"> {% block body %}{% endblock %}
             </div>
             {% include 'includes/footer.njk' %}
         </body>
-        <script type="text/javascript">
-            feather.replace();
-        </script>
     </html>
