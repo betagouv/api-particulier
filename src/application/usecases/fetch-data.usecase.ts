@@ -4,18 +4,14 @@ import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {MesriInput} from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
-import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
-import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenCache} from 'src/domain/data-fetching/token.cache';
-import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
 
 export class FetchDataUsecase {
   constructor(
     private readonly tokenCache: TokenCache,
-    private readonly dataProviderClient: DataProviderClient,
-    private readonly eventBus: EventBus
+    private readonly dataProviderClient: DataProviderClient
   ) {}
 
   async fetchDgfipData(
@@ -24,17 +20,10 @@ export class FetchDataUsecase {
     route: string,
     setCurrentToken: (token: Token) => void
   ) {
-    try {
-      const token = await this.tokenCache.findByTokenValue(tokenValue);
-      setUser({id: token.applicationId});
-      setCurrentToken(token);
-      return this.dataProviderClient.consumeDgfip(input, token, route);
-    } catch (error) {
-      if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(new TokenNotFound(tokenValue));
-      }
-      throw error;
-    }
+    const token = await this.tokenCache.findByTokenValue(tokenValue);
+    setUser({id: token.applicationId});
+    setCurrentToken(token);
+    return this.dataProviderClient.consumeDgfip(input, token, route);
   }
 
   async fetchCnafData(
@@ -43,16 +32,9 @@ export class FetchDataUsecase {
     route: string,
     setCurrentToken: (token: Token) => void
   ) {
-    try {
-      const token = await this.tokenCache.findByTokenValue(tokenValue);
-      setCurrentToken(token);
-      return this.dataProviderClient.consumeCnaf(input, token, route);
-    } catch (error) {
-      if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(new TokenNotFound(tokenValue));
-      }
-      throw error;
-    }
+    const token = await this.tokenCache.findByTokenValue(tokenValue);
+    setCurrentToken(token);
+    return this.dataProviderClient.consumeCnaf(input, token, route);
   }
 
   async fetchPoleEmploiData(
@@ -61,16 +43,9 @@ export class FetchDataUsecase {
     route: string,
     setCurrentToken: (token: Token) => void
   ) {
-    try {
-      const token = await this.tokenCache.findByTokenValue(tokenValue);
-      setCurrentToken(token);
-      return this.dataProviderClient.consumePoleEmploi(input, token, route);
-    } catch (error) {
-      if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(new TokenNotFound(tokenValue));
-      }
-      throw error;
-    }
+    const token = await this.tokenCache.findByTokenValue(tokenValue);
+    setCurrentToken(token);
+    return this.dataProviderClient.consumePoleEmploi(input, token, route);
   }
 
   async fetchMesriData(
@@ -79,15 +54,8 @@ export class FetchDataUsecase {
     route: string,
     setCurrentToken: (token: Token) => void
   ) {
-    try {
-      const token = await this.tokenCache.findByTokenValue(tokenValue);
-      setCurrentToken(token);
-      return this.dataProviderClient.consumeMesri(input, token, route);
-    } catch (error) {
-      if (error instanceof TokenNotFoundError) {
-        await this.eventBus.publish(new TokenNotFound(tokenValue));
-      }
-      throw error;
-    }
+    const token = await this.tokenCache.findByTokenValue(tokenValue);
+    setCurrentToken(token);
+    return this.dataProviderClient.consumeMesri(input, token, route);
   }
 }

@@ -1,6 +1,5 @@
 import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
-import {RedisTokenRepository} from 'src/infrastructure/repositories/redis-token.repository';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
@@ -13,7 +12,6 @@ import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projecto
 import {EventSourcedApplicationRepository} from 'src/infrastructure/repositories/event-sourced-application.repository';
 import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
-import {RepositoryFeeder} from 'src/domain/data-fetching/repository-feeder';
 import {ChalkLogger} from 'src/infrastructure/chalk.logger';
 import {logFor, setInstance} from 'src/domain/logger';
 import {DgfipDataPresenter} from 'src/presentation/presenters/dgfip-data.presenter';
@@ -22,7 +20,6 @@ import {PostgresEntryRepository} from 'src/infrastructure/repositories/postgres-
 import {EntryProjector} from 'src/domain/journal/projectors/entry.projector';
 import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter';
 import {postgresPool} from 'src/infrastructure/configuration/postgres';
-import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {AirtableDgfipDataProvider} from 'src/infrastructure/data-providers/dgfip/airtable';
 import {PostgresApplicationProjectionRepository} from 'src/infrastructure/repositories/postgres-application-projection.repository';
 import {ApplicationProjector} from 'src/domain/application-management/projectors/application-projection.projector';
@@ -56,11 +53,6 @@ localLogger.log('info', 'Postgres pool configured');
 export const eventStore: EventStore = new PostgresEventStore(postgresPool);
 localLogger.log('info', 'Event store initialized');
 
-localLogger.log('info', 'Redis connection configured');
-
-export const redisTokenRepository: TokenRepository =
-  new TokenRepositoryWithHashRetry(new RedisTokenRepository(redisConnection));
-localLogger.log('info', 'Redis token repository initialized');
 export const postgresTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresPool));
 localLogger.log('info', 'Postgres token repository initialized');
@@ -114,11 +106,6 @@ localLogger.log('info', 'Token value factory initialized');
 export const tokenCache = new TokenCache(postgresTokenRepository);
 localLogger.log('info', 'Token cache initialized');
 
-export const redisTokenProjector = new TokenProjector(
-  redisTokenRepository,
-  tokenCache
-);
-localLogger.log('info', 'Redis token projector initialized');
 export const postgresTokenProjector = new TokenProjector(
   postgresTokenRepository,
   tokenCache
@@ -136,12 +123,6 @@ export const applicationTransactionManager = new ApplicationTransactionManager(
   eventStore
 );
 localLogger.log('info', 'Application transaction manager initialized');
-
-export const repositoryFeeder = new RepositoryFeeder(
-  redisTokenRepository,
-  postgresTokenRepository
-);
-localLogger.log('info', 'Repository feeder initialized');
 
 export const dgfipDataPresenter = new DgfipDataPresenter();
 localLogger.log('info', 'DGFIP data presenter initialized');
@@ -177,8 +158,7 @@ localLogger.log('info', 'Application projector initialized');
 
 export const fetchDataUsecase = new FetchDataUsecase(
   tokenCache,
-  dataProviderClient,
-  eventBus
+  dataProviderClient
 );
 localLogger.log('info', 'Fetch data usecase initialized');
 
