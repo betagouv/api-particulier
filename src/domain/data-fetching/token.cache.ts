@@ -8,7 +8,9 @@ export class TokenCache {
     MemoizedFunction;
 
   constructor(tokenRepository: TokenRepository) {
-    this.findByTokenValue = memoize(tokenRepository.findByTokenValue);
+    this.findByTokenValue = memoize(
+      tokenRepository.findByTokenValue.bind(tokenRepository)
+    );
   }
 
   clear() {
