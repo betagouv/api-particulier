@@ -2,7 +2,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import {Command} from 'commander';
 import {postgresPool} from 'src/infrastructure/configuration/postgres';
-import {eventBus, eventStore} from 'src/infrastructure/service-container';
+import {
+  eventBus,
+  eventStore,
+  tokenCache,
+} from 'src/infrastructure/service-container';
 
 (async () => {
   const program = new Command();
@@ -15,6 +19,9 @@ import {eventBus, eventStore} from 'src/infrastructure/service-container';
 
   await postgresPool.query('DELETE FROM applications');
   await postgresPool.query('DELETE FROM tokens');
+
+  console.log('Clearing cache');
+  tokenCache.clear();
 
   console.log(`Publishing ${events.length} events`);
 

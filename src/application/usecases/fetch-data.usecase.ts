@@ -7,13 +7,13 @@ import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-empl
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {TokenNotFound} from 'src/domain/data-fetching/events/token-not-found.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
-import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
+import {TokenCache} from 'src/domain/data-fetching/token.cache';
 import {EventBus} from 'src/domain/event-bus';
 import {TokenValue} from 'src/domain/token-value';
 
 export class FetchDataUsecase {
   constructor(
-    private readonly tokenRepository: TokenRepository,
+    private readonly tokenCache: TokenCache,
     private readonly dataProviderClient: DataProviderClient,
     private readonly eventBus: EventBus
   ) {}
@@ -25,7 +25,7 @@ export class FetchDataUsecase {
     setCurrentToken: (token: Token) => void
   ) {
     try {
-      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      const token = await this.tokenCache.findByTokenValue(tokenValue);
       setUser({id: token.applicationId});
       setCurrentToken(token);
       return this.dataProviderClient.consumeDgfip(input, token, route);
@@ -44,7 +44,7 @@ export class FetchDataUsecase {
     setCurrentToken: (token: Token) => void
   ) {
     try {
-      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      const token = await this.tokenCache.findByTokenValue(tokenValue);
       setCurrentToken(token);
       return this.dataProviderClient.consumeCnaf(input, token, route);
     } catch (error) {
@@ -62,7 +62,7 @@ export class FetchDataUsecase {
     setCurrentToken: (token: Token) => void
   ) {
     try {
-      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      const token = await this.tokenCache.findByTokenValue(tokenValue);
       setCurrentToken(token);
       return this.dataProviderClient.consumePoleEmploi(input, token, route);
     } catch (error) {
@@ -80,7 +80,7 @@ export class FetchDataUsecase {
     setCurrentToken: (token: Token) => void
   ) {
     try {
-      const token = await this.tokenRepository.findByTokenValue(tokenValue);
+      const token = await this.tokenCache.findByTokenValue(tokenValue);
       setCurrentToken(token);
       return this.dataProviderClient.consumeMesri(input, token, route);
     } catch (error) {
