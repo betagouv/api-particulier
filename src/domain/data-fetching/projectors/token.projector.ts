@@ -4,12 +4,16 @@ import {ApplicationImported} from 'src/domain/application-management/events/appl
 import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
+import {TokenCache} from 'src/domain/data-fetching/token.cache';
 import {logFor, Logger} from 'src/domain/logger';
 
 export class TokenProjector {
   private readonly logger: Logger;
 
-  constructor(private readonly tokenRepository: TokenRepository) {
+  constructor(
+    private readonly tokenRepository: TokenRepository,
+    private readonly tokenCache: TokenCache
+  ) {
     this.logger = logFor(
       `${TokenProjector.name}/${tokenRepository.constructor.name}`
     );
@@ -43,6 +47,7 @@ export class TokenProjector {
   }
 
   async onApplicationRemoved(event: ApplicationRemoved): Promise<void> {
+    this.tokenCache.clear();
     await this.tokenRepository.removeByApplicationId(
       <ApplicationId>event.aggregateId
     );

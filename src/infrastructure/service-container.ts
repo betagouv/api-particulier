@@ -111,10 +111,17 @@ localLogger.log('info', 'Uuid factory initialized');
 export const tokenValueFactory = new RandomTokenValueFactory(uuidFactory);
 localLogger.log('info', 'Token value factory initialized');
 
-export const redisTokenProjector = new TokenProjector(redisTokenRepository);
+export const tokenCache = new TokenCache(postgresTokenRepository);
+localLogger.log('info', 'Token cache initialized');
+
+export const redisTokenProjector = new TokenProjector(
+  redisTokenRepository,
+  tokenCache
+);
 localLogger.log('info', 'Redis token projector initialized');
 export const postgresTokenProjector = new TokenProjector(
-  postgresTokenRepository
+  postgresTokenRepository,
+  tokenCache
 );
 localLogger.log('info', 'Postgres token projector initialized');
 
@@ -135,9 +142,6 @@ export const repositoryFeeder = new RepositoryFeeder(
   postgresTokenRepository
 );
 localLogger.log('info', 'Repository feeder initialized');
-
-export const tokenCache = new TokenCache(postgresTokenRepository);
-localLogger.log('info', 'Token cache initialized');
 
 export const dgfipDataPresenter = new DgfipDataPresenter();
 localLogger.log('info', 'DGFIP data presenter initialized');
@@ -172,7 +176,7 @@ export const applicationProjector = new ApplicationProjector(
 localLogger.log('info', 'Application projector initialized');
 
 export const fetchDataUsecase = new FetchDataUsecase(
-  redisTokenRepository,
+  tokenCache,
   dataProviderClient,
   eventBus
 );
@@ -180,7 +184,7 @@ localLogger.log('info', 'Fetch data usecase initialized');
 
 export const introspectUsecase = new IntrospectUsecase(
   applicationProjectionRepository,
-  redisTokenRepository
+  tokenCache
 );
 localLogger.log('info', 'Introspect usecase initialized');
 
