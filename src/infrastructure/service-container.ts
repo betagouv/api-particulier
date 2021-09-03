@@ -42,6 +42,7 @@ import {routeEvents} from 'src/infrastructure/event-router';
 import {MesriDataPresenter} from 'src/presentation/presenters/mesri-data.presenter';
 import {PoleEmploiDataPresenter} from 'src/presentation/presenters/pole-emploi-data.presenter';
 import {RemoveApplicationUsecase} from 'src/application/usecases/remove-application.usecase';
+import {TokenCache} from 'src/domain/data-fetching/token.cache';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -134,6 +135,9 @@ export const repositoryFeeder = new RepositoryFeeder(
   postgresTokenRepository
 );
 localLogger.log('info', 'Repository feeder initialized');
+
+export const tokenCache = new TokenCache(postgresTokenRepository);
+localLogger.log('info', 'Token cache initialized');
 
 export const dgfipDataPresenter = new DgfipDataPresenter();
 localLogger.log('info', 'DGFIP data presenter initialized');
