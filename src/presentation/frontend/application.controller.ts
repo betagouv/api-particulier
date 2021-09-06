@@ -8,7 +8,7 @@ export default class extends Controller {
     'displayScopesLink',
     'deleteForm',
   ];
-  sourceTarget!: Element;
+  sourceTarget!: HTMLInputElement;
   buttonTarget!: Element;
   scopesTarget!: Element;
   displayScopesLinkTarget!: Element;
@@ -21,8 +21,6 @@ export default class extends Controller {
   }
 
   copy() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     this.sourceTarget.select();
     document.execCommand('copy');
     this.buttonTarget.innerHTML = 'Jeton copié !';
