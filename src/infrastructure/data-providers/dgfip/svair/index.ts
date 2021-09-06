@@ -14,7 +14,7 @@ export class SvairDataProvider implements DgfipDataProvider {
   throttledGetViewState: DebouncedFunc<() => Promise<string>>;
 
   constructor() {
-    this.throttledGetViewState = throttle(this.getViewState, 300000, {
+    this.throttledGetViewState = throttle(this.getViewState, 1000 * 10, {
       trailing: false,
     });
   }
