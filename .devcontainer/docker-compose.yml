@@ -41,7 +41,6 @@ services:
       NODE_ENV: development
       LOG_LEVEL: '1'
       ENV: local
-      SANDBOXED: 'true'
       SENTRY_ENABLED: 'false'
     ports:
       - 3000:3000
