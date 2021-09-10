@@ -33,3 +33,7 @@ export type PoleEmploiOutput = {
   telephone: string;
   telephone2: string;
 };
+
+export type PoleEmploiMetadata = {
+  caller: string;
+};

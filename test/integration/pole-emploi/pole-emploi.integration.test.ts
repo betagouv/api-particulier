@@ -13,7 +13,9 @@ describe('The pole emploi api data provider', () => {
       id: process.env.TEST_POLE_EMPLOI_ID as PoleEmploiId,
     };
 
-    const output = await dataProvider.fetch(input);
+    const output = await dataProvider.fetch(input, {
+      caller: 'TEST-INTEGRATION',
+    });
     expect(output.nom).to.be.a('string');
   });
 });
