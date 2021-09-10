@@ -6,6 +6,7 @@ import tokenProvider from 'axios-token-interceptor';
 import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/pole-emploi/data-provider';
 import {
   PoleEmploiInput,
+  PoleEmploiMetadata,
   PoleEmploiOutput,
 } from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
 import {NotFoundError} from 'src/domain/data-fetching/data-providers/pole-emploi/errors/not-found.error';
@@ -29,11 +30,19 @@ export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
     );
   }
 
-  async fetch(input: PoleEmploiInput): Promise<PoleEmploiOutput> {
+  async fetch(
+    input: PoleEmploiInput,
+    metadata: PoleEmploiMetadata
+  ): Promise<PoleEmploiOutput> {
     try {
       const response = await this.axios.post(
         process.env.POLE_EMPLOI_API_URL!,
-        input.id
+        input.id,
+        {
+          headers: {
+            'X-pe-consommateur': metadata.caller,
+          },
+        }
       );
 
       const {data} = response;
