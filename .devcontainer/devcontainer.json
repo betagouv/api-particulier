@@ -30,13 +30,20 @@
 		"eslint.validate": [
 			"javascript",
 			"typescript"
-		]
+		],
+		"rest-client.environmentVariables": {
+			"$shared": {},
+			"devcontainer": {
+				"host": "localhost:3000"
+			}
+		}
 	},
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-pg",
-		"eseom.nunjucks-template"
+		"eseom.nunjucks-template",
+		"humao.rest-client"
 	],
 	"postCreateCommand": "npm install && npm run migrate up && npm run fixtures:load"
 }
