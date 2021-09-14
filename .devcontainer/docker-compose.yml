@@ -34,6 +34,7 @@ services:
     command: sleep infinity
     volumes:
       - ..:/workspace:cached
+      - /workspace/node_modules
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
       TEST_DATABASE_URL: postgres://postgres:postgres@test-db:5432/postgres
