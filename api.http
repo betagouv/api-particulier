@@ -3,13 +3,13 @@
 
 # Global ping
 GET http://{{host}}/api/ping
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
 # Introspect
 GET http://{{host}}/api/introspect
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
@@ -17,7 +17,7 @@ X-Api-Key: {{ apiKey }}
 GET http://{{host}}/api/impots/svair
     ?numeroFiscal={{$dotenv TEST_TAX_NUMBER}}
     &referenceAvis={{$dotenv TEST_TAX_NOTICE_NUMBER}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
@@ -25,7 +25,7 @@ X-Api-Key: {{ apiKey }}
 GET http://{{host}}/api/v2/avis-imposition
     ?numeroFiscal={{$dotenv TEST_TAX_NUMBER}}
     &referenceAvis={{$dotenv TEST_TAX_NOTICE_NUMBER}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
@@ -33,7 +33,7 @@ X-Api-Key: {{ apiKey }}
 GET http://{{host}}/api/caf/famille
     ?numeroAllocataire={{$dotenv TEST_NUMERO_ALLOCATAIRE}}
     &codePostal={{$dotenv TEST_CODE_POSTAL}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
@@ -41,21 +41,21 @@ X-Api-Key: {{ apiKey }}
 GET http://{{host}}/api/v2/composition-familiale
     ?numeroAllocataire={{$dotenv TEST_NUMERO_ALLOCATAIRE}}
     &codePostal={{$dotenv TEST_CODE_POSTAL}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
 # Pôle Emploi v2
 GET http://{{host}}/api/v2/situations-pole-emploi
     ?identifiant={{$dotenv TEST_POLE_EMPLOI_ID}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
 # MESRI v2 par INE
 GET http://{{host}}/api/v2/etudiants
     ?ine={{$dotenv TEST_MESRI_INE}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
 
 ###
 
@@ -66,4 +66,4 @@ GET http://{{host}}/api/v2/etudiants
     &dateDeNaissance={{$dotenv TEST_MESRI_DATE_NAISSANCE}}
     &lieuDeNaissance={{$dotenv TEST_MESRI_LIEU_NAISSANCE}}
     &sexe={{$dotenv TEST_MESRI_SEXE}}
-X-Api-Key: {{ apiKey }}
+X-Api-Key: {{apiKey}}
