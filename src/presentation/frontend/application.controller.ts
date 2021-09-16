@@ -18,6 +18,7 @@ export default class extends Controller {
     if (document.queryCommandSupported('copy')) {
       this.buttonTarget.classList.remove('hidden');
     }
+    this.displayScopesLinkTarget.classList.remove('hidden');
   }
 
   copy() {
