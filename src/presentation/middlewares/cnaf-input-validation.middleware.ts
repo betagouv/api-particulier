@@ -3,8 +3,12 @@ import {inputValidationMiddlewareBuilder} from 'src/presentation/middlewares/inp
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
 
 export const cnafInputSchema = z.object({
-  numeroAllocataire: z.string().nonempty(),
-  codePostal: z.string().nonempty(),
+  numeroAllocataire: z
+    .string()
+    .nonempty()
+    .max(7)
+    .regex(/[0-9]+/),
+  codePostal: z.string().nonempty().max(5),
 });
 
 export const cnafInputValidationMiddleware =
