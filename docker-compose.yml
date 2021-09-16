@@ -5,6 +5,8 @@ services:
     extends:
       file: .devcontainer/docker-compose.yml
       service: db
+    ports:
+      - 5432:5432
   test-db:
     extends:
       file: .devcontainer/docker-compose.yml
@@ -13,6 +15,8 @@ services:
     extends:
       file: .devcontainer/docker-compose.yml
       service: cache
+    ports:
+      - 6379:6379
   web:
     build:
       context: docker/web
