@@ -15,7 +15,7 @@ services:
       service: cache
   web:
     build:
-      context: .
+      context: docker/web
       dockerfile: Dockerfile
     volumes:
       - .:/app:cached
