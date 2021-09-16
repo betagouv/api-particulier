@@ -25,9 +25,9 @@ export const zodErrorPresenter: ErrorPresenter<ZodError> = (
       statusCode: 400,
       error: 'bad_request',
       reason:
-        'Les paramètres `codePostal` et `numeroAllocataire` sont obligatoires',
+        'Les paramètres `codePostal` et `numeroAllocataire` sont invalides, veuillez vérifier que vous les avez correctement saisis',
       message:
-        'Les paramètres `codePostal` et `numeroAllocataire` sont obligatoires',
+        'Les paramètres `codePostal` et `numeroAllocataire` sont invalides, veuillez vérifier que vous les avez correctement saisis',
     };
   }
   return {
