@@ -6,6 +6,11 @@ export default class extends Controller {
   formTarget!: Element;
   submitButtonTarget!: Element;
 
+  connect() {
+    this.buttonTarget.classList.remove('hidden');
+    this.formTarget.classList.add('hidden');
+  }
+
   reveal() {
     this.buttonTarget.classList.add('hidden');
     this.formTarget.classList.remove('hidden');
