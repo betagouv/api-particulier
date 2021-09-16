@@ -10,6 +10,7 @@ import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {format} from 'date-fns';
 import {fr} from 'date-fns/locale';
 import methodOverride from 'method-override';
+import {scopesConfiguration} from 'src/presentation/scopes-configuration';
 
 const RedisStore = connectRedis(session);
 
@@ -30,6 +31,7 @@ export const initWebapp = (app: Express) => {
     'production',
     process.env.NODE_ENV === 'production'
   );
+  nunjuckEnvironment.addGlobal('scopesConfiguration', scopesConfiguration);
   if (process.env.NODE_ENV === 'production') {
     const manifest = require('../../../public/manifest.json');
     nunjuckEnvironment.addGlobal('manifest', manifest);

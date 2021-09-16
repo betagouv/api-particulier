@@ -8,10 +8,10 @@
       {% if applications.length > 0 %}
         <div>
           {% for application in applications %}
-            {% include 'includes/application.njk' %}
+            {% include 'partials/application.njk' %}
           {% endfor %}
           {% if sandbox %}
-            {% include 'includes/new-application.njk' %}
+            {% include 'partials/new-application.njk' %}
           {% endif %}
         </div>
         <br/>
@@ -25,7 +25,7 @@
         {% include 'includes/no-token.njk' %}
         {% if sandbox %}
           <div class="mt-4">
-            {% include 'includes/new-application.njk' %}
+            {% include 'partials/new-application.njk' %}
           </div>
         {% endif %}
       {% endif %}
