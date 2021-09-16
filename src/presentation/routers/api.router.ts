@@ -23,11 +23,9 @@ import {schema} from 'src/presentation/schema';
 
 export const apiRouter = Router();
 
-const corsMiddleware = cors({methods: 'GET', origin: /api\.gouv\.fr$/});
+const corsMiddleware = cors({methods: 'GET', origin: /^api\.gouv\.fr$/});
 
-if (process.env.SANDBOXED === 'true') {
-  apiRouter.use(corsMiddleware);
-}
+apiRouter.use(corsMiddleware);
 
 apiRouter.get(
   '/impots/svair',
@@ -125,10 +123,6 @@ apiRouter.post(
   manageErrorMiddleware
 );
 
-apiRouter.get(
-  '/open-api.yml',
-  corsMiddleware,
-  (_req: Request, res: Response) => {
-    res.type('text/yaml').send(schema.getSpecAsYaml());
-  }
-);
+apiRouter.get('/open-api.yml', (_req: Request, res: Response) => {
+  res.type('text/yaml').send(schema.getSpecAsYaml());
+});
