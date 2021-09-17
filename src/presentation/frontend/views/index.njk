@@ -7,9 +7,7 @@
     <turbo-frame id="user-applications">
       {% if applications.length > 0 %}
         <div>
-          {% for application in applications %}
-            {% include 'partials/application.njk' %}
-          {% endfor %}
+          {% include 'partials/application-list.njk' %}
           {% if sandbox %}
             {% include 'partials/new-application.njk' %}
           {% endif %}

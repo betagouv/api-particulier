@@ -35,8 +35,7 @@
                     <div class="flex flex-wrap mt-1">
                         {% for scope, label in scopes %}
                             <div class="flex items-center mr-2">
-                                <input class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if input.scopes[scope] %} checked {% endif %}/>
+                                <input class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if input.scopes[scope] %} checked {% endif %}/>
                                 <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
                                 </label>
                             </div>

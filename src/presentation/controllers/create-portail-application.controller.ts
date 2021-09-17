@@ -30,9 +30,12 @@ export const createPortailApplicationController = async (
   const inputValidation = await createUserApplicationDtoSchema.safeParseAsync(
     req.body
   );
+  const clientHasJsEnabled = req
+    .get('Accept')
+    ?.includes('text/vnd.turbo-stream.html');
 
   if (!inputValidation.success) {
-    if (req.accepts('text/vnd.turbo-stream.html')) {
+    if (clientHasJsEnabled) {
       res.status(422).render('partials/new-application', {
         errors: inputValidation.error.format(),
         input: req.body,
@@ -45,13 +48,14 @@ export const createPortailApplicationController = async (
 
   await createApplicationUsecase.createApplication(
     new CreateApplicationDto(
-      res.locals.input.name,
+      inputValidation.data.name,
       '0',
-      <AnyScope[]>res.locals.input.scopes,
+      <AnyScope[]>inputValidation.data.scopes,
       [req.user!.email]
     )
   );
+
   setTimeout(() => {
     res.redirect('/');
-  }, 100);
+  }, 300);
 };
