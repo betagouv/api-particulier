@@ -37,7 +37,7 @@ const commonAttributes = {
       name: 'referenceAvis',
       in: 'query',
       description:
-        "Référence de l'avis fiscal (identifiant alphanumérique de 13 caractères). Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la fin de sa référence d'avis. Il s'agit d'une clé de vérification, il est nécessaire de l'enlever avant de l'envoyer sur l'API Particulier.",
+        "Référence de l'avis fiscal (identifiant alphanumérique de 13 caractères). Si l'avis est un avis de dégrèvement, l'identifiant est alors composé de 14 caractères.",
       required: true,
       schema: {
         type: 'number',
