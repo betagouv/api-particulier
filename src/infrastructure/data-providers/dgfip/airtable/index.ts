@@ -58,9 +58,9 @@ export class AirtableDgfipDataProvider implements DgfipDataProvider {
         revenuBrutGlobal: parseEuro(rawNotice.revenuBrutGlobal),
         revenuImposable: parseEuro(rawNotice.revenuImposable),
         impotRevenuNetAvantCorrections: parseEuro(
-          rawNotice.impotRevenuNetAvantCorrections
+          rawNotice.impotsNetAvantCorrections
         ),
-        montantImpot: parseEuro(rawNotice.montantImpot),
+        montantImpot: parseEuro(rawNotice.impots),
         revenuFiscalReference: parseEuro(rawNotice.revenuFiscalReference),
         foyerFiscal: {
           annee: parseInt(rawNotice.anneeImpots),
