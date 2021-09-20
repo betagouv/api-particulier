@@ -23,7 +23,11 @@ import {schema} from 'src/presentation/schema';
 
 export const apiRouter = Router();
 
-const corsMiddleware = cors({methods: 'GET', origin: /^api\.gouv\.fr$/});
+const corsMiddleware = cors({
+  methods: 'GET',
+  origin: /^https:\/\/api\.gouv\.fr$/,
+  optionsSuccessStatus: 200,
+});
 
 apiRouter.use(corsMiddleware);
 
