@@ -19,21 +19,12 @@
 
 > Attention, l'installation peut échouer si vous ne définissez pas correctement le `.env`, par exemple la commande de migration ne saura pas se connecter à la base de données
 
-Une fois les containers lancés, vous pouvez préparer votre environnement de développement local en lançant les commandes suivantes dans le container `web` accessible par la commande `docker-compose exec web sh` :
+Une fois les containers lancés, vous pouvez préparer votre environnement de développement local en lançant les commandes suivantes sur votre machine hôte :
+- `npm install`
 - `npm run migrate up`
 - `npm run fixtures:load`
 
 ## Installations alternatives
-
-### En local
-
-Si vous ne souhaitez pas faire tourner l'application sur un devcontainer ou que vous ne souhaitez pas utiliser VSCode, vous pouvez tout à fait le faire tourner sur votre machine hôte, ou dans un Docker.
-
-Plusieurs options s'offrent à vous :
-- vous faites tout tourner sur votre machine, il vous faudra :
-  - NodeJs version >= 14
-  - PostgreSQL avec extension [Timescaledb](https://www.timescale.com/)
-- vous faites tourner NodeJs sur votre machine, et Timescaledb sur Docker
 
 ### Sur Github Codespace
 
@@ -55,7 +46,7 @@ Parmi les variables d'environnement notables, si vous n'avez pas choisi le mode 
 
 ## Vérifier l'installation
 
-Afin de vous assurer que vous êtes prêts à développer sur le projet, vous pouvez lancer les tests suivants depuis le container web, accessbile par `docker-compose exec web sh` :
+Afin de vous assurer que vous êtes prêts à développer sur le projet, vous pouvez lancer les tests suivants depuis votre machine hôte :
 - `npm run type-check`
 - `npm test`
 - `npm run test:integration`
@@ -78,14 +69,15 @@ L'application possède deux couches de présentation principales :
 - l'API et le backend, lancés par la commande `npm run start:dev:backend`
 - le frontend, sous la forme du portail développeur, lancé par la commande `npm run start:dev:frontend`
 
-Le container `web` lancé par Docker compose lance la commande `npm run start:dev`, qui lance en parallèle les deux commandes précédentes. Vous n'avez rien à faire pour lancer l'application, elle tourne déjà.
+Afin de lancer les deux couches de présentation en mode développement, exécutez la commande suivante sur votre machine hôte :
+- `npm run start:dev`
 
-Une fois les containers démarrés, vous pouvez vous rendre sur [https://mon.portail.local:3000](https://mon.portail.local:3000) afin de récupérer votre jeton d'API.
+Une fois l'application démarrée, vous pouvez vous rendre sur [https://mon.portail.local:3000](https://mon.portail.local:3000) afin de récupérer votre jeton d'API.
 
 # Tests
 
 L'application possède 4 niveaux de test :
-- `npm run type-check` - exécutable sur votre machine directement : analyse statique de types
-- `npm test` - exécutable sur votre machine directement : tests unitaires
-- `npm run test:integration` - exécutable dans le container `web` : tests d'intégration
-- `npm run test:end-to-end` - exécutable sur votre machine directement : tests end-to-end, lancés principalement sur la [CI](https://github.com/betagouv/api-particulier/actions)
+- `npm run type-check` : analyse statique de types
+- `npm test` : tests unitaires
+- `npm run test:integration` : tests d'intégration
+- `npm run test:end-to-end` : tests end-to-end, lancés principalement sur la [CI](https://github.com/betagouv/api-particulier/actions)
