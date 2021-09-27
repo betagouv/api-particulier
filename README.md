@@ -81,3 +81,8 @@ L'application possède 4 niveaux de test :
 - `npm test` : tests unitaires
 - `npm run test:integration` : tests d'intégration
 - `npm run test:end-to-end` : tests end-to-end, lancés principalement sur la [CI](https://github.com/betagouv/api-particulier/actions)
+
+# Administration
+
+[Forest Admin](https://www.forestadmin.com/) est utilisé pour gérer les fournisseurs de services dans l'API Particulier.
+[Créez-vous un compte](https://app.forestadmin.com/signup) afin de pouvoir accéder à l'interface, puis demandez à un collègue ou ami de vous inviter sur l'interface d'administration.
