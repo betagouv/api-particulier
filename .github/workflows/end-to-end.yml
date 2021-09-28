@@ -73,3 +73,8 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          APPLICATION_URL: ${{ secrets.APPLICATION_URL }}
+          DATABASE_SCHEMA: ${{ secrets.DATABASE_SCHEMA }}
+          DATABASE_SSL: ${{ secrets.DATABASE_SSL }}
+          FOREST_AUTH_SECRET: ${{ secrets.FOREST_AUTH_SECRET }}
+          FOREST_ENV_SECRET: ${{ secrets.FOREST_ENV_SECRET }}
