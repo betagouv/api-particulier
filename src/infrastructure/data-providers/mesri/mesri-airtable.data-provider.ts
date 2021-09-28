@@ -31,7 +31,7 @@ export class MesriAirtableDataProvider implements MesriDataProvider {
           {
             headers: {Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`},
             params: {
-              filterByFormula: `AND({nom}='${input.nomFamille}', {prenom}='${input.prenom}', {dateNaissance}='${input.dateNaissance}')`,
+              filterByFormula: `AND({nom}='${input.nomFamille}', {prenom}='${input.prenom}', {dateNaissance}='${input.dateNaissance}', {sexe}='${input.sexe}', {lieuNaissance}='${input.lieuNaissance}')`,
             },
           }
         );
