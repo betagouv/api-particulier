@@ -7,11 +7,6 @@ import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 import {UuidFactory} from 'src/domain/uuid.factory';
 
-export type Token = {
-  value: TokenValue;
-  createdOn: Date;
-};
-
 export class Application {
   private readonly logger = logFor(Application.name);
 
@@ -20,7 +15,7 @@ export class Application {
     public readonly name: string,
     public readonly createdOn: Date,
     public readonly dataPassId: string,
-    public readonly tokens: Token[],
+    public readonly tokens: TokenValue[],
     public readonly subscriptions: Subscription[],
     public readonly userEmails: UserEmail[],
     public readonly scopes: AnyScope[]
@@ -40,12 +35,7 @@ export class Application {
       name,
       new Date(),
       dataPassId,
-      [
-        {
-          value: tokenValueFactory.generateTokenValue(),
-          createdOn: new Date(),
-        },
-      ],
+      [tokenValueFactory.generateTokenValue()],
       subscriptions,
       userEmails,
       scopes
@@ -66,10 +56,7 @@ export class Application {
       name,
       new Date(),
       dataPassId,
-      tokenValues.map(tokenValue => ({
-        createdOn: new Date(),
-        value: tokenValue,
-      })),
+      tokenValues,
       subscriptions,
       userEmails,
       scopes
