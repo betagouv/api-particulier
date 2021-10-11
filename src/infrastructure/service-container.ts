@@ -1,16 +1,12 @@
-import {PostgresEventStore} from 'src/infrastructure/postgres.event-store';
 import {TokenRepositoryWithHashRetry} from 'src/domain/data-fetching/repositories/token-with-hash-retry.repository';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {SoapDataProvider} from 'src/infrastructure/data-providers/cnaf/soap';
 import {SvairDataProvider} from 'src/infrastructure/data-providers/dgfip/svair';
-import {EventStore} from 'src/domain/event-store';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {EventBus} from 'src/domain/event-bus';
 import {UuidFactory} from 'src/infrastructure/uuid.factory';
 import {FetchDataUsecase} from 'src/application/usecases/fetch-data.usecase';
 import {TokenProjector} from 'src/domain/data-fetching/projectors/token.projector';
-import {EventSourcedApplicationRepository} from 'src/infrastructure/repositories/event-sourced-application.repository';
-import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
 import {ChalkLogger} from 'src/infrastructure/chalk.logger';
 import {logFor, setInstance} from 'src/domain/logger';
@@ -21,9 +17,6 @@ import {EntryProjector} from 'src/domain/journal/projectors/entry.projector';
 import {CnafDataPresenter} from 'src/presentation/presenters/cnaf-data.presenter';
 import {postgresPool} from 'src/infrastructure/configuration/postgres';
 import {AirtableDgfipDataProvider} from 'src/infrastructure/data-providers/dgfip/airtable';
-import {PostgresApplicationProjectionRepository} from 'src/infrastructure/repositories/postgres-application-projection.repository';
-import {ApplicationProjector} from 'src/domain/application-management/projectors/application-projection.projector';
-import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
 import {IntrospectUsecase} from 'src/application/usecases/introspect.usecase';
 import {IntrospectDataPresenter} from 'src/presentation/presenters/introspect-data.presenter';
 import {RandomTokenValueFactory} from 'src/infrastructure/token-value.factory';
@@ -50,9 +43,6 @@ const sandboxed = process.env.SANDBOXED !== 'false';
 const localLogger = logFor('ServiceContainer');
 
 localLogger.log('info', 'Postgres pool configured');
-
-export const eventStore: EventStore = new PostgresEventStore(postgresPool);
-localLogger.log('info', 'Event store initialized');
 
 export const postgresTokenRepository: TokenRepository =
   new TokenRepositoryWithHashRetry(new PostgresTokenRepository(postgresPool));
@@ -113,22 +103,10 @@ export const postgresTokenProjector = new TokenProjector(
 );
 localLogger.log('info', 'Postgres token projector initialized');
 
-export const applicationRepository = new EventSourcedApplicationRepository(
-  eventStore
-);
-localLogger.log('info', 'Application repository initialized');
-
 export const applicationEntityRepository = new PostgresApplicationRepository(
   postgresPool
 );
 localLogger.log('info', 'Application repository initialized');
-
-export const applicationTransactionManager = new ApplicationTransactionManager(
-  applicationRepository,
-  eventBus,
-  eventStore
-);
-localLogger.log('info', 'Application transaction manager initialized');
 
 export const dgfipDataPresenter = new DgfipDataPresenter();
 localLogger.log('info', 'DGFIP data presenter initialized');
@@ -152,15 +130,6 @@ localLogger.log('info', 'Journal entry repository initialized');
 
 export const entryProjector = new EntryProjector(entryRepository);
 localLogger.log('info', 'Journal entry projector initialized');
-
-export const applicationProjectionRepository: ApplicationProjectionRepository =
-  new PostgresApplicationProjectionRepository(postgresPool);
-localLogger.log('info', 'Application projection repository initialized');
-
-export const applicationProjector = new ApplicationProjector(
-  applicationProjectionRepository
-);
-localLogger.log('info', 'Application projector initialized');
 
 export const fetchDataUsecase = new FetchDataUsecase(
   tokenCache,

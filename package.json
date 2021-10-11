@@ -22,9 +22,7 @@
     "start:dev": "run-p start:dev:*",
     "start:dev:backend": "ts-node-dev --watch .env --files -r dotenv/config -r tsconfig-paths/register src/infrastructure/server.ts",
     "start:dev:frontend": "vite --host",
-    "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts",
-    "fixtures:load": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts",
-    "publish-all-events": "ts-node -r tsconfig-paths/register src/presentation/cli/publish-all-events.ts"
+    "fixtures:load": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts"
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.1.0",

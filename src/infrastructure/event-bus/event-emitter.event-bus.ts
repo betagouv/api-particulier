@@ -1,6 +1,5 @@
 import {EventEmitter} from 'events';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
-import {ApplicationImported} from 'src/domain/application-management/events/application-imported.event';
 import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
 import {UserSubscribed} from 'src/domain/application-management/events/user-subscribed.event';
 import {TokenConsumed} from 'src/domain/data-fetching/events/token-consumed.event';
@@ -21,12 +20,6 @@ export class EventEmitterEventBus implements EventBus {
 
   onApplicationCreated(handler: (event: ApplicationCreated) => Promise<void>) {
     this.eventEmitter.addListener(ApplicationCreated.name, handler);
-  }
-
-  onApplicationImported(
-    handler: (event: ApplicationImported) => Promise<void>
-  ) {
-    this.eventEmitter.addListener(ApplicationImported.name, handler);
   }
 
   onApplicationRemoved(handler: (event: ApplicationRemoved) => Promise<void>) {

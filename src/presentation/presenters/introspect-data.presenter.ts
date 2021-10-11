@@ -1,7 +1,7 @@
-import {ApplicationProjection} from 'src/domain/application-management/projections/application.projection';
+import {Application} from 'src/domain/application-management/entities/application.entity';
 
 export class IntrospectDataPresenter {
-  presentData(introspectData: ApplicationProjection) {
+  presentData(introspectData: Application) {
     return {
       _id: introspectData.id,
       name: introspectData.name,
