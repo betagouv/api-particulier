@@ -10,7 +10,7 @@ import {UuidFactory} from 'src/domain/uuid.factory';
 export class Application {
   private readonly logger = logFor(Application.name);
 
-  private constructor(
+  constructor(
     public readonly id: ApplicationId,
     public readonly name: string,
     public readonly createdOn: Date,
