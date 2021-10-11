@@ -1,5 +1,4 @@
 import {
-  applicationProjector,
   entryProjector,
   eventBus,
   postgresTokenProjector,
@@ -8,13 +7,6 @@ import {
 export const routeEvents = () => {
   eventBus.onApplicationCreated(
     postgresTokenProjector.onApplicationCreated.bind(postgresTokenProjector)
-  );
-
-  eventBus.onApplicationImported(
-    postgresTokenProjector.onApplicationImported.bind(postgresTokenProjector)
-  );
-  eventBus.onApplicationImported(
-    applicationProjector.onApplicationImported.bind(applicationProjector)
   );
 
   eventBus.onTokenConsumed(entryProjector.onTokenConsumed.bind(entryProjector));

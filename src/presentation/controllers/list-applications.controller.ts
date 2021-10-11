@@ -1,18 +1,18 @@
 import {Request, Response} from 'express';
 import {ApplicationId} from 'src/domain/application-id';
 import {
-  applicationProjectionRepository,
+  applicationEntityRepository,
   subscribeUserUsecase,
 } from 'src/infrastructure/service-container';
 
 export const listApplications = async (req: Request, res: Response) => {
-  const applications = await applicationProjectionRepository.findAll();
+  const applications = await applicationEntityRepository.findAll();
 
   res.render('admin/index', {applications, user: req.user});
 };
 
 export const applicationDetails = async (req: Request, res: Response) => {
-  const application = await applicationProjectionRepository.findById(
+  const application = await applicationEntityRepository.findById(
     req.params.id as ApplicationId
   );
 

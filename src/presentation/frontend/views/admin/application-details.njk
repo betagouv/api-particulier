@@ -7,7 +7,7 @@
                     {{ application.name }}
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    {{ application.createdAt }}
+                    {{ application.createdOn }}
                 </p>
             </div>
             <div class="border-t border-gray-200 px-4 py-5">
@@ -18,8 +18,8 @@
                 {% endfor %}
                 <div class="flex flex-columns">
                     <form action="./users" method="POST">
-                        <input class="border border-black flex-1" type="text" name="email">
-                        <input type="submit" class="border border-black flex-1" value="Ajouter">
+                        <input class="border border-black flex-1" type="text" name="email"/>
+                        <input type="submit" class="border border-black flex-1" value="Ajouter"/>
                     </form>
                 </div>
             </div>
