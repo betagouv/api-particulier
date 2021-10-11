@@ -188,7 +188,8 @@ export const createApplicationUsecase = new CreateApplicationUsecase(
 localLogger.log('info', 'Create application usecase initialized');
 
 export const removeApplicationUsecase = new RemoveApplicationUsecase(
-  applicationTransactionManager
+  applicationEntityRepository,
+  eventBus
 );
 localLogger.log('info', 'Remove application usecase initialized');
 

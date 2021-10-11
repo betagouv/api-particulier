@@ -24,10 +24,6 @@ export const routeEvents = () => {
   eventBus.onTokenConsumed(entryProjector.onTokenConsumed.bind(entryProjector));
 
   eventBus.onApplicationRemoved(
-    applicationProjector.onApplicationRemoved.bind(applicationProjector)
-  );
-
-  eventBus.onApplicationRemoved(
     postgresTokenProjector.onApplicationRemoved.bind(postgresTokenProjector)
   );
 };

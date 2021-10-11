@@ -1,15 +1,16 @@
 import {ApplicationId} from 'src/domain/application-id';
-import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
+import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
+import {ApplicationRepository} from 'src/domain/application-management/repositories/application-entity.repository';
+import {EventBus} from 'src/domain/event-bus';
 
 export class RemoveApplicationUsecase {
   constructor(
-    private readonly applicationTransactionManager: ApplicationTransactionManager
+    private readonly applicationRepository: ApplicationRepository,
+    private readonly eventBus: EventBus
   ) {}
 
   async remove(applicationId: ApplicationId) {
-    await this.applicationTransactionManager.apply(application => {
-      application.remove();
-      return application;
-    }, applicationId);
+    await this.applicationRepository.remove(applicationId);
+    this.eventBus.publish(new ApplicationRemoved(applicationId, new Date()));
   }
 }
