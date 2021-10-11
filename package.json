@@ -20,7 +20,7 @@
     "build:frontend": "vite build",
     "start": "node build/infrastructure/server.js",
     "start:dev": "run-p start:dev:*",
-    "start:dev:backend": "ts-node-dev --files -r dotenv/config -r tsconfig-paths/register src/infrastructure/server.ts",
+    "start:dev:backend": "ts-node-dev --watch .env --files -r dotenv/config -r tsconfig-paths/register src/infrastructure/server.ts",
     "start:dev:frontend": "vite --host",
     "migrate-gravitee-applications": "ts-node -r tsconfig-paths/register src/presentation/cli/migrate-gravitee-applications.ts",
     "fixtures:load": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts",
