@@ -17,10 +17,6 @@ export const routeEvents = () => {
     applicationProjector.onApplicationImported.bind(applicationProjector)
   );
 
-  eventBus.onUserSubscribed(
-    applicationProjector.onUserSubscribed.bind(applicationProjector)
-  );
-
   eventBus.onTokenConsumed(entryProjector.onTokenConsumed.bind(entryProjector));
 
   eventBus.onApplicationRemoved(
