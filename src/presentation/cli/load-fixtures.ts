@@ -9,8 +9,9 @@ import {AnyScope, unifiedScopesConfiguration} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 import {
-  applicationTransactionManager,
+  applicationEntityRepository,
   createApplicationUsecase,
+  eventBus,
   uuidFactory,
 } from 'src/infrastructure/service-container';
 
@@ -35,9 +36,10 @@ import {
     },
   };
   const createDevApplicationUseCase = new CreateApplicationUsecase(
-    applicationTransactionManager,
     uuidFactory,
-    devTokenValueFactory
+    devTokenValueFactory,
+    applicationEntityRepository,
+    eventBus
   );
   await createDevApplicationUseCase.createApplication(
     new CreateApplicationDto(

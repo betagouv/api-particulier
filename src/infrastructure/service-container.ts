@@ -40,6 +40,7 @@ import {MesriDataPresenter} from 'src/presentation/presenters/mesri-data.present
 import {PoleEmploiDataPresenter} from 'src/presentation/presenters/pole-emploi-data.presenter';
 import {RemoveApplicationUsecase} from 'src/application/usecases/remove-application.usecase';
 import {TokenCache} from 'src/domain/data-fetching/token.cache';
+import {PostgresApplicationRepository} from 'src/infrastructure/repositories/postgres-application.repository';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -117,6 +118,11 @@ export const applicationRepository = new EventSourcedApplicationRepository(
 );
 localLogger.log('info', 'Application repository initialized');
 
+export const applicationEntityRepository = new PostgresApplicationRepository(
+  postgresPool
+);
+localLogger.log('info', 'Application repository initialized');
+
 export const applicationTransactionManager = new ApplicationTransactionManager(
   applicationRepository,
   eventBus,
@@ -174,9 +180,10 @@ export const subscribeUserUsecase = new SubscribeUserUsecase(
 localLogger.log('info', 'Subscribe user usecase initialized');
 
 export const createApplicationUsecase = new CreateApplicationUsecase(
-  applicationTransactionManager,
   uuidFactory,
-  tokenValueFactory
+  tokenValueFactory,
+  applicationEntityRepository,
+  eventBus
 );
 localLogger.log('info', 'Create application usecase initialized');
 
