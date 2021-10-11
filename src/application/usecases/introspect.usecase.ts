@@ -1,10 +1,10 @@
-import {ApplicationProjectionRepository} from 'src/domain/application-management/repositories/application-projection.repository';
+import {ApplicationRepository} from 'src/domain/application-management/repositories/application-entity.repository';
 import {TokenCache} from 'src/domain/data-fetching/token.cache';
 import {TokenValue} from 'src/domain/token-value';
 
 export class IntrospectUsecase {
   constructor(
-    private readonly applicationProjectionRepository: ApplicationProjectionRepository,
+    private readonly applicationRepository: ApplicationRepository,
     private readonly tokenCache: TokenCache
   ) {}
 
@@ -13,7 +13,7 @@ export class IntrospectUsecase {
     const token = await this.tokenCache.findByTokenValue(tokenValue);
 
     const applicationProjection =
-      await this.applicationProjectionRepository.findByTokenValue(token.value);
+      await this.applicationRepository.findByTokenValue(token.value);
     return applicationProjection;
   }
 }

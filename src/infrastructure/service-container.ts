@@ -169,7 +169,7 @@ export const fetchDataUsecase = new FetchDataUsecase(
 localLogger.log('info', 'Fetch data usecase initialized');
 
 export const introspectUsecase = new IntrospectUsecase(
-  applicationProjectionRepository,
+  applicationEntityRepository,
   tokenCache
 );
 localLogger.log('info', 'Introspect usecase initialized');
