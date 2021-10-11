@@ -9,9 +9,6 @@ export const routeEvents = () => {
   eventBus.onApplicationCreated(
     postgresTokenProjector.onApplicationCreated.bind(postgresTokenProjector)
   );
-  eventBus.onApplicationCreated(
-    applicationProjector.onApplicationCreated.bind(applicationProjector)
-  );
 
   eventBus.onApplicationImported(
     postgresTokenProjector.onApplicationImported.bind(postgresTokenProjector)
