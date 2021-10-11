@@ -1,16 +1,15 @@
 import {ApplicationId} from 'src/domain/application-id';
-import {ApplicationTransactionManager} from 'src/domain/application-management/application-transaction-manager';
+import {ApplicationRepository} from 'src/domain/application-management/repositories/application-entity.repository';
 import {UserEmail} from 'src/domain/application-management/user';
 
 export class SubscribeUserUsecase {
-  constructor(
-    private readonly applicationTransactionManager: ApplicationTransactionManager
-  ) {}
+  constructor(private readonly applicationRepository: ApplicationRepository) {}
 
   async subscribe(userEmail: UserEmail, applicationId: ApplicationId) {
-    await this.applicationTransactionManager.apply(application => {
-      application.subscribeUser(userEmail);
-      return application;
-    }, applicationId);
+    const application = await this.applicationRepository.findById(
+      applicationId
+    );
+    application.subscribeUser(userEmail);
+    await this.applicationRepository.update(application);
   }
 }

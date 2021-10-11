@@ -175,7 +175,7 @@ export const introspectUsecase = new IntrospectUsecase(
 localLogger.log('info', 'Introspect usecase initialized');
 
 export const subscribeUserUsecase = new SubscribeUserUsecase(
-  applicationTransactionManager
+  applicationEntityRepository
 );
 localLogger.log('info', 'Subscribe user usecase initialized');
 
