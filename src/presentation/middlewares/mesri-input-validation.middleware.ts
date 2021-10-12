@@ -19,7 +19,7 @@ export const mesriInputSchema = z.union([
       nom: z.string().min(1),
       prenom: z.string().min(1),
       dateDeNaissance: z.string().regex(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/),
-      lieuDeNaissance: z.string().min(1),
+      lieuDeNaissance: z.string().min(1).optional(),
       sexe: z.string().min(1).max(1),
     })
     .transform(({sexe, prenom, nom, dateDeNaissance, lieuDeNaissance}) => ({
