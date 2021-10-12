@@ -46,6 +46,7 @@ export const mesriPaths: PathsObject = {
           in: 'query',
           schema: {
             type: 'string',
+            required: false,
           },
         },
         {

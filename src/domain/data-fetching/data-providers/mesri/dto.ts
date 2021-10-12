@@ -11,7 +11,7 @@ export type CiviliteMesriInput = {
   nomFamille: string;
   dateNaissance: Date;
   sexe: string;
-  lieuNaissance: string;
+  lieuNaissance?: string;
 };
 
 export type MesriInput = IneMesriInput | CiviliteMesriInput;
@@ -30,8 +30,7 @@ export const isCiviliteInput = (
     'prenom' in input &&
     'nomFamille' in input &&
     'dateNaissance' in input &&
-    'sexe' in input &&
-    'lieuNaissance' in input
+    'sexe' in input
   );
 };
 
