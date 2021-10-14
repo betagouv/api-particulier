@@ -34,27 +34,13 @@ export class PostgresTokenRepository implements TokenRepository {
     return token;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async save(token: Token): Promise<void> {
-    this.logger.log('debug', `Saving token "${token.value}"`, {token});
-    const query =
-      'INSERT INTO tokens(application_id, value, scopes, subscriptions) VALUES ($1, $2, $3, $4)';
-    const values = [
-      token.applicationId,
-      token.value,
-      JSON.stringify(token.scopes),
-      JSON.stringify(token.subscriptions),
-    ];
-
-    await this.pg.query(query, values);
-    return;
+    // No-op, token is already saved by the application postgres repository
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async removeByApplicationId(id: ApplicationId): Promise<void> {
-    this.logger.log('debug', `Removing tokens for application "${id}"`);
-    const query = 'DELETE FROM tokens WHERE application_id = $1';
-    const values = [id];
-
-    await this.pg.query(query, values);
-    return;
+    // No-op, token is already removed by the application postgres repository
   }
 }

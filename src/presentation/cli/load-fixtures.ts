@@ -9,7 +9,7 @@ import {AnyScope, unifiedScopesConfiguration} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 import {
-  applicationEntityRepository,
+  applicationRepository,
   createApplicationUsecase,
   eventBus,
   uuidFactory,
@@ -38,7 +38,7 @@ import {
   const createDevApplicationUseCase = new CreateApplicationUsecase(
     uuidFactory,
     devTokenValueFactory,
-    applicationEntityRepository,
+    applicationRepository,
     eventBus
   );
   await createDevApplicationUseCase.createApplication(

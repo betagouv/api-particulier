@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {applicationEntityRepository} from 'src/infrastructure/service-container';
+import {applicationRepository} from 'src/infrastructure/service-container';
 
 export const scopesConfiguration = {
   'DGFIP - État civil - déclarant 1': {
@@ -62,7 +62,7 @@ export const scopesConfiguration = {
 };
 
 export const listUserApplications = async (req: Request, res: Response) => {
-  const applications = await applicationEntityRepository.findAllByUserEmail(
+  const applications = await applicationRepository.findAllByUserEmail(
     req.user!.email
   );
 

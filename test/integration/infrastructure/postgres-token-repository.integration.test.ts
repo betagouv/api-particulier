@@ -1,25 +1,39 @@
 import {expect} from 'chai';
 import {ApplicationId} from 'src/domain/application-id';
-import {Token} from 'src/domain/data-fetching/projections/token';
+import {Application} from 'src/domain/application-management/entities/application';
 import {TokenValue} from 'src/domain/token-value';
+import {PostgresApplicationRepository} from 'src/infrastructure/repositories/postgres-application.repository';
 import {PostgresTokenRepository} from 'src/infrastructure/repositories/postgres-token.repository';
 import {pgPool} from 'test/integration/config';
 
 describe('The postgres token repository', () => {
-  it('can save and retrieve tokens', async () => {
-    const repository = new PostgresTokenRepository(pgPool);
+  it('can retrieve tokens', async () => {
+    const postgresRepository = new PostgresApplicationRepository(pgPool);
+    const tokenRepository = new PostgresTokenRepository(pgPool);
 
-    const token = new Token(
+    const application = new Application(
       '70156b20-dce3-49d7-8a64-4294d9d81746' as ApplicationId,
-      'value' as TokenValue,
-      ['cnaf_adresse', 'dgfip_adresse'],
-      ['CNAF', 'DGFIP']
+      'croute',
+      new Date(),
+      '0',
+      {
+        value: 'value' as TokenValue,
+        scopes: ['cnaf_adresse', 'dgfip_adresse'],
+        subscriptions: ['CNAF', 'DGFIP'],
+      },
+      []
     );
 
-    await repository.save(token);
+    await postgresRepository.save(application);
 
-    const candidate = await repository.findByTokenValue(token.value);
+    const candidate = await tokenRepository.findByTokenValue(
+      application.token.value
+    );
 
-    expect(candidate).to.deep.equal(token);
+    expect(candidate).to.deep.include({
+      value: 'value',
+      scopes: ['cnaf_adresse', 'dgfip_adresse'],
+      subscriptions: ['CNAF', 'DGFIP'],
+    });
   });
 });

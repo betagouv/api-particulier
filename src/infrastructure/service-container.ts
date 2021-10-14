@@ -103,7 +103,7 @@ export const postgresTokenProjector = new TokenProjector(
 );
 localLogger.log('info', 'Postgres token projector initialized');
 
-export const applicationEntityRepository = new PostgresApplicationRepository(
+export const applicationRepository = new PostgresApplicationRepository(
   postgresPool
 );
 localLogger.log('info', 'Application repository initialized');
@@ -138,26 +138,26 @@ export const fetchDataUsecase = new FetchDataUsecase(
 localLogger.log('info', 'Fetch data usecase initialized');
 
 export const introspectUsecase = new IntrospectUsecase(
-  applicationEntityRepository,
+  applicationRepository,
   tokenCache
 );
 localLogger.log('info', 'Introspect usecase initialized');
 
 export const subscribeUserUsecase = new SubscribeUserUsecase(
-  applicationEntityRepository
+  applicationRepository
 );
 localLogger.log('info', 'Subscribe user usecase initialized');
 
 export const createApplicationUsecase = new CreateApplicationUsecase(
   uuidFactory,
   tokenValueFactory,
-  applicationEntityRepository,
+  applicationRepository,
   eventBus
 );
 localLogger.log('info', 'Create application usecase initialized');
 
 export const removeApplicationUsecase = new RemoveApplicationUsecase(
-  applicationEntityRepository,
+  applicationRepository,
   eventBus
 );
 localLogger.log('info', 'Remove application usecase initialized');
