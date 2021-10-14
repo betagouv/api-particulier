@@ -13,7 +13,11 @@ export class PostgresTokenRepository implements TokenRepository {
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Token> {
     this.logger.log('debug', `Finding token "${tokenValue}"`);
-    const query = 'SELECT * FROM tokens WHERE value = $1';
+    const query = `
+      SELECT tokens.*, applications.name as application_name
+      FROM tokens
+      JOIN applications ON applications.id = tokens.application_id
+      WHERE value = $1`;
     const values = [tokenValue];
 
     const result = await this.pg.query(query, values);
@@ -24,7 +28,10 @@ export class PostgresTokenRepository implements TokenRepository {
     const rawToken = result.rows[0];
 
     const token = new Token(
-      rawToken.application_id,
+      {
+        id: rawToken.application_id,
+        name: rawToken.application_name,
+      },
       rawToken.value,
       rawToken.scopes,
       rawToken.subscriptions

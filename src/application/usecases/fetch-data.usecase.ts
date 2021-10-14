@@ -21,7 +21,7 @@ export class FetchDataUsecase {
     setCurrentToken: (token: Token) => void
   ) {
     const token = await this.tokenCache.findByTokenValue(tokenValue);
-    setUser({id: token.applicationId});
+    setUser({id: token.application.id});
     setCurrentToken(token);
     return this.dataProviderClient.consumeDgfip(input, token, route);
   }

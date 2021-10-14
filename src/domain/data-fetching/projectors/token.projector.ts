@@ -20,7 +20,10 @@ export class TokenProjector {
 
   async onApplicationCreated(event: ApplicationCreated): Promise<void> {
     const newToken = new Token(
-      event.aggregateId as ApplicationId,
+      {
+        id: event.aggregateId as ApplicationId,
+        name: event.name,
+      },
       event.tokenValue,
       event.scopes,
       event.subscriptions

@@ -31,19 +31,28 @@ describe('The data provider client', () => {
   );
 
   const noSubscriptionToken = new Token(
-    'croute' as ApplicationId,
+    {
+      id: 'croute' as ApplicationId,
+      name: 'yolo',
+    },
     'tokenValue' as TokenValue,
     [],
     []
   );
   const dgfipToken = new Token(
-    'croute' as ApplicationId,
+    {
+      id: 'croute' as ApplicationId,
+      name: 'yolo',
+    },
     'tokenValue' as TokenValue,
     ['dgfip_avis_imposition'],
     ['DGFIP']
   );
   const cnafToken = new Token(
-    'croute' as ApplicationId,
+    {
+      id: 'croute' as ApplicationId,
+      name: 'yolo',
+    },
     'tokenValue' as TokenValue,
     ['cnaf_adresse'],
     ['CNAF']

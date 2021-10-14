@@ -31,6 +31,10 @@ describe('The postgres token repository', () => {
     );
 
     expect(candidate).to.deep.include({
+      application: {
+        id: application.id,
+        name: application.name,
+      },
       value: 'value',
       scopes: ['cnaf_adresse', 'dgfip_adresse'],
       subscriptions: ['CNAF', 'DGFIP'],

@@ -7,6 +7,10 @@ import {PoleEmploiApiDataProvider} from 'src/infrastructure/data-providers/pole-
 
 describe('The pole emploi api data provider', () => {
   const dataProvider = new PoleEmploiApiDataProvider();
+  const caller = {
+    id: 'XXX',
+    name: 'Intégration continue API Particulier',
+  };
 
   it('returns data when correct input is provided', async () => {
     const input: PoleEmploiInput = {
@@ -14,7 +18,7 @@ describe('The pole emploi api data provider', () => {
     };
 
     const output = await dataProvider.fetch(input, {
-      caller: 'TEST-INTEGRATION',
+      caller,
     });
     expect(output.nom).to.be.a('string');
   });

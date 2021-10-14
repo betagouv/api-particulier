@@ -55,7 +55,7 @@ export class DataProviderClient {
       this.poleEmploiDataProvider,
       'POLE_EMPLOI',
       {
-        caller: token.applicationId,
+        caller: token.application,
       }
     );
   }
@@ -68,7 +68,7 @@ export class DataProviderClient {
       this.mesriDataProvider,
       'MESRI',
       {
-        caller: token.applicationId,
+        caller: token.application,
       }
     );
 
@@ -91,7 +91,7 @@ export class DataProviderClient {
   ): Promise<Partial<O>> {
     if (!token.subscriptions.includes(neededSubscription)) {
       throw new ApplicationNotSubscribedError(
-        token.applicationId,
+        token.application.id,
         neededSubscription
       );
     }

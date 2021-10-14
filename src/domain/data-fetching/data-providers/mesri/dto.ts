@@ -17,7 +17,10 @@ export type CiviliteMesriInput = {
 export type MesriInput = IneMesriInput | CiviliteMesriInput;
 
 export type MesriMetadata = {
-  caller: string;
+  caller: {
+    id: string;
+    name: string;
+  };
 };
 
 export const isIneInput = (input: MesriInput): input is IneMesriInput => {
