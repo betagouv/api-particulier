@@ -12,8 +12,9 @@ export class IntrospectUsecase {
     // Use a token repository to benefit from hash retry strategy
     const token = await this.tokenCache.findByTokenValue(tokenValue);
 
-    const applicationProjection =
-      await this.applicationRepository.findByTokenValue(token.value);
-    return applicationProjection;
+    const application = await this.applicationRepository.findByTokenValue(
+      token.value
+    );
+    return application;
   }
 }

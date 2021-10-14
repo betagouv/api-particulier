@@ -1,6 +1,6 @@
 import {Pool} from 'pg';
 import {ApplicationId} from 'src/domain/application-id';
-import {Application} from 'src/domain/application-management/entities/application.entity';
+import {Application} from 'src/domain/application-management/entities/application';
 import {ApplicationRepository} from 'src/domain/application-management/repositories/application-entity.repository';
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
@@ -15,8 +15,12 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   constructor(private readonly pg: Pool) {}
 
   async findById(id: ApplicationId): Promise<Application> {
-    this.logger.log('debug', `Finding application projection "${id}"`);
-    const query = 'SELECT * FROM applications WHERE id = $1';
+    this.logger.log('debug', `Finding application "${id}"`);
+    const query = `
+      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
+      FROM applications app
+      JOIN tokens tok ON tok.application_id = app.id
+      WHERE app.id = $1`;
     const values = [id];
 
     const result = await this.pg.query(query, values);
@@ -32,8 +36,11 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   }
 
   async findAll(): Promise<Application[]> {
-    this.logger.log('debug', 'Finding all application projections');
-    const query = 'SELECT * FROM applications';
+    this.logger.log('debug', 'Finding all applications');
+    const query = `
+      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
+      FROM applications app
+      JOIN tokens tok ON tok.application_id = app.id`;
 
     const result = await this.pg.query(query);
 
@@ -41,21 +48,18 @@ export class PostgresApplicationRepository implements ApplicationRepository {
       this.deserialize(rawApplication)
     );
 
-    this.logger.log(
-      'debug',
-      `Found ${applications.length} application projections`
-    );
+    this.logger.log('debug', `Found ${applications.length} applications`);
 
     return applications;
   }
 
   async findByTokenValue(tokenValue: TokenValue): Promise<Application> {
-    this.logger.log(
-      'debug',
-      `Finding application projection for token "${tokenValue}"`
-    );
-    const query =
-      'SELECT * FROM applications JOIN tokens ON tokens.application_id = applications.id WHERE tokens.value = $1';
+    this.logger.log('debug', `Finding application for token "${tokenValue}"`);
+    const query = `
+      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
+      FROM applications app
+      JOIN tokens tok ON tok.application_id = app.id
+      WHERE tokens.value = $1`;
     const values = [tokenValue];
 
     const result = await this.pg.query(query, values);
@@ -70,7 +74,7 @@ export class PostgresApplicationRepository implements ApplicationRepository {
 
     this.logger.log(
       'debug',
-      `Found application projection for token value "${tokenValue}"`,
+      `Found application for token value "${tokenValue}"`,
       {application}
     );
 
@@ -78,11 +82,12 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   }
 
   async findAllByUserEmail(userEmail: UserEmail): Promise<Application[]> {
-    this.logger.log(
-      'debug',
-      `Finding application projections for user "${userEmail}"`
-    );
-    const query = 'SELECT * FROM applications WHERE user_emails ? $1';
+    this.logger.log('debug', `Finding application for user "${userEmail}"`);
+    const query = `
+      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
+      FROM applications app
+      JOIN tokens tok ON tok.application_id = app.id
+      WHERE user_emails ? $1`;
     const values = [userEmail];
 
     const result = await this.pg.query(query, values);
@@ -91,57 +96,98 @@ export class PostgresApplicationRepository implements ApplicationRepository {
       this.deserialize(rawApplication)
     );
 
-    this.logger.log(
-      'debug',
-      `Found application projections for user "${userEmail}"`
-    );
+    this.logger.log('debug', `Found application for user "${userEmail}"`);
 
     return applications;
   }
 
   async save(application: Application): Promise<void> {
     this.logger.log('debug', `Saving application "${application.id}"`, {
-      applicationProjection: application,
+      application,
     });
-    const query =
-      'INSERT INTO applications(id, name, scopes, subscriptions, data_pass_id, user_emails, created_at, tokens) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-    const values = this.serialize(application);
+    try {
+      await this.pg.query('BEGIN');
 
-    await this.pg.query(query, values);
+      const applicationQuery =
+        'INSERT INTO applications(id, name, data_pass_id, user_emails, created_at) VALUES ($1, $2, $3, $4, $5)';
+      const applicationValues = this.serializeApplication(application);
+      await this.pg.query(applicationQuery, applicationValues);
+
+      const tokenQuery =
+        'INSERT INTO tokens(application_id, value, scopes, subscriptions) VALUES ($1, $2, $3, $4)';
+      const tokenValues = this.serializeToken(application);
+      await this.pg.query(tokenQuery, tokenValues);
+
+      await this.pg.query('COMMIT');
+    } catch (error) {
+      await this.pg.query('ROLLBACK');
+      throw error;
+    }
     return;
   }
 
   async update(application: Application): Promise<void> {
     this.logger.log('debug', `Updating application "${application.id}"`, {
-      applicationProjection: application,
+      application,
     });
-    const query =
-      'UPDATE applications SET (name, scopes, subscriptions, data_pass_id, user_emails, created_at, tokens) = ($2, $3, $4, $5, $6, $7, $8) WHERE id = $1';
-    const values = this.serialize(application);
+    try {
+      await this.pg.query('BEGIN');
 
-    await this.pg.query(query, values);
+      const applicationQuery =
+        'UPDATE applications SET(name, data_pass_id, user_emails, created_at) = ($2, $3, $4, $5) WHERE id = $1';
+      const applicationValues = this.serializeApplication(application);
+      await this.pg.query(applicationQuery, applicationValues);
+
+      const tokenQuery =
+        'UPDATE tokens (value, scopes, subscriptions) = ($2, $3, $4) WHERE application_id = $1';
+      const tokenValues = this.serializeToken(application);
+      await this.pg.query(tokenQuery, tokenValues);
+
+      await this.pg.query('COMMIT');
+    } catch (error) {
+      await this.pg.query('ROLLBACK');
+      throw error;
+    }
     return;
   }
 
   async remove(id: ApplicationId): Promise<void> {
-    this.logger.log('debug', `Removing application projection "${id}"`);
-    const query = 'DELETE FROM applications WHERE id = $1';
-    const values = [id];
+    this.logger.log('debug', `Removing application "${id}"`);
+    try {
+      await this.pg.query('BEGIN');
 
-    await this.pg.query(query, values);
+      const values = [id];
+
+      const tokenQuery = 'DELETE FROM tokens WHERE application_id = $1';
+      await this.pg.query(tokenQuery, values);
+
+      const applicationQuery = 'DELETE FROM applications WHERE id = $1';
+      await this.pg.query(applicationQuery, values);
+
+      await this.pg.query('COMMIT');
+    } catch (error) {
+      await this.pg.query('ROLLBACK');
+      throw error;
+    }
     return;
   }
 
-  private serialize(application: Application): unknown[] {
+  private serializeApplication(application: Application): unknown[] {
     return [
       application.id,
       application.name,
-      JSON.stringify(application.scopes),
-      JSON.stringify(application.subscriptions),
       application.dataPassId,
       JSON.stringify(application.userEmails),
       application.createdOn,
-      JSON.stringify(application.tokens),
+    ];
+  }
+
+  private serializeToken(application: Application): unknown[] {
+    return [
+      application.id,
+      application.token.value,
+      JSON.stringify(application.token.scopes),
+      JSON.stringify(application.token.subscriptions),
     ];
   }
 
@@ -150,7 +196,7 @@ export class PostgresApplicationRepository implements ApplicationRepository {
     name: string;
     created_at: Date;
     data_pass_id: string;
-    tokens: string[];
+    token: string;
     subscriptions: string[];
     user_emails: string[];
     scopes: string[];
@@ -160,10 +206,12 @@ export class PostgresApplicationRepository implements ApplicationRepository {
       rawApplication.name,
       rawApplication.created_at,
       rawApplication.data_pass_id,
-      rawApplication.tokens as TokenValue[],
-      rawApplication.subscriptions as Subscription[],
-      rawApplication.user_emails as UserEmail[],
-      rawApplication.scopes as AnyScope[]
+      {
+        scopes: rawApplication.scopes as AnyScope[],
+        subscriptions: rawApplication.subscriptions as Subscription[],
+        value: rawApplication.token as TokenValue,
+      },
+      rawApplication.user_emails as UserEmail[]
     );
   }
 }

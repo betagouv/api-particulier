@@ -1,4 +1,4 @@
-import {Application} from 'src/domain/application-management/entities/application.entity';
+import {Application} from 'src/domain/application-management/entities/application';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationRepository} from 'src/domain/application-management/repositories/application-entity.repository';
 import {TokenValueFactory} from 'src/domain/application-management/token-value.factory';
@@ -32,10 +32,10 @@ export class CreateApplicationUsecase {
         application.createdOn,
         application.name,
         application.dataPassId,
-        application.scopes,
-        application.subscriptions,
+        createApplicationDto.scopes,
+        createApplicationDto.subscriptions,
         application.userEmails,
-        application.tokens[0]
+        application.token.value
       )
     );
 

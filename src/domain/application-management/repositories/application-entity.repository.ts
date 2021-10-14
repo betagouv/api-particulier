@@ -1,5 +1,5 @@
 import {ApplicationId} from 'src/domain/application-id';
-import {Application} from 'src/domain/application-management/entities/application.entity';
+import {Application} from 'src/domain/application-management/entities/application';
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenValue} from 'src/domain/token-value';
 

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
-import {ApplicationId} from 'src/domain/application-id';
-import {Application} from 'src/domain/application-management/entities/application.entity';
+import {Application} from 'src/domain/application-management/entities/application';
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenValue} from 'src/domain/token-value';
 
@@ -27,7 +26,7 @@ describe('An application', () => {
   );
 
   it('creates a token upon application creation', () => {
-    expect(application.tokens).to.have.length(1);
+    expect(application.token).to.exist;
   });
 
   it('can subscribe new users', () => {
@@ -37,19 +36,5 @@ describe('An application', () => {
 
     expect(application.userEmails).to.have.length(2);
     expect(application.userEmails[1]).to.deep.equal(newUser);
-  });
-
-  it('can be imported', () => {
-    const application = Application.import(
-      'id' as ApplicationId,
-      'yolo',
-      '4',
-      [],
-      [],
-      ['georges@moustaki.fr' as UserEmail],
-      ['token' as TokenValue]
-    );
-
-    expect(application.createdOn).to.exist.and.to.be.a('date');
   });
 });
