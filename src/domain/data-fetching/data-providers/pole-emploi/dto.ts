@@ -35,5 +35,8 @@ export type PoleEmploiOutput = {
 };
 
 export type PoleEmploiMetadata = {
-  caller: string;
+  caller: {
+    id: string;
+    name: string;
+  };
 };

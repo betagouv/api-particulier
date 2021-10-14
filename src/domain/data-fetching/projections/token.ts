@@ -5,7 +5,10 @@ import {TokenValue} from 'src/domain/token-value';
 
 export class Token {
   constructor(
-    readonly applicationId: ApplicationId,
+    readonly application: {
+      id: ApplicationId;
+      name: string;
+    },
     readonly value: TokenValue,
     readonly scopes: AnyScope[],
     readonly subscriptions: Subscription[]

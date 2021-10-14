@@ -7,6 +7,10 @@ import {MesriSupdataDataProvider} from 'src/infrastructure/data-providers/mesri/
 
 describe.skip('The Supdata Mesri data provider', () => {
   const dataProvider = new MesriSupdataDataProvider();
+  const caller = {
+    id: 'XXX',
+    name: 'Intégration continue API Particulier',
+  };
 
   it('returns data when input is a correct ine', async () => {
     const input: MesriInput = {
@@ -14,7 +18,7 @@ describe.skip('The Supdata Mesri data provider', () => {
     };
 
     const output = await dataProvider.fetch(input, {
-      caller: 'Intégration continue API Particulier',
+      caller,
     });
 
     expect(output.ine).to.equal(process.env.TEST_MESRI_INE);
@@ -30,7 +34,7 @@ describe.skip('The Supdata Mesri data provider', () => {
     };
 
     const output = await dataProvider.fetch(input, {
-      caller: 'Intégration continue API Particulier',
+      caller,
     });
 
     expect(output.ine).to.be.undefined;
