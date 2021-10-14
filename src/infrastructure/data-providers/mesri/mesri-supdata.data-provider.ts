@@ -29,6 +29,7 @@ export class MesriSupdataDataProvider implements MesriDataProvider {
             params: {
               INE: input.ine,
             },
+            timeout: 10000,
           }
         );
         data = response.data;
@@ -47,6 +48,7 @@ export class MesriSupdataDataProvider implements MesriDataProvider {
               'X-API-Key': process.env.SUPDATA_CIVILITE_API_KEY,
               'X-Caller': metadata.caller,
             },
+            timeout: 10000,
           }
         );
         data = response.data;

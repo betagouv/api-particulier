@@ -33,7 +33,10 @@ export class SvairDataProvider implements DgfipDataProvider {
           j_id_7_SUBMIT: 1,
           'javax.faces.ViewState': viewState,
         }),
-        {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+        {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          timeout: 10000,
+        }
       );
     } catch (error) {
       throw transformError(error);

@@ -22,6 +22,7 @@ export class MesriAirtableDataProvider implements MesriDataProvider {
             params: {
               filterByFormula: `{ine} = '${input.ine}'`,
             },
+            timeout: 10000,
           }
         );
         data = response.data;
@@ -33,6 +34,7 @@ export class MesriAirtableDataProvider implements MesriDataProvider {
             params: {
               filterByFormula: `AND({nom}='${input.nomFamille}', {prenom}='${input.prenom}', {dateNaissance}='${input.dateNaissance}', {sexe}='${input.sexe}', {lieuNaissance}='${input.lieuNaissance}')`,
             },
+            timeout: 10000,
           }
         );
         data = response.data;

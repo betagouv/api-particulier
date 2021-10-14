@@ -21,6 +21,7 @@ export class AirtableDgfipDataProvider implements DgfipDataProvider {
           params: {
             filterByFormula: `AND({numeroFiscal}='${input.taxNumber}', {numeroAvisImposition}='${input.taxNoticeNumber}')`,
           },
+          timeout: 10000,
         }
       );
 
