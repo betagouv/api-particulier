@@ -17,6 +17,7 @@ export class PoleEmploiAirtableDataProvider implements PoleEmploiDataProvider {
           params: {
             filterByFormula: `{identifiant} = '${input.id}'`,
           },
+          timeout: 10000,
         }
       );
 

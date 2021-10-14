@@ -42,6 +42,7 @@ export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
           headers: {
             'X-pe-consommateur': metadata.caller,
           },
+          timeout: 10000,
         }
       );
 

@@ -21,6 +21,7 @@ export class SoapDataProvider implements DataProvider<CnafInput, CnafOutput> {
         {
           httpsAgent: buildHttpsAgent(),
           headers: {'Content-Type': 'text/xml; charset=utf-8'},
+          timeout: 10000,
         }
       );
     } catch (error) {

@@ -18,6 +18,7 @@ export class AirtableCnafDataProvider implements CnafDataProvider {
           params: {
             filterByFormula: `AND({numeroAllocataire}='${input.numeroAllocataire}', {codePostal}='${input.codePostal}')`,
           },
+          timeout: 10000,
         }
       );
 
