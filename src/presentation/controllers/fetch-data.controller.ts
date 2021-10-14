@@ -9,14 +9,15 @@ import {
 import {TokenValue} from 'src/domain/token-value';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {MesriOutput} from 'src/domain/data-fetching/data-providers/mesri/dto';
+import {Credentials} from 'src/domain/credentials';
 
 export const fetchDgfipDataControllerBuidler =
   (withNulls: boolean) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    const tokenValue = req.header('X-Api-Key') as TokenValue;
+    const credentials = getCredentialsFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchDgfipData(
-        tokenValue,
+        credentials,
         res.locals.input,
         req.path,
         (token: Token) => {
@@ -33,10 +34,10 @@ export const fetchDgfipDataControllerBuidler =
 
 export const fetchCnafDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const tokenValue = req.header('X-Api-Key') as TokenValue;
+    const credentials = getCredentialsFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchCnafData(
-        tokenValue,
+        credentials,
         res.locals.input,
         req.baseUrl + req.path,
         (token: Token) => {
@@ -53,10 +54,10 @@ export const fetchCnafDataControllerBuidler =
 
 export const fetchPoleEmploiDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const tokenValue = req.header('X-Api-Key') as TokenValue;
+    const credentials = getCredentialsFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchPoleEmploiData(
-        tokenValue,
+        credentials,
         res.locals.input,
         req.baseUrl + req.path,
         (token: Token) => {
@@ -73,10 +74,10 @@ export const fetchPoleEmploiDataControllerBuidler =
 
 export const fetchMesriDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const tokenValue = req.header('X-Api-Key') as TokenValue;
+    const credentials = getCredentialsFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchMesriData(
-        tokenValue,
+        credentials,
         res.locals.input,
         req.baseUrl + req.path,
         (token: Token) => {
@@ -90,3 +91,11 @@ export const fetchMesriDataControllerBuidler =
       return next(error);
     }
   };
+
+const getCredentialsFromRequest = (req: Request): Credentials => {
+  const tokenValue = req.header('X-Api-Key') as TokenValue;
+  return {
+    tokenValue,
+    type: 'api-key',
+  };
+};
