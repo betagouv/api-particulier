@@ -40,7 +40,8 @@ export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
         input.id,
         {
           headers: {
-            'X-pe-consommateur': metadata.caller,
+            'X-pe-consommateur':
+              metadata.caller.id + ' - ' + metadata.caller.name,
           },
           timeout: 10000,
         }
