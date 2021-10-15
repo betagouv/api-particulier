@@ -93,9 +93,19 @@ export const fetchMesriDataControllerBuidler =
   };
 
 const getCredentialsFromRequest = (req: Request): Credentials => {
-  const tokenValue = req.header('X-Api-Key') as TokenValue;
-  return {
-    tokenValue,
-    type: 'api-key',
-  };
+  const apiKey = req.header('X-Api-Key');
+  if (apiKey !== undefined) {
+    return {
+      tokenValue: <TokenValue>apiKey,
+      type: 'api-key',
+    };
+  }
+  const accessToken = req.header('Authorization')?.split(' ')[1];
+  if (accessToken) {
+    return {
+      tokenValue: <TokenValue>accessToken,
+      type: 'access-token',
+    };
+  }
+  throw new Error('No credentials found despite request validation');
 };
