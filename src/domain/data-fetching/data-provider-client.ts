@@ -27,31 +27,28 @@ export class DataProviderClient {
     private readonly mesriDataProvider: MesriDataProvider
   ) {}
 
-  async consumeDgfip(input: DgfipInput, token: Token, route: string) {
+  async consumeDgfip(input: DgfipInput, token: Token) {
     return await this.callDataProvider(
       input,
       token,
-      route,
       this.dgfipDataProvider,
       'DGFIP'
     );
   }
 
-  async consumeCnaf(input: CnafInput, token: Token, route: string) {
+  async consumeCnaf(input: CnafInput, token: Token) {
     return await this.callDataProvider(
       input,
       token,
-      route,
       this.cnafDataProvider,
       'CNAF'
     );
   }
 
-  async consumePoleEmploi(input: PoleEmploiInput, token: Token, route: string) {
+  async consumePoleEmploi(input: PoleEmploiInput, token: Token) {
     return await this.callDataProvider(
       input,
       token,
-      route,
       this.poleEmploiDataProvider,
       'POLE_EMPLOI',
       {
@@ -60,11 +57,10 @@ export class DataProviderClient {
     );
   }
 
-  async consumeMesri(input: MesriInput, token: Token, route: string) {
+  async consumeMesri(input: MesriInput, token: Token) {
     const propertyFilteredResult = await this.callDataProvider(
       input,
       token,
-      route,
       this.mesriDataProvider,
       'MESRI',
       {
@@ -84,7 +80,6 @@ export class DataProviderClient {
   private async callDataProvider<I, O, M>(
     input: I,
     token: Token,
-    route: string,
     dataProvider: DataProvider<I, O, M>,
     neededSubscription: Subscription,
     metadata?: M

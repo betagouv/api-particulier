@@ -17,45 +17,41 @@ export class FetchDataUsecase {
   async fetchDgfipData(
     apiKey: TokenValue,
     input: DgfipInput,
-    route: string,
     setCurrentToken: (token: Token) => void
   ) {
     const token = await this.tokenCache.findByTokenValue(apiKey);
     setUser({id: token.application.id});
     setCurrentToken(token);
-    return this.dataProviderClient.consumeDgfip(input, token, route);
+    return this.dataProviderClient.consumeDgfip(input, token);
   }
 
   async fetchCnafData(
     apiKey: TokenValue,
     input: CnafInput,
-    route: string,
     setCurrentToken: (token: Token) => void
   ) {
     const token = await this.tokenCache.findByTokenValue(apiKey);
     setCurrentToken(token);
-    return this.dataProviderClient.consumeCnaf(input, token, route);
+    return this.dataProviderClient.consumeCnaf(input, token);
   }
 
   async fetchPoleEmploiData(
     apiKey: TokenValue,
     input: PoleEmploiInput,
-    route: string,
     setCurrentToken: (token: Token) => void
   ) {
     const token = await this.tokenCache.findByTokenValue(apiKey);
     setCurrentToken(token);
-    return this.dataProviderClient.consumePoleEmploi(input, token, route);
+    return this.dataProviderClient.consumePoleEmploi(input, token);
   }
 
   async fetchMesriData(
     apiKey: TokenValue,
     input: MesriInput,
-    route: string,
     setCurrentToken: (token: Token) => void
   ) {
     const token = await this.tokenCache.findByTokenValue(apiKey);
     setCurrentToken(token);
-    return this.dataProviderClient.consumeMesri(input, token, route);
+    return this.dataProviderClient.consumeMesri(input, token);
   }
 }
