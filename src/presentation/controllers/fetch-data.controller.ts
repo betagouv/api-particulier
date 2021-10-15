@@ -18,7 +18,6 @@ export const fetchDgfipDataControllerBuidler =
       const data = await fetchDataUsecase.fetchDgfipData(
         apiKey,
         res.locals.input,
-        req.path,
         (token: Token) => {
           res.locals.token = token;
         }
@@ -38,7 +37,6 @@ export const fetchCnafDataControllerBuidler =
       const data = await fetchDataUsecase.fetchCnafData(
         apiKey,
         res.locals.input,
-        req.baseUrl + req.path,
         (token: Token) => {
           res.locals.token = token;
         }
@@ -58,7 +56,6 @@ export const fetchPoleEmploiDataControllerBuidler =
       const data = await fetchDataUsecase.fetchPoleEmploiData(
         apiKey,
         res.locals.input,
-        req.baseUrl + req.path,
         (token: Token) => {
           res.locals.token = token;
         }
@@ -78,7 +75,6 @@ export const fetchMesriDataControllerBuidler =
       const data = await fetchDataUsecase.fetchMesriData(
         apiKey,
         res.locals.input,
-        req.baseUrl + req.path,
         (token: Token) => {
           res.locals.token = token;
         }
