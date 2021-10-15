@@ -10,7 +10,7 @@ import {
 } from 'src/presentation/controllers/fetch-data.controller';
 import {introspectController} from 'src/presentation/controllers/introspect.controller';
 import {pingControllerBuilder} from 'src/presentation/controllers/ping.controller';
-import {apiKeyValidationMiddleware} from 'src/presentation/middlewares/api-key-validation.middleware';
+import {credentialsValidationMiddleware} from 'src/presentation/middlewares/credentials-validation.middleware';
 import {cnafInputValidationMiddleware} from 'src/presentation/middlewares/cnaf-input-validation.middleware';
 import {createApplicationValidationMiddleware} from 'src/presentation/middlewares/create-application-validation.middleware';
 import {dfdipInputValidationMiddleware} from 'src/presentation/middlewares/dgfip-input-validation.middleware';
@@ -33,7 +33,7 @@ apiRouter.use(corsMiddleware);
 
 apiRouter.get(
   '/impots/svair',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   timingMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(false),
@@ -42,7 +42,7 @@ apiRouter.get(
 );
 apiRouter.get(
   '/v2/avis-imposition',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   timingMiddleware,
   dfdipInputValidationMiddleware,
   fetchDgfipDataControllerBuidler(true),
@@ -52,7 +52,7 @@ apiRouter.get(
 
 apiRouter.get(
   '/caf/famille',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   timingMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
@@ -61,7 +61,7 @@ apiRouter.get(
 );
 apiRouter.get(
   '/v2/composition-familiale',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   timingMiddleware,
   cnafInputValidationMiddleware,
   fetchCnafDataControllerBuidler(),
@@ -71,7 +71,7 @@ apiRouter.get(
 
 apiRouter.get(
   '/v2/situations-pole-emploi',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   timingMiddleware,
   poleEmploiInputValidationMiddleware,
   fetchPoleEmploiDataControllerBuidler(),
@@ -81,7 +81,7 @@ apiRouter.get(
 
 apiRouter.get(
   '/v2/etudiants',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   timingMiddleware,
   mesriInputValidationMiddleware,
   fetchMesriDataControllerBuidler(),
@@ -91,7 +91,7 @@ apiRouter.get(
 
 apiRouter.get(
   '/introspect',
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   introspectController,
   manageErrorMiddleware
 );
@@ -121,7 +121,7 @@ apiRouter.get('/ping', (_req: Request, res: Response) => {
 apiRouter.post(
   '/applications',
   json(),
-  apiKeyValidationMiddleware,
+  credentialsValidationMiddleware,
   createApplicationValidationMiddleware,
   createApplicationController,
   manageErrorMiddleware

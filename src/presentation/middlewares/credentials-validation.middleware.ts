@@ -3,17 +3,22 @@ import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-foun
 import {TokenValue} from 'src/domain/token-value';
 import * as z from 'zod';
 
-export async function apiKeyValidationMiddleware(
+export async function credentialsValidationMiddleware(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const headerValidation = await z
+  const apiKeyValidation = await z
     .string()
     .nonempty()
     .safeParseAsync(req.header('X-Api-Key'));
+  const accesstokenValidation = await z
+    .string()
+    .nonempty()
+    .regex(/^Bearer [\w]+/gi)
+    .safeParseAsync(req.header('Authorization'));
 
-  if (!headerValidation.success) {
+  if (!apiKeyValidation.success && !accesstokenValidation.success) {
     return next(new TokenNotFoundError('' as TokenValue));
   }
   next();
