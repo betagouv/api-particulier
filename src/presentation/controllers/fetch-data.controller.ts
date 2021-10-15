@@ -9,15 +9,14 @@ import {
 import {TokenValue} from 'src/domain/token-value';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {MesriOutput} from 'src/domain/data-fetching/data-providers/mesri/dto';
-import {Credentials} from 'src/domain/credentials';
 
 export const fetchDgfipDataControllerBuidler =
   (withNulls: boolean) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    const credentials = getCredentialsFromRequest(req);
+    const apiKey = getApiKeyFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchDgfipData(
-        credentials,
+        apiKey,
         res.locals.input,
         req.path,
         (token: Token) => {
@@ -34,10 +33,10 @@ export const fetchDgfipDataControllerBuidler =
 
 export const fetchCnafDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const credentials = getCredentialsFromRequest(req);
+    const apiKey = getApiKeyFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchCnafData(
-        credentials,
+        apiKey,
         res.locals.input,
         req.baseUrl + req.path,
         (token: Token) => {
@@ -54,10 +53,10 @@ export const fetchCnafDataControllerBuidler =
 
 export const fetchPoleEmploiDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const credentials = getCredentialsFromRequest(req);
+    const apiKey = getApiKeyFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchPoleEmploiData(
-        credentials,
+        apiKey,
         res.locals.input,
         req.baseUrl + req.path,
         (token: Token) => {
@@ -74,10 +73,10 @@ export const fetchPoleEmploiDataControllerBuidler =
 
 export const fetchMesriDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const credentials = getCredentialsFromRequest(req);
+    const apiKey = getApiKeyFromRequest(req);
     try {
       const data = await fetchDataUsecase.fetchMesriData(
-        credentials,
+        apiKey,
         res.locals.input,
         req.baseUrl + req.path,
         (token: Token) => {
@@ -92,20 +91,7 @@ export const fetchMesriDataControllerBuidler =
     }
   };
 
-const getCredentialsFromRequest = (req: Request): Credentials => {
+const getApiKeyFromRequest = (req: Request): TokenValue => {
   const apiKey = req.header('X-Api-Key');
-  if (apiKey !== undefined) {
-    return {
-      tokenValue: <TokenValue>apiKey,
-      type: 'api-key',
-    };
-  }
-  const accessToken = req.header('Authorization')?.split(' ')[1];
-  if (accessToken) {
-    return {
-      tokenValue: <TokenValue>accessToken,
-      type: 'access-token',
-    };
-  }
-  throw new Error('No credentials found despite request validation');
+  return apiKey as TokenValue;
 };
