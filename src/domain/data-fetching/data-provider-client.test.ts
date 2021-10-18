@@ -66,8 +66,7 @@ describe('The data provider client', () => {
       const useCase = async () =>
         await dataProviderClient.consumeDgfip(
           sinon.stubInterface<DgfipInput>(),
-          noSubscriptionToken,
-          '/croute'
+          noSubscriptionToken
         );
 
       expect(useCase()).to.be.rejectedWith(ApplicationNotSubscribedError);
@@ -84,11 +83,7 @@ describe('The data provider client', () => {
         unfilteredData as unknown as DgfipOutput
       );
 
-      const result = await dataProviderClient.consumeDgfip(
-        input,
-        dgfipToken,
-        '/croute'
-      );
+      const result = await dataProviderClient.consumeDgfip(input, dgfipToken);
 
       expect(result).to.deep.equal({});
     });
@@ -99,8 +94,7 @@ describe('The data provider client', () => {
       const useCase = async () =>
         await dataProviderClient.consumeCnaf(
           sinon.stubInterface<CnafInput>(),
-          noSubscriptionToken,
-          '/croute'
+          noSubscriptionToken
         );
 
       expect(useCase()).to.be.rejectedWith(ApplicationNotSubscribedError);
@@ -115,11 +109,7 @@ describe('The data provider client', () => {
       const unfilteredData = Symbol('unfiltered data');
       cnafDataProvider.fetch.resolves(unfilteredData as unknown as CnafOutput);
 
-      const result = await dataProviderClient.consumeCnaf(
-        input,
-        cnafToken,
-        '/croute'
-      );
+      const result = await dataProviderClient.consumeCnaf(input, cnafToken);
 
       expect(result).to.deep.equal({});
     });
