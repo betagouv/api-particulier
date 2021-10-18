@@ -13,7 +13,9 @@ describe('The input validation middleware', () => {
   );
 
   it('checks for input correctness', async () => {
-    const req = {} as unknown as Request;
+    const req = {
+      header: stub(),
+    } as unknown as Request;
     const res = stubInterface<Response>();
     const next = stub();
 
@@ -70,5 +72,18 @@ describe('The input validation middleware', () => {
     await middleware(req, res, next);
 
     expect(res.locals.input).to.deep.equal(req.query);
+  });
+
+  it('passes when no input is provided but request holds an access token', async () => {
+    const req = {
+      header: stub().returns('croute'),
+    } as unknown as Request;
+    const res = stubInterface<Response>();
+    const next = stub();
+
+    await middleware(req, res, next);
+
+    expect(res.locals.input).not.to.exist;
+    expect(next).to.have.been.calledOnceWithExactly();
   });
 });
