@@ -30,20 +30,43 @@ import {
     'POLE_EMPLOI',
   ];
   const userEmails = ['api-particulier@yopmail.com' as UserEmail];
-  const devTokenValueFactory: TokenValueFactory = {
+
+  // Generate a new application working with an API key token
+  const devApiKeyTokenValueFactory: TokenValueFactory = {
     generateTokenValue() {
       return 'dev-token' as TokenValue;
     },
   };
-  const createDevApplicationUseCase = new CreateApplicationUsecase(
+  const createApiKeyDevApplicationUseCase = new CreateApplicationUsecase(
     uuidFactory,
-    devTokenValueFactory,
+    devApiKeyTokenValueFactory,
     applicationRepository,
     eventBus
   );
-  await createDevApplicationUseCase.createApplication(
+  await createApiKeyDevApplicationUseCase.createApplication(
     new CreateApplicationDto(
-      'Application de développement local',
+      "Application de développement local appelable par clé d'API",
+      dataPassId,
+      scopes,
+      userEmails
+    )
+  );
+
+  // Generate a new application working with a FranceConnect token
+  const devFranceConnectTokenValueFactory: TokenValueFactory = {
+    generateTokenValue() {
+      return '211286433e39cce01db448d80181bdfd005554b19cd51b3fe7943f6b3b86ab6e' as TokenValue; // see https://github.com/france-connect/service-provider-example/blob/master/config.js#L5
+    },
+  };
+  const createFranceConnectDevApplicationUseCase = new CreateApplicationUsecase(
+    uuidFactory,
+    devFranceConnectTokenValueFactory,
+    applicationRepository,
+    eventBus
+  );
+  await createFranceConnectDevApplicationUseCase.createApplication(
+    new CreateApplicationDto(
+      'Application de développement local appelable par FranceConnect',
       dataPassId,
       scopes,
       userEmails

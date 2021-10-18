@@ -9,11 +9,13 @@ export function inputValidationMiddlewareBuilder<O>(
   return async (req: Request, res: Response, next: NextFunction) => {
     const inputValidation = await inputSchema.safeParseAsync(req[source]);
 
-    if (!inputValidation.success) {
+    if (!inputValidation.success && req.header('Authorization') === undefined) {
       return next(inputValidation.error);
     }
 
-    res.locals.input = inputSchema.parse(req[source]);
+    if (inputValidation.success) {
+      res.locals.input = inputValidation.data;
+    }
     next();
   };
 }

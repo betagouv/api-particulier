@@ -26,7 +26,7 @@ export class FetchDataWithFranceConnectUsecase {
       dateNaissance: new Date(identity.birthdate),
       nomFamille: identity.family_name,
       prenom: identity.given_name,
-      sexe: identity.gender,
+      sexe: identity.gender === 'female' ? '2' : '1',
       lieuNaissance: identity.birthplace,
     };
     return this.dataProviderClient.consumeMesri(mesriInput, token);
