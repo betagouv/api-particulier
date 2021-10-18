@@ -66,6 +66,16 @@ describe('API Particulier', () => {
       }).then(response => {
         expect(response.status).to.eq(200);
       });
+
+      cy.request({
+        method: 'GET',
+        url: 'http://localhost:3000/api/introspect',
+        headers: {
+          'X-Api-Key': token,
+        },
+      }).then(response => {
+        expect(response.status).to.eq(200);
+      });
     });
   });
 });
