@@ -34,6 +34,8 @@ import {PoleEmploiDataPresenter} from 'src/presentation/presenters/pole-emploi-d
 import {RemoveApplicationUsecase} from 'src/application/usecases/remove-application.usecase';
 import {TokenCache} from 'src/domain/data-fetching/token.cache';
 import {PostgresApplicationRepository} from 'src/infrastructure/repositories/postgres-application.repository';
+import {FetchDataWithFranceConnectUsecase} from 'src/application/usecases/fetch-data-with-france-connect.usecase';
+import {FranceConnectClient} from 'src/domain/data-fetching/france-connect.client';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -97,6 +99,9 @@ localLogger.log('info', 'Token value factory initialized');
 export const tokenCache = new TokenCache(postgresTokenRepository);
 localLogger.log('info', 'Token cache initialized');
 
+export const franceConnectClient = new FranceConnectClient(tokenCache);
+localLogger.log('info', 'FranceConnect client initialized');
+
 export const postgresTokenProjector = new TokenProjector(
   postgresTokenRepository,
   tokenCache
@@ -135,6 +140,13 @@ export const fetchDataUsecase = new FetchDataUsecase(
   tokenCache,
   dataProviderClient
 );
+localLogger.log('info', 'Fetch data usecase initialized');
+
+export const fetchDataWithFranceConnectUsecase =
+  new FetchDataWithFranceConnectUsecase(
+    franceConnectClient,
+    dataProviderClient
+  );
 localLogger.log('info', 'Fetch data usecase initialized');
 
 export const introspectUsecase = new IntrospectUsecase(
