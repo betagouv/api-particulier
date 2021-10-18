@@ -17,10 +17,10 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   async findById(id: ApplicationId): Promise<Application> {
     this.logger.log('debug', `Finding application "${id}"`);
     const query = `
-      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
-      FROM applications app
-      JOIN tokens tok ON tok.application_id = app.id
-      WHERE app.id = $1`;
+      SELECT applications.*, tokens.scopes as scopes, tokens.subscriptions as subscriptions, tokens.value as token
+      FROM applications
+      JOIN tokens ON tokens.application_id = applications.id
+      WHERE applications.id = $1`;
     const values = [id];
 
     const result = await this.pg.query(query, values);
@@ -38,9 +38,9 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   async findAll(): Promise<Application[]> {
     this.logger.log('debug', 'Finding all applications');
     const query = `
-      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
-      FROM applications app
-      JOIN tokens tok ON tok.application_id = app.id`;
+      SELECT applications.*, tokens.scopes as scopes, tokens.subscriptions as subscriptions, tokens.value as token
+      FROM applications
+      JOIN tokens ON tokens.application_id = applications.id`;
 
     const result = await this.pg.query(query);
 
@@ -56,9 +56,9 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   async findByTokenValue(tokenValue: TokenValue): Promise<Application> {
     this.logger.log('debug', `Finding application for token "${tokenValue}"`);
     const query = `
-      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
-      FROM applications app
-      JOIN tokens tok ON tok.application_id = app.id
+      SELECT applications.*, tokens.scopes as scopes, tokens.subscriptions as subscriptions, tokens.value as token
+      FROM applications
+      JOIN tokens ON tokens.application_id = applications.id
       WHERE tokens.value = $1`;
     const values = [tokenValue];
 
@@ -84,9 +84,9 @@ export class PostgresApplicationRepository implements ApplicationRepository {
   async findAllByUserEmail(userEmail: UserEmail): Promise<Application[]> {
     this.logger.log('debug', `Finding application for user "${userEmail}"`);
     const query = `
-      SELECT app.*, tok.scopes as scopes, tok.subscriptions as subscriptions, tok.value as token
-      FROM applications app
-      JOIN tokens tok ON tok.application_id = app.id
+      SELECT applications.*, tokens.scopes as scopes, tokens.subscriptions as subscriptions, tokens.value as token
+      FROM applications
+      JOIN tokens ON tokens.application_id = applications.id
       WHERE user_emails ? $1`;
     const values = [userEmail];
 
