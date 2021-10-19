@@ -59,11 +59,13 @@ export class MesriSupdataDataProvider implements MesriDataProvider {
         dateNaissance: new Date(data.dateNaissance),
         nom: data.nomFamille,
         prenom: data.prenom,
-        inscriptions: data.inscriptions.map((inscription: Inscription) => ({
-          ...inscription,
-          dateDebutInscription: new Date(inscription.dateDebutInscription),
-          dateFinInscription: new Date(inscription.dateFinInscription),
-        })),
+        inscriptions: (data.inscriptions ?? []).map(
+          (inscription: Inscription) => ({
+            ...inscription,
+            dateDebutInscription: new Date(inscription.dateDebutInscription),
+            dateFinInscription: new Date(inscription.dateFinInscription),
+          })
+        ),
       };
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 404) {

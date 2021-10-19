@@ -47,7 +47,7 @@ export class MesriAirtableDataProvider implements MesriDataProvider {
       const fields = data.records[0].fields;
 
       const inscriptions: Inscription[] = await Promise.all(
-        fields.inscriptions.map(getInscription)
+        (fields.inscriptions ?? []).map(getInscription)
       );
 
       return {
