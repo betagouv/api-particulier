@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {Inscription} from 'src/domain/data-fetching/data-providers/mesri/dto';
+import {NoEnrollmentError} from 'src/domain/data-fetching/data-providers/mesri/errors/no-enrollment.error';
 import {MesriScopesFilter} from 'src/domain/data-fetching/scopes-filters/mesri.scopes-filter';
 
 describe('The mesri scopes filter', () => {
@@ -78,5 +79,11 @@ describe('The mesri scopes filter', () => {
 
     expect(result).to.have.length(1);
     expect(result[0].codeCommune).to.be.undefined;
+  });
+
+  it('throws an error when no enrollment is left', () => {
+    expect(() =>
+      mesriScopesFilter.filterInsriptions(['cnaf_adresse'], inscriptions)
+    ).to.throw(NoEnrollmentError);
   });
 });
