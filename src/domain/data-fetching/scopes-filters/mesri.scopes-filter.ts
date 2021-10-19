@@ -1,5 +1,6 @@
 import {isEmpty} from 'lodash';
 import {Inscription} from 'src/domain/data-fetching/data-providers/mesri/dto';
+import {NoEnrollmentError} from 'src/domain/data-fetching/data-providers/mesri/errors/no-enrollment.error';
 import {AnyScope} from 'src/domain/scopes';
 
 export class MesriScopesFilter {
@@ -69,6 +70,10 @@ export class MesriScopesFilter {
         return result;
       })
       .filter(partial => !isEmpty(partial)) ?? []) as Partial<Inscription>[];
+
+    if (partialInscriptions.length === 0) {
+      throw new NoEnrollmentError();
+    }
 
     return partialInscriptions;
   }
