@@ -1,6 +1,7 @@
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {InvalidCredentialsError} from 'src/domain/data-fetching/data-providers/dgfip/errors/invalid-credentials.error';
 import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/errors/rate-limited.error';
+import {NoEnrollmentError} from 'src/domain/data-fetching/data-providers/mesri/errors/no-enrollment.error';
 import {NotFoundError as MesriNotFoundError} from 'src/domain/data-fetching/data-providers/mesri/errors/not-found.error';
 import {NotFoundError as PoleEmploiNotFoundError} from 'src/domain/data-fetching/data-providers/pole-emploi/errors/not-found.error';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
@@ -46,6 +47,7 @@ export const errorPresenter: ErrorPresenter<Error> = (error: Error) => {
     case ZodError:
       return zodErrorPresenter(error as ZodError);
     case MesriNotFoundError:
+    case NoEnrollmentError:
       return mesriErrorPresenter(error);
     case PoleEmploiNotFoundError:
       return poleEmploiErrorPresenter(error);
