@@ -8,7 +8,7 @@ export class EntryProjector {
   async onTokenConsumed(event: TokenConsumed) {
     return this.entryRepository.save(
       new Entry(
-        event.tokenValue,
+        event.tokenId,
         event.date,
         event.subscription,
         event.route,
