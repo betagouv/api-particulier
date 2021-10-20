@@ -21,7 +21,7 @@ export const journalMiddleware = async (
   await eventBus.publish(
     new TokenConsumed(
       new Date(),
-      token.id!,
+      token.id,
       subscription,
       req.baseUrl + req.path,
       res.statusCode,

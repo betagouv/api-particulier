@@ -3,7 +3,7 @@ import {AnyScope} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 
-export class Token {
+export class UnsavedToken {
   constructor(
     readonly application: {
       id: ApplicationId;
@@ -11,7 +11,23 @@ export class Token {
     },
     readonly value: TokenValue,
     readonly scopes: AnyScope[],
-    readonly subscriptions: Subscription[],
-    readonly id?: string
+    readonly subscriptions: Subscription[]
   ) {}
+}
+
+export class Token extends UnsavedToken {
+  constructor(
+    readonly id: string,
+    ...rest: [
+      {
+        id: ApplicationId;
+        name: string;
+      },
+      TokenValue,
+      AnyScope[],
+      Subscription[]
+    ]
+  ) {
+    super(...rest);
+  }
 }
