@@ -34,7 +34,8 @@ export class PostgresTokenRepository implements TokenRepository {
       },
       rawToken.value,
       rawToken.scopes,
-      rawToken.subscriptions
+      rawToken.subscriptions,
+      rawToken.id
     );
     this.logger.log('debug', `Found token for value "${tokenValue}"`, {token});
 

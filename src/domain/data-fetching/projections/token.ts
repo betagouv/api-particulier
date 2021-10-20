@@ -11,6 +11,7 @@ export class Token {
     },
     readonly value: TokenValue,
     readonly scopes: AnyScope[],
-    readonly subscriptions: Subscription[]
+    readonly subscriptions: Subscription[],
+    readonly id?: string
   ) {}
 }

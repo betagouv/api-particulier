@@ -4,7 +4,7 @@ import {Subscription} from 'src/domain/subscription';
 export class TokenConsumed implements Event {
   constructor(
     readonly date: Date,
-    readonly tokenValue: string,
+    readonly tokenId: string,
     readonly subscription: Subscription,
     readonly route: string,
     readonly statusCode: number,

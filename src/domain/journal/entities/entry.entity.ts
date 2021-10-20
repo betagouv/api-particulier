@@ -2,7 +2,7 @@ import {Subscription} from 'src/domain/subscription';
 
 export class Entry {
   constructor(
-    readonly tokenValue: string,
+    readonly tokenId: string,
     readonly date: Date,
     readonly subscription: Subscription,
     readonly route: string,
