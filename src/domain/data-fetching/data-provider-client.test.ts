@@ -31,6 +31,7 @@ describe('The data provider client', () => {
   );
 
   const noSubscriptionToken = new Token(
+    'id',
     {
       id: 'croute' as ApplicationId,
       name: 'yolo',
@@ -40,6 +41,7 @@ describe('The data provider client', () => {
     []
   );
   const dgfipToken = new Token(
+    'id',
     {
       id: 'croute' as ApplicationId,
       name: 'yolo',
@@ -49,6 +51,7 @@ describe('The data provider client', () => {
     ['DGFIP']
   );
   const cnafToken = new Token(
+    'id',
     {
       id: 'croute' as ApplicationId,
       name: 'yolo',

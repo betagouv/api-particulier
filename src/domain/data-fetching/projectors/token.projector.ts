@@ -1,7 +1,7 @@
 import {ApplicationId} from 'src/domain/application-id';
 import {ApplicationCreated} from 'src/domain/application-management/events/application-created.event';
 import {ApplicationRemoved} from 'src/domain/application-management/events/application-removed.event';
-import {Token} from 'src/domain/data-fetching/projections/token';
+import {UnsavedToken} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {TokenCache} from 'src/domain/data-fetching/token.cache';
 import {logFor, Logger} from 'src/domain/logger';
@@ -19,7 +19,7 @@ export class TokenProjector {
   }
 
   async onApplicationCreated(event: ApplicationCreated): Promise<void> {
-    const newToken = new Token(
+    const newToken = new UnsavedToken(
       {
         id: event.aggregateId as ApplicationId,
         name: event.name,

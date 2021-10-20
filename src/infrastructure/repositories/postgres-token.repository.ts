@@ -1,7 +1,7 @@
 import {Pool} from 'pg';
 import {ApplicationId} from 'src/domain/application-id';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
-import {Token} from 'src/domain/data-fetching/projections/token';
+import {Token, UnsavedToken} from 'src/domain/data-fetching/projections/token';
 import {TokenRepository} from 'src/domain/data-fetching/repositories/token.repository';
 import {logFor} from 'src/domain/logger';
 import {TokenValue} from 'src/domain/token-value';
@@ -28,14 +28,14 @@ export class PostgresTokenRepository implements TokenRepository {
     const rawToken = result.rows[0];
 
     const token = new Token(
+      rawToken.id,
       {
         id: rawToken.application_id,
         name: rawToken.application_name,
       },
       rawToken.value,
       rawToken.scopes,
-      rawToken.subscriptions,
-      rawToken.id
+      rawToken.subscriptions
     );
     this.logger.log('debug', `Found token for value "${tokenValue}"`, {token});
 
@@ -43,7 +43,7 @@ export class PostgresTokenRepository implements TokenRepository {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async save(token: Token): Promise<void> {
+  async save(token: UnsavedToken): Promise<void> {
     // No-op, token is already saved by the application postgres repository
   }
 
