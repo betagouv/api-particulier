@@ -45,5 +45,9 @@
 		"eseom.nunjucks-template",
 		"humao.rest-client"
 	],
-	"postCreateCommand": "npm install && npm run migrate up && npm run fixtures:load"
+	"postCreateCommand": "npm install && npm run migrate up && npm run fixtures:load",
+	"forwardPorts": [
+		3000,
+		5444
+	]
 }
