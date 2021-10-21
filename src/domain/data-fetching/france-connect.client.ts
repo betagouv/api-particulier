@@ -40,7 +40,7 @@ export class FranceConnectClient {
     const {
       data: {identity, client},
     } = await axios.post<CheckTokenResponse>(
-      'https://fcp.integ01.dev-franceconnect.fr/api/v1/checktoken',
+      process.env.FRANCE_CONNECT_CHECK_TOKEN_URL!,
       {
         token: accessToken,
       }
