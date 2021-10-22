@@ -15,7 +15,7 @@ const RedisStore = connectRedis(session);
 
 export const initWebapp = (app: Express) => {
   const nunjuckEnvironment = nunjucks.configure(
-    path.join(__dirname, '../frontend/views/'),
+    path.join(__dirname, '../../frontend/views/'),
     {
       autoescape: true,
       express: app,
@@ -31,7 +31,7 @@ export const initWebapp = (app: Express) => {
     process.env.NODE_ENV === 'production'
   );
   if (process.env.NODE_ENV === 'production') {
-    const manifest = require('../../../public/manifest.json');
+    const manifest = require('../../../../public/manifest.json');
     nunjuckEnvironment.addGlobal('manifest', manifest);
   }
   app.set('view engine', 'njk');
