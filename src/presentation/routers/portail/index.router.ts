@@ -6,8 +6,8 @@ import {removePortailApplicationController} from 'src/presentation/controllers/r
 import {createUserApplicationValidationMiddleware} from 'src/presentation/middlewares/create-user-application-validation.middleware';
 import {isLoggedInMiddleware} from 'src/presentation/middlewares/is-logged-in.middleware';
 import {portailErrorMiddleware} from 'src/presentation/middlewares/portail-error.middleware';
-import {adminRouter} from 'src/presentation/routers/admin.router';
-import {webappRouter} from 'src/presentation/routers/webapp.router';
+import {adminRouter} from 'src/presentation/routers/portail/admin.router';
+import {webappRouter} from 'src/presentation/routers/portail/login.router';
 
 export const portailRouter = Router();
 

@@ -15,7 +15,7 @@ export const initSentry = (app: Express) => {
   });
 };
 
-export const sentryRouter = Router();
+export const sentryMiddleware = Router();
 
-sentryRouter.use(Sentry.Handlers.requestHandler());
-sentryRouter.use(Sentry.Handlers.tracingHandler());
+sentryMiddleware.use(Sentry.Handlers.requestHandler());
+sentryMiddleware.use(Sentry.Handlers.tracingHandler());
