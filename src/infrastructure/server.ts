@@ -1,11 +1,14 @@
 const express = require('express');
 import {default as vhost} from 'vhost';
 import {logFor} from 'src/domain/logger';
-import {apiRouter} from 'src/presentation/routers/api.router';
-import {portailRouter} from 'src/presentation/routers/portail.router';
-import {initSentry, sentryRouter} from 'src/presentation/routers/sentry.router';
+import {apiRouter} from 'src/presentation/routers/api/index.router';
+import {portailRouter} from 'src/presentation/routers/portail/index.router';
+import {
+  initSentry,
+  sentryMiddleware,
+} from 'src/presentation/middlewares/sentry.middleware';
 import {initWebapp} from 'src/presentation/routers/webapp.router';
-import {forestAdminRouter} from 'src/presentation/routers/forest-admin.router';
+import {forestAdminRouter} from 'src/presentation/routers/forest-admin/index.router';
 
 const app = express();
 const logger = logFor('Server');
@@ -13,7 +16,7 @@ const logger = logFor('Server');
 initSentry(app);
 initWebapp(app);
 
-app.use(sentryRouter);
+app.use(sentryMiddleware);
 app.use('/api', apiRouter);
 app.use('/forest', forestAdminRouter);
 app.use(
