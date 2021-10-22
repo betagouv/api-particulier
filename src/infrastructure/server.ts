@@ -7,7 +7,7 @@ import {
   initSentry,
   sentryMiddleware,
 } from 'src/presentation/middlewares/sentry.middleware';
-import {initWebapp} from 'src/presentation/routers/webapp.router';
+import {initWebapp} from 'src/presentation/routers/portail/login.router';
 import {forestAdminRouter} from 'src/presentation/routers/forest-admin/index.router';
 
 const app = express();
