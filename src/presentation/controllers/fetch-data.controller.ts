@@ -7,17 +7,17 @@ import {
   mesriDataPresenter,
   poleEmploiDataPresenter,
 } from 'src/infrastructure/service-container';
-import {TokenValue} from 'src/domain/token-value';
 import {Token} from 'src/domain/data-fetching/projections/token';
 import {MesriOutput} from 'src/domain/data-fetching/data-providers/mesri/dto';
+import {Credentials} from 'src/domain/credentials';
 
 export const fetchDgfipDataControllerBuidler =
   (withNulls: boolean) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    const {credential} = getApiKeyOrAccessTokenFromRequest(req);
+    const credentials: Credentials = res.locals.credentials;
     try {
       const data = await fetchDataUsecase.fetchDgfipData(
-        credential,
+        credentials.tokenValue,
         res.locals.input,
         (token: Token) => {
           res.locals.token = token;
@@ -33,10 +33,10 @@ export const fetchDgfipDataControllerBuidler =
 
 export const fetchCnafDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const {credential} = getApiKeyOrAccessTokenFromRequest(req);
+    const credentials: Credentials = res.locals.credentials;
     try {
       const data = await fetchDataUsecase.fetchCnafData(
-        credential,
+        credentials.tokenValue,
         res.locals.input,
         (token: Token) => {
           res.locals.token = token;
@@ -52,10 +52,10 @@ export const fetchCnafDataControllerBuidler =
 
 export const fetchPoleEmploiDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const {credential} = getApiKeyOrAccessTokenFromRequest(req);
+    const credentials: Credentials = res.locals.credentials;
     try {
       const data = await fetchDataUsecase.fetchPoleEmploiData(
-        credential,
+        credentials.tokenValue,
         res.locals.input,
         (token: Token) => {
           res.locals.token = token;
@@ -71,26 +71,19 @@ export const fetchPoleEmploiDataControllerBuidler =
 
 export const fetchMesriDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const {credential, type} = getApiKeyOrAccessTokenFromRequest(req);
+    const credentials: Credentials = res.locals.credentials;
+    const useCase =
+      credentials.type === 'api-key'
+        ? fetchDataUsecase
+        : fetchDataWithFranceConnectUsecase;
     try {
-      let data;
-      if (type === 'api-key') {
-        data = await fetchDataUsecase.fetchMesriData(
-          credential,
-          res.locals.input,
-          (token: Token) => {
-            res.locals.token = token;
-          }
-        );
-      }
-      if (type === 'france-connect') {
-        data = await fetchDataWithFranceConnectUsecase.fetchMesriData(
-          credential,
-          (token: Token) => {
-            res.locals.token = token;
-          }
-        );
-      }
+      const data = await useCase.fetchMesriData(
+        credentials.tokenValue,
+        res.locals.input,
+        (token: Token) => {
+          res.locals.token = token;
+        }
+      );
 
       res.json(mesriDataPresenter.presentData(<Partial<MesriOutput>>data));
       return next();
@@ -98,28 +91,3 @@ export const fetchMesriDataControllerBuidler =
       return next(error);
     }
   };
-
-const getApiKeyOrAccessTokenFromRequest = (
-  req: Request
-): {credential: TokenValue; type: 'api-key' | 'france-connect'} => {
-  const apiKey = req.header('X-Api-Key');
-  const rawFranceConnectToken = req.header('Authorization')?.split(' ');
-  const franceConnectToken = rawFranceConnectToken
-    ? rawFranceConnectToken.length > 1
-      ? rawFranceConnectToken[1]
-      : undefined
-    : undefined;
-  if (apiKey !== undefined) {
-    return {
-      credential: apiKey as TokenValue,
-      type: 'api-key',
-    };
-  }
-  if (franceConnectToken !== undefined) {
-    return {
-      credential: franceConnectToken as TokenValue,
-      type: 'france-connect',
-    };
-  }
-  throw new Error('Missing credentials');
-};
