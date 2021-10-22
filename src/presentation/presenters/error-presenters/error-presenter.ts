@@ -8,6 +8,7 @@ import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/app
 import {InvalidFormatError} from 'src/domain/data-fetching/errors/invalid-format.error';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
+import {TooManyCredentialsError} from 'src/domain/data-fetching/errors/too-many-credentials.error';
 import {applicationNotSubsribedErrorPresenter} from 'src/presentation/presenters/error-presenters/application-not-subscribed.error-presenter';
 import {cnafErrorPresenter} from 'src/presentation/presenters/error-presenters/cnaf.error-presenter';
 import {invalidCredentialsErrorPresenter} from 'src/presentation/presenters/error-presenters/invalid-crendentials.error-presenter';
@@ -18,6 +19,7 @@ import {poleEmploiErrorPresenter} from 'src/presentation/presenters/error-presen
 import {rateLimitedErrorPresenter} from 'src/presentation/presenters/error-presenters/rate-limited.error-presenter';
 import {serverErrorPresenter} from 'src/presentation/presenters/error-presenters/server.error-presenter';
 import {tokenNotFoundErrorPresenter} from 'src/presentation/presenters/error-presenters/token-not-found.error-presenter';
+import {tooManyCredentialsErrorPresenter} from 'src/presentation/presenters/error-presenters/too-many-credentials.error-presenter';
 import {zodErrorPresenter} from 'src/presentation/presenters/error-presenters/zod.error-presenter';
 import {ZodError} from 'zod';
 
@@ -44,6 +46,8 @@ export const errorPresenter: ErrorPresenter<Error> = (error: Error) => {
       return rateLimitedErrorPresenter(error);
     case TokenNotFoundError:
       return tokenNotFoundErrorPresenter(error as TokenNotFoundError);
+    case TooManyCredentialsError:
+      return tooManyCredentialsErrorPresenter(error as TooManyCredentialsError);
     case ZodError:
       return zodErrorPresenter(error as ZodError);
     case MesriNotFoundError:
