@@ -12,12 +12,6 @@ const commonAttributes = {
   description: `Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager.
 
 **Paramètres d'appel :** numéro fiscal et numéro d'avis d'imposition
-
-**Jetons de bac à sable associés à cette route :**
- - DGFIP - Avis d'imposition : *83c68bf0b6013c4daf3f8213f7212aa5*
- - DGFIP - Adresse : *02013fe1b5221dd7d914e4406fb88891*
- - DGFIP - Avis d'imposition et CNAF - Situation familiale : d7e9c9f4c3ca00caadde31f50fd4521a
- - DGFIP - Avis d'imposition, CNAF - Situation familiale et CNAF - Quotient Familial : fb156a4e-d497-480f-b3ef-9bc1bccdfbb9
  
 **Données disponibles en bac à sable :** [liste](https://airtable.com/invite/l?inviteId=inv3ImCypw30uuLK9&inviteToken=0482ffbcc5d830fb6a409161fc372635a48b6bbcffdcde552f5be4290f80db50)`,
   summary: "Service de vérification de l'avis d'impôt sur le revenu",
@@ -29,8 +23,7 @@ const commonAttributes = {
         'Numéro fiscal propre à chaque citoyen (identifiant numérique de 13 chiffres)',
       required: true,
       schema: {
-        type: 'number',
-        format: 'string',
+        type: 'string',
       },
     },
     {
@@ -40,8 +33,7 @@ const commonAttributes = {
         "Référence de l'avis fiscal (identifiant alphanumérique de 13 caractères). Si l'avis est un avis de dégrèvement, l'identifiant est alors composé de 14 caractères.",
       required: true,
       schema: {
-        type: 'number',
-        format: 'string',
+        type: 'string',
       },
     },
   ],
