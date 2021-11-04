@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: Sequelize.literal('gen_random_uuid()'),
         allowNull: false,
       },
-      applicationId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
       value: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -32,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: 'tokens',
-      underscored: true,
       timestamps: false,
       schema: process.env.DATABASE_SCHEMA,
     }
@@ -41,8 +36,18 @@ module.exports = (sequelize, DataTypes) => {
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/v/v6/reference-guide/relationships#adding-relationships.
   Tokens.associate = models => {
     Tokens.belongsTo(models.applications, {
-      foreignKey: 'applicationId',
-      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'applicationIdKey',
+        field: 'application_id',
+      },
+      as: 'application',
+    });
+    Tokens.hasMany(models.journalEntries, {
+      foreignKey: {
+        name: 'tokenIdKey',
+        field: 'token_id',
+      },
+      as: 'journalEntries',
     });
   };
 
