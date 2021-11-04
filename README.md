@@ -86,3 +86,12 @@ L'application possède 4 niveaux de test :
 
 [Forest Admin](https://www.forestadmin.com/) est utilisé pour gérer les fournisseurs de services dans l'API Particulier.
 [Créez-vous un compte](https://app.forestadmin.com/signup) afin de pouvoir accéder à l'interface, puis demandez à un collègue ou ami de vous inviter sur l'interface d'administration.
+
+## Mettre à jour le schéma ForestAdmin suite à une migration de base de données
+
+- `npx -p forest-cli forest schema:update --config=src/presentation/admin/config/databases.js --outputDirectory=src/presentation/admin2`
+- `cp -R src/presentation/admin2/* src/presentation/admin/`
+- `npx eslint --fix src/presentation/admin`
+- manually fix the remaining linting issues
+- `rm -rf src/presentation/admin2`
+- `npm run start:dev:backend` to update the `.forestadmin-schema.json` file

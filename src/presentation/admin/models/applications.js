@@ -26,19 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-      scopes: {
-        type: DataTypes.JSONB,
-        allowNull: false,
-      },
-      subscriptions: {
-        type: DataTypes.JSONB,
-        allowNull: false,
-      },
-      tokens: {
-        type: DataTypes.JSONB,
-        defaultValue: [],
-        allowNull: false,
-      },
     },
     {
       tableName: 'applications',
@@ -49,7 +36,15 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/v/v6/reference-guide/relationships#adding-relationships.
-  Applications.associate = () => {};
+  Applications.associate = models => {
+    Applications.hasMany(models.tokens, {
+      foreignKey: {
+        name: 'applicationIdKey',
+        field: 'application_id',
+      },
+      as: 'tokens',
+    });
+  };
 
   return Applications;
 };

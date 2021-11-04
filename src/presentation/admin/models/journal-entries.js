@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
-      tokenValue: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       subscription: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,7 +37,15 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // This section contains the relationships for this model. See: https://docs.forestadmin.com/documentation/v/v6/reference-guide/relationships#adding-relationships.
-  JournalEntries.associate = () => {};
+  JournalEntries.associate = models => {
+    JournalEntries.belongsTo(models.tokens, {
+      foreignKey: {
+        name: 'tokenIdKey',
+        field: 'token_id',
+      },
+      as: 'token',
+    });
+  };
 
   return JournalEntries;
 };

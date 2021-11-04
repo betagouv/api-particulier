@@ -82,62 +82,21 @@
         "value": null
       }]
     }, {
-      "field": "scopes",
-      "type": "Json",
-      "defaultValue": null,
-      "enums": null,
-      "integration": null,
-      "isFilterable": true,
-      "isPrimaryKey": false,
-      "isReadOnly": false,
-      "isRequired": true,
-      "isSortable": true,
-      "isVirtual": false,
-      "reference": null,
-      "inverseOf": null,
-      "validations": [{
-        "message": null,
-        "type": "is present",
-        "value": null
-      }]
-    }, {
-      "field": "subscriptions",
-      "type": "Json",
-      "defaultValue": null,
-      "enums": null,
-      "integration": null,
-      "isFilterable": true,
-      "isPrimaryKey": false,
-      "isReadOnly": false,
-      "isRequired": true,
-      "isSortable": true,
-      "isVirtual": false,
-      "reference": null,
-      "inverseOf": null,
-      "validations": [{
-        "message": null,
-        "type": "is present",
-        "value": null
-      }]
-    }, {
       "field": "tokens",
-      "type": "Json",
-      "defaultValue": [],
+      "type": ["Number"],
+      "defaultValue": null,
       "enums": null,
       "integration": null,
       "isFilterable": true,
       "isPrimaryKey": false,
       "isReadOnly": false,
-      "isRequired": true,
+      "isRequired": false,
       "isSortable": true,
       "isVirtual": false,
-      "reference": null,
-      "inverseOf": null,
-      "validations": [{
-        "message": null,
-        "type": "is present",
-        "value": null
-      }]
+      "reference": "tokens.id",
+      "inverseOf": "application",
+      "relationship": "HasMany",
+      "validations": []
     }, {
       "field": "userEmails",
       "type": "Json",
@@ -266,7 +225,7 @@
         "value": null
       }]
     }, {
-      "field": "tokenValue",
+      "field": "token",
       "type": "String",
       "defaultValue": null,
       "enums": null,
@@ -274,16 +233,13 @@
       "isFilterable": true,
       "isPrimaryKey": false,
       "isReadOnly": false,
-      "isRequired": true,
+      "isRequired": false,
       "isSortable": true,
       "isVirtual": false,
-      "reference": null,
-      "inverseOf": null,
-      "validations": [{
-        "message": null,
-        "type": "is present",
-        "value": null
-      }]
+      "reference": "tokens.id",
+      "inverseOf": "journalEntries",
+      "relationship": "BelongsTo",
+      "validations": []
     }],
     "segments": [],
     "actions": []
@@ -376,7 +332,7 @@
       "isSortable": true,
       "isVirtual": false,
       "reference": "applications.id",
-      "inverseOf": null,
+      "inverseOf": "tokens",
       "relationship": "BelongsTo",
       "validations": []
     }, {
@@ -393,6 +349,22 @@
       "isVirtual": false,
       "reference": null,
       "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "journalEntries",
+      "type": ["Number"],
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": "journalEntries.date",
+      "inverseOf": "token",
+      "relationship": "HasMany",
       "validations": []
     }, {
       "field": "scopes",
