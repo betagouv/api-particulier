@@ -4,15 +4,21 @@
 
 API Particulier est une API en accès restreint, ce qui signifie qu'il vous faut remplir une [demande d'habilitation](https://datapass.api.gouv.fr) avant de pouvoir l'utiliser avec des vraies données.
 
-Suite à la validation de votre demande, vous pourrez récupérer sur [le portail API Particulier](https://mon.portail.api.gouv.fr) le jeton d'accès, qui identifiera votre cas d'usage auprès de l'API.
-
 Afin de vous permettre de commencer à utiliser l'API avant la validation de votre demande d'habilitation, nous avons mis en place un bac à sable de l'API, qui reproduit les comportements de l'API, en remplaçant les données réelles par des données fictives.
 
-Pour chaque type de donnée disponible, un jeu de donnée libre en édition est mis à votre disposition, afin que vous puissiez faire vos tests en toute autonomie.
+Dans le bac à sable, pour chaque type de donnée disponible, un jeu de donnée libre en édition est mis à votre disposition, afin que vous puissiez faire vos tests en toute autonomie.
 
-Comme pour l'API de production, l'API de bac à sable est appelable avec des jetons, qui sont listés dans chaque endpoint ci-dessous.
+Le fonctionnement du bac à sable est identique à celui de la véritable API de production, à la différence près que les données sont fictives, éditables par tout le monde, et que les jetons d'accès sont en libre service.
 
-La seule différence d'appel entre l'API de production et l'API de bac à sable réside en leurs adresses : l'API de production est disponible à l'adresse *https://particulier.api.gouv.fr/api*, l'API de bac à sable est disponbile à l'adresse *https://particulier-test.api.gouv.fr/api*.
+Le bac à sable et l'API de production sont appelables par deux adresses distinctes :
+
+- bac à sable : [https://particulier-test.api.gouv.fr/api](https://particulier-test.api.gouv.fr/api)
+- production : [https://particulier.api.gouv.fr/api](https://particulier.api.gouv.fr/api)
+
+Pour récupérer le jeton de production ou créer des jetons de bac à sable, un portail développeur est mis à votre disposition aux adresses suivantes :
+
+- bac à sable : [https://mon.portail-test.api.gouv.fr](https://mon.portail-test.api.gouv.fr)
+- production : [https://mon.portail.api.gouv.fr](https://mon.portail.api.gouv.fr)
 
 ### Périmètre des données retournées
 
