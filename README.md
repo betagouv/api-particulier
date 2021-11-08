@@ -95,3 +95,7 @@ L'application possède 4 niveaux de test :
 - manually fix the remaining linting issues
 - `rm -rf src/presentation/admin2`
 - `npm run start:dev:backend` to update the `.forestadmin-schema.json` file
+
+# Fonctionnement
+
+![](./docs/fonctionnel.png)
