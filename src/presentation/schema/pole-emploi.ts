@@ -12,7 +12,7 @@ export const poleEmploiPaths: PathsObject = {
       summary: "Recherche de la situation Pôle Emploi d'un particulier",
       description: `Le service permet de récupérer la situation Pôle Emploi d'un particulier, avec ses données d'état civil et ses données relatives à son inscription à Pôle Emploi.
 
-**Paramètres d'appel :** identifiant "PeamU" Pôle Emploi choisi par le particulier lors de la création de son compte en ligne
+**Paramètres d'appel :** Nom d’utilisateur Pôle emploi choisi par le particulier lors de la création de son espace personnel en ligne
  
 **Données disponibles en bac à sable :** [liste](https://airtable.com/invite/l?inviteId=inv1n0CkFzq3Y0pvn&inviteToken=a5b49ec5bb9d2323df4adbdfc6c65da35a2248af30c38095101b3cca6ea0898a&utm_source=email)`,
       parameters: [
