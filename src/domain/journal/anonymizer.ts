@@ -1,8 +1,5 @@
 import {createHash} from 'crypto';
-
-type Payload = {
-  [key: string]: unknown;
-};
+import {Payload} from 'src/domain/payload';
 
 export class Anonymizer {
   anonymizePayload(payload: Payload): Payload {

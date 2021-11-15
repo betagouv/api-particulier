@@ -1,3 +1,4 @@
+import {Payload} from 'src/domain/payload';
 import {Subscription} from 'src/domain/subscription';
 
 export class Entry {
@@ -7,6 +8,7 @@ export class Entry {
     readonly subscription: Subscription,
     readonly route: string,
     readonly statusCode: number,
-    readonly time: number
+    readonly time: number,
+    readonly payload: Payload
   ) {}
 }
