@@ -25,7 +25,8 @@ export const journalMiddleware = async (
       subscription,
       req.baseUrl + req.path,
       res.statusCode,
-      timeSpent
+      timeSpent,
+      res.locals.input
     )
   );
   next();

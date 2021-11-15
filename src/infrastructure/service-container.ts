@@ -36,6 +36,7 @@ import {TokenCache} from 'src/domain/data-fetching/token.cache';
 import {PostgresApplicationRepository} from 'src/infrastructure/repositories/postgres-application.repository';
 import {FetchDataWithFranceConnectUsecase} from 'src/application/usecases/fetch-data-with-france-connect.usecase';
 import {FranceConnectClient} from 'src/domain/data-fetching/france-connect.client';
+import {Anonymizer} from 'src/domain/journal/anonymizer';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -128,12 +129,15 @@ localLogger.log('info', 'MESRI data presenter initialized');
 export const introspectDataPresenter = new IntrospectDataPresenter();
 localLogger.log('info', 'Introspect data presenter initialized');
 
+export const anonymizer = new Anonymizer();
+localLogger.log('info', 'Anonymizer initialized');
+
 export const entryRepository: EntryRepository = new PostgresEntryRepository(
   postgresPool
 );
 localLogger.log('info', 'Journal entry repository initialized');
 
-export const entryProjector = new EntryProjector(entryRepository);
+export const entryProjector = new EntryProjector(entryRepository, anonymizer);
 localLogger.log('info', 'Journal entry projector initialized');
 
 export const fetchDataUsecase = new FetchDataUsecase(
