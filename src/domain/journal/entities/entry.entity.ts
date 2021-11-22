@@ -9,6 +9,7 @@ export class Entry {
     readonly route: string,
     readonly statusCode: number,
     readonly time: number,
-    readonly payload: Payload
+    readonly payload: Payload,
+    readonly ip: string
   ) {}
 }
