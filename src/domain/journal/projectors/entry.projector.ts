@@ -18,7 +18,8 @@ export class EntryProjector {
         event.route,
         event.statusCode,
         event.time,
-        this.anonymizer.anonymizePayload(event.payload)
+        this.anonymizer.anonymizePayload(event.payload),
+        event.ip
       )
     );
   }

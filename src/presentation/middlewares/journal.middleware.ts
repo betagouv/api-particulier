@@ -26,7 +26,8 @@ export const journalMiddleware = async (
       req.baseUrl + req.path,
       res.statusCode,
       timeSpent,
-      res.locals.input
+      res.locals.input,
+      <string>req.headers['x-forwarded-for']
     )
   );
   next();
