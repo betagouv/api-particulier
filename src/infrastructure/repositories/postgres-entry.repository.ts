@@ -7,7 +7,7 @@ export class PostgresEntryRepository implements EntryRepository {
 
   async save(entry: Entry): Promise<void> {
     const query =
-      'INSERT INTO journal_entries(date, token_id, subscription, route, status_code, time, payload) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+      'INSERT INTO journal_entries(date, token_id, subscription, route, status_code, time, payload, ip) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
     const values = [
       entry.date,
       entry.tokenId,
@@ -16,6 +16,7 @@ export class PostgresEntryRepository implements EntryRepository {
       entry.statusCode,
       entry.time,
       JSON.stringify(entry.payload),
+      entry.ip,
     ];
 
     await this.pg.query(query, values);
