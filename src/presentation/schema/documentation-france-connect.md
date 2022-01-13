@@ -15,14 +15,9 @@ Le bac à sable et l'API de production sont appelables par deux adresses distinc
 - bac à sable : [https://particulier-test.api.gouv.fr/api](https://particulier-test.api.gouv.fr/api)
 - production : [https://particulier.api.gouv.fr/api](https://particulier.api.gouv.fr/api)
 
-Pour récupérer le jeton de production ou créer des jetons de bac à sable, un portail développeur est mis à votre disposition aux adresses suivantes :
-
-- bac à sable : [https://mon.portail-test.api.gouv.fr](https://mon.portail-test.api.gouv.fr)
-- production : [https://mon.portail.api.gouv.fr](https://mon.portail.api.gouv.fr)
-
 ### Périmètre des données retournées
 
-**Important :** le contenu du jeu de données retourné dépend des _scopes_ ou _périmètres_ du jeton utilisé.
+**Important :** le contenu du jeu de données retourné dépend des _scopes_ associés à votre accès FranceConnect.
 
 En effet, les disposition de l'article [L144-8](https://www.legifrance.gouv.fr/affichCodeArticle.do?cidTexte=LEGITEXT000031366350&idArticle=LEGIARTI000031367412&dateTexte=&categorieLien=cid) n'autorisent que l'échange des informations **strictement nécessaires** pour traiter une démarche.
 
@@ -30,15 +25,6 @@ Afin de respecter ce devoir de minimisation de la donnée, chaque jeton est asso
 
 Ainsi, pour pouvoir lire de la donnée provenant de la DGFIP par exemple, il est nécessaire de cocher lors de votre [demande d'habilitation](https://datapass.api.gouv.fr) une ou plusieurs cases correspondant aux données de la DGFIP, votre jeton possèdera alors les _scopes_ associés aux données cochées.
 
-En conséquence, suivant le jeton utilisé, une même requête peut retourner des résultats différents.
+En conséquence, suivant les accès conférés, une même requête peut retourner des résultats différents.
 
-Pendant vos tests, assurez-vous d'utiliser le jeton associé au _scope_ correspondant aux données auxquelles vous aurez accès d'un point de vue légal.
-
-**Attention :** La documentation ci-dessous ne prend pas en compte les _scopes_, qui agissent comme masques de la donnée retournée par l'API. Cette documentation suppose donc que votre jeton permet d'accéder à la donnée décrite.
-
-### Passer son service en production
-
-Lors de votre passage en production :
-
-- remplacez l'URL de particulier-test.api.gouv.fr à particulier.api.gouv.fr
-- remplacez le jeton de test par le jeton obtenu sur [le portail API Particulier](https://mon.portail.api.gouv.fr)
+**Attention :** La documentation ci-dessous ne prend pas en compte les _scopes_, qui agissent comme masques de la donnée retournée par l'API. Cette documentation suppose donc que vous avez été habilité à accéder à la donnée décrite.

@@ -6,7 +6,10 @@ import {introspectController} from 'src/presentation/controllers/introspect.cont
 import {credentialsValidationMiddleware} from 'src/presentation/middlewares/credentials-validation.middleware';
 import {createApplicationValidationMiddleware} from 'src/presentation/middlewares/create-application-validation.middleware';
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
-import {schema} from 'src/presentation/schema';
+import {
+  schemaWithApiKey,
+  schemaWithFranceConnectToken,
+} from 'src/presentation/schema';
 import {mesriRouter} from 'src/presentation/routers/api/data-providers/mesri/index.router';
 import {cnafRouter} from 'src/presentation/routers/api/data-providers/cnaf/index.router';
 import {dgfipRouter} from 'src/presentation/routers/api/data-providers/dgfip/index.router';
@@ -48,5 +51,12 @@ apiRouter.post(
 );
 
 apiRouter.get('/open-api.yml', (_req: Request, res: Response) => {
-  res.type('text/yaml').send(schema.getSpecAsYaml());
+  res.type('text/yaml').send(schemaWithApiKey.getSpecAsYaml());
 });
+
+apiRouter.get(
+  '/france-connect/open-api.yml',
+  (_req: Request, res: Response) => {
+    res.type('text/yaml').send(schemaWithFranceConnectToken.getSpecAsYaml());
+  }
+);
