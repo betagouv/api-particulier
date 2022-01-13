@@ -4,11 +4,14 @@ import {join} from 'path';
 import {cafPaths} from 'src/presentation/schema/caf';
 import {dgfipPaths} from 'src/presentation/schema/dgfip';
 import {introspectPaths} from 'src/presentation/schema/introspect';
-import {mesriPaths} from 'src/presentation/schema/mesri';
+import {
+  mesriFranceConnectPaths,
+  mesriPaths,
+} from 'src/presentation/schema/mesri';
 import {pingPaths} from 'src/presentation/schema/ping';
 import {poleEmploiPaths} from 'src/presentation/schema/pole-emploi';
 
-export const schema = new OpenApiBuilder({
+const generalInformationGetter = (docPath: string) => ({
   info: {
     title: 'API Particulier',
     version: '2.1.0',
@@ -22,7 +25,7 @@ export const schema = new OpenApiBuilder({
       name: 'GNU Affero General Public License v3.0',
       url: 'https://github.com/betagouv/api-particulier/blob/master/LICENSE',
     },
-    description: readFileSync(join(__dirname, 'documentation.md'), 'utf-8'),
+    description: readFileSync(join(__dirname, `${docPath}.md`), 'utf-8'),
   },
   openapi: '3.0.0',
   servers: [
@@ -35,14 +38,18 @@ export const schema = new OpenApiBuilder({
       description: 'Serveur de production',
     },
   ],
+});
+
+export const schemaWithApiKey = new OpenApiBuilder({
+  ...generalInformationGetter('documentation'),
   security: [
     {
-      Jeton: [],
+      apiKey: [],
     },
   ],
   components: {
     securitySchemes: {
-      Jeton: {
+      apiKey: {
         type: 'apiKey',
         in: 'header',
         name: 'X-Api-Key',
@@ -58,5 +65,28 @@ export const schema = new OpenApiBuilder({
     ...mesriPaths,
     ...introspectPaths,
     ...pingPaths,
+  },
+});
+
+export const schemaWithFranceConnectToken = new OpenApiBuilder({
+  ...generalInformationGetter('documentation-france-connect'),
+  security: [
+    {
+      franceConnectToken: [],
+    },
+  ],
+  components: {
+    securitySchemes: {
+      franceConnectToken: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'Jeton FranceConnect',
+        description:
+          'Jeton FranceConnect obtenu suite à une cinématique de connexion FranceConnect',
+      },
+    },
+  },
+  paths: {
+    ...mesriFranceConnectPaths,
   },
 });

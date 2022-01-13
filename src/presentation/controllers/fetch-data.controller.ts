@@ -72,18 +72,22 @@ export const fetchPoleEmploiDataControllerBuidler =
 export const fetchMesriDataControllerBuidler =
   () => async (req: Request, res: Response, next: NextFunction) => {
     const credentials: Credentials = res.locals.credentials;
-    const useCase =
-      credentials.type === 'api-key'
-        ? fetchDataUsecase
-        : fetchDataWithFranceConnectUsecase;
     try {
-      const data = await useCase.fetchMesriData(
-        credentials.tokenValue,
-        res.locals.input,
-        (token: Token) => {
-          res.locals.token = token;
-        }
-      );
+      const data =
+        credentials.type === 'api-key'
+          ? await fetchDataUsecase.fetchMesriData(
+              credentials.tokenValue,
+              res.locals.input,
+              (token: Token) => {
+                res.locals.token = token;
+              }
+            )
+          : await fetchDataWithFranceConnectUsecase.fetchMesriData(
+              credentials.tokenValue,
+              (token: Token) => {
+                res.locals.token = token;
+              }
+            );
 
       res.json(mesriDataPresenter.presentData(<Partial<MesriOutput>>data));
       return next();
