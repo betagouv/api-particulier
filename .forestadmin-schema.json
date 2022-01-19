@@ -433,7 +433,7 @@
     "stack": {
       "database_type": "postgres",
       "engine": "nodejs",
-      "engine_version": "16.13.0",
+      "engine_version": "16.13.1",
       "orm_version": "5.15.2"
     }
   }

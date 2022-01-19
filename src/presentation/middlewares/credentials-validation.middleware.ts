@@ -5,7 +5,7 @@ import {TooManyCredentialsError} from 'src/domain/data-fetching/errors/too-many-
 import {TokenValue} from 'src/domain/token-value';
 import * as z from 'zod';
 
-const accessTokenRegex = /^Bearer ([\w]+)/i;
+const accessTokenRegex = /^Bearer (.+)/i;
 
 export async function credentialsValidationMiddleware(
   req: Request,

@@ -13,7 +13,8 @@ export class FetchDataWithFranceConnectUsecase {
 
   async fetchMesriData(
     accessToken: TokenValue,
-    setCurrentToken: (token: Token) => void
+    setCurrentToken: (token: Token) => void,
+    setInputData: (inputData: unknown) => void
   ) {
     const {identity, token} =
       await this.franceConnectClient.getTokenAndIdentityFromAccessToken(
@@ -21,6 +22,7 @@ export class FetchDataWithFranceConnectUsecase {
       );
     setUser({id: token.application.id});
     setCurrentToken(token);
+    setInputData(identity);
 
     const mesriInput: MesriInput = {
       dateNaissance: new Date(identity.birthdate),
