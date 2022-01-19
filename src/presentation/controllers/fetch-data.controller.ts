@@ -86,6 +86,9 @@ export const fetchMesriDataControllerBuidler =
               credentials.tokenValue,
               (token: Token) => {
                 res.locals.token = token;
+              },
+              (inputData: unknown) => {
+                res.locals.input = inputData;
               }
             );
 
