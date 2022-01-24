@@ -47,7 +47,7 @@ describe('The data provider client', () => {
       name: 'yolo',
     },
     'tokenValue' as TokenValue,
-    ['dgfip_avis_imposition'],
+    ['dgfip_declarant1_nom'],
     ['DGFIP']
   );
   const cnafToken = new Token(
