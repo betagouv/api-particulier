@@ -16,7 +16,7 @@ describe('The postgres application repository', () => {
       '0',
       {
         value: 'my-token-value' as TokenValue,
-        scopes: ['cnaf_adresse', 'dgfip_adresse'],
+        scopes: ['cnaf_adresse', 'dgfip_adresse_fiscale_taxation'],
         subscriptions: ['CNAF', 'DGFIP'],
       },
       []
@@ -33,7 +33,7 @@ describe('The postgres application repository', () => {
       name: application.name,
       token: {
         value: 'my-token-value',
-        scopes: ['cnaf_adresse', 'dgfip_adresse'],
+        scopes: ['cnaf_adresse', 'dgfip_adresse_fiscale_taxation'],
         subscriptions: ['CNAF', 'DGFIP'],
       },
     });
