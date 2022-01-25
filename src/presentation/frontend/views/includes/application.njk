@@ -1,4 +1,4 @@
-<div data-controller="application" class="fr-tile fr-tile--horizontal w-full mb-4 rounded">
+<div data-controller="application" class="fr-tile fr-tile--horizontal w-full mb-4">
     <div class="w-full">
         <div class="p-4 border-b border-gray-200">
             <div class="w-full flex flex-row items-center">
@@ -46,14 +46,14 @@
                 </span>
             </div>
         </div>
-        <div class="hidden p-4" data-application-target="scopes">
+        <fieldset class="hidden p-4 fr-fieldset fr-fieldset--inline" data-application-target="scopes">
             {% for sectionName, scopes in scopesConfiguration %}
-                <div class="mt-1 text-blue-900">
+                <div class="mt-1 text-blue-900 fieldset__legend">
                     <i>{{ sectionName }}</i>
                 </div>
                 <div class="flex flex-wrap mt-1">
                     {% for scope, label in scopes %}
-                        <div class="flex items-center mr-2">
+                        <div class="flex items-center mr-2 fr-checkbox-group">
                             <input class="form-tick h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-800 checked:border-transparent focus:outline-none mr-1 mt-1" type="checkbox" id="scopes[{{ scope }}]" name="scopes[{{ scope }}]" {% if application.token.scopes.includes(scope) %} checked {% endif %} disabled/>
                             <label class="fr-label" for="scopes[{{ scope }}]">{{ label }}
                             </label>
@@ -61,7 +61,7 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-        </div>
+        </fieldset>
         <div class="w-full flex flex-row items-center px-4 pb-4 pt-1">
             <div class="whitespace-nowrap truncate flex-shrink-0 max-w-lg">
                 <strong>Jeton</strong>
