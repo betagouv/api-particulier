@@ -434,7 +434,7 @@
       "database_type": "postgres",
       "engine": "nodejs",
       "engine_version": "16.13.1",
-      "orm_version": "5.15.2"
+      "orm_version": "5.22.5"
     }
   }
 }
