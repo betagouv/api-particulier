@@ -23,7 +23,7 @@ export class MesriSupdataDataProvider implements MesriDataProvider {
           `${process.env.SUPDATA_API_URL}/api/etudiant`,
           {
             headers: {
-              'X-API-Key': process.env.SUPDATA_INE_API_KEY,
+              'X-API-Key': process.env.SUPDATA_INE_API_KEY!,
               'X-Caller': metadata.caller.id + ' - ' + metadata.caller.name,
             },
             params: {
@@ -45,8 +45,8 @@ export class MesriSupdataDataProvider implements MesriDataProvider {
           },
           {
             headers: {
-              'X-API-Key': process.env.SUPDATA_CIVILITE_API_KEY,
-              'X-Caller': metadata.caller,
+              'X-API-Key': process.env.SUPDATA_CIVILITE_API_KEY!,
+              'X-Caller': metadata.caller.id + ' - ' + metadata.caller.name,
             },
             timeout: 10000,
           }
