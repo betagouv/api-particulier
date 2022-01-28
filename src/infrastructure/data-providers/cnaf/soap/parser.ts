@@ -1,16 +1,19 @@
 import {CnafOutput} from '../../../../domain/data-fetching/data-providers/cnaf/dto';
-import {parse} from 'fast-xml-parser';
+import {XMLParser as Parser} from 'fast-xml-parser';
 import {parse as dateParse} from 'date-fns';
 import {InvalidFormatError} from 'src/domain/data-fetching/errors/invalid-format.error';
 import {CnafError} from 'src/domain/data-fetching/data-providers/cnaf/errors/cnaf.error';
 import {isArray, isObject, isUndefined, omitBy, unescape} from 'lodash';
+
+const rawParser = new Parser();
+const noTagValueParser = new Parser({parseTagValue: false});
 
 export class XMLParser {
   parse(xml: string): CnafOutput {
     let rawBody;
     let returnCode;
     try {
-      const rawXML = parse(xml);
+      const rawXML = rawParser.parse(xml);
       const result =
         rawXML[Object.keys(rawXML)[0]]['soapenv:Envelope']['soapenv:Body'][
           'ns2:demanderDocumentWebResponse'
@@ -25,9 +28,7 @@ export class XMLParser {
       throw new CnafError(returnCode);
     }
 
-    const body = parse(unescape(rawBody), {
-      parseNodeValue: false,
-    }).drtData;
+    const body = noTagValueParser.parse(unescape(rawBody)).drtData;
 
     const address = {
       identite: parseString(body.adresse.LIBLIG1ADR),

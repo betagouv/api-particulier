@@ -45,7 +45,7 @@
       }]
     }, {
       "field": "id",
-      "type": "String",
+      "type": "Uuid",
       "defaultValue": null,
       "enums": null,
       "integration": null,
@@ -226,7 +226,7 @@
       }]
     }, {
       "field": "token",
-      "type": "String",
+      "type": "Uuid",
       "defaultValue": null,
       "enums": null,
       "integration": null,
@@ -321,7 +321,7 @@
     "paginationType": "page",
     "fields": [{
       "field": "application",
-      "type": "String",
+      "type": "Uuid",
       "defaultValue": null,
       "enums": null,
       "integration": null,
@@ -337,7 +337,7 @@
       "validations": []
     }, {
       "field": "id",
-      "type": "String",
+      "type": "Uuid",
       "defaultValue": null,
       "enums": null,
       "integration": null,
@@ -429,7 +429,7 @@
   }],
   "meta": {
     "liana": "forest-express-sequelize",
-    "liana_version": "8.2.7",
+    "liana_version": "8.4.8",
     "stack": {
       "database_type": "postgres",
       "engine": "nodejs",

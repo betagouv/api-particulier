@@ -9,7 +9,7 @@ export const pingControllerBuilder =
         `http://localhost:${process.env.PORT}${path}`,
         {
           headers: {
-            'X-Api-Key': process.env.PING_TOKEN,
+            'X-Api-Key': process.env.PING_TOKEN!,
           },
           params: query,
         }
