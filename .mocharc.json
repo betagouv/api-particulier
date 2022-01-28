@@ -4,7 +4,6 @@
     ],
     "require": [
         "test/babel-register.js",
-        "test/chai-register.js",
-        "chai/register-expect"
+        "test/chai-register.js"
     ]
 }
