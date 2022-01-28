@@ -65,7 +65,7 @@
     "qs": "^6.7.0",
     "query-string": "^7.0.0",
     "require-all": "^3.0.0",
-    "sequelize": "~5.15.1",
+    "sequelize": "^5.22.5",
     "stimulus": "^2.0.0",
     "uuid": "^8.3.2",
     "vhost": "^3.0.2",
