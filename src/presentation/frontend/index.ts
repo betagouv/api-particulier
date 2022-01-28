@@ -1,4 +1,4 @@
-import {Application} from 'stimulus';
+import {Application} from '@hotwired/stimulus';
 import ApplicationController from './application.controller';
 import NewApplicationController from './new-application.controller';
 import '@hotwired/turbo';
