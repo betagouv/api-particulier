@@ -12,6 +12,10 @@ import {
 import {NotFoundError} from 'src/domain/data-fetching/data-providers/pole-emploi/errors/not-found.error';
 import {transformError} from 'src/infrastructure/data-providers/error-transformer';
 
+const parseDate = (date: string): Date => {
+  return new Date(date.split('T')[0]);
+};
+
 export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
   private readonly axios: AxiosInstance;
 
@@ -57,7 +61,7 @@ export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
         prenom: data.prenom,
         sexe: data.sexe,
         dateNaissance: data.dateNaissance
-          ? new Date(data.dateNaissance)
+          ? parseDate(data.dateNaissance)
           : undefined,
         codeCertificationCNAV: data.codeCertificationCNAV,
         telephone: data.telephone,
@@ -65,10 +69,10 @@ export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
         email: data.email,
         adresse: data.adresse,
         dateInscription: data.dateInscription
-          ? new Date(data.dateInscription)
+          ? parseDate(data.dateInscription)
           : undefined,
         dateCessationInscription: data.dateCessationInscription
-          ? new Date(data.dateCessationInscription)
+          ? parseDate(data.dateCessationInscription)
           : undefined,
         codeCategorieInscription: data.categorieInscription
           ? parseInt(data.categorieInscription)
