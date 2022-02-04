@@ -1,3 +1,4 @@
+import {captureEvent, Severity} from '@sentry/node';
 import {parse} from 'date-fns';
 
 export function parseEuro(str?: string): number | undefined {
@@ -8,7 +9,15 @@ export function parseEuro(str?: string): number | undefined {
   if (data === '') {
     return undefined;
   }
-  return isNumeric(data) ? parseInt(data) : 0;
+  const parsedData = isNumeric(data) ? parseInt(data) : 0;
+
+  if (parsedData < 0) {
+    captureEvent({
+      message: 'Negative financial data detected',
+      level: Severity.Info,
+    });
+  }
+  return parsedData;
 }
 
 function isNumeric(n: string) {
