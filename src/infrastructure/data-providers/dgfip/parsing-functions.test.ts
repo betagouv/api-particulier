@@ -29,6 +29,10 @@ describe('Parse ', () => {
     it('returns undefined if no data', () => {
       expect(parseEuro('')).to.be.undefined;
     });
+
+    it('returns negative values', () => {
+      expect(parseEuro('-15&nbsp;237 €')).to.equal(-15237);
+    });
   });
 
   describe('parse dates', () => {

@@ -4,7 +4,7 @@ export function parseEuro(str?: string): number | undefined {
   if (str === undefined) {
     return undefined;
   }
-  const data = str.replace(/[^0-9]/g, '');
+  const data = str.replace(/[^-0-9]/g, '');
   if (data === '') {
     return undefined;
   }
