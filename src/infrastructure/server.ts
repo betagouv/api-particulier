@@ -27,7 +27,7 @@ app.use(
   vhost(new URL(process.env.BASE_URL!).hostname, portailRouter)
 );
 app.get('/', (_req: Request, res: Response) => {
-  res.redirect('https://api.gouv.fr/les-api/api-particulier');
+  res.redirect(process.env.DOCUMENTATION_URL!);
 });
 
 app.listen(process.env.PORT || 3000, () => {
