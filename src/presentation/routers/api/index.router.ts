@@ -30,6 +30,10 @@ apiRouter.use(dgfipRouter);
 apiRouter.use(mesriRouter);
 apiRouter.use(poleEmploiRouter);
 
+apiRouter.get('/', (_req: Request, res: Response) => {
+  res.redirect(process.env.DOCUMENTATION_URL!);
+});
+
 apiRouter.get(
   '/introspect',
   credentialsValidationMiddleware,
