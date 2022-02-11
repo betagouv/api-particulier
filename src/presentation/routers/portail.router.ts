@@ -38,7 +38,7 @@ export const initPortail = (app: Express) => {
     process.env.NODE_ENV === 'production'
   );
   if (process.env.NODE_ENV === 'production') {
-    const manifest = require('../../../../public/manifest.json');
+    const manifest = require('../../../public/manifest.json');
     nunjuckEnvironment.addGlobal('manifest', manifest);
   }
   app.set('view engine', 'njk');
