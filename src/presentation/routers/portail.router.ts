@@ -6,6 +6,13 @@ import passport from 'passport';
 import session from 'express-session';
 import {flash} from 'express-flash-message';
 import connectRedis from 'connect-redis';
+import {urlencoded} from 'body-parser';
+import {createPortailApplicationController} from 'src/presentation/controllers/create-portail-application.controller';
+import {listUserApplications} from 'src/presentation/controllers/list-user-applications.controller';
+import {removePortailApplicationController} from 'src/presentation/controllers/remove-portail-application.controller';
+import {createUserApplicationValidationMiddleware} from 'src/presentation/middlewares/create-user-application-validation.middleware';
+import {isLoggedInMiddleware} from 'src/presentation/middlewares/is-logged-in.middleware';
+import {portailErrorMiddleware} from 'src/presentation/middlewares/portail-error.middleware';
 import {redisConnection} from 'src/infrastructure/configuration/redis';
 import {format} from 'date-fns';
 import {fr} from 'date-fns/locale';
@@ -13,9 +20,9 @@ import methodOverride from 'method-override';
 
 const RedisStore = connectRedis(session);
 
-export const initWebapp = (app: Express) => {
+export const initPortail = (app: Express) => {
   const nunjuckEnvironment = nunjucks.configure(
-    path.join(__dirname, '../../frontend/views/'),
+    path.join(__dirname, '../frontend/views/'),
     {
       autoescape: true,
       express: app,
@@ -69,9 +76,9 @@ passport.deserializeUser((user, done) => {
   done(null, user as Express.User);
 });
 
-export const webappRouter = Router();
+export const portailRouter = Router();
 
-webappRouter.use(
+portailRouter.use(
   session({
     secret: process.env.SESSION_SECRET!,
     saveUninitialized: true,
@@ -79,12 +86,12 @@ webappRouter.use(
     store: new RedisStore({client: redisConnection}),
   })
 );
-webappRouter.use(methodOverride('_method'));
-webappRouter.use(flash());
-webappRouter.use(passport.initialize());
-webappRouter.use(passport.session());
-webappRouter.get('/login', passport.authenticate('openid'));
-webappRouter.get('/logout', (req, res) => {
+portailRouter.use(methodOverride('_method'));
+portailRouter.use(flash());
+portailRouter.use(passport.initialize());
+portailRouter.use(passport.session());
+portailRouter.get('/login', passport.authenticate('openid'));
+portailRouter.get('/logout', (req, res) => {
   req.logout();
   res.redirect(
     `https://${
@@ -93,10 +100,27 @@ webappRouter.get('/logout', (req, res) => {
     }/oauth/logout`
   );
 });
-webappRouter.get(
+portailRouter.get(
   '/callback',
   passport.authenticate('openid', {
     successRedirect: '/',
     failureRedirect: '/login',
   })
 );
+portailRouter.use(isLoggedInMiddleware);
+portailRouter.get('/', listUserApplications);
+if (process.env.SANDBOXED === 'true') {
+  portailRouter.post(
+    '/new',
+    urlencoded({extended: true}),
+    createUserApplicationValidationMiddleware,
+    createPortailApplicationController,
+    portailErrorMiddleware
+  );
+
+  portailRouter.delete(
+    '/applications/:id',
+    urlencoded({extended: true}),
+    removePortailApplicationController
+  );
+}
