@@ -11,10 +11,7 @@ import {
 } from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
 import {NotFoundError} from 'src/domain/data-fetching/data-providers/pole-emploi/errors/not-found.error';
 import {transformError} from 'src/infrastructure/data-providers/error-transformer';
-
-const parseDate = (date: string): Date => {
-  return new Date(date.split('T')[0]);
-};
+import {parseDate} from 'src/infrastructure/data-providers/parsers';
 
 export class PoleEmploiApiDataProvider implements PoleEmploiDataProvider {
   private readonly axios: AxiosInstance;
