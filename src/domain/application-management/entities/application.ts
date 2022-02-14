@@ -1,7 +1,7 @@
 import {ApplicationId} from 'src/domain/application-id';
 import {TokenValueFactory} from 'src/domain/application-management/token-value.factory';
 import {UserEmail} from 'src/domain/application-management/user';
-import {AnyScope} from 'src/domain/scopes';
+import {Scope} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 import {UuidFactory} from 'src/domain/uuid.factory';
@@ -15,7 +15,7 @@ export class Application {
     public readonly token: {
       value: TokenValue;
       subscriptions: Subscription[];
-      scopes: AnyScope[];
+      scopes: Scope[];
     },
     public readonly userEmails: UserEmail[]
   ) {}
@@ -24,7 +24,7 @@ export class Application {
     name: string,
     dataPassId: string,
     subscriptions: Subscription[],
-    scopes: AnyScope[],
+    scopes: Scope[],
     userEmails: UserEmail[],
     uuidFactory: UuidFactory,
     tokenValueFactory: TokenValueFactory

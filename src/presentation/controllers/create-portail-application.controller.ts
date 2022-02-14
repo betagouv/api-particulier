@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {CreateApplicationDto} from 'src/domain/data-fetching/dtos/create-application.dto';
-import {AnyScope} from 'src/domain/scopes';
+import {Scope} from 'src/domain/scopes';
 import {createApplicationUsecase} from 'src/infrastructure/service-container';
 
 export const createPortailApplicationController = async (
@@ -13,7 +13,7 @@ export const createPortailApplicationController = async (
       new CreateApplicationDto(
         res.locals.input.name,
         '0',
-        <AnyScope[]>res.locals.input.scopes,
+        <Scope[]>res.locals.input.scopes,
         [req.user!.email]
       )
     );

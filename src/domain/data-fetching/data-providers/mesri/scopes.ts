@@ -1,5 +1,3 @@
-export type MesriScope = keyof typeof scopesConfiguration;
-
 export const scopesConfiguration = {
   mesri_identifiant: ['ine'],
   mesri_identite: ['nom', 'prenom', 'dateNaissance'],

@@ -1,10 +1,10 @@
 import {isEmpty} from 'lodash';
 import {Inscription} from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {NoEnrollmentError} from 'src/domain/data-fetching/data-providers/mesri/errors/no-enrollment.error';
-import {AnyScope} from 'src/domain/scopes';
+import {Scope} from 'src/domain/scopes';
 
 export class MesriScopesFilter {
-  filterInsriptions(scopes: AnyScope[], inscriptions: Inscription[] = []) {
+  filterInsriptions(scopes: Scope[], inscriptions: Inscription[] = []) {
     const partialInscriptions = (inscriptions
       ?.map(inscription => {
         let result: object = {};

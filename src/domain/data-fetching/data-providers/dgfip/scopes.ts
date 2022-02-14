@@ -1,5 +1,3 @@
-export type DgfipScope = keyof typeof scopesConfiguration;
-
 export const scopesConfiguration = {
   dgfip_declarant1_nom: ['declarant1.nom'],
   dgfip_declarant1_nom_naissance: ['declarant1.nomNaissance'],
