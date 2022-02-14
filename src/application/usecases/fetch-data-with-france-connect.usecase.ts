@@ -46,7 +46,7 @@ export class FetchDataWithFranceConnectUsecase {
 
     const cnousInput: CnousInput = {
       dateNaissance: new Date(identity.birthdate),
-      nomFamille: identity.family_name,
+      nom: identity.family_name,
       prenoms: identity.given_name,
       sexe: identity.gender === 'female' ? '2' : '1',
       lieuNaissance: identity.birthplace,

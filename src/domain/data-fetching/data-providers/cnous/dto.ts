@@ -9,7 +9,7 @@ export type IneCnousInput = {
 
 export type CiviliteCnousInput = {
   prenoms: string;
-  nomFamille: string;
+  nom: string;
   dateNaissance: Date;
   sexe: string;
   lieuNaissance: string;
@@ -29,7 +29,7 @@ export const isCiviliteInput = (
 ): input is CiviliteCnousInput => {
   return (
     'prenoms' in input &&
-    'nomFamille' in input &&
+    'nom' in input &&
     'dateNaissance' in input &&
     'sexe' in input &&
     'lieuNaissance' in input

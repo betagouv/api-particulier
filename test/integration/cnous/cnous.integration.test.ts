@@ -21,7 +21,7 @@ describe('The CNOUS api data provider', () => {
   it('returns data when a civility input is provided', async () => {
     const input: CnousInput = {
       prenoms: process.env.TEST_CNOUS_PRENOMS!,
-      nomFamille: process.env.TEST_CNOUS_NOM_FAMILLE!,
+      nom: process.env.TEST_CNOUS_NOM!,
       dateNaissance: new Date(process.env.TEST_CNOUS_DATE_NAISSANCE!),
       sexe: process.env.TEST_CNOUS_SEXE!,
       lieuNaissance: process.env.TEST_CNOUS_LIEU_NAISSANCE!,

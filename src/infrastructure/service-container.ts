@@ -37,6 +37,7 @@ import {FetchDataWithFranceConnectUsecase} from 'src/application/usecases/fetch-
 import {FranceConnectClient} from 'src/domain/data-fetching/france-connect.client';
 import {Anonymizer} from 'src/domain/journal/anonymizer';
 import {CnousApiDataProvider} from 'src/infrastructure/data-providers/cnous/cnous-api.data-provider';
+import {CnousDataPresenter} from 'src/presentation/presenters/cnous-data.presenter';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -132,6 +133,9 @@ localLogger.log('info', 'Pole Emploi data presenter initialized');
 
 export const mesriDataPresenter = new MesriDataPresenter();
 localLogger.log('info', 'MESRI data presenter initialized');
+
+export const cnoustDataPresenter = new CnousDataPresenter();
+localLogger.log('info', 'CNOUS data presenter initialized');
 
 export const introspectDataPresenter = new IntrospectDataPresenter();
 localLogger.log('info', 'Introspect data presenter initialized');

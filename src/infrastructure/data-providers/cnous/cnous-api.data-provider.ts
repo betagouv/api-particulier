@@ -70,7 +70,7 @@ export class CnousApiDataProvider implements CnousDataProvider {
         const response = await this.axios.post(
           `${process.env.CNOUS_API_URL}/v1/boursier/donnees-pivots`,
           {
-            lastName: input.nomFamille,
+            lastName: input.nom,
             firstNames: input.prenoms,
             birthDate: format(input.dateNaissance, 'dd/MM/yyyy'),
             birthPlace: input.lieuNaissance,
