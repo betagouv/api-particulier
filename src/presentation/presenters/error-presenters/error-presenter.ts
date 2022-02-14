@@ -4,6 +4,7 @@ import {RateLimitedError} from 'src/domain/data-fetching/data-providers/dgfip/er
 import {NoEnrollmentError} from 'src/domain/data-fetching/data-providers/mesri/errors/no-enrollment.error';
 import {NotFoundError as MesriNotFoundError} from 'src/domain/data-fetching/data-providers/mesri/errors/not-found.error';
 import {NotFoundError as PoleEmploiNotFoundError} from 'src/domain/data-fetching/data-providers/pole-emploi/errors/not-found.error';
+import {NotFoundError as CnousNotFoundError} from 'src/domain/data-fetching/data-providers/cnous/errors/not-found.error';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {InvalidFormatError} from 'src/domain/data-fetching/errors/invalid-format.error';
 import {NetworkError} from 'src/domain/data-fetching/errors/network.error';
@@ -22,6 +23,7 @@ import {tokenNotFoundErrorPresenter} from 'src/presentation/presenters/error-pre
 import {tooManyCredentialsErrorPresenter} from 'src/presentation/presenters/error-presenters/too-many-credentials.error-presenter';
 import {zodErrorPresenter} from 'src/presentation/presenters/error-presenters/zod.error-presenter';
 import {ZodError} from 'zod';
+import {cnousErrorPresenter} from 'src/presentation/presenters/error-presenters/cnous.error-presenter';
 
 export type ErrorPresenter<E extends Error> = (error: E) => {
   statusCode: number;
@@ -55,6 +57,8 @@ export const errorPresenter: ErrorPresenter<Error> = (error: Error) => {
       return mesriErrorPresenter(error);
     case PoleEmploiNotFoundError:
       return poleEmploiErrorPresenter(error);
+    case CnousNotFoundError:
+      return cnousErrorPresenter(error);
     default:
       return serverErrorPresenter(error);
   }

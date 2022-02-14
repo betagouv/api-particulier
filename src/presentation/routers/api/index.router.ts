@@ -14,6 +14,7 @@ import {mesriRouter} from 'src/presentation/routers/api/data-providers/mesri/ind
 import {cnafRouter} from 'src/presentation/routers/api/data-providers/cnaf/index.router';
 import {dgfipRouter} from 'src/presentation/routers/api/data-providers/dgfip/index.router';
 import {poleEmploiRouter} from 'src/presentation/routers/api/data-providers/pole-emploi/index.router';
+import {cnousRouter} from 'src/presentation/routers/api/data-providers/cnous/index.router';
 
 export const apiRouter = Router();
 
@@ -29,6 +30,7 @@ apiRouter.use(cnafRouter);
 apiRouter.use(dgfipRouter);
 apiRouter.use(mesriRouter);
 apiRouter.use(poleEmploiRouter);
+apiRouter.use(cnousRouter);
 
 apiRouter.get('/', (_req: Request, res: Response) => {
   res.redirect(process.env.DOCUMENTATION_URL!);

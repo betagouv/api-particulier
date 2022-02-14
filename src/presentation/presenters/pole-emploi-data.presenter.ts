@@ -1,13 +1,6 @@
-import {format} from 'date-fns';
 import {PoleEmploiOutput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
 import {logFor} from 'src/domain/logger';
-
-const formatDate = (date?: Date) => {
-  if (!date) {
-    return;
-  }
-  return format(date, 'yyyy-MM-dd');
-};
+import {formatDate} from 'src/presentation/presenters/date-presenter';
 
 export class PoleEmploiDataPresenter {
   private readonly logger = logFor(PoleEmploiDataPresenter.name);

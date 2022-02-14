@@ -1,13 +1,6 @@
-import {format} from 'date-fns';
 import {MesriOutput} from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {logFor} from 'src/domain/logger';
-
-const formatDate = (date?: Date) => {
-  if (!date) {
-    return;
-  }
-  return format(date, 'yyyy-MM-dd');
-};
+import {formatDate} from 'src/presentation/presenters/date-presenter';
 
 export class MesriDataPresenter {
   private readonly logger = logFor(MesriDataPresenter.name);
