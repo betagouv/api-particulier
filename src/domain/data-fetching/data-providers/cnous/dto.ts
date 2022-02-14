@@ -1,4 +1,5 @@
 import {Brand} from 'src/domain/branded-types';
+import {FranceConnectIdentity} from 'src/domain/data-fetching/france-connect.client';
 
 export type CnousId = Brand<string, 'CnousId'>;
 
@@ -14,7 +15,10 @@ export type CiviliteCnousInput = {
   lieuNaissance: string;
 };
 
-export type CnousInput = IneCnousInput | CiviliteCnousInput;
+export type CnousInput =
+  | IneCnousInput
+  | CiviliteCnousInput
+  | FranceConnectIdentity;
 
 export const isIneInput = (input: CnousInput): input is IneCnousInput => {
   return 'ine' in input;
@@ -29,6 +33,19 @@ export const isCiviliteInput = (
     'dateNaissance' in input &&
     'sexe' in input &&
     'lieuNaissance' in input
+  );
+};
+
+export const isFranceConnectIdentityInput = (
+  input: CnousInput
+): input is FranceConnectIdentity => {
+  return (
+    'birthdate' in input &&
+    'family_name' in input &&
+    'given_name' in input &&
+    'birthplace' in input &&
+    'birthcountry' in input &&
+    'gender' in input
   );
 };
 
