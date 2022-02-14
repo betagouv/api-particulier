@@ -9,9 +9,22 @@ import {CnousApiDataProvider} from 'src/infrastructure/data-providers/cnous/cnou
 describe('The CNOUS api data provider', () => {
   const dataProvider = new CnousApiDataProvider();
 
-  it('returns data when correct input is provided', async () => {
+  it('returns data when an ine input is provided', async () => {
     const input: CnousInput = {
       ine: process.env.TEST_CNOUS_INE as CnousId,
+    };
+
+    const output = await dataProvider.fetch(input);
+    expect(output.nom).to.be.a('string');
+  });
+
+  it('returns data when a civility input is provided', async () => {
+    const input: CnousInput = {
+      prenoms: process.env.TEST_CNOUS_PRENOMS!,
+      nomFamille: process.env.TEST_CNOUS_NOM_FAMILLE!,
+      dateNaissance: new Date(process.env.TEST_CNOUS_DATE_NAISSANCE!),
+      sexe: process.env.TEST_CNOUS_SEXE!,
+      lieuNaissance: process.env.TEST_CNOUS_LIEU_NAISSANCE!,
     };
 
     const output = await dataProvider.fetch(input);

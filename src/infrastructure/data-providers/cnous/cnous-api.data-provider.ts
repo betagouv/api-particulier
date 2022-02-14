@@ -6,11 +6,13 @@ import {CnousDataProvider} from 'src/domain/data-fetching/data-providers/cnous/d
 import {
   CnousInput,
   CnousOutput,
+  isFranceConnectIdentityInput,
   isIneInput,
 } from 'src/domain/data-fetching/data-providers/cnous/dto';
 import {transformError} from 'src/infrastructure/data-providers/error-transformer';
 import {parseDate} from 'src/infrastructure/data-providers/parsers';
 import {NotFoundError} from 'src/domain/data-fetching/data-providers/cnous/errors/not-found.error';
+import {format} from 'date-fns';
 
 export class CnousApiDataProvider implements CnousDataProvider {
   private readonly axios: AxiosInstance;
@@ -40,7 +42,7 @@ export class CnousApiDataProvider implements CnousDataProvider {
         },
       }
     );
-    this.axios = axios.create();
+    this.axios = axios.create({timeout: 10000});
     this.axios.interceptors.request.use(
       tokenProvider({
         getToken: tokenCache,
@@ -53,11 +55,31 @@ export class CnousApiDataProvider implements CnousDataProvider {
       let data;
       if (isIneInput(input)) {
         const response = await this.axios.get(
-          `${process.env.CNOUS_API_URL}/v1/boursier/${input.ine}`,
-          {timeout: 10000}
+          `${process.env.CNOUS_API_URL}/v1/boursier/${input.ine}`
+        );
+        data = response.data;
+      } else if (isFranceConnectIdentityInput(input)) {
+        const response = await this.axios.get(
+          `${process.env.CNOUS_API_URL}/v1/boursier/find`,
+          {
+            params: input,
+          }
+        );
+        data = response.data;
+      } else {
+        const response = await this.axios.post(
+          `${process.env.CNOUS_API_URL}/v1/boursier/donnees-pivots`,
+          {
+            lastName: input.nomFamille,
+            firstNames: input.prenoms,
+            birthDate: format(input.dateNaissance, 'dd/MM/yyyy'),
+            birthPlace: input.lieuNaissance,
+            civility: input.sexe,
+          }
         );
         data = response.data;
       }
+
       return {
         nom: data.lastName,
         prenom: data.firstName,
