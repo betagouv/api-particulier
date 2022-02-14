@@ -17,17 +17,20 @@ import {Token} from 'src/domain/data-fetching/projections/token';
 import {TokenValue} from 'src/domain/token-value';
 import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/pole-emploi/data-provider';
 import {MesriDataProvider} from 'src/domain/data-fetching/data-providers/mesri/data-provider';
+import {CnousDataProvider} from 'src/domain/data-fetching/data-providers/cnous/data-provider';
 
 describe('The data provider client', () => {
   const cnafDataProvider = sinon.stubInterface<CnafDataProvider>();
   const dgfipDataProvider = sinon.stubInterface<DgfipDataProvider>();
   const poleEmploiDataProvider = sinon.stubInterface<PoleEmploiDataProvider>();
   const mesriDataProvider = sinon.stubInterface<MesriDataProvider>();
+  const cnousDataProvider = sinon.stubInterface<CnousDataProvider>();
   const dataProviderClient = new DataProviderClient(
     cnafDataProvider,
     dgfipDataProvider,
     poleEmploiDataProvider,
-    mesriDataProvider
+    mesriDataProvider,
+    cnousDataProvider
   );
 
   const noSubscriptionToken = new Token(
