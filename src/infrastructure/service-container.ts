@@ -38,6 +38,7 @@ import {FranceConnectClient} from 'src/domain/data-fetching/france-connect.clien
 import {Anonymizer} from 'src/domain/journal/anonymizer';
 import {CnousApiDataProvider} from 'src/infrastructure/data-providers/cnous/cnous-api.data-provider';
 import {CnousDataPresenter} from 'src/presentation/presenters/cnous-data.presenter';
+import {CnousAirtableDataProvider} from 'src/infrastructure/data-providers/cnous/cnous-airtable.data-provider';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -84,7 +85,9 @@ localLogger.log(
   `MESRI data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
 );
 
-const cnousDataProvider = new CnousApiDataProvider();
+const cnousDataProvider = sandboxed
+  ? new CnousAirtableDataProvider()
+  : new CnousApiDataProvider();
 localLogger.log(
   'info',
   `CNOUS data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
