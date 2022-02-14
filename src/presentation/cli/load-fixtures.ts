@@ -28,6 +28,7 @@ import {
     'DGFIP',
     'MESRI',
     'POLE_EMPLOI',
+    'CNOUS',
   ];
   const userEmails = ['api-particulier@yopmail.com' as UserEmail];
 

@@ -45,6 +45,8 @@ const getSubscriptionFromRoute = (route: string): Subscription => {
       return 'POLE_EMPLOI';
     case '/api/v2/etudiants':
       return 'MESRI';
+    case '/api/v2/etudiants-boursiers':
+      return 'CNOUS';
     default:
       throw new Error(`No subscription found for route ${route}`);
   }

@@ -3,8 +3,8 @@ import {credentialsValidationMiddleware} from 'src/presentation/middlewares/cred
 import {manageErrorMiddleware} from 'src/presentation/middlewares/error-management.middleware';
 import {journalMiddleware} from 'src/presentation/middlewares/journal.middleware';
 import {timingMiddleware} from 'src/presentation/middlewares/timing.middleware';
-import {fetchCnafDataControllerBuidler} from 'src/presentation/controllers/fetch-data.controller';
 import {cnousInputValidationMiddleware} from 'src/presentation/middlewares/cnous-input-validation.middleware';
+import {fetchCnousDataControllerBuidler} from 'src/presentation/controllers/fetch-data.controller';
 
 export const cnousRouter = Router();
 
@@ -13,7 +13,7 @@ cnousRouter.get(
   credentialsValidationMiddleware,
   timingMiddleware,
   cnousInputValidationMiddleware,
-  fetchCnafDataControllerBuidler(),
+  fetchCnousDataControllerBuidler(),
   manageErrorMiddleware,
   journalMiddleware
 );
