@@ -1,6 +1,7 @@
 import {setUser} from '@sentry/node';
 import {DataProviderClient} from 'src/domain/data-fetching/data-provider-client';
 import {CnafInput} from 'src/domain/data-fetching/data-providers/cnaf/dto';
+import {CnousInput} from 'src/domain/data-fetching/data-providers/cnous/dto';
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {MesriInput} from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {PoleEmploiInput} from 'src/domain/data-fetching/data-providers/pole-emploi/dto';
@@ -19,10 +20,12 @@ export class FetchDataUsecase {
     input: DgfipInput,
     setCurrentToken: (token: Token) => void
   ) {
-    const token = await this.tokenCache.findByTokenValue(apiKey);
-    setUser({id: token.application.id});
-    setCurrentToken(token);
-    return this.dataProviderClient.consumeDgfip(input, token);
+    return this.callDataProvider(
+      apiKey,
+      input,
+      setCurrentToken,
+      'consumeDgfip'
+    );
   }
 
   async fetchCnafData(
@@ -30,9 +33,7 @@ export class FetchDataUsecase {
     input: CnafInput,
     setCurrentToken: (token: Token) => void
   ) {
-    const token = await this.tokenCache.findByTokenValue(apiKey);
-    setCurrentToken(token);
-    return this.dataProviderClient.consumeCnaf(input, token);
+    return this.callDataProvider(apiKey, input, setCurrentToken, 'consumeCnaf');
   }
 
   async fetchPoleEmploiData(
@@ -40,9 +41,12 @@ export class FetchDataUsecase {
     input: PoleEmploiInput,
     setCurrentToken: (token: Token) => void
   ) {
-    const token = await this.tokenCache.findByTokenValue(apiKey);
-    setCurrentToken(token);
-    return this.dataProviderClient.consumePoleEmploi(input, token);
+    return this.callDataProvider(
+      apiKey,
+      input,
+      setCurrentToken,
+      'consumePoleEmploi'
+    );
   }
 
   async fetchMesriData(
@@ -50,8 +54,43 @@ export class FetchDataUsecase {
     input: MesriInput,
     setCurrentToken: (token: Token) => void
   ) {
+    return this.callDataProvider(
+      apiKey,
+      input,
+      setCurrentToken,
+      'consumeMesri'
+    );
+  }
+
+  async fetchCnousData(
+    apiKey: TokenValue,
+    input: CnousInput,
+    setCurrentToken: (token: Token) => void
+  ) {
+    return this.callDataProvider(
+      apiKey,
+      input,
+      setCurrentToken,
+      'consumeCnous'
+    );
+  }
+
+  private async callDataProvider<I, O>(
+    apiKey: TokenValue,
+    input: I,
+    setCurrentToken: (token: Token) => void,
+    providerFunctionName: keyof DataProviderClient
+  ): Promise<Partial<O>> {
     const token = await this.tokenCache.findByTokenValue(apiKey);
+    setUser({id: token.application.id});
     setCurrentToken(token);
-    return this.dataProviderClient.consumeMesri(input, token);
+    return this.dataProviderClient[providerFunctionName](
+      input as unknown as DgfipInput &
+        CnafInput &
+        PoleEmploiInput &
+        MesriInput &
+        CnousInput,
+      token
+    ) as unknown as Partial<O>;
   }
 }
