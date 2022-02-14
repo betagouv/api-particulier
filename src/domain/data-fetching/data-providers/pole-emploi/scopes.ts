@@ -1,5 +1,3 @@
-export type PoleEmploiScope = keyof typeof scopesConfiguration;
-
 export const scopesConfiguration = {
   pole_emploi_identite: [
     'identifiant',

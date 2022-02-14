@@ -13,6 +13,8 @@ import {PoleEmploiDataProvider} from 'src/domain/data-fetching/data-providers/po
 import {MesriInput} from 'src/domain/data-fetching/data-providers/mesri/dto';
 import {MesriDataProvider} from 'src/domain/data-fetching/data-providers/mesri/data-provider';
 import {MesriScopesFilter} from 'src/domain/data-fetching/scopes-filters/mesri.scopes-filter';
+import {CnousDataProvider} from 'src/domain/data-fetching/data-providers/cnous/data-provider';
+import {CnousInput} from 'src/domain/data-fetching/data-providers/cnous/dto';
 
 const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
   unifiedScopesConfiguration
@@ -24,7 +26,8 @@ export class DataProviderClient {
     private readonly cnafDataProvider: CnafDataProvider,
     private readonly dgfipDataProvider: DgfipDataProvider,
     private readonly poleEmploiDataProvider: PoleEmploiDataProvider,
-    private readonly mesriDataProvider: MesriDataProvider
+    private readonly mesriDataProvider: MesriDataProvider,
+    private readonly cnousDataProvider: CnousDataProvider
   ) {}
 
   async consumeDgfip(input: DgfipInput, token: Token) {
@@ -75,6 +78,15 @@ export class DataProviderClient {
         propertyFilteredResult.inscriptions ?? []
       ),
     };
+  }
+
+  async consumeCnous(input: CnousInput, token: Token) {
+    return await this.callDataProvider(
+      input,
+      token,
+      this.cnousDataProvider,
+      'CNOUS'
+    );
   }
 
   private async callDataProvider<I, O, M>(

@@ -1,6 +1,6 @@
 import {some} from 'lodash';
 import {UserEmail} from 'src/domain/application-management/user';
-import {AnyScope} from 'src/domain/scopes';
+import {Scope} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 
 export class CreateApplicationDto {
@@ -9,7 +9,7 @@ export class CreateApplicationDto {
   constructor(
     readonly name: string,
     readonly dataPassId: string,
-    readonly scopes: AnyScope[],
+    readonly scopes: Scope[],
     readonly userEmails: UserEmail[]
   ) {
     this.subscriptions = [];
@@ -24,6 +24,9 @@ export class CreateApplicationDto {
     }
     if (some(scopes, scope => scope.startsWith('mesri'))) {
       this.subscriptions.push('MESRI');
+    }
+    if (some(scopes, scope => scope.startsWith('cnous'))) {
+      this.subscriptions.push('CNOUS');
     }
   }
 }

@@ -1,5 +1,3 @@
-export type CnousScopes = keyof typeof scopesConfiguration;
-
 export const scopesConfiguration = {
   cnous_statut_boursier: ['boursier'],
   cnous_echelon_bourse: ['echelonBourse'],

@@ -5,7 +5,7 @@ import {ApplicationRepository} from 'src/domain/application-management/repositor
 import {UserEmail} from 'src/domain/application-management/user';
 import {TokenNotFoundError} from 'src/domain/data-fetching/errors/token-not-found.error';
 import {logFor} from 'src/domain/logger';
-import {AnyScope} from 'src/domain/scopes';
+import {Scope} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 
@@ -207,7 +207,7 @@ export class PostgresApplicationRepository implements ApplicationRepository {
       rawApplication.created_at,
       rawApplication.data_pass_id,
       {
-        scopes: rawApplication.scopes as AnyScope[],
+        scopes: rawApplication.scopes as Scope[],
         subscriptions: rawApplication.subscriptions as Subscription[],
         value: rawApplication.token as TokenValue,
       },

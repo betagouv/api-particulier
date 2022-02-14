@@ -1,5 +1,3 @@
-export type CnafScope = keyof typeof scopesConfiguration;
-
 export const scopesConfiguration = {
   cnaf_adresse: ['adresse'],
   cnaf_allocataires: ['allocataires'],
