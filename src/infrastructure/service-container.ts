@@ -36,6 +36,7 @@ import {PostgresApplicationRepository} from 'src/infrastructure/repositories/pos
 import {FetchDataWithFranceConnectUsecase} from 'src/application/usecases/fetch-data-with-france-connect.usecase';
 import {FranceConnectClient} from 'src/domain/data-fetching/france-connect.client';
 import {Anonymizer} from 'src/domain/journal/anonymizer';
+import {CnousApiDataProvider} from 'src/infrastructure/data-providers/cnous/cnous-api.data-provider';
 
 const logger = new ChalkLogger();
 setInstance(logger);
@@ -82,11 +83,18 @@ localLogger.log(
   `MESRI data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
 );
 
+const cnousDataProvider = new CnousApiDataProvider();
+localLogger.log(
+  'info',
+  `CNOUS data provider initialized - ${sandboxed ? 'stubbed' : 'real'}`
+);
+
 export const dataProviderClient: DataProviderClient = new DataProviderClient(
   cnafDataProvider,
   dgfipDataProvider,
   poleEmploiDataProvider,
-  mesriDataProvider
+  mesriDataProvider,
+  cnousDataProvider
 );
 localLogger.log('info', 'Data provider client initialized');
 
