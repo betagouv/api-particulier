@@ -4,7 +4,7 @@ import {scopesConfiguration as dgfipScopesConfiguration} from './data-fetching/d
 import {scopesConfiguration as mesriScopesConfiguration} from './data-fetching/data-providers/mesri/scopes';
 import {scopesConfiguration as cnousScopesConfiguration} from './data-fetching/data-providers/cnous/scopes';
 
-export const unifiedScopesConfiguration = {
+export const scopesConfiguration = {
   ...cnafScopesConfiguration,
   ...dgfipScopesConfiguration,
   ...poleEmploiScopesConfiguration,
@@ -12,4 +12,4 @@ export const unifiedScopesConfiguration = {
   ...cnousScopesConfiguration,
 };
 
-export type Scope = keyof typeof unifiedScopesConfiguration;
+export type Scope = keyof typeof scopesConfiguration;
