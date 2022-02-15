@@ -4,7 +4,7 @@ import {DgfipDataProvider} from 'src/domain/data-fetching/data-providers/dgfip/d
 import {DgfipInput} from 'src/domain/data-fetching/data-providers/dgfip/dto';
 import {ApplicationNotSubscribedError} from 'src/domain/data-fetching/errors/application-not-subscribed.error';
 import {Token} from 'src/domain/data-fetching/projections/token';
-import {unifiedScopesConfiguration} from 'src/domain/scopes';
+import {scopesConfiguration} from 'src/domain/scopes';
 import {PropertyBasedScopesFilter} from 'src/domain/data-fetching/scopes-filters/property-based.scopes-filter';
 import {DataProvider} from 'src/domain/data-fetching/data-providers/data-provider';
 import {Subscription} from 'src/domain/subscription';
@@ -17,7 +17,7 @@ import {CnousDataProvider} from 'src/domain/data-fetching/data-providers/cnous/d
 import {CnousInput} from 'src/domain/data-fetching/data-providers/cnous/dto';
 
 const propertyBasedScopesFilter = new PropertyBasedScopesFilter(
-  unifiedScopesConfiguration
+  scopesConfiguration
 );
 const mesriScopesFilter = new MesriScopesFilter();
 

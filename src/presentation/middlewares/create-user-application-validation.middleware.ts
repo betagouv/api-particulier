@@ -1,4 +1,4 @@
-import {unifiedScopesConfiguration} from 'src/domain/scopes';
+import {scopesConfiguration} from 'src/domain/scopes';
 import {inputValidationMiddlewareBuilder} from 'src/presentation/middlewares/input-validation.middleware';
 import {z} from 'zod';
 
@@ -7,7 +7,7 @@ export const createUserApplicationDtoSchema = z
     name: z.string().nonempty(),
     scopes: z
       .object(
-        Object.keys(unifiedScopesConfiguration).reduce((acc, key) => {
+        Object.keys(scopesConfiguration).reduce((acc, key) => {
           return {
             ...acc,
             [key]: z.literal('on'),

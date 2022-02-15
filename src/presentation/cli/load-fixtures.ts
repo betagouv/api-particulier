@@ -5,7 +5,7 @@ import {CreateApplicationUsecase} from 'src/application/usecases/create-applicat
 import {TokenValueFactory} from 'src/domain/application-management/token-value.factory';
 import {UserEmail} from 'src/domain/application-management/user';
 import {CreateApplicationDto} from 'src/domain/data-fetching/dtos/create-application.dto';
-import {Scope, unifiedScopesConfiguration} from 'src/domain/scopes';
+import {Scope, scopesConfiguration} from 'src/domain/scopes';
 import {Subscription} from 'src/domain/subscription';
 import {TokenValue} from 'src/domain/token-value';
 import {
@@ -22,7 +22,7 @@ import {
   program.parse(process.argv);
 
   const dataPassId = '0';
-  const scopes = <Scope[]>Object.keys(unifiedScopesConfiguration);
+  const scopes = <Scope[]>Object.keys(scopesConfiguration);
   const subscriptions: Subscription[] = [
     'CNAF',
     'DGFIP',
