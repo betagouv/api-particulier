@@ -86,7 +86,7 @@ export class CnousApiDataProvider implements CnousDataProvider {
         prenom2: data.firstName2,
         sexe: data.civility,
         dateNaissance: parseDate(data.birthDate),
-        lieuNaissance: data.birthPlaceLibelle,
+        lieuNaissance: data.birthPlace?.libelle ?? data.birthPlaceLibelle,
         boursier: data.boursier,
         echelonBourse: data.grantEchelon,
         email: data.email,
