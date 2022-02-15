@@ -2,6 +2,10 @@ import {readFileSync} from 'fs';
 import {OpenApiBuilder} from 'openapi3-ts';
 import {join} from 'path';
 import {cafPaths} from 'src/presentation/schema/caf';
+import {
+  cnousFranceConnectPaths,
+  cnousPaths,
+} from 'src/presentation/schema/cnous';
 import {dgfipPaths} from 'src/presentation/schema/dgfip';
 import {introspectPaths} from 'src/presentation/schema/introspect';
 import {
@@ -14,7 +18,7 @@ import {poleEmploiPaths} from 'src/presentation/schema/pole-emploi';
 const generalInformationGetter = (docPath: string) => ({
   info: {
     title: 'API Particulier',
-    version: '2.1.0',
+    version: '2.2.0',
     contact: {
       email: 'contact@particulier.api.gouv.fr',
       name: 'Contact API Particulier',
@@ -63,6 +67,7 @@ export const schemaWithApiKey = new OpenApiBuilder({
     ...cafPaths,
     ...poleEmploiPaths,
     ...mesriPaths,
+    ...cnousPaths,
     ...introspectPaths,
     ...pingPaths,
   },
@@ -88,5 +93,6 @@ export const schemaWithFranceConnectToken = new OpenApiBuilder({
   },
   paths: {
     ...mesriFranceConnectPaths,
+    ...cnousFranceConnectPaths,
   },
 });
