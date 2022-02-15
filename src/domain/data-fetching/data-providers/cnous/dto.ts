@@ -8,7 +8,7 @@ export type IneCnousInput = {
 };
 
 export type CiviliteCnousInput = {
-  prenoms: string;
+  prenoms: string[];
   nom: string;
   dateNaissance: Date;
   sexe: string;

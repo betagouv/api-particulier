@@ -24,7 +24,7 @@ export const cnousInputSchema = z.union([
     })
     .transform(({sexe, prenoms, nom, dateDeNaissance, lieuDeNaissance}) => ({
       sexe,
-      prenoms,
+      prenoms: prenoms.split(' '),
       nom,
       dateNaissance: parse(dateDeNaissance, 'yyyy-MM-dd', new Date()),
       lieuNaissance: lieuDeNaissance,
