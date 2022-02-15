@@ -71,7 +71,7 @@ export class CnousApiDataProvider implements CnousDataProvider {
           `${process.env.CNOUS_API_URL}/v1/boursier/donnees-pivots`,
           {
             lastName: input.nom,
-            firstNames: input.prenoms,
+            firstNames: input.prenoms.join(', '),
             birthDate: format(input.dateNaissance, 'dd/MM/yyyy'),
             birthPlace: input.lieuNaissance,
             civility: input.sexe,

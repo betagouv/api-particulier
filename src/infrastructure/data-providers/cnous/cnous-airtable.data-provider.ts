@@ -44,9 +44,11 @@ export class CnousAirtableDataProvider implements CnousDataProvider {
           {
             headers: {Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`},
             params: {
-              filterByFormula: `AND({nom}='${input.nom}', {prenoms}='${
-                input.prenoms
-              }', {dateNaissance}='${input.dateNaissance.toISOString()}', {sexe}='${
+              filterByFormula: `AND({nom}='${
+                input.nom
+              }', {prenoms}='${input.prenoms.join(
+                ' '
+              )}', {dateNaissance}='${input.dateNaissance.toISOString()}', {sexe}='${
                 input.sexe
               }', {lieuNaissance}='${input.lieuNaissance}')`,
             },
@@ -61,7 +63,7 @@ export class CnousAirtableDataProvider implements CnousDataProvider {
 
       const fields = data.records[0].fields;
 
-      const prenoms = fields.prenoms.split(',');
+      const prenoms = fields.prenoms.split(' ');
 
       return {
         nom: fields.nom,
