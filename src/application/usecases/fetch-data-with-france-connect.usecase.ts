@@ -44,13 +44,7 @@ export class FetchDataWithFranceConnectUsecase {
       setInputData
     );
 
-    const cnousInput: CnousInput = {
-      dateNaissance: new Date(identity.birthdate),
-      nom: identity.family_name,
-      prenoms: identity.given_name,
-      sexe: identity.gender === 'female' ? '2' : '1',
-      lieuNaissance: identity.birthplace,
-    };
+    const cnousInput: CnousInput = identity;
     return this.dataProviderClient.consumeCnous(cnousInput, token);
   }
 

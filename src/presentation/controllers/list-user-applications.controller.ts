@@ -59,6 +59,15 @@ export const scopesConfiguration = {
     mesri_admission: 'Admissions',
     mesri_etablissements: 'Établissements',
   },
+  CNOUS: {
+    cnous_identite: 'Identité',
+    cnous_statut_boursier: 'Statut étudiant boursier',
+    cnous_echelon_bourse: 'Échelon de la bourse',
+    cnous_email: 'Email',
+    cnous_periode_versement: 'Période de versement',
+    cnous_statut_bourse: 'Statut définitif de la bourse',
+    cnous_ville_etudes: "Ville d'études et établissement",
+  },
 };
 
 export const listUserApplications = async (req: Request, res: Response) => {
