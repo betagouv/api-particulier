@@ -20,6 +20,7 @@
 > Attention, l'installation peut échouer si vous ne définissez pas correctement le `.env`, par exemple la commande de migration ne saura pas se connecter à la base de données
 
 Une fois les containers lancés, vous pouvez préparer votre environnement de développement local en lançant les commandes suivantes sur votre machine hôte :
+
 - `npm install`
 - `npm run migrate up`
 - `npm run fixtures:load`
@@ -41,12 +42,14 @@ Toute la configuration se fait par variable d'environnement, selon les recommand
 Si vous avez choisir l'installation par Docker compose, vous n'avez rien à configurer.
 
 Parmi les variables d'environnement notables, si vous n'avez pas choisi le mode d'installation par docker-compose, vous serez amené à modifier :
+
 - `DATABASE_URL`
 - `TEST_DATABASE_URL`
 
 ## Vérifier l'installation
 
 Afin de vous assurer que vous êtes prêts à développer sur le projet, vous pouvez lancer les tests suivants depuis votre machine hôte :
+
 - `npm run type-check`
 - `npm test`
 - `npm run test:integration`
@@ -60,16 +63,19 @@ Ce fichier recense tous les appels usuels à l'API qui vous seront utiles pour t
 ## Bac à sable ou appels aux fournisseurs de donnée ?
 
 L'API possède deux modes de fonctionnement, choisis selon la variable d'env `SANDBOXED` :
+
 - `SANDBOXED=true` : mode bac à sable, l'API n'appelle pas les fournisseurs de donnée et se base sur les données Airtable
 - `SANDBOXED=false` : mode réel, l'API appelle les fournisseurs de donnée
 
 ## Lancement de l'application
 
 L'application possède deux couches de présentation principales :
+
 - l'API et le backend, lancés par la commande `npm run start:dev:backend`
 - le frontend, sous la forme du portail développeur, lancé par la commande `npm run start:dev:frontend`
 
 Afin de lancer les deux couches de présentation en mode développement, exécutez la commande suivante sur votre machine hôte :
+
 - `npm run start:dev`
 
 Une fois l'application démarrée, vous pouvez vous rendre sur [https://mon.portail.local:3000](https://mon.portail.local:3000) afin de récupérer votre jeton d'API.
@@ -77,6 +83,7 @@ Une fois l'application démarrée, vous pouvez vous rendre sur [https://mon.port
 # Tests
 
 L'application possède 4 niveaux de test :
+
 - `npm run type-check` : analyse statique de types
 - `npm test` : tests unitaires
 - `npm run test:integration` : tests d'intégration
@@ -87,12 +94,14 @@ L'application possède 4 niveaux de test :
 L'application est exécutée sur [Dokku](), le déploiement se fait par des git push sur les bons remotes.
 
 Un remote correspond à un environnment, vous devez donc les ajouter à votre repo local pour pouvoir ensuite déploier :
+
 - `git remote add sandbox-staging dokku@staging.particulier-infra.api.gouv.fr:particulier-test-staging.api.gouv.fr`
 - `git remote add sandbox-production dokku@production.particulier-infra.api.gouv.fr:particulier-test.api.gouv.fr`
 - `git remote add staging dokku@staging.particulier-infra.api.gouv.fr:particulier-staging.api.gouv.fr`
 - `git remote add production dokku@production.particulier-infra.api.gouv.fr:particulier.api.gouv.fr`
 
 Vous pouvez alors déploier sur les différents environnements :
+
 - [Bac à sable de staging](https://particulier-test-staging.api.gouv.fr) : `git push sandbox-staging`
 - [Bac à sable de production](https://particulier-test.api.gouv.fr) : `git push sandbox-production`
 - [API de staging](https://particulier-staging.api.gouv.fr) : `git push staging`
@@ -115,3 +124,16 @@ Vous pouvez alors déploier sur les différents environnements :
 # Fonctionnement
 
 ![](./docs/fonctionnel.png)
+
+# Tâches de run
+
+Certaines tâches interviennent fréquemment dans le run du produit, lorsqu'elles deviennent trop fréquentes, il convient de s'outiller.
+
+## Envoyer les flux XML à la CNAF pour débugage de leur API
+
+La CNAF nous demande fréquemment le contenu des flux XML d'échange avec leur API, pour certains identifiants.
+Cette tâche est outillée par une CLI :
+
+```bash
+npm run cnaf:debug -- -a numeroAllocataire -c codePostal
+```
