@@ -22,7 +22,8 @@
     "start:dev": "run-p start:dev:*",
     "start:dev:backend": "ts-node-dev --watch .env --files -r dotenv/config -r tsconfig-paths/register src/infrastructure/server.ts",
     "start:dev:frontend": "vite --host",
-    "fixtures:load": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts"
+    "fixtures:load": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/load-fixtures.ts",
+    "cnaf:debug": "ts-node -r dotenv/config -r tsconfig-paths/register src/presentation/cli/debug-cnaf.ts"
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.3.0",

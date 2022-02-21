@@ -12,10 +12,10 @@ export class SoapDataProvider implements DataProvider<CnafInput, CnafOutput> {
   private readonly parser = new XMLParser();
 
   async fetch(input: CnafInput): Promise<CnafOutput> {
-    let response: AxiosResponse;
+    let xml: string;
 
     try {
-      response = await axios.post(
+      const response = await axios.post(
         `${process.env.CAF_HOST}/sgmap/wswdd/v1`,
         buildQuery(input),
         {
@@ -24,15 +24,30 @@ export class SoapDataProvider implements DataProvider<CnafInput, CnafOutput> {
           timeout: 10000,
         }
       );
+      xml = response.data;
     } catch (error) {
       throw transformError(error);
     }
 
-    return this.parser.parse(response.data);
+    return this.parser.parse(xml);
+  }
+
+  async fetchXmlResponse(input: CnafInput): Promise<string> {
+    const response = await axios.post(
+      `${process.env.CAF_HOST}/sgmap/wswdd/v1`,
+      buildQuery(input),
+      {
+        httpsAgent: buildHttpsAgent(),
+        headers: {'Content-Type': 'text/xml; charset=utf-8'},
+        timeout: 10000,
+      }
+    );
+
+    return response.data;
   }
 }
 
-const buildQuery = (
+export const buildQuery = (
   input: CnafInput
 ) => `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://v1.ws.wsdemandedocumentcafweb.cnaf/">
 <soap:Header/>
