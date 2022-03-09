@@ -93,14 +93,14 @@ L'application possède 4 niveaux de test :
 
 L'application est exécutée sur [Dokku](), le déploiement se fait par des git push sur les bons remotes.
 
-Un remote correspond à un environnment, vous devez donc les ajouter à votre repo local pour pouvoir ensuite déploier :
+Un remote correspond à un environment, vous devez donc les ajouter à votre repo local pour pouvoir ensuite déployer :
 
 - `git remote add sandbox-staging dokku@staging.particulier-infra.api.gouv.fr:particulier-test-staging.api.gouv.fr`
 - `git remote add sandbox-production dokku@production.particulier-infra.api.gouv.fr:particulier-test.api.gouv.fr`
 - `git remote add staging dokku@staging.particulier-infra.api.gouv.fr:particulier-staging.api.gouv.fr`
 - `git remote add production dokku@production.particulier-infra.api.gouv.fr:particulier.api.gouv.fr`
 
-Vous pouvez alors déploier sur les différents environnements :
+Vous pouvez alors déployer sur les différents environnements :
 
 - [Bac à sable de staging](https://particulier-test-staging.api.gouv.fr) : `git push sandbox-staging`
 - [Bac à sable de production](https://particulier-test.api.gouv.fr) : `git push sandbox-production`
