@@ -69,12 +69,13 @@
                     <strong>Jeton</strong>
                 </div>
                 <div class="flex-shrink flex-1 truncate text-center mx-4">
-                    <input data-application-target="source" type="textarea" value="{{ token.value }}" readonly class="absolute opacity-0 -left-32"/>
+                    <input data-application-target="source" type="textarea" value="{{ application.token.value }}" readonly class="absolute opacity-0 -left-32"/>
                     <div class="select-all truncate">{{ application.token.value }}</div>
                 </div>
                 <div class="flex-shrink-0">
-                    <button data-action="application#copy" data-application-target="button" class="fr-btn hidden whitespace-nowrap">Copier
-                        dans le presse-papier</button>
+                    <button data-application-target="button" class="fr-btn whitespace-nowrap">
+                        Copier dans le presse-papier
+                    </button>
                 </div>
             </div>
         </div>

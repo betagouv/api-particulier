@@ -1,4 +1,5 @@
 import {Controller} from '@hotwired/stimulus';
+import ClipboardJS from 'clipboard';
 
 export default class extends Controller {
   static targets = [
@@ -15,15 +16,17 @@ export default class extends Controller {
   deleteFormTarget!: HTMLFormElement;
 
   connect() {
-    if (document.queryCommandSupported('copy')) {
-      this.buttonTarget.classList.remove('hidden');
-    }
-  }
+    const {sourceTarget, buttonTarget} = this;
 
-  copy() {
-    this.sourceTarget.select();
-    document.execCommand('copy');
-    this.buttonTarget.innerHTML = 'Jeton copié !';
+    const clipboard = new ClipboardJS(this.buttonTarget, {
+      target: function () {
+        return sourceTarget;
+      },
+    });
+
+    clipboard.on('success', () => {
+      buttonTarget.innerHTML = 'Jeton copié !';
+    });
   }
 
   toggleScopesDisplay() {
