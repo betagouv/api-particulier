@@ -15,10 +15,7 @@ Le bac à sable et l'API de production sont appelables par deux adresses distinc
 - bac à sable : https://particulier-test.api.gouv.fr/api
 - production : https://particulier.api.gouv.fr/api
 
-Pour récupérer le jeton de production ou créer des jetons de bac à sable, un portail développeur est mis à votre disposition aux adresses suivantes :
-
-- bac à sable : [https://mon.portail-test.api.gouv.fr](https://mon.portail-test.api.gouv.fr)
-- production : [https://mon.portail.api.gouv.fr](https://mon.portail.api.gouv.fr)
+Pour récupérer le jeton de production ou créer des jetons de bac à sable, un portail développeur est mis à votre disposition, cliquez sur Authorize (plus bas sur la page) pour l'obtennir.
 
 ### Périmètre des données retournées
 
