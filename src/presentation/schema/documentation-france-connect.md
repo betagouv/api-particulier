@@ -10,10 +10,13 @@ Dans le bac à sable, pour chaque type de donnée disponible, un jeu de donnée 
 
 Le fonctionnement du bac à sable est identique à celui de la véritable API de production, à la différence près que les données sont fictives, éditables par tout le monde, et que les jetons d'accès sont en libre service.
 
-Le bac à sable et l'API de production sont appelables par deux adresses distinctes :
+Pour utiliser un jeton France Connect, cliquez sur Authorize (plus bas sur la page) puis entrez la valeur du jeton obtenu suite à une cinématique de  connexion France Connect.
 
-- bac à sable : [https://particulier-test.api.gouv.fr/api](https://particulier-test.api.gouv.fr/api)
-- production : [https://particulier.api.gouv.fr/api](https://particulier.api.gouv.fr/api)
+Le bac à sable et l'API de production sont appellables par deux adresses distinctes :
+
+- bac à sable : https://particulier-test.api.gouv.fr/api
+- production : https://particulier.api.gouv.fr/api
+
 
 ### Périmètre des données retournées
 
