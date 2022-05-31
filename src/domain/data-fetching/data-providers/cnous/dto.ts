@@ -50,6 +50,7 @@ export const isFranceConnectIdentityInput = (
 };
 
 export type CnousOutput = {
+  ine: CnousId;
   nom: string;
   prenom: string;
   prenom2: string;
