@@ -65,7 +65,7 @@ export const cafNotFoundError = errorResponseBuilder({
 export const cafError = errorResponseBuilder({
   error: 'data_provider_error',
   reason: 'Unknown error code 134',
-  message: 'rreur inconnue du fournisseur de donnée CAF',
+  message: 'Erreur inconnue du fournisseur de donnée CAF',
 });
 export const poleEmploiNotFoundError = errorResponseBuilder({
   error: 'not_found',
