@@ -1,6 +1,6 @@
 name: End-to-end tests
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   end-to-end-tests:
@@ -62,14 +62,14 @@ jobs:
           TEST_OIDC_EMAIL: ${{ secrets.TEST_OIDC_EMAIL }}
           TEST_OIDC_PASSWORD: ${{ secrets.TEST_OIDC_PASSWORD }}
           PORT: 3000
-          NODE_ENV: 'production'
-          LOG_LEVEL: '1'
-          SENTRY_DSN: 'https://public@sentry.example.com/1'
-          ENV: 'test-real'
-          SANDBOXED: 'false'
-          SENTRY_ENABLED: 'false'
-          DATAPASS_API_KEY: 'lolilol'
-          SESSION_SECRET: 'yolo'
+          NODE_ENV: "production"
+          LOG_LEVEL: "1"
+          SENTRY_DSN: "https://public@sentry.example.com/1"
+          ENV: "test-real"
+          SANDBOXED: "false"
+          SENTRY_ENABLED: "false"
+          DATAPASS_API_KEY: "lolilol"
+          SESSION_SECRET: "yolo"
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
