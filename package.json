@@ -31,7 +31,7 @@
     "@hotwired/turbo": "^7.1.0",
     "@sentry/node": "^6.17.2",
     "@sentry/tracing": "^6.17.2",
-    "@xmldom/xmldom": "^0.8.0",
+    "@xmldom/xmldom": "^0.8.3",
     "axios": "^0.25.0",
     "axios-oauth-client": "^1.4.4",
     "axios-token-interceptor": "^0.2.0",
