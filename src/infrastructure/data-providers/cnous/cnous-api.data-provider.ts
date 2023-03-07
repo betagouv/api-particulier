@@ -81,6 +81,7 @@ export class CnousApiDataProvider implements CnousDataProvider {
       }
 
       return {
+        ine: data.ine,
         nom: data.lastName,
         prenom: data.firstName,
         prenom2: data.firstName2,

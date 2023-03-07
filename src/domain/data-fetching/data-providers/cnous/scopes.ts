@@ -1,4 +1,5 @@
 export const scopesConfiguration = {
+  cnous_identifiant: ['ine'],
   cnous_statut_boursier: ['boursier'],
   cnous_echelon_bourse: ['echelonBourse'],
   cnous_email: ['email'],

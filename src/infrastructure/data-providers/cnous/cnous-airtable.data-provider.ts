@@ -66,6 +66,7 @@ export class CnousAirtableDataProvider implements CnousDataProvider {
       const prenoms = fields.prenoms.split(' ');
 
       return {
+        ine: fields.ine,
         nom: fields.nom,
         prenom: prenoms[0],
         prenom2: prenoms.length > 1 ? prenoms[1].trim() : null,
